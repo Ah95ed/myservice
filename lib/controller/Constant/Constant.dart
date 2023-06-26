@@ -14,4 +14,8 @@ class DataSend {
 
   DataSend(this.collection);
 }
+// ignore: non_constant_identifier_names
+// Enum Service {
+// doctore
+// }
 

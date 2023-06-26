@@ -18,6 +18,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   intl_utils: ^2.8.3
+  sizer: ^2.0.15
 
 dev_dependencies:
   flutter_test:

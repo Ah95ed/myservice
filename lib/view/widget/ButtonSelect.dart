@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class ButtonSelect extends StatelessWidget {
   String title;
   VoidCallback onPressed;
-  ButtonSelect({super.key, required this.title,required this.onPressed});
+  ButtonSelect({super.key, required this.title, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -13,10 +13,10 @@ class ButtonSelect extends StatelessWidget {
         onPressed: onPressed,
         style: flatButtonStyle,
         child: Text(
-          title ,
+          title,
           style: const TextStyle(
             color: Colors.black,
-            fontSize: 24.0,
+            fontSize: 20.0,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -29,14 +29,11 @@ class ButtonSelect extends StatelessWidget {
     minimumSize: const Size(28.0, 24.0),
     maximumSize: const Size(400, 200),
     fixedSize: const Size(0.0, 55.0),
-
     padding: const EdgeInsets.symmetric(horizontal: 10),
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.all(
         Radius.circular(8.0),
       ),
     ),
-
-    // shape:  ,
   );
 }

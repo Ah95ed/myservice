@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tester_app/controller/Constant/ServiceCollectios.dart';
 import 'package:tester_app/controller/provider/Provider.dart';
 import 'package:tester_app/generated/l10n.dart';
 import 'package:tester_app/view/widget/CardProfessions.dart';
@@ -14,10 +15,11 @@ class ProfessionsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ss = Provider.of<Providers>(context, listen: false);
-    ss.getData('professions');
+    ss.getData(ServiceCollectios.professions.name);
+    
     return Scaffold(
       appBar: AppBar(
-         actions: [
+        actions: [
           IconButton(
             onPressed: () {
               showSearch(

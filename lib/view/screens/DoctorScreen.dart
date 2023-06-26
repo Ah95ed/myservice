@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:tester_app/generated/l10n.dart';
 import 'package:tester_app/view/widget/cardView.dart';
 import '../../controller/Constant/CustomSearchDelegate.dart';
+import '../../controller/Constant/ServiceCollectios.dart';
 import '../../controller/provider/Provider.dart';
 
 class DoctorScreen extends StatelessWidget {
@@ -13,7 +14,7 @@ class DoctorScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ss = Provider.of<Providers>(context, listen: false);
-    ss.getData('Doctor');
+    ss.getData(ServiceCollectios.Doctor.name);
 
     return Scaffold(
       appBar: AppBar(
@@ -37,7 +38,6 @@ class DoctorScreen extends StatelessWidget {
       body: Consumer<Providers>(
         builder: (context, value, child) {
           return ListView.builder(
-            
               itemCount: value.s.length,
               itemBuilder: (BuildContext context, int index) {
                 // return const ImageListView(startIndex: 0);

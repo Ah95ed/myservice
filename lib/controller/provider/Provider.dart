@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:tester_app/Models/SatotaModel.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Providers with ChangeNotifier {
   List sss = [];
   List s = [];
+  //  double? width;
+  //  double? height;
 
   Future getData(String collection) async {
     s.clear();
@@ -33,4 +35,23 @@ class Providers with ChangeNotifier {
     Navigator.pushNamed(context, route, arguments: object);
     notifyListeners();
   }
+
+  Future<void> callNumber(String number) async {
+    final Uri launchUri = Uri(
+      scheme: 'tel',
+      path: number,
+    );
+    if (await canLaunchUrl(launchUri)) {
+      await launchUrl(launchUri);
+    } else {
+      print('not call ____');
+    }
+    notifyListeners();
+  }
+
+  // void changeSizeScreen(double width,double height) {
+  //   this.width =width;
+  //   this.height = height;
+  //   notifyListeners();
+  // }
 }

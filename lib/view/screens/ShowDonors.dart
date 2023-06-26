@@ -11,7 +11,6 @@ import '../../controller/Constant/CustomSearchDelegate.dart';
 class ShowDonors extends StatelessWidget {
   static const ROUTE = 'ShowDonors';
   String? collection;
-  
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +20,7 @@ class ShowDonors extends StatelessWidget {
 
     return Scaffold(
         appBar: AppBar(
-           actions: [
+          actions: [
             IconButton(
               onPressed: () {
                 showSearch(
@@ -61,6 +60,4 @@ class ShowDonors extends StatelessWidget {
   }
 }
 
-class A extends AppBar {
-
-}
+class A extends AppBar {}
