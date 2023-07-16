@@ -23,14 +23,25 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "Cars": MessageLookupByLibrary.simpleMessage("Cars"),
-        "Doctor_Screen": MessageLookupByLibrary.simpleMessage("DoctorScreen"),
+        "Doctor": MessageLookupByLibrary.simpleMessage("Doctor"),
+        "Select_Service":
+            MessageLookupByLibrary.simpleMessage("Select Service"),
         "blood_type": MessageLookupByLibrary.simpleMessage("Blood Type"),
         "doctor": MessageLookupByLibrary.simpleMessage("Doctors"),
         "donors": MessageLookupByLibrary.simpleMessage("Donors"),
+        "from": MessageLookupByLibrary.simpleMessage("From :"),
         "internal_transfer":
             MessageLookupByLibrary.simpleMessage("Internal Transfer"),
         "line": MessageLookupByLibrary.simpleMessage("Lines"),
+        "name": MessageLookupByLibrary.simpleMessage("Name :"),
+        "presence": MessageLookupByLibrary.simpleMessage("Presence"),
+        "profession": MessageLookupByLibrary.simpleMessage("Profession :"),
         "professions": MessageLookupByLibrary.simpleMessage("Professions"),
-        "title": MessageLookupByLibrary.simpleMessage("My Service")
+        "specialization":
+            MessageLookupByLibrary.simpleMessage("Specialization :"),
+        "time": MessageLookupByLibrary.simpleMessage("Time :"),
+        "title": MessageLookupByLibrary.simpleMessage("My Service"),
+        "title_service": MessageLookupByLibrary.simpleMessage("Title :"),
+        "type": MessageLookupByLibrary.simpleMessage("Type :")
       };
 }

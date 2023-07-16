@@ -6,6 +6,16 @@
     "doctor": "Doctors",
     "blood_type": "Blood Type",
     "Cars": "Cars",
-    "Doctor_Screen": "DoctorScreen",
-    "donors" : "Donors"
+    "Doctor": "Doctor",
+    "donors": "Donors",
+    "Select_Service": "Select Service",
+    "name": "Name :",
+    "type": "Type :",
+    "time": "Time :",
+    "from": "From :",
+    "profession": "Profession :",
+    "presence" : "Presence",
+    "specialization" : "Specialization :",
+    "title_service" : "Title :"
+
 }

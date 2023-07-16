@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tester_app/controller/Constant/ServiceCollectios.dart';
-import 'package:tester_app/controller/provider/Provider.dart';
+import 'package:tester_app/Models/provider/Provider.dart';
 import 'package:tester_app/generated/l10n.dart';
 import 'package:tester_app/view/widget/CardProfessions.dart';
 
@@ -16,7 +16,7 @@ class ProfessionsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final ss = Provider.of<Providers>(context, listen: false);
     ss.getData(ServiceCollectios.professions.name);
-    
+
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -53,8 +53,12 @@ class ProfessionsScreen extends StatelessWidget {
                 // return const ImageListView(startIndex: 0);
                 return CardProfessions(
                   name: value.s[index]['name'],
-                  number: value.s[index]['number'],
                   nameProfession: value.s[index]['nameProfession'],
+                  onPressed: () {
+                    context
+                        .read<Providers>()
+                        .callNumber(value.s[index]['number']);
+                  },
                 );
               });
         },

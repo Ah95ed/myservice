@@ -9,7 +9,7 @@ import 'package:tester_app/view/screens/ProfessionsScreen.dart';
 import 'package:tester_app/view/screens/SatotaScreen.dart';
 import 'package:tester_app/view/screens/ShowDonors.dart';
 import 'package:tester_app/view/screens/TheCars.dart';
-import 'controller/provider/Provider.dart';
+import 'Models/provider/Provider.dart';
 import 'firebase_options.dart';
 import 'generated/l10n.dart';
 import 'package:sizer/sizer.dart';
@@ -52,11 +52,11 @@ class MyApp extends StatelessWidget {
           ROUTE: (context) => const MyApp(),
           MainScreen.ROUTE: (context) => const MainScreen(),
           DoctorScreen.ROUTE: (context) => const DoctorScreen(),
-          BloodScreen.ROUTE: (context) => const BloodScreen(),
+          BloodScreen.ROUTE: (context) =>  BloodScreen(),
           ShowDonors.ROUTE: (context) => ShowDonors(),
           TheCars.ROUTE: (context) => const TheCars(),
           ProfessionsScreen.ROUTE: (context) => const ProfessionsScreen(),
-          SatotaScreen.ROUTE: (context) => const SatotaScreen(),
+          SatotaScreen.ROUTE: (context) =>  SatotaScreen(),
         },
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),

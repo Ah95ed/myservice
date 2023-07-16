@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tester_app/controller/Constant/Constant.dart';
-import 'package:tester_app/controller/provider/Provider.dart';
+import 'package:tester_app/Models/provider/Provider.dart';
 import 'package:tester_app/generated/l10n.dart';
 import 'package:tester_app/view/widget/CardDonors.dart';
 
@@ -10,7 +10,6 @@ import '../../controller/Constant/CustomSearchDelegate.dart';
 // ignore: must_be_immutable
 class ShowDonors extends StatelessWidget {
   static const ROUTE = 'ShowDonors';
-  String? collection;
 
   @override
   Widget build(BuildContext context) {
@@ -45,19 +44,19 @@ class ShowDonors extends StatelessWidget {
         ),
         body: Consumer<Providers>(
           builder: (context, data, child) {
-            return ListView.builder(
-                itemCount: data.s.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return CardDonors(
-                    name: data.s[index]['name'],
-                    type: data.s[index]['type'],
-                    title: data.s[index]['location'],
-                    number: data.s[index]['number'],
-                  );
-                });
+            return ss.s.isEmpty
+                ? const Center(child: CircularProgressIndicator())
+                : ListView.builder(
+                    itemCount: data.s.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return CardDonors(
+                        name: data.s[index]['name'],
+                        type: dataSend.collection,
+                        title: data.s[index]['location'],
+                        number: data.s[index]['number'],
+                      );
+                    });
           },
         ));
   }
 }
-
-class A extends AppBar {}

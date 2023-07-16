@@ -120,11 +120,11 @@ class S {
     );
   }
 
-  /// `DoctorScreen`
-  String get Doctor_Screen {
+  /// `Doctor`
+  String get Doctor {
     return Intl.message(
-      'DoctorScreen',
-      name: 'Doctor_Screen',
+      'Doctor',
+      name: 'Doctor',
       desc: '',
       args: [],
     );
@@ -135,6 +135,96 @@ class S {
     return Intl.message(
       'Donors',
       name: 'donors',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Service`
+  String get Select_Service {
+    return Intl.message(
+      'Select Service',
+      name: 'Select_Service',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Name :`
+  String get name {
+    return Intl.message(
+      'Name :',
+      name: 'name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type :`
+  String get type {
+    return Intl.message(
+      'Type :',
+      name: 'type',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Time :`
+  String get time {
+    return Intl.message(
+      'Time :',
+      name: 'time',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `From :`
+  String get from {
+    return Intl.message(
+      'From :',
+      name: 'from',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Profession :`
+  String get profession {
+    return Intl.message(
+      'Profession :',
+      name: 'profession',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Presence`
+  String get presence {
+    return Intl.message(
+      'Presence',
+      name: 'presence',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Specialization :`
+  String get specialization {
+    return Intl.message(
+      'Specialization :',
+      name: 'specialization',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Title :`
+  String get title_service {
+    return Intl.message(
+      'Title :',
+      name: 'title_service',
       desc: '',
       args: [],
     );

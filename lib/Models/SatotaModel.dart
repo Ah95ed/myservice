@@ -1,8 +1,5 @@
-
-
 class SatotaModel {
-  String name,number,location;
+  String? name, number, location;
 
-  SatotaModel({required this.name,required this.number,required this.location});
-
+  SatotaModel({this.name, this.number, this.location});
 }

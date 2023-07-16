@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
-import '../../Models/colorsProject.dart';
-import '../../controller/provider/Provider.dart';
+import 'package:sizer/sizer.dart';
+import '../../Models/provider/Provider.dart';
+import '../../generated/l10n.dart';
+import 'Multi_text.dart';
 
 // ignore: must_be_immutable
 class CardCars extends StatelessWidget {
@@ -19,71 +20,40 @@ class CardCars extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<Providers>(builder: (context, value, child) {
-      return Container(
-        margin: const EdgeInsets.all(6.0),
-        decoration: BoxDecoration(
-          border: Border.all(
-            width: 3.0,
-            color: const Color(0xFF5808FB),
-          ),
-          borderRadius: const BorderRadius.all(
-            Radius.circular(20),
-          ),
-        ),
-        padding: const EdgeInsets.all(10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Flexible(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(name,
-                      style: const TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 20)),
-                  Text(type,
-                      style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          color: Colors.black)),
-                  Text(
-                    time,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                        color: Colors.black),
-                  ),
-                  Text(
-                    from,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                        color: Colors.black),
-                  ),
-                ],
-              ),
+    return Card(
+      elevation: 8,
+      shadowColor: Colors.teal,
+      child: Row(
+        children: [
+          Expanded(
+            flex: 1,
+            child: Column(
+              children: [
+                MultiText(name, S.of(context).name),
+                
+                MultiText(type, S.of(context).type),
+               
+                MultiText(time, S.of(context).time),
+                
+                MultiText(from, S.of(context).from),
+              ],
             ),
-            IconButton(
-              icon: const Icon(
+          ),
+          Expanded(
+            flex: 0,
+            child: IconButton(
+              icon: Icon(
                 Icons.call,
-                size: 30.0,
-                color: ColorsProject.colorAppBar,
+                size: 4.h,
+                color: Colors.black,
               ),
               onPressed: () async {
-                // _callNumber(number);
-                // _makePhoneCall(number);
-                value.callNumber(number);
+                context.read<Providers>().callNumber(number);
               },
             ),
-          ],
-        ),
-      );
-    });
+          ),
+        ],
+      ),
+    );
   }
-
-  // _callNumber(String num) async {
-  //   // const numb = '+9647824854526'; //set the number here
-  //   bool? res = await FlutterPhoneDirectCaller.callNumber(num);
-  // }
 }

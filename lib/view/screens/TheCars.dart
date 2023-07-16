@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tester_app/controller/Constant/ServiceCollectios.dart';
-import 'package:tester_app/controller/provider/Provider.dart';
+import 'package:tester_app/Models/provider/Provider.dart';
 import 'package:tester_app/generated/l10n.dart';
 import 'package:tester_app/view/widget/CardCars.dart';
 

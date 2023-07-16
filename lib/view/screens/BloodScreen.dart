@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tester_app/Models/colorsProject.dart';
+import 'package:sizer/sizer.dart';
 import 'package:tester_app/controller/Constant/Constant.dart';
-import 'package:tester_app/controller/provider/Provider.dart';
+import 'package:tester_app/Models/provider/Provider.dart';
 import 'package:tester_app/generated/l10n.dart';
 import 'package:tester_app/view/screens/ShowDonors.dart';
 import 'package:tester_app/view/widget/ButtonSelect.dart';
 
 class BloodScreen extends StatelessWidget {
   static const ROUTE = "BloodScreen";
-  const BloodScreen({super.key});
-  final double Hight = 20.0;
+  BloodScreen({super.key});
+  final double Hight = 5.h;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 4.0,
+        elevation: 5.sp,
         title: Center(
           child: Text(
             S.of(context).blood_type,
-            style: const TextStyle(
+            style: TextStyle(
               color: Colors.black,
-              fontSize: 22,
+              fontSize: 16.sp,
               fontWeight: FontWeight.bold,
             ),
           ),

@@ -1,8 +1,19 @@
 {
-    "title": "خدماتي",
-    "doctor": "أطباء",
-    "blood_type": "فصائل الدم",
+    "title": "خدمتي",
     "professions": "المهن",
-    "line": "خطوط النقل",
-    "internal_transfer": "النقل الداخلي"
+    "line": "الخطوط",
+    "internal_transfer": "نقل داخلي",
+    "doctor": "الأطباء",
+    "blood_type": "فصيلة الدم",
+    "Cars": "السيارات",
+    "Doctor": "الطبيب",
+    "donors": "المتبرعين",
+    "Select_Service": "اختر الخدمة",
+    "name": "الاسم :",
+    "type": "النوع :",
+    "time": "الوقت :",
+    "from": "من :",
+    "profession": "المهنة :",
+    "specialization": "الاختصاص :",
+    "title_service": "العنوان :"
 }

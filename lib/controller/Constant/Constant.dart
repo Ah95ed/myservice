@@ -10,7 +10,7 @@ class Constant {
 }
 
 class DataSend {
-  final String collection;
+   String collection;
 
   DataSend(this.collection);
 }

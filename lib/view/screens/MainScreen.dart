@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sizer/sizer.dart';
 import 'package:tester_app/generated/l10n.dart';
 import 'package:tester_app/view/screens/BloodScreen.dart';
 import 'package:tester_app/view/screens/DoctorScreen.dart';
@@ -7,8 +8,7 @@ import 'package:tester_app/view/screens/ProfessionsScreen.dart';
 import 'package:tester_app/view/screens/SatotaScreen.dart';
 import 'package:tester_app/view/screens/TheCars.dart';
 import 'package:tester_app/view/widget/ButtonSelect.dart';
-
-import '../../controller/provider/Provider.dart';
+import '../../Models/provider/Provider.dart';
 
 // ignore: must_be_immutable
 class MainScreen extends StatelessWidget {
@@ -17,14 +17,12 @@ class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    // final ss = Provider.of<Providers>(context, listen: false);
-    // ss.changeSizeScreen(
-    //     MediaQuery.of(context).size.width, MediaQuery.of(context).size.height);
     return Consumer<Providers>(
       builder: (context, value, child) {
         return Scaffold(
           appBar: AppBar(
-            elevation: 4.0,
+            elevation: 8.0,
+            backgroundColor: Theme.of(context).colorScheme.inversePrimary,
             title: Center(
               child: Text(
                 S.of(context).title,
@@ -40,7 +38,7 @@ class MainScreen extends StatelessWidget {
             decoration: BoxDecoration(
               border: Border.all(
                 width: 3.0,
-                color: const Color(0xFF5808FB),
+                color: Theme.of(context).colorScheme.inversePrimary,
               ),
               borderRadius: const BorderRadius.all(
                 Radius.circular(20),
@@ -54,14 +52,22 @@ class MainScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // ButtonSelect(
-                //   title: S.of(context).blood_type,
-                //   onPressed: () {
-                //     ss.changeSizeScreen(context);
 
-                //     print("_____________${ss.height}");
-                //   },
-                // ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                   Text(S.of(context).Select_Service,style:  TextStyle(
+                     color: Colors.black,
+                     fontSize: 18.sp,
+                     fontWeight: FontWeight.bold,
+
+                   ),),
+
+                  ],
+                ),
+                const SizedBox(
+                  height: 50.0,
+                ),
                 Row(
                   children: [
                     ButtonSelect(

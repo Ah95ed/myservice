@@ -4,13 +4,13 @@ import 'package:tester_app/generated/l10n.dart';
 import 'package:tester_app/view/widget/cardView.dart';
 import '../../controller/Constant/CustomSearchDelegate.dart';
 import '../../controller/Constant/ServiceCollectios.dart';
-import '../../controller/provider/Provider.dart';
+import '../../Models/provider/Provider.dart';
 
 class DoctorScreen extends StatelessWidget {
   static const ROUTE = "SecondScreen";
 
   const DoctorScreen({super.key});
-
+  
   @override
   Widget build(BuildContext context) {
     final ss = Provider.of<Providers>(context, listen: false);
@@ -19,7 +19,7 @@ class DoctorScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 4.0,
-        title: Text(S.of(context).Doctor_Screen),
+        title: Text(S.of(context).Doctor),
         actions: [
           IconButton(
             onPressed: () {
@@ -44,8 +44,9 @@ class DoctorScreen extends StatelessWidget {
                 return CardViewList(
                   name: value.s[index]['name'],
                   presence: value.s[index]['presence'],
-                  time: value.s[index]['specialization'],
+                  specialization: value.s[index]['specialization'],
                   number: value.s[index]['number'],
+                  title: value.s[index]['title'],
                 );
               });
         },

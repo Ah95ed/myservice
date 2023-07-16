@@ -22,12 +22,22 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "blood_type": MessageLookupByLibrary.simpleMessage("فصائل الدم"),
-        "doctor": MessageLookupByLibrary.simpleMessage("أطباء"),
-        "internal_transfer":
-            MessageLookupByLibrary.simpleMessage("النقل الداخلي"),
-        "line": MessageLookupByLibrary.simpleMessage("خطوط النقل"),
+        "Cars": MessageLookupByLibrary.simpleMessage("السيارات"),
+        "Doctor": MessageLookupByLibrary.simpleMessage("الطبيب"),
+        "Select_Service": MessageLookupByLibrary.simpleMessage("اختر الخدمة"),
+        "blood_type": MessageLookupByLibrary.simpleMessage("فصيلة الدم"),
+        "doctor": MessageLookupByLibrary.simpleMessage("الأطباء"),
+        "donors": MessageLookupByLibrary.simpleMessage("المتبرعين"),
+        "from": MessageLookupByLibrary.simpleMessage("من :"),
+        "internal_transfer": MessageLookupByLibrary.simpleMessage("نقل داخلي"),
+        "line": MessageLookupByLibrary.simpleMessage("الخطوط"),
+        "name": MessageLookupByLibrary.simpleMessage("الاسم :"),
+        "profession": MessageLookupByLibrary.simpleMessage("المهنة :"),
         "professions": MessageLookupByLibrary.simpleMessage("المهن"),
-        "title": MessageLookupByLibrary.simpleMessage("خدماتي")
+        "specialization": MessageLookupByLibrary.simpleMessage("الاختصاص :"),
+        "time": MessageLookupByLibrary.simpleMessage("الوقت :"),
+        "title": MessageLookupByLibrary.simpleMessage("خدمتي"),
+        "title_service": MessageLookupByLibrary.simpleMessage("العنوان :"),
+        "type": MessageLookupByLibrary.simpleMessage("النوع :")
       };
 }

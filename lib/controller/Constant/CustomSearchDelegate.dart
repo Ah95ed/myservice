@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../Models/colorsProject.dart';
-
 class CustomSearchDelegate extends SearchDelegate {
   List search = [];
 
@@ -43,9 +41,6 @@ class CustomSearchDelegate extends SearchDelegate {
       if (e.toString().contains(query)) {
         results.add(e);
       }
-      // if (e.contains(query)) {
-      //   results.add(e);
-      // }
     }
     return ListView.builder(
         itemCount: results.length,
@@ -71,7 +66,7 @@ class CustomSearchDelegate extends SearchDelegate {
                 icon: const Icon(
                   Icons.call,
                   size: 30.0,
-                  color: ColorsProject.colorAppBar,
+                  color: Colors.black,
                 ),
                 onPressed: () async {
                   close(context, results[index]['number']);
@@ -118,7 +113,7 @@ class CustomSearchDelegate extends SearchDelegate {
                 icon: const Icon(
                   Icons.call,
                   size: 30.0,
-                  color: ColorsProject.colorAppBar,
+                  color: Colors.black,
                 ),
                 onPressed: () async {
                   _makePhoneCall(results[index]['number']);

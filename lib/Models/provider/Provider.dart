@@ -3,31 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Providers with ChangeNotifier {
-  List sss = [];
   List s = [];
-  //  double? width;
-  //  double? height;
 
   Future getData(String collection) async {
     s.clear();
     FirebaseFirestore firestoreInstance = FirebaseFirestore.instance;
     final collectionRef = firestoreInstance.collection(collection);
     final querySnapshot = await collectionRef.get();
-    for (var document in querySnapshot.docs) {
-      s.add(document.data());
-    }
-
-    notifyListeners();
-  }
-
-  Future getDataSatota(String collection) async {
-    sss.clear();
-    FirebaseFirestore firestoreInstance = FirebaseFirestore.instance;
-    final collectionRef = firestoreInstance.collection(collection);
-    final querySnapshot = await collectionRef.get();
-    for (var document in querySnapshot.docs) {
-      sss.add(document.data());
-    }
+    s = querySnapshot.docs.map((e) => e).toList();
     notifyListeners();
   }
 
@@ -43,15 +26,7 @@ class Providers with ChangeNotifier {
     );
     if (await canLaunchUrl(launchUri)) {
       await launchUrl(launchUri);
-    } else {
-      print('not call ____');
     }
     notifyListeners();
   }
-
-  // void changeSizeScreen(double width,double height) {
-  //   this.width =width;
-  //   this.height = height;
-  //   notifyListeners();
-  // }
 }
