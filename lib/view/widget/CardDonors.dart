@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
+import 'package:tester_app/Models/provider/Provider.dart';
 import 'package:tester_app/generated/l10n.dart';
 import 'package:tester_app/view/widget/Multi_text.dart';
 
@@ -31,6 +33,7 @@ class CardDonors extends StatelessWidget {
                   MultiText(name, S.of(context).name),
                   MultiText(type, S.of(context).type),
                   MultiText(title, S.of(context).title_service),
+
                 ],
               ),
             ),
@@ -43,7 +46,9 @@ class CardDonors extends StatelessWidget {
                 size: 4.h,
                 color: Colors.black,
               ),
-              onPressed: () async {},
+              onPressed: () async {
+                context.read<Providers>().callNumber(number);
+              },
             ),
           ),
         ],
