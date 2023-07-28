@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sizer/sizer.dart';
 import 'package:tester_app/controller/Constant/ServiceCollectios.dart';
 import 'package:tester_app/Models/provider/Provider.dart';
 import 'package:tester_app/generated/l10n.dart';
@@ -9,7 +10,7 @@ import '../../controller/Constant/CustomSearchDelegate.dart';
 class SatotaScreen extends StatelessWidget {
   static const ROUTE = '/SatotaScreen';
   const SatotaScreen({super.key});
-  
+
   @override
   Widget build(BuildContext context) {
     final ss = Provider.of<Providers>(context, listen: false);
@@ -41,21 +42,36 @@ class SatotaScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: Consumer<Providers>(
+      body: Selector<Providers, List>(
+        selector: (p0, p1) => p1.s,
         builder: (context, value, child) {
-          return ListView.builder(
-              itemCount: value.s.length,
-              itemBuilder: (BuildContext context, int index) {
-                return CardSatota(
-                  name: value.s[index]['name'],
-                  location: value.s[index]['location'],
-                  onPressed: () {
-                    context
-                        .read<Providers>()
-                        .callNumber(value.s[index]['number']);
-                  },
-                );
-              });
+          return value.isEmpty
+              ? Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const CircularProgressIndicator(),
+                      SizedBox(
+                        height: 2.h,
+                      ),
+                      Text(S.of(context).wait_service),
+                    ],
+                  ),
+                )
+              : ListView.builder(
+                  itemCount: value.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return CardSatota(
+                      name: value[index]['name'],
+                      location: value[index]['location'],
+                      onPressed: () {
+                        context
+                            .read<Providers>()
+                            .callNumber(value[index]['number']);
+                      },
+                    );
+                  });
         },
       ),
     );

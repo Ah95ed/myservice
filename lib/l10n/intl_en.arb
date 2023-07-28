@@ -14,8 +14,8 @@
     "time": "Time :",
     "from": "From :",
     "profession": "Profession :",
-    "presence" : "Presence",
-    "specialization" : "Specialization :",
-    "title_service" : "Title :"
-
+    "presence": "Presence",
+    "specialization": "Specialization :",
+    "title_service": "Title :",
+    "wait_service": "Waiting Service"
 }

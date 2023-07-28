@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sizer/sizer.dart';
 import 'package:tester_app/controller/Constant/ServiceCollectios.dart';
 import 'package:tester_app/Models/provider/Provider.dart';
 import 'package:tester_app/generated/l10n.dart';
 import 'package:tester_app/view/widget/CardCars.dart';
-
 import '../../controller/Constant/CustomSearchDelegate.dart';
+
+
 
 class TheCars extends StatelessWidget {
   static const ROUTE = 'TheCars';
@@ -44,19 +46,35 @@ class TheCars extends StatelessWidget {
           ),
         ),
       ),
-      body: Consumer<Providers>(
+      body: Selector<Providers, List>(
+        selector: (p0, p1) => p1.s,
         builder: (context, value, child) {
-          return ListView.builder(
-              itemCount: value.s.length,
-              itemBuilder: (BuildContext context, int index) {
-                return CardCars(
-                  name: value.s[index]['name'],
-                  type: value.s[index]['type'],
-                  time: value.s[index]['time'],
-                  number: value.s[index]['number'],
-                  from: value.s[index]['from'],
+          return value.isEmpty
+              ? Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const CircularProgressIndicator(),
+                      SizedBox(
+                        height: 2.h,
+                      ),
+                      Text(S.of(context).wait_service),
+                    ],
+                  ),
+                )
+              : ListView.builder(
+                  itemCount: value.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return CardCars(
+                      name: value[index]['name'],
+                      type: value[index]['type'],
+                      time: value[index]['time'],
+                      number: value[index]['number'],
+                      from: value[index]['from'],
+                    );
+                  },
                 );
-              });
         },
       ),
     );

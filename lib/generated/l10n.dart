@@ -229,6 +229,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Waiting Service`
+  String get wait_service {
+    return Intl.message(
+      'Waiting Service',
+      name: 'wait_service',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

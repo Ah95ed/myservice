@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sizer/sizer.dart';
 import 'package:tester_app/generated/l10n.dart';
 import 'package:tester_app/view/widget/cardView.dart';
 import '../../controller/Constant/CustomSearchDelegate.dart';
@@ -35,18 +36,32 @@ class DoctorScreen extends StatelessWidget {
           )
         ],
       ),
-      body: Consumer<Providers>(
+      body: Selector<Providers,List>(
+        selector: (p0, p1) => p1.s,
         builder: (context, value, child) {
-          return ListView.builder(
-              itemCount: value.s.length,
+          return value.isEmpty ?
+          Center(
+             child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const CircularProgressIndicator(),
+                      SizedBox(
+                        height: 2.h,
+                      ),
+                      Text(S.of(context).wait_service)
+                    ],
+                  ),
+          ) : ListView.builder(
+              itemCount: value.length,
               itemBuilder: (BuildContext context, int index) {
                 // return const ImageListView(startIndex: 0);
                 return CardViewList(
-                  name: value.s[index]['name'],
-                  presence: value.s[index]['presence'],
-                  specialization: value.s[index]['specialization'],
-                  number: value.s[index]['number'],
-                  title: value.s[index]['title'],
+                  name: value[index]['name'],
+                  presence: value[index]['presence'],
+                  specialization: value[index]['specialization'],
+                  number: value[index]['number'],
+                  title: value[index]['title'],
                 );
               });
         },

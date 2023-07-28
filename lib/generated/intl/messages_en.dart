@@ -42,6 +42,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "time": MessageLookupByLibrary.simpleMessage("Time :"),
         "title": MessageLookupByLibrary.simpleMessage("My Service"),
         "title_service": MessageLookupByLibrary.simpleMessage("Title :"),
-        "type": MessageLookupByLibrary.simpleMessage("Type :")
+        "type": MessageLookupByLibrary.simpleMessage("Type :"),
+        "wait_service": MessageLookupByLibrary.simpleMessage("Waiting Service")
       };
 }

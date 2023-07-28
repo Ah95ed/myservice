@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sizer/sizer.dart';
 import 'package:tester_app/controller/Constant/Constant.dart';
 import 'package:tester_app/Models/provider/Provider.dart';
 import 'package:tester_app/generated/l10n.dart';
@@ -10,6 +11,8 @@ import '../../controller/Constant/CustomSearchDelegate.dart';
 // ignore: must_be_immutable
 class ShowDonors extends StatelessWidget {
   static const ROUTE = 'ShowDonors';
+
+  const ShowDonors({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -42,18 +45,31 @@ class ShowDonors extends StatelessWidget {
           ),
           elevation: 4.0,
         ),
-        body: Consumer<Providers>(
+        body: Selector<Providers, List>(
+          selector: (p0, p1) => p1.s,
           builder: (context, data, child) {
-            return ss.s.isEmpty
-                ? const Center(child: CircularProgressIndicator())
+            return data.isEmpty
+                ? Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        const CircularProgressIndicator(),
+                        SizedBox(
+                          height: 2.h,
+                        ),
+                        Text(S.of(context).wait_service)
+                      ],
+                    ),
+                  )
                 : ListView.builder(
-                    itemCount: data.s.length,
+                    itemCount: data.length,
                     itemBuilder: (BuildContext context, int index) {
                       return CardDonors(
-                        name: data.s[index]['name'],
+                        name: data[index]['name'],
                         type: dataSend.collection,
-                        title: data.s[index]['location'],
-                        number: data.s[index]['number'],
+                        title: data[index]['location'],
+                        number: data[index]['number'],
                       );
                     });
           },
