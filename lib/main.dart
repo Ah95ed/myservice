@@ -52,11 +52,7 @@ class MyApp extends StatelessWidget {
           ROUTE: (context) => const MyApp(),
           MainScreen.ROUTE: (context) => const MainScreen(),
           DoctorScreen.ROUTE: (context) => const DoctorScreen(),
-<<<<<<< HEAD
           BloodScreen.ROUTE: (context) => BloodScreen(),
-=======
-          BloodScreen.ROUTE: (context) =>  BloodScreen(),
->>>>>>> 6cbfc1d323408942b27a0ff4239a12c3f847c6ba
           ShowDonors.ROUTE: (context) => const ShowDonors(),
           TheCars.ROUTE: (context) => const TheCars(),
           ProfessionsScreen.ROUTE: (context) => const ProfessionsScreen(),
@@ -66,7 +62,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: const TheCars(),
+        home: const MainScreen(),
       );
     });
   }

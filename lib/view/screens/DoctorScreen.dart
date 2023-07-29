@@ -16,6 +16,7 @@ class DoctorScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     context.read<Providers>().getData(ServiceCollectios.Doctor.name);
     context.read<Providers>().title = Text(S.of(context).doctor);
+      context.read<Providers>().actionsicon = const Icon(Icons.search);
     return Consumer<Providers>(
       builder: (context, value, child) {
         return Scaffold(

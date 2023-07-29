@@ -3,30 +3,34 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-
 class Providers with ChangeNotifier {
-  List s = [];
 
+  List s = [];
   List search = [];
   List save = [];
   Widget title = const Text('');
   Icon actionsicon = const Icon(Icons.search);
+
   final TextEditingController number = TextEditingController();
 
   void changewidget(String titles) {
+    number.text = "";
     if (actionsicon.icon == Icons.search) {
       save = s;
       actionsicon = const Icon(Icons.close);
       title = TextField(
         controller: number,
         keyboardType: TextInputType.text,
-        style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
+        style: TextStyle(
+          fontSize: 16.sp,
+          fontWeight: FontWeight.bold,
+        ),
         textAlign: TextAlign.start,
-        onSubmitted: (v) {
-          searchName(v);
+        onChanged: (value) {
+
+          searchName(value);
         },
       );
-      notifyListeners();
     } else {
       s = save;
       save = [];
@@ -34,19 +38,20 @@ class Providers with ChangeNotifier {
       number.text = "";
       actionsicon = const Icon(Icons.search);
       title = Text(titles);
-      notifyListeners();
     }
+    notifyListeners();
   }
 
   Future<void> searchName(String? name) async {
     if (name == null) return;
 
-    for (  var element in  s) {
-      if ( element['name'].toString().contains(name)) {
+    for (var element in s) {
+      if (element['name'].toString().contains(name)) {
         search.add(element);
       }
     }
-     s = search;
+    s = search;
+    search = [];
     notifyListeners();
   }
 

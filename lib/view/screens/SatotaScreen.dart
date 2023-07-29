@@ -14,6 +14,7 @@ class SatotaScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     context.read<Providers>().getData(ServiceCollectios.Satota.name);
     context.read<Providers>().title =Text(S.of(context).internal_transfer);
+      context.read<Providers>().actionsicon = const Icon(Icons.search);
     return Consumer<Providers>(
       builder: (context, value, child) {
         return Scaffold(

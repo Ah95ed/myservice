@@ -7,6 +7,7 @@ import 'package:tester_app/generated/l10n.dart';
 import 'package:tester_app/view/widget/CardCars.dart';
 
 class TheCars extends StatelessWidget {
+
   static const ROUTE = 'TheCars';
 
   const TheCars({super.key});
@@ -15,6 +16,7 @@ class TheCars extends StatelessWidget {
   Widget build(BuildContext context) {
     context.read<Providers>().getData(ServiceCollectios.line.name);
     context.read<Providers>().title = Text(S.of(context).Cars);
+    context.read<Providers>().actionsicon = const Icon(Icons.search);
     return Consumer<Providers>(
       builder: (context, value, child) {
         return Scaffold(
@@ -53,7 +55,7 @@ class TheCars extends StatelessWidget {
                       name: value.s[index]['name'],
                       type: value.s[index]['type'],
                       time: value.s[index]['time'],
-                      number: value.s[index]['number'],
+                      number:value.s[index]['number'],
                       from: value.s[index]['from'],
                     );
                   },

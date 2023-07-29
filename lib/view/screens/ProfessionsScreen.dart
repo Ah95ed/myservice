@@ -15,6 +15,7 @@ class ProfessionsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     context.read<Providers>().getData(ServiceCollectios.professions.name);
     context.read<Providers>().title = Text(S.current.professions);
+      context.read<Providers>().actionsicon = const Icon(Icons.search);
     return Consumer<Providers>(
       builder: (context, value, child) {
         return Scaffold(

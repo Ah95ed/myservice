@@ -17,7 +17,7 @@ class ShowDonors extends StatelessWidget {
     DataSend? dataSend = ModalRoute.of(context)!.settings.arguments as DataSend;
     context.read<Providers>().title = Text(S.of(context).donors);
     context.read<Providers>().getData(dataSend.collection);
-
+    context.read<Providers>().actionsicon = const Icon(Icons.search);
     return Consumer<Providers>(
       builder: (context, value, child) {
         return Scaffold(
