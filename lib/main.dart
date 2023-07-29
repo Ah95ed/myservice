@@ -53,10 +53,10 @@ class MyApp extends StatelessWidget {
           MainScreen.ROUTE: (context) => const MainScreen(),
           DoctorScreen.ROUTE: (context) => const DoctorScreen(),
           BloodScreen.ROUTE: (context) =>  BloodScreen(),
-          ShowDonors.ROUTE: (context) => ShowDonors(),
+          ShowDonors.ROUTE: (context) => const ShowDonors(),
           TheCars.ROUTE: (context) => const TheCars(),
           ProfessionsScreen.ROUTE: (context) => const ProfessionsScreen(),
-          SatotaScreen.ROUTE: (context) =>  SatotaScreen(),
+          SatotaScreen.ROUTE: (context) => const SatotaScreen(),
         },
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
