@@ -6,8 +6,6 @@ import 'package:tester_app/Models/provider/Provider.dart';
 import 'package:tester_app/generated/l10n.dart';
 import 'package:tester_app/view/widget/CardProfessions.dart';
 
-import '../../controller/Constant/CustomSearchDelegate.dart';
-
 class ProfessionsScreen extends StatelessWidget {
   static const ROUTE = 'ProfessionsScreen';
 
@@ -15,41 +13,24 @@ class ProfessionsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ss = Provider.of<Providers>(context, listen: false);
-    ss.getData(ServiceCollectios.professions.name);
-
-    return Scaffold(
-      appBar: AppBar(
-        actions: [
-          IconButton(
-            onPressed: () {
-              showSearch(
-                  context: context,
-                  delegate: CustomSearchDelegate(search: ss.s));
-            },
-            icon: const Icon(
-              Icons.search,
-              weight: 50.0,
-              color: Color.fromARGB(255, 82, 24, 24),
-            ),
-          )
-        ],
-        elevation: 4.0,
-        title: Center(
-          child: Text(
-            S.of(context).professions,
-            style: const TextStyle(
-              color: Colors.black,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
+    context.read<Providers>().getData(ServiceCollectios.professions.name);
+    context.read<Providers>().title = Text(S.current.professions);
+    return Consumer<Providers>(
+      builder: (context, value, child) {
+        return Scaffold(
+          appBar: AppBar(
+            actions: [
+              IconButton(
+                onPressed: () {
+                  value.changewidget(S.current.professions);
+                },
+                icon: Icon(value.actionsicon.icon),
+              )
+            ],
+            elevation: 4.0,
+            title: value.title,
           ),
-        ),
-      ),
-      body: Selector<Providers,List>(
-        selector: (p0, p1) => p1.s,
-        builder: (context, value, child) {
-          return value.isEmpty
+          body: value.s.isEmpty
               ? Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -64,21 +45,22 @@ class ProfessionsScreen extends StatelessWidget {
                   ),
                 )
               : ListView.builder(
-              itemCount: value.length,
-              itemBuilder: (BuildContext context, int index) {
-                // return const ImageListView(startIndex: 0);
-                return CardProfessions(
-                  name: value[index]['name'],
-                  nameProfession: value[index]['nameProfession'],
-                  onPressed: () {
-                    context
-                        .read<Providers>()
-                        .callNumber(value[index]['number']);
+                  itemCount: value.s.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    // return const ImageListView(startIndex: 0);
+                    return CardProfessions(
+                      name: value.s[index]['name'],
+                      nameProfession: value.s[index]['nameProfession'],
+                      onPressed: () {
+                        context
+                            .read<Providers>()
+                            .callNumber(value.s[index]['number']);
+                      },
+                    );
                   },
-                );
-              });
-        },
-      ),
+                ),
+        );
+      },
     );
   }
 }

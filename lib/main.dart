@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return Sizer(builder: (context,orientations,device){
+    return Sizer(builder: (context, orientations, device) {
       return MaterialApp(
         localizationsDelegates: const [
           S.delegate,
@@ -52,20 +52,18 @@ class MyApp extends StatelessWidget {
           ROUTE: (context) => const MyApp(),
           MainScreen.ROUTE: (context) => const MainScreen(),
           DoctorScreen.ROUTE: (context) => const DoctorScreen(),
-          BloodScreen.ROUTE: (context) =>  BloodScreen(),
-          ShowDonors.ROUTE: (context) => ShowDonors(),
+          BloodScreen.ROUTE: (context) => BloodScreen(),
+          ShowDonors.ROUTE: (context) => const ShowDonors(),
           TheCars.ROUTE: (context) => const TheCars(),
           ProfessionsScreen.ROUTE: (context) => const ProfessionsScreen(),
-          SatotaScreen.ROUTE: (context) =>  SatotaScreen(),
+          SatotaScreen.ROUTE: (context) => const SatotaScreen(),
         },
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: const MainScreen(),
+        home: const TheCars(),
       );
     });
-   
   }
 }
-

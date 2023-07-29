@@ -17,8 +17,6 @@ class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    return Consumer<Providers>(
-      builder: (context, value, child) {
         return Scaffold(
           appBar: AppBar(
             elevation: 8.0,
@@ -136,7 +134,6 @@ class MainScreen extends StatelessWidget {
             ),
           ),
         );
-      },
-    );
+
   }
 }

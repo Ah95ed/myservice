@@ -5,7 +5,6 @@ import 'package:tester_app/controller/Constant/ServiceCollectios.dart';
 import 'package:tester_app/Models/provider/Provider.dart';
 import 'package:tester_app/generated/l10n.dart';
 import 'package:tester_app/view/widget/Card_Satota.dart';
-import '../../controller/Constant/CustomSearchDelegate.dart';
 
 class SatotaScreen extends StatelessWidget {
   static const ROUTE = '/SatotaScreen';
@@ -13,39 +12,28 @@ class SatotaScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ss = Provider.of<Providers>(context, listen: false);
-    ss.getData(ServiceCollectios.Satota.name);
-    return Scaffold(
-      appBar: AppBar(
-        actions: [
-          IconButton(
-            onPressed: () {
-              showSearch(
-                  context: context,
-                  delegate: CustomSearchDelegate(search: ss.s));
-            },
-            icon: const Icon(
-              Icons.search,
-              weight: 50.0,
-              color: Color.fromARGB(255, 82, 24, 24),
-            ),
+    context.read<Providers>().getData(ServiceCollectios.Satota.name);
+    context.read<Providers>().title =Text(S.of(context).internal_transfer);
+    return Consumer<Providers>(
+      builder: (context, value, child) {
+        return Scaffold(
+          appBar: AppBar(
+            actions: [
+              IconButton(
+                onPressed: () {
+                  value.changewidget(
+                    S.of(context).internal_transfer.toString(),
+                  );
+                },
+                icon: Icon(
+                  value.actionsicon.icon,
+                ),
+              ),
+            ],
+            elevation: 4.0,
+            title: value.title,
           ),
-        ],
-        elevation: 4.0,
-        title: Center(
-          child: Text(
-            S.of(context).internal_transfer,
-            style: const TextStyle(
-              fontSize: 20.0,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-      ),
-      body: Selector<Providers, List>(
-        selector: (p0, p1) => p1.s,
-        builder: (context, value, child) {
-          return value.isEmpty
+          body: value.s.isEmpty
               ? Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -60,20 +48,21 @@ class SatotaScreen extends StatelessWidget {
                   ),
                 )
               : ListView.builder(
-                  itemCount: value.length,
+                  itemCount: value.s.length,
                   itemBuilder: (BuildContext context, int index) {
                     return CardSatota(
-                      name: value[index]['name'],
-                      location: value[index]['location'],
+                      name: value.s[index]['name'],
+                      location: value.s[index]['location'],
                       onPressed: () {
-                        context
-                            .read<Providers>()
-                            .callNumber(value[index]['number']);
+                        context.read<Providers>().callNumber(
+                              value.s[index]['number'],
+                            );
                       },
                     );
-                  });
-        },
-      ),
+                  },
+                ),
+        );
+      },
     );
   }
 }
