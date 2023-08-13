@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import '../../Models/provider/Provider.dart';
 import '../../generated/l10n.dart';
 import 'Multi_text.dart';
+import 'constant/Constant.dart';
 
 // ignore: must_be_immutable
 class CardCars extends StatelessWidget {
@@ -30,11 +32,8 @@ class CardCars extends StatelessWidget {
             child: Column(
               children: [
                 MultiText(name, S.of(context).name),
-                
                 MultiText(type, S.of(context).type),
-               
                 MultiText(time, S.of(context).time),
-                
                 MultiText(from, S.of(context).from),
               ],
             ),
@@ -45,7 +44,7 @@ class CardCars extends StatelessWidget {
               icon: Icon(
                 Icons.call,
                 size: 4.h,
-                color: Colors.black,
+                color: ColorUsed.primary,
               ),
               onPressed: () async {
                 context.read<Providers>().callNumber(number);
@@ -53,7 +52,14 @@ class CardCars extends StatelessWidget {
             ),
           ),
         ],
-      ),
+      ).animate().addEffect(
+            const MoveEffect(
+              begin: Offset(25, 15),
+              duration: Duration(milliseconds: 900),
+              delay: Duration(milliseconds: 500),
+              curve: Curves.linear,
+            ),
+          ),
     );
   }
 }

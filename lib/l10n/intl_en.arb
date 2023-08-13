@@ -19,13 +19,8 @@
     "specialization": "Specialization :",
     "title_service": "Title :",
     "wait_service": "Waiting Service",
-    "doNotDonateIf ": [
-        "You have ever taken drugs",
-        "Your partner takes drugs",
-        "You are HIV positive",
-        " You are a male who had sexual contacts with another male",
-        " Your partner is HIV positive",
-        " You have more than one sexual partner",
-        "You think your partner has risky sex"
-    ]
+    "whocandonate": "Who Can Donate Blood ?",
+    "source":"Go to the source",
+    "blooddonors": "Blood Donors :"
+    
 }

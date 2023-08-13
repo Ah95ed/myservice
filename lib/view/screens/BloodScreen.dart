@@ -1,17 +1,17 @@
+import 'package:Al_Zab_township_guide/Models/provider/Provider.dart';
+import 'package:Al_Zab_township_guide/controller/Constant/Constant.dart';
+import 'package:Al_Zab_township_guide/generated/l10n.dart';
+import 'package:Al_Zab_township_guide/view/screens/ShowDonors.dart';
+import 'package:Al_Zab_township_guide/view/screens/WhoCanDonateScreen%20.dart';
+import 'package:Al_Zab_township_guide/view/widget/ButtonSelect.dart';
+import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
+import 'package:Al_Zab_township_guide/view/widget/constant/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
-import 'package:tester_app/view/screens/WhoCanDonateScreen%20.dart';
-import 'package:tester_app/view/widget/constant/app_theme.dart';
-import 'package:tester_app/controller/Constant/Constant.dart';
-import 'package:tester_app/Models/provider/Provider.dart';
-import 'package:tester_app/generated/l10n.dart';
-import 'package:tester_app/view/screens/ShowDonors.dart';
-import 'package:tester_app/view/widget/ButtonSelect.dart';
-import 'package:tester_app/view/widget/constant/Constant.dart';
 
 class BloodScreen extends StatelessWidget {
   static const ROUTE = "BloodScreen";
@@ -74,25 +74,27 @@ class BloodScreen extends StatelessWidget {
                     color: Colors.black26,
                     shape: BoxShape.circle,
                   ),
-                  
                 ),
                 ListTile(
-                      onTap: () {
-                        context.read<Providers>().managerScreen(WhoCanDonateScreen.route,context,);
-                      },
-                      leading: const Icon(
-                        Icons.calculate_outlined,
-                        color: Colors.white,
-                      ),
-                      title: Text(
-                        S.of(context).doctor,
-                        style: const TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
+                  onTap: () {
+                    context.read<Providers>().managerScreen(
+                          WhoCanDonateScreen.route,
+                          context,
+                        );
+                  },
+                  leading: const Icon(
+                    Icons.star_border_outlined,
+                    color: Colors.white,
+                  ),
+                  title: Text(
+                    S.of(context).whocandonate,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
                     ),
+                  ),
+                ),
                 const Spacer(),
                 Padding(
                   padding: const EdgeInsets.all(4),
@@ -124,7 +126,7 @@ class BloodScreen extends StatelessWidget {
                     duration: const Duration(milliseconds: 190),
                     child: Icon(
                       value.visible ? Icons.clear : Icons.menu,
-                      color: AppTheme.nearlyWhite ,
+                      color: AppTheme.nearlyWhite,
                       key: ValueKey<bool>(value.visible),
                     ),
                   );

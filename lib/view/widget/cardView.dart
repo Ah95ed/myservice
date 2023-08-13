@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
-import 'package:tester_app/generated/l10n.dart';
-import 'package:tester_app/view/widget/Multi_text.dart';
+import 'package:Al_Zab_township_guide/generated/l10n.dart';
+import 'package:Al_Zab_township_guide/view/widget/Multi_text.dart';
 
 import '../../Models/provider/Provider.dart';
+import 'constant/Constant.dart';
 
 // ignore: must_be_immutable
 class CardViewList extends StatelessWidget {
@@ -42,7 +44,7 @@ class CardViewList extends StatelessWidget {
               icon: Icon(
                 Icons.call,
                 size: 4.h,
-                color: Colors.black,
+                color: ColorUsed.primary,
               ),
               onPressed: () {
                 context.read<Providers>().callNumber(number!);
@@ -50,7 +52,14 @@ class CardViewList extends StatelessWidget {
             ),
           ),
         ],
-      ),
+      ).animate().addEffect(
+            const MoveEffect(
+              begin: Offset(25, 15),
+              duration: Duration(milliseconds: 900),
+              delay: Duration(milliseconds: 500),
+              curve: Curves.linear,
+            ),
+          ),
     );
   }
 }

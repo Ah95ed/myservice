@@ -1,6 +1,6 @@
 {
-    "name": "tester_app",
-    "short_name": "tester_app",
+    "name": "Al_Zab_township_guide",
+    "short_name": "Al_Zab_township_guide",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

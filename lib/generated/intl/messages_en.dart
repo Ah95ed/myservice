@@ -27,6 +27,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Select_Service":
             MessageLookupByLibrary.simpleMessage("Select Service"),
         "blood_type": MessageLookupByLibrary.simpleMessage("Blood Type"),
+        "blooddonors": MessageLookupByLibrary.simpleMessage("Blood Donors :"),
         "doctor": MessageLookupByLibrary.simpleMessage("Doctors"),
         "donors": MessageLookupByLibrary.simpleMessage("Donors"),
         "from": MessageLookupByLibrary.simpleMessage("From :"),
@@ -37,6 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "presence": MessageLookupByLibrary.simpleMessage("Presence"),
         "profession": MessageLookupByLibrary.simpleMessage("Profession :"),
         "professions": MessageLookupByLibrary.simpleMessage("Professions"),
+        "source": MessageLookupByLibrary.simpleMessage("Go to the source"),
         "specialization":
             MessageLookupByLibrary.simpleMessage("Specialization :"),
         "team_policy": MessageLookupByLibrary.simpleMessage(
@@ -45,6 +47,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "title": MessageLookupByLibrary.simpleMessage("My Service"),
         "title_service": MessageLookupByLibrary.simpleMessage("Title :"),
         "type": MessageLookupByLibrary.simpleMessage("Type :"),
-        "wait_service": MessageLookupByLibrary.simpleMessage("Waiting Service")
+        "wait_service": MessageLookupByLibrary.simpleMessage("Waiting Service"),
+        "whocandonate":
+            MessageLookupByLibrary.simpleMessage("Who Can Donate Blood ?")
       };
 }

@@ -38,6 +38,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "time": MessageLookupByLibrary.simpleMessage("الوقت :"),
         "title": MessageLookupByLibrary.simpleMessage("خدمتي"),
         "title_service": MessageLookupByLibrary.simpleMessage("العنوان :"),
-        "type": MessageLookupByLibrary.simpleMessage("النوع :")
+        "type": MessageLookupByLibrary.simpleMessage("النوع :"),
+        "whocandonate":
+            MessageLookupByLibrary.simpleMessage("من يمكنه التبرع بالدم ؟")
       };
 }

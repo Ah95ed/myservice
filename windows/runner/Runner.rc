@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "tester_app" "\0"
+            VALUE "FileDescription", "Al_Zab_township_guide" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "tester_app" "\0"
+            VALUE "InternalName", "Al_Zab_township_guide" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2023 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "tester_app.exe" "\0"
-            VALUE "ProductName", "tester_app" "\0"
+            VALUE "OriginalFilename", "Al_Zab_township_guide.exe" "\0"
+            VALUE "ProductName", "Al_Zab_township_guide" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

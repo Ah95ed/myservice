@@ -1,3 +1,4 @@
+import 'package:Al_Zab_township_guide/view/widget/constant/app_theme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
@@ -7,7 +8,10 @@ class Providers with ChangeNotifier {
   List s = [];
   List search = [];
   List save = [];
-  Widget title = const Text('');
+  Widget title = const Text(
+    '',
+    style: TextStyle(color: AppTheme.notWhite),
+  );
   Icon actionsicon = const Icon(Icons.search);
 
   final TextEditingController number = TextEditingController();
@@ -21,7 +25,7 @@ class Providers with ChangeNotifier {
     notifyListeners();
   }
 
-  void changewidget(String titles) {
+  void changewidget(String titles,TextStyle style) {
     number.text = "";
     if (actionsicon.icon == Icons.search) {
       save = s;
@@ -44,7 +48,7 @@ class Providers with ChangeNotifier {
       search = [];
       number.text = "";
       actionsicon = const Icon(Icons.search);
-      title = Text(titles);
+      title = Text(titles,style: style,);
     }
     notifyListeners();
   }

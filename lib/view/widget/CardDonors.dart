@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
-import 'package:tester_app/Models/provider/Provider.dart';
-import 'package:tester_app/generated/l10n.dart';
-import 'package:tester_app/view/widget/Multi_text.dart';
+import 'package:Al_Zab_township_guide/Models/provider/Provider.dart';
+import 'package:Al_Zab_township_guide/generated/l10n.dart';
+import 'package:Al_Zab_township_guide/view/widget/Multi_text.dart';
+import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
 
 // ignore: must_be_immutable
 class CardDonors extends StatelessWidget {
@@ -34,7 +35,6 @@ class CardDonors extends StatelessWidget {
                   MultiText(name, S.of(context).name),
                   MultiText(type, S.of(context).type),
                   MultiText(title, S.of(context).title_service),
-
                 ],
               ),
             ),
@@ -45,7 +45,7 @@ class CardDonors extends StatelessWidget {
               icon: Icon(
                 Icons.call,
                 size: 4.h,
-                color: Colors.black,
+                color: ColorUsed.primary,
               ),
               onPressed: () async {
                 context.read<Providers>().callNumber(number);
@@ -55,12 +55,12 @@ class CardDonors extends StatelessWidget {
         ],
       ),
     ).animate().addEffect(
-              const MoveEffect(
-                begin: Offset(0.0, 60),
-                duration: Duration(milliseconds: 1000),
-                delay: Duration(milliseconds: 500),
-                curve: Curves.linear,
-              ),
-            );
+          const MoveEffect(
+            begin: Offset(20, 10),
+            duration: Duration(milliseconds: 900),
+            delay: Duration(milliseconds: 500),
+            curve: Curves.linear,
+          ),
+        );
   }
 }

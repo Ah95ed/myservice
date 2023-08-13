@@ -249,6 +249,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Who Can Donate Blood ?`
+  String get whocandonate {
+    return Intl.message(
+      'Who Can Donate Blood ?',
+      name: 'whocandonate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Go to the source`
+  String get source {
+    return Intl.message(
+      'Go to the source',
+      name: 'source',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Blood Donors :`
+  String get blooddonors {
+    return Intl.message(
+      'Blood Donors :',
+      name: 'blooddonors',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -1,19 +1,20 @@
+import 'package:Al_Zab_township_guide/view/screens/BloodScreen.dart';
+import 'package:Al_Zab_township_guide/view/screens/DoctorScreen.dart';
+import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
+import 'package:Al_Zab_township_guide/view/screens/ProfessionsScreen.dart';
+import 'package:Al_Zab_township_guide/view/screens/SatotaScreen.dart';
+import 'package:Al_Zab_township_guide/view/screens/ShowDonors.dart';
+import 'package:Al_Zab_township_guide/view/screens/TheCars.dart';
+import 'package:Al_Zab_township_guide/view/screens/WhoCanDonateScreen%20.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
-import 'package:tester_app/view/screens/MainScreen.dart';
-import 'package:tester_app/view/screens/DoctorScreen.dart';
-import 'package:tester_app/view/screens/BloodScreen.dart';
-import 'package:tester_app/view/screens/ProfessionsScreen.dart';
-import 'package:tester_app/view/screens/SatotaScreen.dart';
-import 'package:tester_app/view/screens/ShowDonors.dart';
-import 'package:tester_app/view/screens/TheCars.dart';
-import 'package:tester_app/view/screens/WhoCanDonateScreen%20.dart';
+import 'package:sizer/sizer.dart';
+
 import 'Models/provider/Provider.dart';
 import 'firebase_options.dart';
 import 'generated/l10n.dart';
-import 'package:sizer/sizer.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

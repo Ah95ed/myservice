@@ -7,18 +7,18 @@
     
         
         {
-            "name": "tester_app",
+            "name": "Al_Zab_township_guide",
             "request": "launch",
             "type": "dart"
         },
         {
-            "name": "tester_app (profile mode)",
+            "name": "Al_Zab_township_guide (profile mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
-            "name": "tester_app (release mode)",
+            "name": "Al_Zab_township_guide (release mode)",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"

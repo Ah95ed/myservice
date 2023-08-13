@@ -1,3 +1,5 @@
+import 'package:Al_Zab_township_guide/generated/l10n.dart';
+
 class InfoGroup {
   final int? id;
   final String? title;
@@ -5,19 +7,19 @@ class InfoGroup {
 
   const InfoGroup({this.id, this.title, this.info});
 
-  static const whoCanDonate = [
-    InfoGroup(id: 0, title: 'Blood Donors:', info: _conditions),
-    InfoGroup(
+  static final whoCanDonate = [
+    InfoGroup(id: 0, title: S().blooddonors, info: _conditions),
+    const InfoGroup(
       id: 1,
       title: 'You should not donate blood if:',
       info: _doNotDonateIf,
     ),
-    InfoGroup(
+    const InfoGroup(
       id: 2,
       title: 'Wait 6 months before donation if:',
       info: _wait6MonthsIf,
     ),
-    InfoGroup(
+    const InfoGroup(
       id: 3,
       title: 'Wait 12 months before donation:',
       info: _wait12MonthsIf,

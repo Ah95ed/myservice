@@ -1,6 +1,6 @@
+import 'package:Al_Zab_township_guide/view/widget/constant/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'package:tester_app/view/widget/constant/app_theme.dart';
 
 import 'constant/Constant.dart';
 
@@ -14,7 +14,6 @@ class ButtonSelect extends StatelessWidget {
     return Expanded(
       child: OutlinedButton(
         onPressed: onPressed,
-        
         style: TextButton.styleFrom(
           foregroundColor: Colors.black87,
           minimumSize: const Size(28.0, 24.0),
