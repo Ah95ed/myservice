@@ -6,15 +6,30 @@ import 'package:tester_app/Models/provider/Provider.dart';
 import 'package:tester_app/generated/l10n.dart';
 import 'package:tester_app/view/widget/Card_Satota.dart';
 
-class SatotaScreen extends StatelessWidget {
+class SatotaScreen extends StatefulWidget {
   static const ROUTE = '/SatotaScreen';
   const SatotaScreen({super.key});
 
   @override
+  State<SatotaScreen> createState() => _SatotaScreenState();
+}
+
+class _SatotaScreenState extends State<SatotaScreen> {
+  late BuildContext c;
+
+  @override
+  void dispose() async {
+    // TODO: implement dispose
+    super.dispose();
+
+  }
+
+  @override
   Widget build(BuildContext context) {
     context.read<Providers>().getData(ServiceCollectios.Satota.name);
-    context.read<Providers>().title =Text(S.of(context).internal_transfer);
-      context.read<Providers>().actionsicon = const Icon(Icons.search);
+    context.read<Providers>().title = Text(S.of(context).internal_transfer);
+    context.read<Providers>().actionsicon = const Icon(Icons.search);
+    c = context;
     return Consumer<Providers>(
       builder: (context, value, child) {
         return Scaffold(
@@ -55,9 +70,9 @@ class SatotaScreen extends StatelessWidget {
                       name: value.s[index]['name'],
                       location: value.s[index]['location'],
                       onPressed: () {
-                        context.read<Providers>().callNumber(
-                              value.s[index]['number'],
-                            );
+                        value.callNumber(
+                          value.s[index]['number'],
+                        );
                       },
                     );
                   },

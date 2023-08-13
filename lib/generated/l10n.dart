@@ -170,6 +170,16 @@ class S {
     );
   }
 
+  /// `Terms of Service | Privacy Policy`
+  String get team_policy {
+    return Intl.message(
+      'Terms of Service | Privacy Policy',
+      name: 'team_policy',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Time :`
   String get time {
     return Intl.message(

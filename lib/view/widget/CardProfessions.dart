@@ -3,16 +3,18 @@ import 'package:sizer/sizer.dart';
 import 'package:tester_app/generated/l10n.dart';
 
 import 'Multi_text.dart';
+
 // ignore: must_be_immutable
 class CardProfessions extends StatelessWidget {
   // const Professions({super.key});
   String name, nameProfession;
   VoidCallback onPressed;
-  CardProfessions(
-      {super.key,
-      required this.name,
-      required this.nameProfession,
-      required this.onPressed});
+  CardProfessions({
+    super.key,
+    required this.name,
+    required this.nameProfession,
+    required this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,8 +26,10 @@ class CardProfessions extends StatelessWidget {
             flex: 1,
             child: Column(
               children: [
-                MultiText(name,S.of(context).name),
-                SizedBox(height: 1.h,),
+                MultiText(name, S.of(context).name),
+                SizedBox(
+                  height: 1.h,
+                ),
                 MultiText(nameProfession, S.of(context).profession),
               ],
             ),
@@ -45,5 +49,3 @@ class CardProfessions extends StatelessWidget {
     );
   }
 }
-
-

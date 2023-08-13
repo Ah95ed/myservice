@@ -51,7 +51,7 @@ class DoctorScreen extends StatelessWidget {
               : ListView.builder(
                   itemCount: value.s.length,
                   itemBuilder: (BuildContext context, int index) {
-                    // return const ImageListView(startIndex: 0);
+                   
                     return CardViewList(
                       name: value.s[index]['name'],
                       presence: value.s[index]['presence'],

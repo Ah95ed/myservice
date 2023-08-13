@@ -4,7 +4,6 @@ import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Providers with ChangeNotifier {
-
   List s = [];
   List search = [];
   List save = [];
@@ -12,6 +11,15 @@ class Providers with ChangeNotifier {
   Icon actionsicon = const Icon(Icons.search);
 
   final TextEditingController number = TextEditingController();
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    title = const Text('');
+    actionsicon = const Icon(Icons.search);
+    notifyListeners();
+  }
 
   void changewidget(String titles) {
     number.text = "";
@@ -27,7 +35,6 @@ class Providers with ChangeNotifier {
         ),
         textAlign: TextAlign.start,
         onChanged: (value) {
-
           searchName(value);
         },
       );
@@ -76,6 +83,16 @@ class Providers with ChangeNotifier {
     );
     if (await canLaunchUrl(launchUri)) {
       await launchUrl(launchUri);
+    }
+    notifyListeners();
+  }
+
+  Future<void> launchInBrowser(Uri url) async {
+    if (!await launchUrl(
+      url,
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw Exception('Could not launch $url');
     }
     notifyListeners();
   }

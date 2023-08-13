@@ -39,6 +39,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "professions": MessageLookupByLibrary.simpleMessage("Professions"),
         "specialization":
             MessageLookupByLibrary.simpleMessage("Specialization :"),
+        "team_policy": MessageLookupByLibrary.simpleMessage(
+            "Terms of Service | Privacy Policy"),
         "time": MessageLookupByLibrary.simpleMessage("Time :"),
         "title": MessageLookupByLibrary.simpleMessage("My Service"),
         "title_service": MessageLookupByLibrary.simpleMessage("Title :"),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:tester_app/Models/provider/Provider.dart';
@@ -53,6 +54,13 @@ class CardDonors extends StatelessWidget {
           ),
         ],
       ),
-    );
+    ).animate().addEffect(
+              const MoveEffect(
+                begin: Offset(0.0, 60),
+                duration: Duration(milliseconds: 1000),
+                delay: Duration(milliseconds: 500),
+                curve: Curves.linear,
+              ),
+            );
   }
 }

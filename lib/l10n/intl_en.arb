@@ -11,11 +11,21 @@
     "Select_Service": "Select Service",
     "name": "Name :",
     "type": "Type :",
+    "team_policy": "Terms of Service | Privacy Policy",
     "time": "Time :",
     "from": "From :",
     "profession": "Profession :",
     "presence": "Presence",
     "specialization": "Specialization :",
     "title_service": "Title :",
-    "wait_service": "Waiting Service"
+    "wait_service": "Waiting Service",
+    "doNotDonateIf ": [
+        "You have ever taken drugs",
+        "Your partner takes drugs",
+        "You are HIV positive",
+        " You are a male who had sexual contacts with another male",
+        " Your partner is HIV positive",
+        " You have more than one sexual partner",
+        "You think your partner has risky sex"
+    ]
 }
