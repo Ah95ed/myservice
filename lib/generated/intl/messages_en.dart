@@ -44,7 +44,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "team_policy": MessageLookupByLibrary.simpleMessage(
             "Terms of Service | Privacy Policy"),
         "time": MessageLookupByLibrary.simpleMessage("Time :"),
-        "title": MessageLookupByLibrary.simpleMessage("My Service"),
+        "title": MessageLookupByLibrary.simpleMessage("Al Zab Township Guide"),
         "title_service": MessageLookupByLibrary.simpleMessage("Title :"),
         "type": MessageLookupByLibrary.simpleMessage("Type :"),
         "wait_service": MessageLookupByLibrary.simpleMessage("Waiting Service"),

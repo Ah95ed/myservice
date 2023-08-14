@@ -41,7 +41,7 @@ class BloodScreen extends StatelessWidget {
       ),
       controller: _advancedDrawerController,
       animationCurve: Curves.easeInSine,
-      animationDuration: const Duration(milliseconds: 400),
+      animationDuration: const Duration(milliseconds: 200),
       animateChildDecoration: true,
       rtlOpening: false,
       // openScale: 1.0,
@@ -134,9 +134,9 @@ class BloodScreen extends StatelessWidget {
               ),
             ).animate().addEffect(
                   const MoveEffect(
-                    begin: Offset(0.0, 60),
-                    duration: Duration(milliseconds: 1000),
-                    delay: Duration(milliseconds: 500),
+                    begin: Offset(0.0, 10),
+                    duration: Duration(milliseconds: 500),
+                    delay: Duration(milliseconds: 200),
                     curve: Curves.linear,
                   ),
                 ),
@@ -151,9 +151,9 @@ class BloodScreen extends StatelessWidget {
               size: 24,
             ).animate().addEffect(
                   const MoveEffect(
-                    begin: Offset(0.0, 60),
-                    duration: Duration(milliseconds: 1000),
-                    delay: Duration(milliseconds: 500),
+                    begin: Offset(0.0, 10),
+                    duration: Duration(milliseconds: 500),
+                    delay: Duration(milliseconds: 200),
                     curve: Curves.linear,
                   ),
                 ),
@@ -167,9 +167,9 @@ class BloodScreen extends StatelessWidget {
             ),
           ).animate().addEffect(
                 const MoveEffect(
-                  begin: Offset(0.0, 60),
-                  duration: Duration(milliseconds: 1000),
-                  delay: Duration(milliseconds: 500),
+                  begin: Offset(0.0, 10),
+                  duration: Duration(milliseconds: 500),
+                  delay: Duration(milliseconds: 200),
                   curve: Curves.linear,
                 ),
               ),
@@ -206,13 +206,14 @@ class BloodScreen extends StatelessWidget {
           alignment: Alignment.center,
           child: Animate(
             effects: const [
+                 
               FadeEffect(
-                duration: Duration(seconds: 1),
-                delay: Duration(milliseconds: 500),
+                duration: Duration(milliseconds: 500),
+                delay: Duration(milliseconds: 200),
                 curve: Curves.linear,
               ),
               MoveEffect(
-                begin: Offset(0.0, 60),
+                begin: Offset(0.0, 10),
               ),
             ],
             child: Column(

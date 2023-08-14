@@ -54,9 +54,9 @@ class CardViewList extends StatelessWidget {
         ],
       ).animate().addEffect(
             const MoveEffect(
-              begin: Offset(25, 15),
-              duration: Duration(milliseconds: 900),
-              delay: Duration(milliseconds: 500),
+              begin: Offset(0.0, 10),
+              duration: Duration(milliseconds: 500),
+              delay: Duration(milliseconds: 200),
               curve: Curves.linear,
             ),
           ),

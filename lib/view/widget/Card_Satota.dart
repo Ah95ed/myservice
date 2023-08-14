@@ -1,8 +1,6 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:sizer/sizer.dart';
-
 import '../../generated/l10n.dart';
 import 'Multi_text.dart';
 import 'constant/Constant.dart';
@@ -12,9 +10,10 @@ class CardSatota extends StatelessWidget {
   late String name, location;
   VoidCallback onPressed;
   CardSatota(
-    {super.key, required this.name,required this.location,
-    required this.onPressed
-  });
+      {super.key,
+      required this.name,
+      required this.location,
+      required this.onPressed});
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -49,12 +48,12 @@ class CardSatota extends StatelessWidget {
         ],
       ),
     ).animate().addEffect(
-            const MoveEffect(
-              begin: Offset(25, 15),
-              duration: Duration(milliseconds: 900),
-              delay: Duration(milliseconds: 500),
-              curve: Curves.linear,
-            ),
-          );
+          const MoveEffect(
+            begin: Offset(0.0, 10),
+            duration: Duration(milliseconds: 500),
+            delay: Duration(milliseconds: 200),
+            curve: Curves.linear,
+          ),
+        );
   }
 }

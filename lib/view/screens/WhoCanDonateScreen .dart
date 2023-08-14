@@ -33,9 +33,9 @@ class WhoCanDonateScreen extends StatelessWidget {
             size: 24,
           ).animate().addEffect(
                 const MoveEffect(
-                  begin: Offset(0.0, 60),
-                  duration: Duration(milliseconds: 1000),
-                  delay: Duration(milliseconds: 500),
+                  begin: Offset(0.0, 10),
+                  duration: Duration(milliseconds: 500),
+                  delay: Duration(milliseconds: 200),
                   curve: Curves.linear,
                 ),
               ),
@@ -49,9 +49,9 @@ class WhoCanDonateScreen extends StatelessWidget {
           ),
         ).animate().addEffect(
               const MoveEffect(
-                begin: Offset(0.0, 60),
-                duration: Duration(milliseconds: 1000),
-                delay: Duration(milliseconds: 500),
+                begin: Offset(0.0, 10),
+                duration: Duration(milliseconds: 500),
+                delay: Duration(milliseconds: 200),
                 curve: Curves.linear,
               ),
             ),
@@ -121,9 +121,9 @@ class WhoCanDonateScreen extends StatelessWidget {
         ),
       ).animate().addEffect(
             const MoveEffect(
-              begin: Offset(0.0, 60),
-              duration: Duration(milliseconds: 1000),
-              delay: Duration(milliseconds: 500),
+              begin: Offset(0.0, 10),
+              duration: Duration(milliseconds: 500),
+              delay: Duration(milliseconds: 200),
               curve: Curves.linear,
             ),
           ),

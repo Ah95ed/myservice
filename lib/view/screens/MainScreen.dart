@@ -36,9 +36,9 @@ class MainScreen extends StatelessWidget {
           ),
         ).animate().addEffect(
               const MoveEffect(
-                begin: Offset(0.0, 60),
-                duration: Duration(seconds: 1),
-                delay: Duration(milliseconds: 500),
+                begin: Offset(0.0, 10),
+                duration: Duration(milliseconds: 500),
+                delay: Duration(milliseconds: 200),
                 curve: Curves.linear,
               ),
             ),
@@ -81,13 +81,17 @@ class MainScreen extends StatelessWidget {
           alignment: Alignment.center,
           child: Animate(
             effects: const [
+                //      begin: Offset(0.0, 10),
+                // duration: Duration(milliseconds: 500),
+                // delay: Duration(milliseconds: 200),
+                // curve: Curves.linear,
               FadeEffect(
-                duration: Duration(seconds: 1),
-                delay: Duration(milliseconds: 500),
+                duration: Duration(milliseconds: 500),
+                delay: Duration(milliseconds: 200),
                 curve: Curves.linear,
               ),
               MoveEffect(
-                begin: Offset(20, 60),
+                begin: Offset(0.0, 10),
               ),
             ],
             child: Column(
