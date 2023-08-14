@@ -34,8 +34,9 @@ class Providers with ChangeNotifier {
         controller: number,
         keyboardType: TextInputType.text,
         style: TextStyle(
-          fontSize: 16.sp,
+          fontSize: 15.sp,
           fontWeight: FontWeight.bold,
+          color: AppTheme.notWhite
         ),
         textAlign: TextAlign.start,
         onChanged: (value) {
