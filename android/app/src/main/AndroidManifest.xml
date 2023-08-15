@@ -11,7 +11,7 @@
 
  </queries>
     <application
-        android:label="Al_Zab_township_guide"
+        android:label="AlZab Township Guide"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:requestLegacyExternalStorage="true"
