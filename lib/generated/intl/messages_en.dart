@@ -29,15 +29,24 @@ class MessageLookup extends MessageLookupByLibrary {
         "blood_type": MessageLookupByLibrary.simpleMessage("Blood Type"),
         "blooddonors": MessageLookupByLibrary.simpleMessage("Blood Donors :"),
         "doctor": MessageLookupByLibrary.simpleMessage("Doctors"),
+        "don_t_have_account":
+            MessageLookupByLibrary.simpleMessage("Don\'t have Account ?"),
         "donors": MessageLookupByLibrary.simpleMessage("Donors"),
+        "enter_email": MessageLookupByLibrary.simpleMessage("Enter Email"),
+        "enter_password":
+            MessageLookupByLibrary.simpleMessage("Enter Password"),
+        "forget_password":
+            MessageLookupByLibrary.simpleMessage("Forget Password ?"),
         "from": MessageLookupByLibrary.simpleMessage("From :"),
         "internal_transfer":
             MessageLookupByLibrary.simpleMessage("Internal Transfer"),
         "line": MessageLookupByLibrary.simpleMessage("Lines"),
+        "login": MessageLookupByLibrary.simpleMessage("Login"),
         "name": MessageLookupByLibrary.simpleMessage("Name :"),
         "presence": MessageLookupByLibrary.simpleMessage("Presence"),
         "profession": MessageLookupByLibrary.simpleMessage("Profession :"),
         "professions": MessageLookupByLibrary.simpleMessage("Professions"),
+        "register_now": MessageLookupByLibrary.simpleMessage("Register Now"),
         "source": MessageLookupByLibrary.simpleMessage("Go to the source"),
         "specialization":
             MessageLookupByLibrary.simpleMessage("Specialization :"),

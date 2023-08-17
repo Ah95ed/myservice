@@ -22,30 +22,39 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "Cars": MessageLookupByLibrary.simpleMessage("السيارات"),
-        "Doctor": MessageLookupByLibrary.simpleMessage("الطبيب"),
-        "Select_Service": MessageLookupByLibrary.simpleMessage("اختيار الخدمة"),
+        "Cars": MessageLookupByLibrary.simpleMessage("سيارات"),
+        "Doctor": MessageLookupByLibrary.simpleMessage("طبيب"),
+        "Select_Service": MessageLookupByLibrary.simpleMessage("اختر الخدمة"),
         "blood_type": MessageLookupByLibrary.simpleMessage("فصيلة الدم"),
-        "blooddonors": MessageLookupByLibrary.simpleMessage("متبرعوا الدم:"),
-        "doctor": MessageLookupByLibrary.simpleMessage("الأطباء"),
-        "donors": MessageLookupByLibrary.simpleMessage("المتبرعون"),
-        "from": MessageLookupByLibrary.simpleMessage(": من"),
+        "blooddonors": MessageLookupByLibrary.simpleMessage("متبرعون بالدم :"),
+        "doctor": MessageLookupByLibrary.simpleMessage("أطباء"),
+        "don_t_have_account":
+            MessageLookupByLibrary.simpleMessage("ليس لديك حساب؟"),
+        "donors": MessageLookupByLibrary.simpleMessage("متبرعين"),
+        "enter_email":
+            MessageLookupByLibrary.simpleMessage("أدخل البريد الإلكتروني"),
+        "enter_password": MessageLookupByLibrary.simpleMessage("ادخل الباسورد"),
+        "forget_password":
+            MessageLookupByLibrary.simpleMessage("هل نسيت الباسورد ؟"),
+        "from": MessageLookupByLibrary.simpleMessage("من :"),
         "internal_transfer":
-            MessageLookupByLibrary.simpleMessage("النقل الداخلي"),
-        "line": MessageLookupByLibrary.simpleMessage("الخطوط"),
-        "name": MessageLookupByLibrary.simpleMessage(": الاسم"),
-        "presence": MessageLookupByLibrary.simpleMessage(": الحضور"),
-        "profession": MessageLookupByLibrary.simpleMessage(": المهنة"),
+            MessageLookupByLibrary.simpleMessage("التحويل الداخلي"),
+        "line": MessageLookupByLibrary.simpleMessage("خطوط"),
+        "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
+        "name": MessageLookupByLibrary.simpleMessage("الاسم :"),
+        "presence": MessageLookupByLibrary.simpleMessage("الحضور"),
+        "profession": MessageLookupByLibrary.simpleMessage("المهنة :"),
         "professions": MessageLookupByLibrary.simpleMessage("المهن"),
+        "register_now": MessageLookupByLibrary.simpleMessage("سجل الآن"),
         "source": MessageLookupByLibrary.simpleMessage("انتقل إلى المصدر"),
-        "specialization": MessageLookupByLibrary.simpleMessage(": التخصص"),
+        "specialization": MessageLookupByLibrary.simpleMessage("التخصص :"),
         "team_policy": MessageLookupByLibrary.simpleMessage(
             "شروط الخدمة | سياسة الخصوصية"),
-        "time": MessageLookupByLibrary.simpleMessage(": الوقت"),
-        "title": MessageLookupByLibrary.simpleMessage("دليل ناحية الزاب"),
-        "title_service": MessageLookupByLibrary.simpleMessage(": العنوان"),
-        "type": MessageLookupByLibrary.simpleMessage(": النوع"),
-        "wait_service": MessageLookupByLibrary.simpleMessage("انتظار الخدمة"),
+        "time": MessageLookupByLibrary.simpleMessage("الوقت :"),
+        "title": MessageLookupByLibrary.simpleMessage("دليل مدينة الزاب"),
+        "title_service": MessageLookupByLibrary.simpleMessage("العنوان :"),
+        "type": MessageLookupByLibrary.simpleMessage("النوع :"),
+        "wait_service": MessageLookupByLibrary.simpleMessage("خدمة الانتظار"),
         "whocandonate":
             MessageLookupByLibrary.simpleMessage("من يمكنه التبرع بالدم ؟")
       };

@@ -20,7 +20,12 @@
     "title_service": "Title :",
     "wait_service": "Waiting Service",
     "whocandonate": "Who Can Donate Blood ?",
-    "source":"Go to the source",
-    "blooddonors": "Blood Donors :"
-    
+    "source": "Go to the source",
+    "blooddonors": "Blood Donors :",
+    "enter_email": "Enter Email",
+    "login": "Login",
+    "don_t_have_account": "Don't have Account ?",
+    "register_now": "Register Now",
+    "forget_password": "Forget Password ?",
+    "enter_password": "Enter Password"
 }

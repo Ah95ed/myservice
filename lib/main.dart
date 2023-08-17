@@ -15,6 +15,8 @@ import 'package:sizer/sizer.dart';
 import 'Models/provider/Provider.dart';
 import 'firebase_options.dart';
 import 'generated/l10n.dart';
+import 'view/screens/Splash.dart';
+import 'view/screens/splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -65,7 +67,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: const MainScreen(),
+        home: const SplashScreen1(),
       );
     });
   }
