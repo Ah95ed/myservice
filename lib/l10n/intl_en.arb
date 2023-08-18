@@ -1,5 +1,5 @@
 {
-    "title": "Al Zab Township Guide",
+    "title": "AL Zab Township Guide",
     "professions": "Professions",
     "line": "Lines",
     "internal_transfer": "Internal Transfer",
@@ -27,5 +27,7 @@
     "don_t_have_account": "Don't have Account ?",
     "register_now": "Register Now",
     "forget_password": "Forget Password ?",
-    "enter_password": "Enter Password"
+    "enter_password": "Enter Password",
+    "number_phone" : "Number Phone",
+    "already_member": "Already Member"
 }

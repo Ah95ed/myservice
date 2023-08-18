@@ -50,10 +50,10 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `Al Zab Township Guide`
+  /// `AL Zab Township Guide`
   String get title {
     return Intl.message(
-      'Al Zab Township Guide',
+      'AL Zab Township Guide',
       name: 'title',
       desc: '',
       args: [],
@@ -335,6 +335,26 @@ class S {
     return Intl.message(
       'Enter Password',
       name: 'enter_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Number Phone`
+  String get number_phone {
+    return Intl.message(
+      'Number Phone',
+      name: 'number_phone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Already Member`
+  String get already_member {
+    return Intl.message(
+      'Already Member',
+      name: 'already_member',
       desc: '',
       args: [],
     );

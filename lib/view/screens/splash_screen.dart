@@ -1,16 +1,17 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-
+import '../widget/constant/Constant.dart';
 import 'login_screen.dart';
 
-class SplashScreen1 extends StatefulWidget {
-  const SplashScreen1({super.key});
+class SplashScreen extends StatefulWidget {
+  static const Route = "SplashScreen";
+  const SplashScreen({super.key});
 
   @override
-  State<SplashScreen1> createState() => InitState();
+  State<SplashScreen> createState() => InitState();
 }
 
-class InitState extends State<SplashScreen1> {
+class InitState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
@@ -19,7 +20,7 @@ class InitState extends State<SplashScreen1> {
 
   startTimer() async {
     var duration = const Duration(
-      seconds: 5,
+      seconds: 4,
     );
     return Timer(
       duration,
@@ -31,7 +32,7 @@ class InitState extends State<SplashScreen1> {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => LoginScreen(),
+        builder: (context) => const LoginScreen(),
       ),
     );
   }
@@ -48,10 +49,10 @@ class InitState extends State<SplashScreen1> {
           Container(
             decoration: const BoxDecoration(
                 // color: new Color(0xffF5591F),
-                color: Color.fromRGBO(80, 16, 99, 1),
+                color: ColorUsed.primary, // Color.fromRGBO(80, 16, 99, 1),
                 gradient: LinearGradient(colors: [
-                  (Color.fromRGBO(80, 16, 99, 1)),
-                  (Color.fromARGB(255, 89, 29, 107))
+                  ColorUsed.primary,
+                  ColorUsed.second,
                 ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
           ),
           Center(

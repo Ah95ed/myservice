@@ -6,16 +6,17 @@ import 'package:Al_Zab_township_guide/view/screens/SatotaScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/ShowDonors.dart';
 import 'package:Al_Zab_township_guide/view/screens/TheCars.dart';
 import 'package:Al_Zab_township_guide/view/screens/WhoCanDonateScreen%20.dart';
+import 'package:Al_Zab_township_guide/view/screens/login_screen.dart';
+import 'package:Al_Zab_township_guide/view/screens/signup_screen.dart';
+import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
-
 import 'Models/provider/Provider.dart';
 import 'firebase_options.dart';
 import 'generated/l10n.dart';
-import 'view/screens/Splash.dart';
 import 'view/screens/splash_screen.dart';
 
 void main() async {
@@ -50,7 +51,7 @@ class MyApp extends StatelessWidget {
         ],
         supportedLocales: S.delegate.supportedLocales,
         debugShowCheckedModeBanner: false,
-        title: 'Alzab Service',
+        title: S().title,
         initialRoute: '/',
         routes: <String, WidgetBuilder>{
           ROUTE: (context) => const MyApp(),
@@ -61,13 +62,18 @@ class MyApp extends StatelessWidget {
           TheCars.ROUTE: (context) => const TheCars(),
           ProfessionsScreen.ROUTE: (context) => const ProfessionsScreen(),
           SatotaScreen.ROUTE: (context) => const SatotaScreen(),
+          SignupScreen.Route:(context) => const SignupScreen(),
+          LoginScreen.Route :(context) => const LoginScreen(),
+          SplashScreen.Route :(context) => const SplashScreen(),
           WhoCanDonateScreen.route: (context) => const WhoCanDonateScreen(),
         },
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: ColorUsed.primary,
+          ),
           useMaterial3: true,
         ),
-        home: const SplashScreen1(),
+        home: const SplashScreen(),
       );
     });
   }

@@ -26,6 +26,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "Doctor": MessageLookupByLibrary.simpleMessage("Doctor"),
         "Select_Service":
             MessageLookupByLibrary.simpleMessage("Select Service"),
+        "already_member":
+            MessageLookupByLibrary.simpleMessage("Already Member"),
         "blood_type": MessageLookupByLibrary.simpleMessage("Blood Type"),
         "blooddonors": MessageLookupByLibrary.simpleMessage("Blood Donors :"),
         "doctor": MessageLookupByLibrary.simpleMessage("Doctors"),
@@ -43,6 +45,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "line": MessageLookupByLibrary.simpleMessage("Lines"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "name": MessageLookupByLibrary.simpleMessage("Name :"),
+        "number_phone": MessageLookupByLibrary.simpleMessage("Number Phone"),
         "presence": MessageLookupByLibrary.simpleMessage("Presence"),
         "profession": MessageLookupByLibrary.simpleMessage("Profession :"),
         "professions": MessageLookupByLibrary.simpleMessage("Professions"),
@@ -53,7 +56,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "team_policy": MessageLookupByLibrary.simpleMessage(
             "Terms of Service | Privacy Policy"),
         "time": MessageLookupByLibrary.simpleMessage("Time :"),
-        "title": MessageLookupByLibrary.simpleMessage("Al Zab Township Guide"),
+        "title": MessageLookupByLibrary.simpleMessage("AL Zab Township Guide"),
         "title_service": MessageLookupByLibrary.simpleMessage("Title :"),
         "type": MessageLookupByLibrary.simpleMessage("Type :"),
         "wait_service": MessageLookupByLibrary.simpleMessage("Waiting Service"),

@@ -1,12 +1,12 @@
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:sizer/sizer.dart';
 
 import 'signup_screen.dart';
 
 class LoginScreen extends StatefulWidget {
+  static const Route = 'login screen';
   const LoginScreen({super.key});
 
   @override
@@ -14,12 +14,18 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  
-
+  TextEditingController? _controller;
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _controller = TextEditingController();
   }
 
   @override
@@ -100,6 +106,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               alignment: Alignment.center,
               child: TextField(
+                controller: _controller,
                 cursorColor: ColorUsed.primary, //Color(0xFF501063),
                 decoration: InputDecoration(
                     icon: const Icon(
