@@ -1,6 +1,7 @@
 import 'package:Al_Zab_township_guide/view/screens/BloodScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/DoctorScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
+import 'package:Al_Zab_township_guide/view/screens/OTPScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/ProfessionsScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/SatotaScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/ShowDonors.dart';
@@ -62,10 +63,11 @@ class MyApp extends StatelessWidget {
           TheCars.ROUTE: (context) => const TheCars(),
           ProfessionsScreen.ROUTE: (context) => const ProfessionsScreen(),
           SatotaScreen.ROUTE: (context) => const SatotaScreen(),
-          SignupScreen.Route:(context) => const SignupScreen(),
-          LoginScreen.Route :(context) => const LoginScreen(),
-          SplashScreen.Route :(context) => const SplashScreen(),
+          SignupScreen.Route: (context) => const SignupScreen(),
+          LoginScreen.Route: (context) => const LoginScreen(),
+          SplashScreen.Route: (context) => const SplashScreen(),
           WhoCanDonateScreen.route: (context) => const WhoCanDonateScreen(),
+          OtpScreen.Route: (context) =>  OtpScreen(),
         },
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(
@@ -73,7 +75,7 @@ class MyApp extends StatelessWidget {
           ),
           useMaterial3: true,
         ),
-        home: const SplashScreen(),
+        home: const SignupScreen(),
       );
     });
   }

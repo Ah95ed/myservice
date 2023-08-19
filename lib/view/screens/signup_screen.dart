@@ -1,7 +1,9 @@
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
+import '../../Models/provider/Provider.dart';
 import 'login_screen.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -13,6 +15,11 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
+  TextEditingController name = TextEditingController();
+  TextEditingController email = TextEditingController();
+  TextEditingController phone = TextEditingController();
+  TextEditingController password = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,6 +82,7 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
               alignment: Alignment.center,
               child: TextField(
+                controller: name,
                 cursorColor: ColorUsed.primary, // Color(0xFF501063),
                 decoration: InputDecoration(
                   icon: const Icon(
@@ -110,6 +118,7 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
               alignment: Alignment.center,
               child: TextField(
+                controller: email,
                 cursorColor: ColorUsed.primary, //Color(0xFF501063),
                 decoration: InputDecoration(
                   icon: const Icon(
@@ -146,15 +155,17 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
               alignment: Alignment.center,
               child: TextField(
+                controller: phone,
                 cursorColor: ColorUsed.primary, // const Color(0xFF501063),
                 decoration: InputDecoration(
-                    icon: const Icon(
-                      Icons.phone,
-                      color: ColorUsed.primary, //Color(0xFF501063),
-                    ),
-                    hintText: S.of(context).number_phone,
-                    enabledBorder: InputBorder.none,
-                    focusedBorder: InputBorder.none),
+                  icon: const Icon(
+                    Icons.phone,
+                    color: ColorUsed.primary, //Color(0xFF501063),
+                  ),
+                  hintText: S.of(context).number_phone,
+                  enabledBorder: InputBorder.none,
+                  focusedBorder: InputBorder.none,
+                ),
               ),
             ),
             // enter password
@@ -164,7 +175,10 @@ class _SignupScreenState extends State<SignupScreen> {
                 right: 20,
                 top: 20,
               ),
-              padding: const EdgeInsets.only(left: 20, right: 20),
+              padding: const EdgeInsets.only(
+                left: 20,
+                right: 20,
+              ),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(50),
                 color: Colors.grey[200],
@@ -177,6 +191,7 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
               alignment: Alignment.center,
               child: TextField(
+                controller: password,
                 obscureText: true,
                 cursorColor: ColorUsed.primary, //Color(0xFF501063),
                 decoration: InputDecoration(
@@ -191,20 +206,29 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
             ),
             GestureDetector(
-              onTap: () => {
-                /** onClick code here */
+              onTap: () async {
+               await context.read<Providers>().registerFireBase(
+                      email.text,
+                      password.text,
+                      context,
+                    ); /** onClick code here */
               },
               child: Container(
                 alignment: Alignment.center,
                 height: 50,
-                margin: const EdgeInsets.only(left: 20, right: 20, top: 60),
-                padding: const EdgeInsets.only(left: 20, right: 20),
+                margin: const EdgeInsets.only(
+                  left: 20,
+                  right: 20,
+                  top: 60,
+                ),
+                padding: const EdgeInsets.only(
+                  left: 20,
+                  right: 20,
+                ),
                 decoration: BoxDecoration(
                   gradient: const LinearGradient(colors: [
                     ColorUsed.primary,
                     ColorUsed.second,
-                    // (Color(0xFF501063)),
-                    // (Color(0xFF591D6B)),
                   ], begin: Alignment.topCenter, end: Alignment.bottomCenter),
                   borderRadius: BorderRadius.circular(50),
                   boxShadow: const [

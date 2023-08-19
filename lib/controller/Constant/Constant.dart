@@ -1,3 +1,5 @@
+import 'package:email_otp/email_otp.dart';
+
 class Constant {
   static const String A_Plus = 'A+';
   static const String A_Minus = 'A-';
@@ -10,9 +12,15 @@ class Constant {
 }
 
 class DataSend {
-   String collection;
+  String collection;
 
   DataSend(this.collection);
+}
+
+class DataOTP {
+  EmailOTP? otp;
+
+  DataOTP( {this.otp});
 }
 // ignore: non_constant_identifier_names
 // Enum Service {

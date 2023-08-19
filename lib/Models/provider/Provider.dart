@@ -1,8 +1,16 @@
+import 'package:Al_Zab_township_guide/generated/l10n.dart';
+import 'package:Al_Zab_township_guide/view/screens/OTPScreen.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/app_theme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:email_otp/email_otp.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../../controller/Constant/Constant.dart';
 
 class Providers with ChangeNotifier {
   List s = [];
@@ -13,6 +21,7 @@ class Providers with ChangeNotifier {
     style: TextStyle(color: AppTheme.notWhite),
   );
   Icon actionsicon = const Icon(Icons.search);
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   final TextEditingController number = TextEditingController();
 
@@ -25,7 +34,44 @@ class Providers with ChangeNotifier {
     notifyListeners();
   }
 
-  void changewidget(String titles,TextStyle style) {
+  late final FirebaseApp app;
+  late final FirebaseAuth auth;
+  late EmailOTP myauth;
+  Future registerFireBase(
+    String email,
+    String password,
+    BuildContext context,
+  ) async {
+    myauth = EmailOTP();
+    myauth.setConfig(
+        appEmail: 'amhmeed31@gmail.com',
+        appName: "Alzab City",
+        userEmail: 'aahh4747@gmail.com',
+        otpLength: 4,
+        otpType: OTPType.digitsOnly);
+    if (await myauth.sendOTP()) {
+      managerScreen(OtpScreen.Route, context);
+    }
+
+    notifyListeners();
+  }
+  
+
+  Future<bool?> saveData() async {
+    SharedPreferences prefs = await _prefs;
+    prefs.setBool('isRegister', true);
+    notifyListeners();
+    return null;
+  }
+
+  Future<bool?> checkData() async {
+    SharedPreferences prefs = await _prefs;
+    prefs.getBool('isRegister');
+    notifyListeners();
+    return null;
+  }
+
+  void changewidget(String titles, TextStyle style) {
     number.text = "";
     if (actionsicon.icon == Icons.search) {
       save = s;
@@ -34,10 +80,9 @@ class Providers with ChangeNotifier {
         controller: number,
         keyboardType: TextInputType.text,
         style: TextStyle(
-          fontSize: 15.sp,
-          fontWeight: FontWeight.bold,
-          color: AppTheme.notWhite
-        ),
+            fontSize: 15.sp,
+            fontWeight: FontWeight.bold,
+            color: AppTheme.notWhite),
         textAlign: TextAlign.start,
         onChanged: (value) {
           searchName(value);
@@ -49,7 +94,10 @@ class Providers with ChangeNotifier {
       search = [];
       number.text = "";
       actionsicon = const Icon(Icons.search);
-      title = Text(titles,style: style,);
+      title = Text(
+        titles,
+        style: style,
+      );
     }
     notifyListeners();
   }
