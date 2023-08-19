@@ -1,8 +1,13 @@
+import 'dart:developer';
+
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../Models/provider/Provider.dart';
 import 'signup_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -14,7 +19,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController? _controller;
+  TextEditingController? _email;
+  TextEditingController? _password;
+
   @override
   void dispose() {
     // TODO: implement dispose
@@ -25,11 +32,13 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _controller = TextEditingController();
+    _email = TextEditingController();
+    _password = TextEditingController();
   }
 
   @override
   Widget build(BuildContext context) {
+    final p = context.read<Providers>();
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -43,7 +52,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 color: ColorUsed.primary, // Color(0xFF501063),
                 gradient: LinearGradient(
                   colors: [
-                    ColorUsed.primary, ColorUsed.second,
+                    ColorUsed.primary,
+                    ColorUsed.second,
                     // (Color(0xFF501063)),
                     // (Color(0xFF591D6B)),
                   ],
@@ -106,7 +116,8 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               alignment: Alignment.center,
               child: TextField(
-                controller: _controller,
+                controller: _email,
+                keyboardType: TextInputType.emailAddress,
                 cursorColor: ColorUsed.primary, //Color(0xFF501063),
                 decoration: InputDecoration(
                     icon: const Icon(
@@ -138,8 +149,10 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               alignment: Alignment.center,
               child: TextField(
+                controller: _password,
                 obscureText: true,
-                cursorColor: const Color(0xFF501063),
+                cursorColor: ColorUsed.primary,
+                keyboardType: TextInputType.visiblePassword,
                 decoration: InputDecoration(
                     icon: const Icon(
                       Icons.vpn_key,
@@ -168,6 +181,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
             GestureDetector(
               onTap: () => {
+
+                p.loginFirebase(_email!.text ,_password!.text,context)
                 /** onClick code here */
               },
               child: Container(

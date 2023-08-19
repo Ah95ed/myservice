@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/login_screen.dart';
+import 'package:Al_Zab_township_guide/view/screens/signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../Models/provider/Provider.dart';
@@ -23,7 +24,7 @@ class InitState extends State<SplashScreen> {
 
   startTimer() async {
     var duration = const Duration(
-      seconds: 4,
+      seconds: 2,
     );
 
     return Timer(
@@ -40,7 +41,7 @@ class InitState extends State<SplashScreen> {
       p.managerScreenSplash(MainScreen.ROUTE, context, false);
       return;
     } else {
-      p.managerScreen(LoginScreen.Route, context);
+      p.managerScreen(SignupScreen.Route, context);
       return;
     }
   }

@@ -1,4 +1,3 @@
-import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
@@ -17,6 +16,7 @@ class OtpScreen extends StatelessWidget {
     final p = context.watch<Providers>();
     return Scaffold(
       body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
         child: Column(
           children: [
             Container(
@@ -89,6 +89,7 @@ class OtpScreen extends StatelessWidget {
                 aspectRatio: 0.5,
                 child: TextField(
                   controller: otpNumber,
+                  
                   autofocus: false,
                   showCursor: false,
                   readOnly: false,
@@ -118,8 +119,8 @@ class OtpScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
-              height: 8.h,
+            const SizedBox(
+              height: 20,
             ),
             SizedBox(
               width: 60.w,
@@ -127,11 +128,10 @@ class OtpScreen extends StatelessWidget {
                 title: 'Confirm',
                 onPressed: () async {
                   if (p.myauth.verifyOTP(otp: otpNumber.text)) {
-                  await p.saveData(context);
-                 
+                    await p.saveData(context);
+                   
                   }
                 },
-
               ),
             ),
           ],

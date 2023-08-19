@@ -221,9 +221,9 @@ class _SignupScreenState extends State<SignupScreen> {
                       const SnackBar(content: Text('حقل الايميل فارغ')));
                   return;
                 }
-                if (phone.text.isEmpty) {
+                if (phone.text.isEmpty && phone.text.length < 11) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('حقل الرقم فارغ')));
+                      const SnackBar(content: Text("تأكد من الر قم")));
                   return;
                 
                 }
