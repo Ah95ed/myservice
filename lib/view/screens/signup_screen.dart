@@ -119,6 +119,7 @@ class _SignupScreenState extends State<SignupScreen> {
               alignment: Alignment.center,
               child: TextField(
                 controller: email,
+                keyboardType: TextInputType.emailAddress,
                 cursorColor: ColorUsed.primary, //Color(0xFF501063),
                 decoration: InputDecoration(
                   icon: const Icon(
@@ -156,7 +157,9 @@ class _SignupScreenState extends State<SignupScreen> {
               alignment: Alignment.center,
               child: TextField(
                 controller: phone,
-                cursorColor: ColorUsed.primary, // const Color(0xFF501063),
+                keyboardType: TextInputType.phone,
+                cursorColor: ColorUsed.primary,
+                // const Color(0xFF501063),
                 decoration: InputDecoration(
                   icon: const Icon(
                     Icons.phone,
@@ -193,6 +196,7 @@ class _SignupScreenState extends State<SignupScreen> {
               child: TextField(
                 controller: password,
                 obscureText: true,
+                keyboardType: TextInputType.visiblePassword,
                 cursorColor: ColorUsed.primary, //Color(0xFF501063),
                 decoration: InputDecoration(
                   icon: const Icon(
@@ -207,11 +211,34 @@ class _SignupScreenState extends State<SignupScreen> {
             ),
             GestureDetector(
               onTap: () async {
-               await context.read<Providers>().registerFireBase(
+                if (name.text.isEmpty) {
+                   ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('حقل الاسم فارغ')));
+                  return;
+                }
+                if (email.text.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('حقل الايميل فارغ')));
+                  return;
+                }
+                if (phone.text.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('حقل الرقم فارغ')));
+                  return;
+                
+                }
+                if (password.text.isEmpty && password.text.length > 6) {
+                   ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('حقل الباسورد فارغ')));
+                  return;
+                }
+                await context.read<Providers>().registerWithEmailOTP(
                       email.text,
                       password.text,
+                      name.text,
+                      phone.text,
                       context,
-                    ); /** onClick code here */
+                    );
               },
               child: Container(
                 alignment: Alignment.center,

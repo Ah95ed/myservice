@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../Models/provider/Provider.dart';
+import '../widget/ButtonSelect.dart';
 import '../widget/constant/Constant.dart';
 
 class OtpScreen extends StatelessWidget {
@@ -15,92 +16,85 @@ class OtpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final p = context.watch<Providers>();
     return Scaffold(
-      body: Column(
-        children: [
-          Container(
-            height: 300,
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(90),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              height: 300,
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(90),
+                ),
+                color: ColorUsed.primary, // Color(0xFF501063),
+                gradient: LinearGradient(
+                  colors: [
+                    ColorUsed.primary, ColorUsed.second,
+                    // (Color(0xFF501063)),
+                    // (Color(0xFF591D6B)),
+                  ],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
               ),
-              color: ColorUsed.primary, // Color(0xFF501063),
-              gradient: LinearGradient(
-                colors: [
-                  ColorUsed.primary, ColorUsed.second,
-                  // (Color(0xFF501063)),
-                  // (Color(0xFF591D6B)),
-                ],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.only(top: 50),
+                      height: 80,
+                      child: Image.asset(
+                        "assets/Ichrak.png",
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(
+                        right: 20,
+                        top: 20,
+                      ),
+                      alignment: Alignment.bottomRight,
+                    ),
+                    const Text(
+                      'OTP Verifying',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(top: 50),
-                    height: 80,
-                    child: Image.asset(
-                      "assets/Ichrak.png",
-                    ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(
-                      right: 20,
-                      top: 20,
-                    ),
-                    alignment: Alignment.bottomRight,
-                  ),
-                  const Text(
-                    'OTP Verifying',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
+            const SizedBox(
+              height: 10,
+            ),
+            const Text(
+              "Enter your OTP code Email",
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: ColorUsed.primary,
               ),
+              textAlign: TextAlign.center,
             ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          const Text(
-            "Enter your OTP code Email",
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              color: ColorUsed.primary,
+            SizedBox(
+              height: 5.h,
             ),
-            textAlign: TextAlign.center,
-          ),
-          SizedBox(
-            height: 5.h,
-          ),
-          Expanded(
-            child: SizedBox(
+            SizedBox(
               height: 60,
-              width: 50.w,
+              width: 60.w,
               child: AspectRatio(
-                aspectRatio: 1.0,
+                aspectRatio: 0.5,
                 child: TextField(
                   controller: otpNumber,
-                  autofocus: true,
-                  // onChanged: (value) {
-                  //   // if (value.length == 4){
-                  //   if (p.myauth.verifyOTP(confir)== true) {
-                  //     context.read<Providers>().managerScreen(MainScreen.ROUTE, context);
-                  //   }
-                  //   // }
-                  // },
-                  showCursor: true,
+                  autofocus: false,
+                  showCursor: false,
                   readOnly: false,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
-                    fontSize: 22,
+                    fontSize: 20,
                     fontWeight: FontWeight.bold,
                     color: ColorUsed.primary,
                   ),
@@ -124,16 +118,24 @@ class OtpScreen extends StatelessWidget {
                 ),
               ),
             ),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              if (p.myauth.verifyOTP(otp: otpNumber.text)) {
-                p.managerScreen(MainScreen.ROUTE, context);
-              }
-            },
-            child: const Text('Confirme'),
-          )
-        ],
+            SizedBox(
+              height: 8.h,
+            ),
+            SizedBox(
+              width: 60.w,
+              child: ButtonSelect(
+                title: 'Confirm',
+                onPressed: () async {
+                  if (p.myauth.verifyOTP(otp: otpNumber.text)) {
+                  await p.saveData(context);
+                 
+                  }
+                },
+
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

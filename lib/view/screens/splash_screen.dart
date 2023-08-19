@@ -1,7 +1,10 @@
 import 'dart:async';
+import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
+import 'package:Al_Zab_township_guide/view/screens/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../Models/provider/Provider.dart';
 import '../widget/constant/Constant.dart';
-import 'login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   static const Route = "SplashScreen";
@@ -22,19 +25,24 @@ class InitState extends State<SplashScreen> {
     var duration = const Duration(
       seconds: 4,
     );
+
     return Timer(
       duration,
       loginRoute,
     );
   }
 
-  loginRoute() {
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const LoginScreen(),
-      ),
-    );
+  loginRoute() async {
+    final p = context.read<Providers>();
+    bool register = await p.checkData() ?? false;
+
+    if (register) {
+      p.managerScreenSplash(MainScreen.ROUTE, context, false);
+      return;
+    } else {
+      p.managerScreen(LoginScreen.Route, context);
+      return;
+    }
   }
 
   @override

@@ -1,18 +1,18 @@
+import 'dart:developer';
+
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
+import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/OTPScreen.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/app_theme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_otp/email_otp.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../controller/Constant/Constant.dart';
-
 class Providers with ChangeNotifier {
+  String? name, email, phone, password;
   List s = [];
   List search = [];
   List save = [];
@@ -34,41 +34,50 @@ class Providers with ChangeNotifier {
     notifyListeners();
   }
 
-  late final FirebaseApp app;
-  late final FirebaseAuth auth;
   late EmailOTP myauth;
-  Future registerFireBase(
+  Future registerWithEmailOTP(
     String email,
     String password,
+    String name,
+    String phone,
     BuildContext context,
   ) async {
     myauth = EmailOTP();
     myauth.setConfig(
         appEmail: 'amhmeed31@gmail.com',
-        appName: "Alzab City",
-        userEmail: 'aahh4747@gmail.com',
+        appName: 'AL Zab Township Guide',
+        userEmail: email,
         otpLength: 4,
         otpType: OTPType.digitsOnly);
     if (await myauth.sendOTP()) {
+      name = name;
+      email = email;
+      phone = phone;
+      password = password;
       managerScreen(OtpScreen.Route, context);
     }
 
     notifyListeners();
   }
-  
 
-  Future<bool?> saveData() async {
+  Future<void> saveRegisterInRealTime() async {}
+  Future<bool?> saveData(BuildContext context) async {
     SharedPreferences prefs = await _prefs;
-    prefs.setBool('isRegister', true);
+    bool t = await prefs.setBool('isRegister', true);
+    
+    if (t) {
+      managerScreenSplash(MainScreen.ROUTE, context, false);
+    }
     notifyListeners();
-    return null;
   }
+
+  // bool isRegister = false;
 
   Future<bool?> checkData() async {
     SharedPreferences prefs = await _prefs;
-    prefs.getBool('isRegister');
+    bool isRegister = prefs.getBool('isRegister') ?? false;
     notifyListeners();
-    return null;
+    return isRegister;
   }
 
   void changewidget(String titles, TextStyle style) {
@@ -126,6 +135,14 @@ class Providers with ChangeNotifier {
 
   void managerScreen(String route, BuildContext context, {Object? object}) {
     Navigator.pushNamed(context, route, arguments: object);
+    notifyListeners();
+  }
+
+  void managerScreenSplash(String route, BuildContext context, bool f,
+      {Object? object}) {
+    Navigator.pushNamedAndRemoveUntil(context, route, (v) {
+      return f;
+    }, arguments: object);
     notifyListeners();
   }
 
