@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
-import 'package:Al_Zab_township_guide/view/screens/login_screen.dart';
 import 'package:Al_Zab_township_guide/view/screens/signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -41,7 +40,7 @@ class InitState extends State<SplashScreen> {
       p.managerScreenSplash(MainScreen.ROUTE, context, false);
       return;
     } else {
-      p.managerScreen(SignupScreen.Route, context);
+      p.managerScreenSplash(SignupScreen.Route, context, false);
       return;
     }
   }
@@ -65,8 +64,10 @@ class InitState extends State<SplashScreen> {
                 ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
           ),
           Center(
-              child: Container(
-            child: Image.asset("assets/Ichrak.png"),
+              child: SizedBox(
+            height: double.infinity,
+            width: 200,
+            child: Image.asset("assets/asd.png"),
           ))
         ],
       ),

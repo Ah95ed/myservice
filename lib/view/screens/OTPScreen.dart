@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../Models/provider/Provider.dart';
-import '../widget/ButtonSelect.dart';
 import '../widget/constant/Constant.dart';
 
 class OtpScreen extends StatelessWidget {
@@ -45,7 +44,7 @@ class OtpScreen extends StatelessWidget {
                       margin: const EdgeInsets.only(top: 50),
                       height: 80,
                       child: Image.asset(
-                        "assets/Ichrak.png",
+                        "assets/asd.png",
                       ),
                     ),
                     Container(
@@ -89,7 +88,6 @@ class OtpScreen extends StatelessWidget {
                 aspectRatio: 0.5,
                 child: TextField(
                   controller: otpNumber,
-                  
                   autofocus: false,
                   showCursor: false,
                   readOnly: false,
@@ -120,18 +118,26 @@ class OtpScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(
-              height: 20,
+              height: 30,
             ),
-            SizedBox(
-              width: 60.w,
-              child: ButtonSelect(
-                title: 'Confirm',
-                onPressed: () async {
-                  if (p.myauth.verifyOTP(otp: otpNumber.text)) {
-                    await p.saveData(context);
-                   
-                  }
-                },
+            OutlinedButton(
+              style: OutlinedButton.styleFrom(
+                backgroundColor: ColorUsed.primary,
+                side: const BorderSide(
+                  color: ColorUsed.second,
+                ),
+              ),
+              onPressed: () async {
+                if (p.myauth.verifyOTP(otp: otpNumber.text)) {
+                  await p.saveData(context);
+                }
+              },
+              child: const Text(
+                "Confirm",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 22.0,
+                ),
               ),
             ),
           ],

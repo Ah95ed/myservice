@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/OTPScreen.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/app_theme.dart';
@@ -11,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../../controller/Constant/Constant.dart';
 
 class Providers with ChangeNotifier {
   String? _name, _email, _phone, _password;
@@ -45,8 +45,8 @@ class Providers with ChangeNotifier {
   ) async {
     myauth = EmailOTP();
     myauth.setConfig(
-        appEmail: 'amhmeed31@gmail.com',
-        appName: 'AL Zab Township Guide',
+        appEmail: Constant.appEmail,
+        appName: Constant.appName,
         userEmail: email,
         otpLength: 4,
         otpType: OTPType.digitsOnly);
@@ -84,8 +84,12 @@ class Providers with ChangeNotifier {
     BuildContext context,
   ) async {
     try {
-      UserCredential userCredential = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password);
+      UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      saveData(context);
       managerScreenSplash(MainScreen.ROUTE, context, false);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {

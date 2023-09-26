@@ -27,5 +27,6 @@
     "don_t_have_account": "ليس لديك حساب؟",
     "register_now": "سجل الآن",
     "forget_password": "هل نسيت الباسورد ؟",
-    "enter_password": "ادخل الباسورد"
+    "enter_password": "ادخل الباسورد",
+    "already_member" :"مسجل بالفعل ؟ "
 }

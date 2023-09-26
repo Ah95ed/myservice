@@ -1,8 +1,5 @@
-import 'dart:developer';
-
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
@@ -67,10 +64,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
-                      margin: const EdgeInsets.only(top: 50),
-                      height: 80,
+                      margin: const EdgeInsets.only(top: 60),
+                      height: 100,
                       child: Image.asset(
-                        "assets/Ichrak.png",
+                        "assets/asd.png",
                       ),
                     ),
                     Container(
@@ -142,9 +139,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 color: Colors.grey[200],
                 boxShadow: const [
                   BoxShadow(
-                      offset: Offset(0, 10),
-                      blurRadius: 50,
-                      color: Color(0xffEEEEEE))
+                    offset: Offset(0, 10),
+                    blurRadius: 50,
+                    color: Color(0xffEEEEEE),
+                  )
                 ],
               ),
               alignment: Alignment.center,
@@ -180,11 +178,8 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
 
             GestureDetector(
-              onTap: () => {
-
-                p.loginFirebase(_email!.text ,_password!.text,context)
-                /** onClick code here */
-              },
+              onTap: () =>
+                  {p.loginFirebase(_email!.text, _password!.text, context)},
               child: Container(
                 alignment: Alignment.center,
                 height: 50,
@@ -231,12 +226,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   GestureDetector(
                     onTap: () => {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const SignupScreen(),
-                        ),
-                      ),
+p.managerScreenSplash(SignupScreen.Route, context, false)
                     },
                     child: Text(
                       S.of(context).register_now,

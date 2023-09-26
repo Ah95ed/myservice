@@ -1,14 +1,14 @@
-import 'package:email_otp/email_otp.dart';
-
-class Constant {
-  static const String A_Plus = 'A+';
-  static const String A_Minus = 'A-';
-  static const String B_Plus = 'B+';
-  static const String B_Minus = 'B-';
-  static const String O_Plus = 'O+';
-  static const String O_Minus = 'O-';
-  static const String AB_Plus = 'AB+';
-  static const String AB_Minus = 'AB-';
+abstract class Constant {
+  static const  A_Plus = 'A+';
+  static const  A_Minus = 'A-';
+  static const  B_Plus = 'B+';
+  static const  B_Minus = 'B-';
+  static const  O_Plus = 'O+';
+  static const  O_Minus = 'O-';
+  static const  AB_Plus = 'AB+';
+  static const  AB_Minus = 'AB-';
+  static const appEmail = 'amhmeed31@gmail.com';
+  static const appName = 'AL-Zab Township Guide';
 }
 
 class DataSend {
@@ -17,13 +17,4 @@ class DataSend {
   DataSend(this.collection);
 }
 
-class DataOTP {
-  EmailOTP? otp;
-
-  DataOTP( {this.otp});
-}
-// ignore: non_constant_identifier_names
-// Enum Service {
-// doctore
-// }
 

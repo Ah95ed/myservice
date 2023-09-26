@@ -350,10 +350,10 @@ class S {
     );
   }
 
-  /// `Already Member`
+  /// `Already Member ? `
   String get already_member {
     return Intl.message(
-      'Already Member',
+      'Already Member ? ',
       name: 'already_member',
       desc: '',
       args: [],

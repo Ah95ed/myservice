@@ -22,6 +22,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final p = context.read<Providers>();
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -43,9 +44,9 @@ class _SignupScreenState extends State<SignupScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
-                      margin: const EdgeInsets.only(top: 50),
-                      height: 80,
-                      child: Image.asset("assets/Ichrak.png"),
+                      margin: const EdgeInsets.only(top: 40),
+                      height: 100,
+                      child: Image.asset("assets/asd.png"),
                     ),
                     Container(
                       margin: const EdgeInsets.only(right: 20, top: 20),
@@ -55,6 +56,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         style: const TextStyle(
                           fontSize: 20,
                           color: Colors.white,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     )
@@ -67,7 +69,7 @@ class _SignupScreenState extends State<SignupScreen> {
               margin: const EdgeInsets.only(
                 left: 20,
                 right: 20,
-                top: 70,
+                top: 40,
               ),
               padding: const EdgeInsets.only(left: 20, right: 20),
               decoration: BoxDecoration(
@@ -212,7 +214,7 @@ class _SignupScreenState extends State<SignupScreen> {
             GestureDetector(
               onTap: () async {
                 if (name.text.isEmpty) {
-                   ScaffoldMessenger.of(context).showSnackBar(
+                  ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('حقل الاسم فارغ')));
                   return;
                 }
@@ -225,10 +227,9 @@ class _SignupScreenState extends State<SignupScreen> {
                   ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text("تأكد من الر قم")));
                   return;
-                
                 }
                 if (password.text.isEmpty && password.text.length > 6) {
-                   ScaffoldMessenger.of(context).showSnackBar(
+                  ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('حقل الباسورد فارغ')));
                   return;
                 }
@@ -246,7 +247,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 margin: const EdgeInsets.only(
                   left: 20,
                   right: 20,
-                  top: 60,
+                  top: 40,
                 ),
                 padding: const EdgeInsets.only(
                   left: 20,
@@ -285,12 +286,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
                   GestureDetector(
                     onTap: () => {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const LoginScreen(),
-                        ),
-                      ),
+                      p.managerScreenSplash(LoginScreen.Route, context, false)
                     },
                     child: Text(
                       S.of(context).login,

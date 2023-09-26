@@ -25,6 +25,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "Cars": MessageLookupByLibrary.simpleMessage("سيارات"),
         "Doctor": MessageLookupByLibrary.simpleMessage("طبيب"),
         "Select_Service": MessageLookupByLibrary.simpleMessage("اختر الخدمة"),
+        "already_member":
+            MessageLookupByLibrary.simpleMessage("مسجل بالفعل ؟ "),
         "blood_type": MessageLookupByLibrary.simpleMessage("فصيلة الدم"),
         "blooddonors": MessageLookupByLibrary.simpleMessage("متبرعون بالدم :"),
         "doctor": MessageLookupByLibrary.simpleMessage("أطباء"),
