@@ -1,8 +1,8 @@
+import 'package:Al_Zab_township_guide/Models/provider/Provider.dart';
+import 'package:email_otp/email_otp.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
-
-import '../../Models/provider/Provider.dart';
 import '../widget/constant/Constant.dart';
 
 class OtpScreen extends StatelessWidget {
@@ -128,7 +128,7 @@ class OtpScreen extends StatelessWidget {
                 ),
               ),
               onPressed: () async {
-                if (p.myauth.verifyOTP(otp: otpNumber.text)) {
+                if (EmailOTP.verifyOTP(otp: otpNumber.text)) {
                   await p.saveData(context);
                 }
               },

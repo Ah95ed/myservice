@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:Al_Zab_township_guide/controller/Constant/Constant.dart';
 import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/OTPScreen.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/app_theme.dart';
@@ -10,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../../controller/Constant/Constant.dart';
 
 class Providers with ChangeNotifier {
   String? _name, _email, _phone, _password;
@@ -35,7 +35,6 @@ class Providers with ChangeNotifier {
     notifyListeners();
   }
 
-  late EmailOTP myauth;
   Future registerWithEmailOTP(
     String email,
     String password,
@@ -43,14 +42,14 @@ class Providers with ChangeNotifier {
     String phone,
     BuildContext context,
   ) async {
-    myauth = EmailOTP();
-    myauth.setConfig(
+// EmailOTP.sendOTP(email: email)
+    EmailOTP.config(
         appEmail: Constant.appEmail,
         appName: Constant.appName,
-        userEmail: email,
+        // userEmail: email,
         otpLength: 4,
-        otpType: OTPType.digitsOnly);
-    if (await myauth.sendOTP()) {
+        otpType: OTPType.numeric,);
+    if (await EmailOTP.sendOTP(email: email)) {
       _name = name;
       _email = email;
       _phone = phone;
@@ -84,7 +83,7 @@ class Providers with ChangeNotifier {
     BuildContext context,
   ) async {
     try {
-      UserCredential userCredential =
+      // UserCredential userCredential =
           await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
         password: password,

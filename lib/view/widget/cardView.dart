@@ -1,11 +1,9 @@
+import 'package:Al_Zab_township_guide/Models/provider/Provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/view/widget/Multi_text.dart';
-
-import '../../Models/provider/Provider.dart';
 import 'constant/Constant.dart';
 
 // ignore: must_be_immutable
@@ -52,14 +50,7 @@ class CardViewList extends StatelessWidget {
             ),
           ),
         ],
-      ).animate().addEffect(
-            const MoveEffect(
-              begin: Offset(0.0, 10),
-              duration: Duration(milliseconds: 500),
-              delay: Duration(milliseconds: 200),
-              curve: Curves.linear,
-            ),
-          ),
+      ),
     );
   }
 }

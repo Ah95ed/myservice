@@ -1,3 +1,4 @@
+import 'package:Al_Zab_township_guide/Models/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/view/screens/BloodScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/DoctorScreen.dart';
@@ -6,13 +7,11 @@ import 'package:Al_Zab_township_guide/view/screens/SatotaScreen.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:Al_Zab_township_guide/view/screens/TheCars.dart';
 import 'package:Al_Zab_township_guide/view/widget/ButtonSelect.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
-import '../../Models/provider/Provider.dart';
 
 // ignore: must_be_immutable
 class MainScreen extends StatelessWidget {
@@ -74,22 +73,7 @@ class MainScreen extends StatelessWidget {
               ),
               padding: const EdgeInsets.all(8.0),
               alignment: Alignment.center,
-              child: Animate(
-                effects: const [
-                  //      begin: Offset(0.0, 10),
-                  // duration: Duration(milliseconds: 500),
-                  // delay: Duration(milliseconds: 200),
-                  // curve: Curves.linear,
-                  FadeEffect(
-                    duration: Duration(milliseconds: 500),
-                    delay: Duration(milliseconds: 200),
-                    curve: Curves.linear,
-                  ),
-                  MoveEffect(
-                    begin: Offset(0.0, 10),
-                  ),
-                ],
-                child: Column(
+              child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Row(
@@ -175,14 +159,9 @@ class MainScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-              ),
+              
             ),
-            // Container(
-            //   alignment: Alignment.bottomCenter,
-            //   height: 60,
-            //   width: double.infinity,
-            //   color: ColorUsed.primary,
-            // )
+         
           ],
         ),
       ),

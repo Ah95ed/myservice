@@ -1,9 +1,9 @@
 import 'dart:async';
+import 'package:Al_Zab_township_guide/Models/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../Models/provider/Provider.dart';
 import '../widget/constant/Constant.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -23,7 +23,7 @@ class InitState extends State<SplashScreen> {
 
   startTimer() async {
     var duration = const Duration(
-      seconds: 2,
+      seconds: 3,
     );
 
     return Timer(
@@ -34,7 +34,7 @@ class InitState extends State<SplashScreen> {
 
   loginRoute() async {
     final p = context.read<Providers>();
-    bool register = await p.checkData() ?? false;
+    bool register = true; //await p.checkData() ?? false;
 
     if (register) {
       p.managerScreenSplash(MainScreen.ROUTE, context, false);

@@ -11,11 +11,11 @@
 
  </queries>
     <application
-        android:label="AlZab Township Guide"
+        android:label="AL Zab Township Guide"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:usesCleartextTraffic="true"
-        android:requestLegacyExternalStorage="true"
+        android:enableOnBackInvokedCallback="true"
         >
         
         <activity

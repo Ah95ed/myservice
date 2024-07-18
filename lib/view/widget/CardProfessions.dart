@@ -1,7 +1,6 @@
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:sizer/sizer.dart';
 
 import 'Multi_text.dart';
@@ -47,14 +46,7 @@ class CardProfessions extends StatelessWidget {
                 onPressed: onPressed),
           ),
         ],
-      ).animate().addEffect(
-            const MoveEffect(
-              begin: Offset(0.0, 10),
-              duration: Duration(milliseconds: 500),
-              delay: Duration(milliseconds: 200),
-              curve: Curves.linear,
-            ),
-          ),
+      ),
     );
   }
 }

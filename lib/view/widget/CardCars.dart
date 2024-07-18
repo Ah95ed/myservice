@@ -1,8 +1,7 @@
+import 'package:Al_Zab_township_guide/Models/provider/Provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
-import '../../Models/provider/Provider.dart';
 import '../../generated/l10n.dart';
 import 'Multi_text.dart';
 import 'constant/Constant.dart';
@@ -52,14 +51,7 @@ class CardCars extends StatelessWidget {
             ),
           ),
         ],
-      ).animate().addEffect(
-            const MoveEffect(
-          begin: Offset(0.0, 10),
-              duration: Duration(milliseconds: 500),
-              delay: Duration(milliseconds: 200),
-              curve: Curves.linear,
-            ),
-          ),
+      ),
     );
   }
 }

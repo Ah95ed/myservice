@@ -2,10 +2,8 @@ import 'package:Al_Zab_township_guide/Models/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
-
 import '../widget/constant/Constant.dart';
 import '../widget/constant/InfoGroup.dart';
 import '../widget/constant/app_theme.dart';
@@ -31,14 +29,7 @@ class WhoCanDonateScreen extends StatelessWidget {
             Icons.arrow_back,
             color: AppTheme.nearlyWhite,
             size: 24,
-          ).animate().addEffect(
-                const MoveEffect(
-                  begin: Offset(0.0, 10),
-                  duration: Duration(milliseconds: 500),
-                  delay: Duration(milliseconds: 200),
-                  curve: Curves.linear,
-                ),
-              ),
+          ),
         ),
         title: Text(
           S.of(context).whocandonate,
@@ -47,14 +38,7 @@ class WhoCanDonateScreen extends StatelessWidget {
             fontSize: 20.sp,
             fontWeight: FontWeight.bold,
           ),
-        ).animate().addEffect(
-              const MoveEffect(
-                begin: Offset(0.0, 10),
-                duration: Duration(milliseconds: 500),
-                delay: Duration(milliseconds: 200),
-                curve: Curves.linear,
-              ),
-            ),
+        ),
         centerTitle: true,
         flexibleSpace: Container(
           decoration: const BoxDecoration(
@@ -119,14 +103,7 @@ class WhoCanDonateScreen extends StatelessWidget {
             ],
           ),
         ),
-      ).animate().addEffect(
-            const MoveEffect(
-              begin: Offset(0.0, 10),
-              duration: Duration(milliseconds: 500),
-              delay: Duration(milliseconds: 200),
-              curve: Curves.linear,
-            ),
-          ),
+      ),
     );
   }
 }

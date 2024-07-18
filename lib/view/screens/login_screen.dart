@@ -1,10 +1,9 @@
+import 'package:Al_Zab_township_guide/Models/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
-
-import '../../Models/provider/Provider.dart';
 import 'signup_screen.dart';
 
 class LoginScreen extends StatefulWidget {

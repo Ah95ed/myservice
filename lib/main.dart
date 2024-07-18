@@ -1,3 +1,4 @@
+import 'package:Al_Zab_township_guide/Models/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/view/screens/BloodScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/DoctorScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
@@ -15,7 +16,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
-import 'Models/provider/Provider.dart';
 import 'firebase_options.dart';
 import 'generated/l10n.dart';
 import 'view/screens/splash_screen.dart';
@@ -29,7 +29,9 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => Providers()),
+        ChangeNotifierProvider(
+          create: (_) => Providers(),
+        ),
       ],
       child: const MyApp(),
     ),
@@ -67,7 +69,7 @@ class MyApp extends StatelessWidget {
           LoginScreen.Route: (context) => const LoginScreen(),
           SplashScreen.Route: (context) => const SplashScreen(),
           WhoCanDonateScreen.route: (context) => const WhoCanDonateScreen(),
-          OtpScreen.Route: (context) =>  OtpScreen(),
+          OtpScreen.Route: (context) => OtpScreen(),
         },
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(
