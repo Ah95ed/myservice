@@ -23,6 +23,7 @@ dependencies:
   intl_utils: 
   sizer: 
   firebase_database: 
+  device_preview: ^1.2.0
 
 dev_dependencies:
   flutter_test:

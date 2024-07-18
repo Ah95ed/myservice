@@ -1,4 +1,4 @@
-import 'package:Al_Zab_township_guide/Models/provider/Provider.dart';
+import 'package:Al_Zab_township_guide/controller/Constant/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/view/screens/BloodScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/DoctorScreen.dart';

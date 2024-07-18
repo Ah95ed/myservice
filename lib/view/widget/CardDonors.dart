@@ -1,4 +1,4 @@
-import 'package:Al_Zab_township_guide/Models/provider/Provider.dart';
+import 'package:Al_Zab_township_guide/controller/Constant/provider/Provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';

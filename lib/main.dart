@@ -1,4 +1,4 @@
-import 'package:Al_Zab_township_guide/Models/provider/Provider.dart';
+import 'package:Al_Zab_township_guide/controller/Constant/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/view/screens/BloodScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/DoctorScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
@@ -44,41 +44,43 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return Sizer(builder: (context, orientations, device) {
-      return MaterialApp(
-        localizationsDelegates: const [
-          S.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: S.delegate.supportedLocales,
-        debugShowCheckedModeBanner: false,
-        title: S().title,
-        initialRoute: '/',
-        routes: <String, WidgetBuilder>{
-          ROUTE: (context) => const MyApp(),
-          MainScreen.ROUTE: (context) => const MainScreen(),
-          DoctorScreen.ROUTE: (context) => const DoctorScreen(),
-          BloodScreen.ROUTE: (context) => BloodScreen(),
-          ShowDonors.ROUTE: (context) => const ShowDonors(),
-          TheCars.ROUTE: (context) => const TheCars(),
-          ProfessionsScreen.ROUTE: (context) => const ProfessionsScreen(),
-          SatotaScreen.ROUTE: (context) => const SatotaScreen(),
-          SignupScreen.Route: (context) => const SignupScreen(),
-          LoginScreen.Route: (context) => const LoginScreen(),
-          SplashScreen.Route: (context) => const SplashScreen(),
-          WhoCanDonateScreen.route: (context) => const WhoCanDonateScreen(),
-          OtpScreen.Route: (context) => OtpScreen(),
-        },
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(
-            seedColor: ColorUsed.primary,
+    return Sizer(
+      builder: (context, orientations, device) {
+        return MaterialApp(
+          localizationsDelegates: const [
+            S.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: S.delegate.supportedLocales,
+          debugShowCheckedModeBanner: false,
+          title: S().title,
+          initialRoute: '/',
+          routes: <String, WidgetBuilder>{
+            ROUTE: (context) => const MyApp(),
+            MainScreen.ROUTE: (context) => const MainScreen(),
+            DoctorScreen.ROUTE: (context) => const DoctorScreen(),
+            BloodScreen.ROUTE: (context) => BloodScreen(),
+            ShowDonors.ROUTE: (context) => const ShowDonors(),
+            TheCars.ROUTE: (context) => const TheCars(),
+            ProfessionsScreen.ROUTE: (context) => const ProfessionsScreen(),
+            SatotaScreen.ROUTE: (context) => const SatotaScreen(),
+            SignupScreen.Route: (context) => const SignupScreen(),
+            LoginScreen.Route: (context) => const LoginScreen(),
+            SplashScreen.Route: (context) => const SplashScreen(),
+            WhoCanDonateScreen.route: (context) => const WhoCanDonateScreen(),
+            OtpScreen.Route: (context) => OtpScreen(),
+          },
+          theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(
+              seedColor: ColorUsed.primary,
+            ),
+            useMaterial3: true,
           ),
-          useMaterial3: true,
-        ),
-        home: const SplashScreen(),
-      );
-    });
+          home: const LoginScreen(),
+        );
+      },
+    );
   }
 }
