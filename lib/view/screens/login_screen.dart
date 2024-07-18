@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:Al_Zab_township_guide/controller/Constant/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/view/widget/LoginWidget/LoginBody.dart';
@@ -9,31 +11,17 @@ import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'signup_screen.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends StatelessWidget {
   static const Route = 'login screen';
-  const LoginScreen({super.key});
+   LoginScreen({super.key});
 
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
+  
   TextEditingController? _email;
   TextEditingController? _password;
 
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-  }
+  
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    _email = TextEditingController();
-    _password = TextEditingController();
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -58,17 +46,23 @@ class _LoginScreenState extends State<LoginScreen> {
             // enter password
 
             Container(
-              alignment: Alignment.center,
+              padding: EdgeInsets.symmetric(horizontal: 5.w),
+              alignment: Alignment.centerRight,
               child: GestureDetector(
                 child: Text(
                   S.of(context).forget_password,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
+                    color: ColorUsed.primary
+
                   ),
                 ),
-                onTap: () => {},
+                onTap: ()  {
+                  log('forget Password');
+                },
               ),
             ),
+            SizedBox(height: 4.h,),
             CustomMaterialButton(
               title: S.of(context).login,
             ),

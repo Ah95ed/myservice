@@ -1,6 +1,6 @@
 {
-    "name": "Al_Zab_township_guide",
-    "short_name": "Al_Zab_township_guide",
+    "name": "myservice",
+    "short_name": "myservice",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

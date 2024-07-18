@@ -11,7 +11,9 @@ import 'package:Al_Zab_township_guide/view/screens/WhoCanDonateScreen%20.dart';
 import 'package:Al_Zab_township_guide/view/screens/login_screen.dart';
 import 'package:Al_Zab_township_guide/view/screens/signup_screen.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
+import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
@@ -33,7 +35,7 @@ void main() async {
           create: (_) => Providers(),
         ),
       ],
-      child: const MyApp(),
+      child: DevicePreview(enabled: !kReleaseMode,builder: (context) => const MyApp(),)
     ),
   );
 }
@@ -67,7 +69,7 @@ class MyApp extends StatelessWidget {
             ProfessionsScreen.ROUTE: (context) => const ProfessionsScreen(),
             SatotaScreen.ROUTE: (context) => const SatotaScreen(),
             SignupScreen.Route: (context) => const SignupScreen(),
-            LoginScreen.Route: (context) => const LoginScreen(),
+            LoginScreen.Route: (context) =>  LoginScreen(),
             SplashScreen.Route: (context) => const SplashScreen(),
             WhoCanDonateScreen.route: (context) => const WhoCanDonateScreen(),
             OtpScreen.Route: (context) => OtpScreen(),
@@ -78,7 +80,7 @@ class MyApp extends StatelessWidget {
             ),
             useMaterial3: true,
           ),
-          home: const LoginScreen(),
+          home:  LoginScreen(),
         );
       },
     );

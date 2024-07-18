@@ -21,19 +21,20 @@ class CustomMaterialButton extends StatelessWidget {
         height: 6.h,
         minWidth: 40.w,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(4.0),
-          side: const BorderSide(
-            color: Colors.black, // Border color
-            width: 1.0, // Border width
-          ),
+          borderRadius: BorderRadius.circular(8.0),
+          // side: const BorderSide(
+          //   color: Colors.black, // Border color
+          //   width: 1.0, // Border width
+          // ),
         ),
-        color: ColorUsed.primary,
+        color: ColorUsed.second,
         onPressed: () {},
-        child: const Text(
-          'data',
+        child:  Text(
+          title!,
           style: TextStyle(
-            fontSize: 16.0,
+            fontSize: 18.0,
             fontWeight: FontWeight.bold,
+            color: Colors.white
           ),
         ),
       ),
