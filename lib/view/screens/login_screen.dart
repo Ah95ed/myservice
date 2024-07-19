@@ -2,6 +2,8 @@ import 'dart:developer';
 
 import 'package:Al_Zab_township_guide/controller/Constant/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
+import 'package:Al_Zab_township_guide/view/configSize/SizeConfig.dart';
+import 'package:Al_Zab_township_guide/view/widget/LoginWidget/HaveAccount.dart';
 import 'package:Al_Zab_township_guide/view/widget/LoginWidget/LoginBody.dart';
 import 'package:Al_Zab_township_guide/view/widget/LoginWidget/Loginimageshow.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
@@ -14,85 +16,64 @@ import 'signup_screen.dart';
 class LoginScreen extends StatelessWidget {
   static const Route = 'login screen';
    LoginScreen({super.key});
-
-  
-  TextEditingController? _email;
-  TextEditingController? _password;
-
-  
-
-
-
+  TextEditingController? _email = TextEditingController();
+  TextEditingController? _password = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final read = context.read<Providers>();
-
     return Scaffold(
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Login_Image(),
-            // enter email
-            LoginBody(
-              text: _email,
-              keyboardType: TextInputType.emailAddress,
-              icon: Icons.email,
-            ),
-            LoginBody(
-              text: _password,
-              keyboardType: TextInputType.visiblePassword,
-              icon: Icons.key,
-            ),
-            // enter password
-
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 5.w),
-              alignment: Alignment.centerRight,
-              child: GestureDetector(
-                child: Text(
-                  S.of(context).forget_password,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: ColorUsed.primary
-
-                  ),
-                ),
-                onTap: ()  {
-                  log('forget Password');
-                },
+        child: Container(
+          height: SizeConfig.screenHeight,
+          color: ColorUsed.PrimaryBackground,
+          child: Column(
+            children: [
+              Login_Image(),
+              SizedBox(height: SizeConfig.screenHeight * 0.04,),
+              // enter email
+              LoginBody(
+                text: _email,
+                keyboardType: TextInputType.emailAddress,
+                icon: Icons.email,
+                hintText: S.of(context).enter_email,
               ),
-            ),
-            SizedBox(height: 4.h,),
-            CustomMaterialButton(
-              title: S.of(context).login,
-            ),
-            Container(
-              margin: const EdgeInsets.only(top: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    S.of(context).don_t_have_account,
-                  ),
-                  SizedBox(
-                    width: 0.5.w,
-                  ),
-                  GestureDetector(
-                    onTap: () => {
-                      read.managerScreenSplash(
-                          SignupScreen.Route, context, false)
-                    },
-                    child: Text(
-                      S.of(context).register_now,
-                      style: const TextStyle(
-                        color: ColorUsed.primary, // Color(0xFF501063),
-                      ),
+              LoginBody(
+                text: _password,
+                keyboardType: TextInputType.visiblePassword,
+                icon: Icons.key,
+                hintText: S().enter_password,
+              ),
+              // enter password
+          
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 5.w),
+                alignment: Alignment.centerRight,
+                child: GestureDetector(
+                  child: Text(
+                    S.of(context).forget_password,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: ColorUsed.DarkGreen,
+          
                     ),
                   ),
-                ],
+                  onTap: ()  {
+                    log('forget Password');
+                  },
+                ),
               ),
-            ),
-          ],
+              SizedBox(height: SizeConfig.screenHeight * 0.04,),
+              CustomMaterialButton(
+                
+                title: S.of(context).login,
+                onPressed: () {
+                  log('message ${_email!.text}');
+                  log('message ${_password!.text}');
+                },
+              ),
+              HaveAccount(),
+            ],
+          ),
         ),
       ),
     );

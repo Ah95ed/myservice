@@ -8,8 +8,9 @@ class CustomMaterialButton extends StatelessWidget {
   CustomMaterialButton({
     super.key,
     required this.title,
+    required this.onPressed,
   });
-
+  void Function()? onPressed;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -28,14 +29,11 @@ class CustomMaterialButton extends StatelessWidget {
           // ),
         ),
         color: ColorUsed.second,
-        onPressed: () {},
-        child:  Text(
+        onPressed: onPressed,
+        child: Text(
           title!,
           style: TextStyle(
-            fontSize: 18.0,
-            fontWeight: FontWeight.bold,
-            color: Colors.white
-          ),
+              fontSize: 18.0, fontWeight: FontWeight.bold, color: Colors.white),
         ),
       ),
     );

@@ -1,6 +1,4 @@
-
-
-import 'package:Al_Zab_township_guide/generated/l10n.dart';
+import 'package:Al_Zab_township_guide/view/configSize/SizeConfig.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
@@ -19,13 +17,13 @@ class Login_Image extends StatelessWidget {
           bottomLeft: Radius.circular(90),
         ),
         boxShadow: const [
-            BoxShadow(
-              offset: Offset(0, 2),
-              blurRadius: 4,
-              color: Color.fromARGB(255, 158, 158, 158),
-            )
-          ],
-        color: ColorUsed.primary, // Color(0xFF501063),
+          BoxShadow(
+            offset: Offset(0, 1),
+            blurRadius: 4,
+            color: Colors.white54,
+          ),
+        ],
+        
         gradient: LinearGradient(
           colors: [
             ColorUsed.primary,
@@ -39,28 +37,14 @@ class Login_Image extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              margin:  EdgeInsets.only(top: 10.h),
-              height: 15.h,
+              margin: EdgeInsets.only(
+                top: SizeConfig.screenHeight * 0.12,
+              ),
+              height: SizeConfig.screenHeight * 0.15,
               child: Image.asset(
                 "assets/asd.png",
               ),
             ),
-            Container(
-              margin:  EdgeInsets.symmetric(
-                horizontal:4.w,
-                vertical: 5.h,
-              ),
-              alignment: Alignment.bottomRight,
-              child: Text(
-                S.of(context).login,
-                style:  TextStyle(
-                  fontSize: 14.sp,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  
-                ),
-              ),
-            )
           ],
         ),
       ),

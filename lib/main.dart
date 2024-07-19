@@ -1,4 +1,5 @@
 import 'package:Al_Zab_township_guide/controller/Constant/provider/Provider.dart';
+import 'package:Al_Zab_township_guide/view/configSize/SizeConfig.dart';
 import 'package:Al_Zab_township_guide/view/screens/BloodScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/DoctorScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
@@ -27,8 +28,10 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  
 
   runApp(
+
     MultiProvider(
       providers: [
         ChangeNotifierProvider(
@@ -46,6 +49,7 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
+   SizeConfig.init(context);
     return Sizer(
       builder: (context, orientations, device) {
         return MaterialApp(
