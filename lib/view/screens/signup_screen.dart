@@ -4,20 +4,18 @@ import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
-import 'login_screen.dart';
+import 'LoginScreen/login_screen.dart';
 
-class SignupScreen extends StatefulWidget {
-  static const Route = "login_screen";
-  const SignupScreen({super.key});
+class SignupScreen extends StatelessWidget {
+  static const Route = "/SignupScreen";
+  SignupScreen({super.key});
 
-  @override
-  State<SignupScreen> createState() => _SignupScreenState();
-}
-
-class _SignupScreenState extends State<SignupScreen> {
   TextEditingController name = TextEditingController();
+
   TextEditingController email = TextEditingController();
+
   TextEditingController phone = TextEditingController();
+
   TextEditingController password = TextEditingController();
 
   @override
@@ -28,38 +26,32 @@ class _SignupScreenState extends State<SignupScreen> {
         child: Column(
           children: [
             Container(
-              height: 250,
+              height: 30.h,
               decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(90),
-                  ),
-                  gradient: LinearGradient(colors: [
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(90),
+                ),
+                gradient: LinearGradient(
+                  colors: [
                     ColorUsed.primary, ColorUsed.second,
                     // (Color(0xFF501063)),
                     // (Color.fromRGBO(89, 29, 107, 1)),
-                  ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
+                  ],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
+              ),
               child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
-                      margin: const EdgeInsets.only(top: 40),
-                      height: 100,
+                      margin: EdgeInsets.only(top: 6.h),
+                      height: 12.h,
                       child: Image.asset("assets/asd.png"),
                     ),
-                    Container(
-                      margin: const EdgeInsets.only(right: 20, top: 20),
-                      alignment: Alignment.bottomRight,
-                      child: Text(
-                        S.of(context).register_now,
-                        style: const TextStyle(
-                          fontSize: 20,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    )
+                 
                   ],
                 ),
               ),

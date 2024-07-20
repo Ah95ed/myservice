@@ -2,7 +2,7 @@ import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
-class TextFieldCustom extends StatelessWidget {
+class TextFieldCustom extends StatefulWidget {
   TextFieldCustom({
     super.key,
     this.hint,
@@ -16,18 +16,42 @@ class TextFieldCustom extends StatelessWidget {
   TextEditingController? text;
 
   @override
+  State<TextFieldCustom> createState() => _TextFieldCustomState();
+}
+
+class _TextFieldCustomState extends State<TextFieldCustom> {
+  bool isPassword = true;
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(
-        controller: text,
-        keyboardType: input,
+        obscureText:
+            widget.input == TextInputType.visiblePassword ?
+             isPassword : false,
+        controller: widget.text,
+        keyboardType: widget.input,
         decoration: InputDecoration(
-          labelText: hint,
+          labelText: widget.hint,
           prefixIcon: Icon(
-            icons,
+            widget.icons,
             color: ColorUsed.second,
           ),
+          suffixIcon: widget.input == TextInputType.visiblePassword
+              ? IconButton(
+                  onPressed: () {
+                    isPassword = !isPassword;
+                    setState(() {});
+                  },
+                  icon: Icon(
+                    isPassword
+                     ? Icons.remove_red_eye
+                      : Icons.visibility_off,
+                    color: ColorUsed.second,
+                  ),
+                )
+              : null,
           border: const OutlineInputBorder(),
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(

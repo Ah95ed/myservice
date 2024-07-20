@@ -8,7 +8,7 @@ import 'package:Al_Zab_township_guide/view/screens/SatotaScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/ShowDonors.dart';
 import 'package:Al_Zab_township_guide/view/screens/TheCars.dart';
 import 'package:Al_Zab_township_guide/view/screens/WhoCanDonateScreen%20.dart';
-import 'package:Al_Zab_township_guide/view/screens/login_screen.dart';
+import 'package:Al_Zab_township_guide/view/screens/LoginScreen/login_screen.dart';
 import 'package:Al_Zab_township_guide/view/screens/signup_screen.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
 import 'package:device_preview/device_preview.dart';
@@ -72,7 +72,7 @@ class MyApp extends StatelessWidget {
             TheCars.ROUTE: (context) => const TheCars(),
             ProfessionsScreen.ROUTE: (context) => const ProfessionsScreen(),
             SatotaScreen.ROUTE: (context) => const SatotaScreen(),
-            SignupScreen.Route: (context) => const SignupScreen(),
+            SignupScreen.Route: (context) =>  SignupScreen(),
             LoginScreen.Route: (context) => LoginScreen(),
             SplashScreen.Route: (context) => const SplashScreen(),
             WhoCanDonateScreen.route: (context) => const WhoCanDonateScreen(),

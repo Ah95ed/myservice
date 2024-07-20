@@ -18,7 +18,7 @@ class LoginScreen extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
-          height:SizerUtil.height ,
+          height: SizerUtil.height,
           color: ColorUsed.PrimaryBackground,
           child: Column(
             children: [
@@ -43,8 +43,10 @@ class LoginScreen extends StatelessWidget {
                 icons: Icons.key,
                 hint: S().enter_password,
               ),
-              // enter password
-
+              //! forget password
+              SizedBox(
+                height: 2.h,
+              ),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 5.w),
                 alignment: Alignment.centerRight,
@@ -62,12 +64,11 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height:5.h,
+                height: 4.h,
               ),
               CustomMaterialButton(
                 title: S.of(context).login,
                 onPressed: () {
-          
                   log('message ${email.text}');
                   log('message ${password.text}');
                 },

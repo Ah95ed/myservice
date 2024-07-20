@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:Al_Zab_township_guide/controller/Constant/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
-import 'package:Al_Zab_township_guide/view/screens/login_screen.dart';
+import 'package:Al_Zab_township_guide/view/screens/LoginScreen/login_screen.dart';
 import 'package:Al_Zab_township_guide/view/screens/signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -35,7 +35,7 @@ class InitState extends State<SplashScreen> {
 
   loginRoute() async {
     final p = context.read<Providers>();
-    bool register = true; //await p.checkData() ?? false;
+    bool register = await p.checkData() ?? false;
 
     if (register) {
       p.managerScreenSplash(LoginScreen.Route, context, false);
@@ -57,19 +57,24 @@ class InitState extends State<SplashScreen> {
         children: [
           Container(
             decoration: const BoxDecoration(
-                // color: new Color(0xffF5591F),
-                color: ColorUsed.primary, // Color.fromRGBO(80, 16, 99, 1),
-                gradient: LinearGradient(colors: [
+              // color: new Color(0xffF5591F),
+              color: ColorUsed.primary, // Color.fromRGBO(80, 16, 99, 1),
+              gradient: LinearGradient(
+                colors: [
                   ColorUsed.primary,
                   ColorUsed.second,
-                ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
+                ],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ),
+            ),
           ),
           Center(
               child: SizedBox(
             height: double.infinity,
             width: 200,
             child: Image.asset("assets/asd.png"),
-          ))
+          ),)
         ],
       ),
     );
