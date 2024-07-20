@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:Al_Zab_township_guide/controller/Constant/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
+import 'package:Al_Zab_township_guide/view/screens/login_screen.dart';
 import 'package:Al_Zab_township_guide/view/screens/signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -37,7 +38,7 @@ class InitState extends State<SplashScreen> {
     bool register = true; //await p.checkData() ?? false;
 
     if (register) {
-      p.managerScreenSplash(MainScreen.ROUTE, context, false);
+      p.managerScreenSplash(LoginScreen.Route, context, false);
       return;
     } else {
       p.managerScreenSplash(SignupScreen.Route, context, false);

@@ -1,10 +1,10 @@
 import 'package:Al_Zab_township_guide/controller/Constant/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
-import 'package:Al_Zab_township_guide/view/configSize/SizeConfig.dart';
 import 'package:Al_Zab_township_guide/view/screens/signup_screen.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sizer/sizer.dart';
 
 class HaveAccount extends StatelessWidget {
   const HaveAccount({
@@ -15,8 +15,8 @@ class HaveAccount extends StatelessWidget {
   Widget build(BuildContext context) {
     final read = context.read<Providers>();
     return Container(
-      margin: const EdgeInsets.only(top: 10),
-      height: SizeConfig.screenHeight * 0.05,
+      margin:  EdgeInsets.only(top:0.1.h),
+      height: 10.h,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -28,7 +28,7 @@ class HaveAccount extends StatelessWidget {
             ),
           ),
           SizedBox(
-            width: SizeConfig.screenWidth * 0.01,
+            width: 0.1.w,
           ),
           TextButton(
             autofocus: true,

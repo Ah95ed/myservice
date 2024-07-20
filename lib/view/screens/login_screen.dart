@@ -1,50 +1,50 @@
 import 'dart:developer';
-
-import 'package:Al_Zab_township_guide/controller/Constant/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
-import 'package:Al_Zab_township_guide/view/configSize/SizeConfig.dart';
 import 'package:Al_Zab_township_guide/view/widget/LoginWidget/HaveAccount.dart';
 import 'package:Al_Zab_township_guide/view/widget/LoginWidget/LoginBody.dart';
 import 'package:Al_Zab_township_guide/view/widget/LoginWidget/Loginimageshow.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
 import 'package:Al_Zab_township_guide/view/widget/staticWidget/CustomMatireal.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
-import 'signup_screen.dart';
 
 class LoginScreen extends StatelessWidget {
+  LoginScreen({super.key});
   static const Route = 'login screen';
-   LoginScreen({super.key});
-  TextEditingController? _email = TextEditingController();
-  TextEditingController? _password = TextEditingController();
+  late TextEditingController email = TextEditingController();
+  late TextEditingController password = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    final read = context.read<Providers>();
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
-          height: SizeConfig.screenHeight,
+          height:SizerUtil.height ,
           color: ColorUsed.PrimaryBackground,
           child: Column(
             children: [
               Login_Image(),
-              SizedBox(height: SizeConfig.screenHeight * 0.04,),
-              // enter email
-              LoginBody(
-                text: _email,
-                keyboardType: TextInputType.emailAddress,
-                icon: Icons.email,
-                hintText: S.of(context).enter_email,
+              SizedBox(
+                height: 6.h,
               ),
-              LoginBody(
-                text: _password,
-                keyboardType: TextInputType.visiblePassword,
-                icon: Icons.key,
-                hintText: S().enter_password,
+
+              //! enter email
+              TextFieldCustom(
+                text: email,
+                input: TextInputType.emailAddress,
+                icons: Icons.email,
+                hint: S.of(context).enter_email,
+              ),
+
+// //! password
+
+              TextFieldCustom(
+                text: password,
+                input: TextInputType.visiblePassword,
+                icons: Icons.key,
+                hint: S().enter_password,
               ),
               // enter password
-          
+
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 5.w),
                 alignment: Alignment.centerRight,
@@ -54,21 +54,22 @@ class LoginScreen extends StatelessWidget {
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       color: ColorUsed.DarkGreen,
-          
                     ),
                   ),
-                  onTap: ()  {
+                  onTap: () {
                     log('forget Password');
                   },
                 ),
               ),
-              SizedBox(height: SizeConfig.screenHeight * 0.04,),
+              SizedBox(
+                height:5.h,
+              ),
               CustomMaterialButton(
-                
                 title: S.of(context).login,
                 onPressed: () {
-                  log('message ${_email!.text}');
-                  log('message ${_password!.text}');
+          
+                  log('message ${email.text}');
+                  log('message ${password.text}');
                 },
               ),
               HaveAccount(),

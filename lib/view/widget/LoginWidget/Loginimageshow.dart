@@ -1,4 +1,3 @@
-import 'package:Al_Zab_township_guide/view/configSize/SizeConfig.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
@@ -38,9 +37,9 @@ class Login_Image extends StatelessWidget {
           children: [
             Container(
               margin: EdgeInsets.only(
-                top: SizeConfig.screenHeight * 0.12,
+                top: 10.h,
               ),
-              height: SizeConfig.screenHeight * 0.15,
+              height: 21.h,
               child: Image.asset(
                 "assets/asd.png",
               ),
