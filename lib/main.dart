@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:Al_Zab_township_guide/controller/Constant/provider/LoginProvider/Loginprovider.dart';
 import 'package:Al_Zab_township_guide/controller/Constant/provider/Provider.dart';
-import 'package:Al_Zab_township_guide/routing/routing.dart';
+import 'package:Al_Zab_township_guide/view/routing/routing.dart';
 import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/splash_screen.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';

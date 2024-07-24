@@ -3,14 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 class Login_Image extends StatelessWidget {
-  const Login_Image({
+   Login_Image({
+    this.height,
     super.key,
   });
+  double? height;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 40.h,
+      height: height,
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(90),
@@ -22,7 +24,6 @@ class Login_Image extends StatelessWidget {
             color: Colors.white54,
           ),
         ],
-        
         gradient: LinearGradient(
           colors: [
             ColorUsed.primary,
@@ -33,18 +34,12 @@ class Login_Image extends StatelessWidget {
         ),
       ),
       child: Center(
-        child: Column(
-          children: [
-            Container(
-              margin: EdgeInsets.only(
-                top: 10.h,
-              ),
-              height: 21.h,
-              child: Image.asset(
-                "assets/asd.png",
-              ),
-            ),
-          ],
+        child: Container(
+      
+          height: 15.h,
+          child: Image.asset(
+            "assets/asd.png",
+          ),
         ),
       ),
     );
