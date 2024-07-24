@@ -51,11 +51,11 @@ void main() async {
           lazy: false,
         ),
       ],
-      // child: MyApp(),
-      child: DevicePreview(
-        enabled: !kReleaseMode,
-        builder: (context) => const MyApp(),
-      ),
+      child: MyApp(),
+      // child: DevicePreview(
+      //   enabled: !kReleaseMode,
+      //   builder: (context) => const MyApp(),
+      // ),
     ),
   );
 }

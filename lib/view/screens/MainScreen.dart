@@ -18,13 +18,14 @@ class MainScreen extends StatelessWidget {
   // ignore: constant_identifier_names
   static const ROUTE = "MainScreen";
   const MainScreen({super.key});
+  // ! lيرنا الحسن
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        elevation: 5.0,
-        toolbarHeight: 10.h,
+        elevation: 2.0,
+        toolbarHeight: 10.h ,
         title: Text(
           S.of(context).Select_Service,
           style: TextStyle(
