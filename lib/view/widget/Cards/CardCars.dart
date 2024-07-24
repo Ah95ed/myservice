@@ -2,9 +2,9 @@ import 'package:Al_Zab_township_guide/controller/Constant/provider/Provider.dart
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
-import '../../generated/l10n.dart';
-import 'Multi_text.dart';
-import 'constant/Constant.dart';
+import '../../../generated/l10n.dart';
+import '../staticWidget/Multi_text.dart';
+import '../constant/Constant.dart';
 
 // ignore: must_be_immutable
 class CardCars extends StatelessWidget {

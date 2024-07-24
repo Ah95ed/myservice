@@ -1,22 +1,18 @@
-import 'package:Al_Zab_township_guide/generated/l10n.dart';
-import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import '../../../generated/l10n.dart';
+import '../staticWidget/Multi_text.dart';
+import '../constant/Constant.dart';
 
-import 'Multi_text.dart';
-
-// ignore: must_be_immutable
-class CardProfessions extends StatelessWidget {
+class CardSatota extends StatelessWidget {
   // const Professions({super.key});
-  String name, nameProfession;
+  late String name, location;
   VoidCallback onPressed;
-  CardProfessions({
-    super.key,
-    required this.name,
-    required this.nameProfession,
-    required this.onPressed,
-  });
-
+  CardSatota(
+      {super.key,
+      required this.name,
+      required this.location,
+      required this.onPressed});
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -31,7 +27,10 @@ class CardProfessions extends StatelessWidget {
                 SizedBox(
                   height: 1.h,
                 ),
-                MultiText(nameProfession, S.of(context).profession),
+                MultiText(
+                  location,
+                  S.of(context).title_service,
+                ),
               ],
             ),
           ),

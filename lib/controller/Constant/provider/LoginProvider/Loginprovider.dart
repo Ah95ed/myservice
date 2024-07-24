@@ -8,27 +8,27 @@ import 'package:flutter/material.dart';
 class LoginProvider with ChangeNotifier {
   String? _name, _email, _password, _phone;
 
-  // Future<void> loginFirebase(
-  //   String email,
-  //   String password,
-  //   BuildContext context,
-  // ) async {
-  //   try {
-  //     // UserCredential userCredential =
-  //     await FirebaseAuth.instance.signInWithEmailAndPassword(
-  //       email: email,
-  //       password: password,
-  //     );
-  //     saveData(context, email);
-  //     managerScreenSplash(MainScreen.ROUTE, context, false);
-  //   } on FirebaseAuthException catch (e) {
-  //     if (e.code == 'user-not-found') {
-  //       log('No user found for that email.');
-  //     } else if (e.code == 'wrong-password') {
-  //       log('Wrong password provided.');
-  //     }
-  //   }
-  // }
+  Future<void> loginFirebase(
+    String email,
+    String password,
+    BuildContext context,
+  ) async {
+    try {
+      // UserCredential userCredential =
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      saveData(context, email);
+      managerScreenSplash(MainScreen.ROUTE, context, false);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        log('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        log('Wrong password provided.');
+      }
+    }
+  }
 
   void managerScreenSplash(String route, BuildContext context, bool f,
       {Object? object}) {
@@ -38,7 +38,7 @@ class LoginProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<bool> saveData(
+  Future<void> saveData(
     BuildContext context,
     String email, {
     String? password,
@@ -48,15 +48,15 @@ class LoginProvider with ChangeNotifier {
     bool t = await sharedPreferences!.setBool('isRegister', true);
 
     if (t) {
-      _name = name;
-      _email = email;
-      _password = password;
-      _phone = phone;
-      await registerFirebase(email);
+      // _name = name;
+      // _email = email;
+      // _password = password;
+      // _phone = phone;
+      // await registerFirebase(email);
       managerScreenSplash(MainScreen.ROUTE, context, false);
     }
     notifyListeners();
-    return t;
+    // return t;
   }
 
   Future<void> registerFirebase(String email) async {

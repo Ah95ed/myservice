@@ -24,7 +24,7 @@ class InitState extends State<SplashScreen> {
 
   startTimer() async {
     var duration = const Duration(
-      seconds: 3,
+      seconds: 2,
     );
 
     return Timer(

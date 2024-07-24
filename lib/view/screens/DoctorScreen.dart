@@ -1,7 +1,7 @@
 import 'package:Al_Zab_township_guide/controller/Constant/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/controller/Constant/ServiceCollectios.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
-import 'package:Al_Zab_township_guide/view/widget/cardView.dart';
+import 'package:Al_Zab_township_guide/view/widget/Cards/cardView.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
