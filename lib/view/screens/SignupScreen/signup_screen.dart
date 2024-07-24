@@ -1,4 +1,6 @@
+import 'package:Al_Zab_township_guide/Models/SignupModel/SignupModel.dart';
 import 'package:Al_Zab_township_guide/controller/Constant/provider/Provider.dart';
+import 'package:Al_Zab_township_guide/controller/Constant/provider/SignupProvider/SignupProvider.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/view/widget/LoginWidget/HaveAccount.dart';
 import 'package:Al_Zab_township_guide/view/widget/LoginWidget/LoginBody.dart';
@@ -24,7 +26,6 @@ class SignupScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final p = context.read<Providers>();
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -74,46 +75,25 @@ class SignupScreen extends StatelessWidget {
               CustomMaterialButton(
                 title: S.of(context).login,
                 onPressed: () {
-                  // providerLogin.loginFirebase(
-                  //   email.text,
-                  //   password.text,
-                  //   context,
-                  // );
-                  // log('message ${email.text}');
-                  // log('message ${password.text}');
+                  Provider.of<SignupProvider>(context, listen: false)
+                      .registerInRealTime(
+                    SignupModel(
+                      name: name.text,
+                      email: email.text,
+                      phone: phone.text,
+                      password: password.text,
+                    ),
+                  );
+                  // Navigator.pushNamed(context, LoginScreen.Route);
                 },
               ),
-                  SizedBox(height: 1.h,),
+              SizedBox(
+                height: 1.h,
+              ),
               HaveAccount(
                   s1: S.of(context).already_member,
                   s2: S.of(context).login,
-                 route : LoginScreen.Route),
-              // Register
-              // Container(
-              //   margin: const EdgeInsets.only(top: 10),
-              //   child: Row(
-              //     mainAxisAlignment: MainAxisAlignment.center,
-              //     children: [
-              //       Text(
-              //         S.of(context).already_member,
-              //       ),
-              //       SizedBox(
-              //         width: 0.5.w,
-              //       ),
-              //       GestureDetector(
-              //         onTap: () => {
-              //           p.managerScreenSplash(LoginScreen.Route, context, false)
-              //         },
-              //         child: Text(
-              //           S.of(context).login,
-              //           style: const TextStyle(
-              //             color: ColorUsed.primary, // Color(0xFF501063),
-              //           ),
-              //         ),
-              //       )
-              //     ],
-              //   ),
-              // ),
+                  route: LoginScreen.Route),
             ],
           ),
         ),
