@@ -4,7 +4,7 @@ description: A new Flutter project.
 publish_to: 'none' 
 version: 1.0.0+1
 environment:
-  sdk: '>=3.4.3 <4.0.0'
+  sdk: '>=3.4.4 <4.0.0'
  
 dependencies:
   flutter:
@@ -13,7 +13,7 @@ dependencies:
   flutter_advanced_drawer:
   firebase_core:
   firebase_auth:
-  email_otp:
+  email_otp: ^3.0.2
   cloud_firestore:
   provider:
   url_launcher: 

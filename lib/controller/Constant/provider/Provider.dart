@@ -1,11 +1,10 @@
 import 'dart:developer';
 import 'package:Al_Zab_township_guide/controller/Constant/Constant.dart';
-import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
+import 'package:Al_Zab_township_guide/main.dart';
 import 'package:Al_Zab_township_guide/view/screens/OTPScreen.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/app_theme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_otp/email_otp.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,7 +12,7 @@ import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Providers with ChangeNotifier {
-  String? _name, _email, _phone, _password;
+  String? name, email, phone,password;
   List s = [];
   List search = [];
   List save = [];
@@ -22,7 +21,6 @@ class Providers with ChangeNotifier {
     style: TextStyle(color: AppTheme.notWhite),
   );
   Icon actionsicon = const Icon(Icons.search);
-  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   final TextEditingController number = TextEditingController();
 
@@ -42,102 +40,30 @@ class Providers with ChangeNotifier {
     String phone,
     BuildContext context,
   ) async {
+    log('message Providers');
 // EmailOTP.sendOTP(email: email)
     EmailOTP.config(
-        appEmail: Constant.appEmail,
-        appName: Constant.appName,
-        // userEmail: email,
-        otpLength: 4,
-        otpType: OTPType.numeric,);
+      appEmail: Constant.appEmail,
+      appName: Constant.appName,
+
+      // userEmail: email,
+      otpLength: 4,
+      otpType: OTPType.numeric,
+    );
     if (await EmailOTP.sendOTP(email: email)) {
-      _name = name;
-      _email = email;
-      _phone = phone;
-      _password = password;
+      log('success');
+      this.name = name;
+      this.email = email;
+      this.phone = phone;
+      this.password = password;
       managerScreen(OtpScreen.Route, context);
     }
 
     notifyListeners();
   }
 
-  Future<void> registerFirebase() async {
-    final checkemails = FirebaseAuth.instance
-        .fetchSignInMethodsForEmail(_email!)
-        .then((value) async {
-      if (value.isEmpty) {
-        UserCredential u =
-            await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: _email!,
-          password: _password!,
-        );
-
-        User? user = u.user;
-        await registerInRealTime();
-      }
-    });
-  }
-
-  Future<void> loginFirebase(
-    String email,
-    String password,
-    BuildContext context,
-  ) async {
-    try {
-      // UserCredential userCredential =
-          await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      saveData(context);
-      managerScreenSplash(MainScreen.ROUTE, context, false);
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        log('No user found for that email.');
-      } else if (e.code == 'wrong-password') {
-        log('Wrong password provided.');
-      }
-    }
-  }
-
-  Future<void> registerInRealTime() async {
-    final database = FirebaseDatabase.instance;
-    database
-        .ref('iphone')
-        .child(_phone!)
-        .set(
-          {
-            'name': _name,
-            'phone': _phone,
-            'email': _email,
-            'password': _password,
-          },
-        )
-        .then(
-          (value) => {},
-        )
-        .onError(
-          (error, stackTrace) => {},
-        );
-    notifyListeners();
-  }
-
-  Future<bool> saveData(BuildContext context) async {
-    SharedPreferences prefs = await _prefs;
-    bool t = await prefs.setBool('isRegister', true);
-
-    if (t) {
-      await registerFirebase();
-      managerScreenSplash(MainScreen.ROUTE, context, false);
-    }
-    notifyListeners();
-    return t;
-  }
-
-  // bool isRegister = false;
-
   Future<bool?> checkData() async {
-    SharedPreferences prefs = await _prefs;
-    bool isRegister = prefs.getBool('isRegister') ?? false;
+    bool isRegister = sharedPreferences!.getBool('isRegister') ?? false;
     notifyListeners();
     return isRegister;
   }

@@ -205,26 +205,26 @@ class SignupScreen extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () async {
-                if (name.text.isEmpty) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('حقل الاسم فارغ')));
-                  return;
-                }
-                if (email.text.isEmpty) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('حقل الايميل فارغ')));
-                  return;
-                }
-                if (phone.text.isEmpty && phone.text.length < 11) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text("تأكد من الر قم")));
-                  return;
-                }
-                if (password.text.isEmpty && password.text.length > 6) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('حقل الباسورد فارغ')));
-                  return;
-                }
+                // if (name.text.isEmpty) {
+                //   ScaffoldMessenger.of(context).showSnackBar(
+                //       const SnackBar(content: Text('حقل الاسم فارغ')));
+                //   return;
+                // }
+                // if (email.text.isEmpty) {
+                //   ScaffoldMessenger.of(context).showSnackBar(
+                //       const SnackBar(content: Text('حقل الايميل فارغ')));
+                //   return;
+                // }
+                // if (phone.text.isEmpty && phone.text.length < 11) {
+                //   ScaffoldMessenger.of(context).showSnackBar(
+                //       const SnackBar(content: Text("تأكد من الر قم")));
+                //   return;
+                // }
+                // if (password.text.isEmpty && password.text.length > 6) {
+                //   ScaffoldMessenger.of(context).showSnackBar(
+                //       const SnackBar(content: Text('حقل الباسورد فارغ')));
+                //   return;
+                // }
                 await context.read<Providers>().registerWithEmailOTP(
                       email.text,
                       password.text,

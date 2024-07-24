@@ -49,6 +49,7 @@ class MainScreen extends StatelessWidget {
         ),
         systemOverlayStyle: SystemUiOverlayStyle.light,
       ),
+      //! body
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Column(

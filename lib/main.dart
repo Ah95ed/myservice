@@ -1,3 +1,4 @@
+import 'package:Al_Zab_township_guide/controller/Constant/provider/LoginProvider/Loginprovider.dart';
 import 'package:Al_Zab_township_guide/controller/Constant/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/view/screens/BloodScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/DoctorScreen.dart';
@@ -12,27 +13,42 @@ import 'package:Al_Zab_township_guide/view/screens/LoginScreen/login_screen.dart
 import 'package:Al_Zab_township_guide/view/screens/signup_screen.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
 import 'package:device_preview/device_preview.dart';
+import 'package:email_otp/email_otp.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 import 'firebase_options.dart';
 import 'generated/l10n.dart';
 import 'view/screens/splash_screen.dart';
 
+SharedPreferences? sharedPreferences;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
+  sharedPreferences = await SharedPreferences.getInstance();
+  EmailOTP.config(
+    appName: 'App Name',
+    otpType: OTPType.numeric,
+    expiry: 30000,
+    emailTheme: EmailTheme.v6,
+    appEmail: 'amhmeed31@gmail.com',
+    otpLength: 6,
+  );
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(
           create: (_) => Providers(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => LoginProvider(),
+          lazy: false,
         ),
       ],
       // child: MyApp(),
@@ -72,7 +88,7 @@ class MyApp extends StatelessWidget {
             TheCars.ROUTE: (context) => const TheCars(),
             ProfessionsScreen.ROUTE: (context) => const ProfessionsScreen(),
             SatotaScreen.ROUTE: (context) => const SatotaScreen(),
-            SignupScreen.Route: (context) =>  SignupScreen(),
+            SignupScreen.Route: (context) => SignupScreen(),
             LoginScreen.Route: (context) => LoginScreen(),
             SplashScreen.Route: (context) => const SplashScreen(),
             WhoCanDonateScreen.route: (context) => const WhoCanDonateScreen(),
@@ -84,7 +100,7 @@ class MyApp extends StatelessWidget {
             ),
             useMaterial3: true,
           ),
-          home: SplashScreen(),
+          home: MainScreen(),
         );
       },
     );
