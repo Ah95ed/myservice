@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:Al_Zab_township_guide/Models/SharedModel/SharedModel.dart';
 import 'package:Al_Zab_township_guide/main.dart';
 import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -7,6 +8,7 @@ import 'package:flutter/material.dart';
 
 class LoginProvider with ChangeNotifier {
   String? _name, _email, _password, _phone;
+  SharedModel? sharedModel;
 
   Future<void> loginFirebase(
     String email,
@@ -20,7 +22,7 @@ class LoginProvider with ChangeNotifier {
         password: password,
       );
       saveData(context, email);
-      managerScreenSplash(MainScreen.ROUTE, context, false);
+      // managerScreenSplash(MainScreen.ROUTE, context, false);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         log('No user found for that email.');
@@ -28,14 +30,6 @@ class LoginProvider with ChangeNotifier {
         log('Wrong password provided.');
       }
     }
-  }
-
-  void managerScreenSplash(String route, BuildContext context, bool f,
-      {Object? object}) {
-    Navigator.pushNamedAndRemoveUntil(context, route, (v) {
-      return f;
-    }, arguments: object);
-    notifyListeners();
   }
 
   Future<void> saveData(
@@ -53,7 +47,7 @@ class LoginProvider with ChangeNotifier {
       // _password = password;
       // _phone = phone;
       // await registerFirebase(email);
-      managerScreenSplash(MainScreen.ROUTE, context, false);
+      // managerScreenSplash(MainScreen.ROUTE, context, false);
     }
     notifyListeners();
     // return t;

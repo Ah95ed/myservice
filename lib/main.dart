@@ -5,6 +5,7 @@ import 'package:Al_Zab_township_guide/controller/Constant/provider/Provider.dart
 import 'package:Al_Zab_township_guide/controller/Constant/provider/SignupProvider/SignupProvider.dart';
 import 'package:Al_Zab_township_guide/view/routing/routing.dart';
 import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
+import 'package:Al_Zab_township_guide/view/screens/SignupScreen/signup_screen.dart';
 import 'package:Al_Zab_township_guide/view/screens/splash_screen.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
 import 'package:device_preview/device_preview.dart';
@@ -83,7 +84,7 @@ class MyApp extends StatelessWidget {
             ),
             useMaterial3: true,
           ),
-          home: SplashScreen(),
+          home: SignupScreen(),
         );
       },
     );
