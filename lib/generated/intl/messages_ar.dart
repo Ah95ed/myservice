@@ -33,6 +33,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "don_t_have_account":
             MessageLookupByLibrary.simpleMessage("ليس لديك حساب؟"),
         "donors": MessageLookupByLibrary.simpleMessage("متبرعين"),
+        "email_exist":
+            MessageLookupByLibrary.simpleMessage(" الايميل مسجل بالفعل"),
         "enter_email":
             MessageLookupByLibrary.simpleMessage("أدخل البريد الإلكتروني"),
         "enter_password": MessageLookupByLibrary.simpleMessage("ادخل الباسورد"),
@@ -44,6 +46,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "line": MessageLookupByLibrary.simpleMessage("خطوط"),
         "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
         "name": MessageLookupByLibrary.simpleMessage("الاسم :"),
+        "number_phone": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
         "presence": MessageLookupByLibrary.simpleMessage("الحضور"),
         "profession": MessageLookupByLibrary.simpleMessage("المهنة :"),
         "professions": MessageLookupByLibrary.simpleMessage("المهن"),

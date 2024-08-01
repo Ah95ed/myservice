@@ -9,8 +9,6 @@ import 'package:Al_Zab_township_guide/view/screens/TheCars.dart';
 import 'package:Al_Zab_township_guide/view/screens/WhoCanDonateScreen%20.dart';
 import 'package:Al_Zab_township_guide/view/screens/LoginScreen/login_screen.dart';
 import 'package:Al_Zab_township_guide/view/screens/SignupScreen/signup_screen.dart';
-
-import 'package:Al_Zab_township_guide/main.dart';
 import 'package:Al_Zab_township_guide/view/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 

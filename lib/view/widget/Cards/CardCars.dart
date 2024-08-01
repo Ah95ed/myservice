@@ -1,8 +1,8 @@
-import 'package:Al_Zab_township_guide/controller/Constant/provider/Provider.dart';
+import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
+import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
-import '../../../generated/l10n.dart';
 import '../staticWidget/Multi_text.dart';
 import '../constant/Constant.dart';
 
@@ -21,6 +21,7 @@ class CardCars extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var s = S;
     return Card(
       elevation: 8,
       shadowColor: Colors.teal,

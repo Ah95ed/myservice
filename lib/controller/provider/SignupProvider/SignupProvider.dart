@@ -16,9 +16,10 @@ class SignupProvider extends ChangeNotifier {
       phone: m.phone,
     );
     await model.register(context);
-    
+
     notifyListeners();
   }
+
   void startLoading() {
     isSignup = true;
     notifyListeners();
@@ -26,6 +27,18 @@ class SignupProvider extends ChangeNotifier {
 
   void stopLoading() {
     isSignup = false;
+    notifyListeners();
+  }
+
+  Future<void> sendCode(SignupModel m,BuildContext context ) async {
+  
+     model = await SignupModel(
+      name: m.name,
+      email: m.email,
+      password: m.password,
+      phone: m.phone,
+    );
+      await model.sendCode();
     notifyListeners();
   }
 }

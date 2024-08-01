@@ -1,11 +1,8 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
 import 'dart:developer';
-
 import 'package:Al_Zab_township_guide/Models/SharedModel/SharedModel.dart';
-import 'package:Al_Zab_township_guide/generated/l10n.dart';
-import 'package:Al_Zab_township_guide/view/screens/LoginScreen/login_screen.dart';
+import 'package:Al_Zab_township_guide/main.dart';
 import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
+import 'package:Al_Zab_township_guide/view/screens/OTPScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -48,7 +45,6 @@ class SignupModel {
   FirebaseAuth _auth = FirebaseAuth.instance;
   SharedModel? sharesModel;
   late BuildContext _ctx;
-  
 
   Future<void> register(
     BuildContext context,
@@ -69,25 +65,20 @@ class SignupModel {
       } else {
         isSignup = false;
         log('message email is Exist ');
-       await ScaffoldMessenger.of(_ctx).showSnackBar(
+        await ScaffoldMessenger.of(_ctx).showSnackBar(
           SnackBar(
             content: Text('email is Exist '),
             duration: Duration(seconds: 2),
           ),
         );
-        // sharesModel!.managerScreenSplash(
-        //   LoginScreen.Route,
-        //   _ctx,
-        //   false,
-        // );
       }
     } catch (e) {
-            await ScaffoldMessenger.of(_ctx).showSnackBar(
-          SnackBar(
-            content: Text('email is Exist $e'),
-            duration: Duration(seconds: 3),
-          ),
-        );
+      await ScaffoldMessenger.of(_ctx).showSnackBar(
+        SnackBar(
+          content: Text('email is Exist $e'),
+          duration: Duration(seconds: 3),
+        ),
+      );
       log('message register -> $e');
     }
   }
@@ -118,5 +109,34 @@ class SignupModel {
         ),
       );
     });
+  }
+
+  String _verificationId = '';
+  Future<void> sendCode() async {
+    String num = phone!.substring(1);
+    await FirebaseAuth.instance.verifyPhoneNumber(
+      phoneNumber: '+964$num',
+      verificationCompleted: (PhoneAuthCredential credential) async {
+        // Auto-retrieval or instant verification.
+        await FirebaseAuth.instance.signInWithCredential(credential);
+      },
+      verificationFailed: (FirebaseAuthException e) {
+        log('Verification failed: ${e.message}');
+      },
+      codeSent: (String verificationId, int? resendToken) {
+        // setState(() {
+        _verificationId = verificationId;
+        sharedPreferences!.setString( 'verificationId', _verificationId);
+        log('message verificationId -> $_verificationId');
+        sharesModel!.managerScreenSplash(OtpScreen.Route, _ctx, false);
+        //   _isLoading = false;
+        // });
+      },
+      codeAutoRetrievalTimeout: (String verificationId) {
+        // setState(() {
+        _verificationId = verificationId;
+        // });
+      },
+    );
   }
 }

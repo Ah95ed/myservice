@@ -31,7 +31,10 @@ class CardProfessions extends StatelessWidget {
                 SizedBox(
                   height: 1.h,
                 ),
-                MultiText(nameProfession, S.of(context).profession),
+                MultiText(
+                  nameProfession,
+                  S.of(context).profession,
+                ),
               ],
             ),
           ),

@@ -5,9 +5,7 @@ import 'package:Al_Zab_township_guide/view/screens/OTPScreen.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/app_theme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_otp/email_otp.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -51,7 +49,6 @@ class Providers with ChangeNotifier {
       otpType: OTPType.numeric,
     );
     if (await EmailOTP.sendOTP(email: email)) {
-      log('success');
       this.name = name;
       this.email = email;
       this.phone = phone;

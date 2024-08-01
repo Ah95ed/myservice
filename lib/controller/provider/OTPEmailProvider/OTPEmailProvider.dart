@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 
-import 'package:Al_Zab_township_guide/controller/Constant/provider/LoginProvider/Loginprovider.dart';
+import 'package:Al_Zab_township_guide/controller/provider/LoginProvider/Loginprovider.dart';
 
 class OTPEmailProvider with ChangeNotifier {
  

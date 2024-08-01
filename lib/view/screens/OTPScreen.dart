@@ -1,5 +1,5 @@
-import 'package:Al_Zab_township_guide/controller/Constant/provider/LoginProvider/Loginprovider.dart';
-import 'package:Al_Zab_township_guide/controller/Constant/provider/Provider.dart';
+import 'package:Al_Zab_township_guide/controller/provider/LoginProvider/Loginprovider.dart';
+import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:email_otp/email_otp.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

@@ -1,5 +1,5 @@
 import 'dart:developer';
-import 'package:Al_Zab_township_guide/controller/Constant/provider/LoginProvider/Loginprovider.dart';
+import 'package:Al_Zab_township_guide/controller/provider/LoginProvider/Loginprovider.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/view/screens/SignupScreen/signup_screen.dart';
 import 'package:Al_Zab_township_guide/view/widget/LoginWidget/HaveAccount.dart';
@@ -19,6 +19,8 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+
     final providerLogin = context.read<LoginProvider>();
     return Scaffold(
       body: SingleChildScrollView(
@@ -79,8 +81,8 @@ class LoginScreen extends StatelessWidget {
                     password.text,
                     context,
                   );
-                  // log('message ${email.text}');
-                  // log('message ${password.text}');
+                  // log(message ${email.text});
+                  // log(message ${password.text});
                 },
               ),
               SizedBox(height: 1.h,),

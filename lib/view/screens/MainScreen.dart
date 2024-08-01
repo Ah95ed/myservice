@@ -1,4 +1,4 @@
-import 'package:Al_Zab_township_guide/controller/Constant/provider/Provider.dart';
+import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/view/screens/BloodScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/DoctorScreen.dart';
@@ -81,19 +81,19 @@ class MainScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          S.of(context).Select_Service,
-                          style: TextStyle(
-                            color: ColorUsed.primary,
-                            fontSize: 18.sp,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+                        // Text(
+                        //   S.of(context).Select_Service,
+                        //   style: TextStyle(
+                        //     color: ColorUsed.primary,
+                        //     fontSize: 18.sp,
+                        //     fontWeight: FontWeight.bold,
+                        //   ),
+                        // ),
                       ],
                     ),
-                    const SizedBox(
-                      height: 50.0,
-                    ),
+                    // const SizedBox(
+                    //   height: 50.0,
+                    // ),
                     Row(
                       children: [
                         ButtonSelect(

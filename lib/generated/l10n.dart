@@ -359,6 +359,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Email is Exist  `
+  String get email_exist {
+    return Intl.message(
+      'Email is Exist  ',
+      name: 'email_exist',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
