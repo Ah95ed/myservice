@@ -10,7 +10,7 @@ import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Providers with ChangeNotifier {
-  String? name, email, phone,password;
+  String? name, email, phone, password;
   List s = [];
   List search = [];
   List save = [];
@@ -113,7 +113,7 @@ class Providers with ChangeNotifier {
     s.clear();
     FirebaseFirestore firestoreInstance = FirebaseFirestore.instance;
     final collectionRef = firestoreInstance.collection(collection);
-    final querySnapshot = await collectionRef.get();
+    final querySnapshot = await collectionRef.where('bool', isEqualTo: true).get();
     s = querySnapshot.docs.map((e) => e).toList();
     notifyListeners();
   }

@@ -79,22 +79,6 @@ class MainScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        // Text(
-                        //   S.of(context).Select_Service,
-                        //   style: TextStyle(
-                        //     color: ColorUsed.primary,
-                        //     fontSize: 18.sp,
-                        //     fontWeight: FontWeight.bold,
-                        //   ),
-                        // ),
-                      ],
-                    ),
-                    // const SizedBox(
-                    //   height: 50.0,
-                    // ),
-                    Row(
                       children: [
                         ButtonSelect(
                           title: S.of(context).blood_type,
@@ -150,7 +134,7 @@ class MainScreen extends StatelessWidget {
                     Row(
                       children: [
                         ButtonSelect(
-                          title: S.of(context).internal_transfer,
+                          title: S().internal_transfer,
                           onPressed: () {
                             context
                                 .read<Providers>()

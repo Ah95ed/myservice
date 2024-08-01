@@ -15,7 +15,7 @@ import 'package:flutter/material.dart';
 Map<String, WidgetBuilder> routs = {
   // ROUTE: (context) => const MyApp(),
   MainScreen.ROUTE: (context) => const MainScreen(),
-  DoctorScreen.ROUTE: (context) => const DoctorScreen(),
+  DoctorScreen.ROUTE: (context) =>  DoctorScreen(),
   BloodScreen.ROUTE: (context) => BloodScreen(),
   ShowDonors.ROUTE: (context) => const ShowDonors(),
   TheCars.ROUTE: (context) => const TheCars(),

@@ -1,4 +1,5 @@
 import 'package:Al_Zab_township_guide/Service/Language/LanguageController.dart';
+import 'package:Al_Zab_township_guide/controller/provider/DoctorProvider/DoctorProvider.dart';
 import 'package:Al_Zab_township_guide/controller/provider/LoginProvider/Loginprovider.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/controller/provider/SignupProvider/SignupProvider.dart';
@@ -51,6 +52,10 @@ void main() async {
           create: (_) => LanguageController(),
           lazy: false,
         ),
+         ChangeNotifierProvider(
+          create: (_) => DoctorProvider(),
+          lazy: false,
+        ),
       ],
       child: MyApp(),
       // child: DevicePreview(
@@ -80,7 +85,7 @@ class MyApp extends StatelessWidget {
 
               debugShowCheckedModeBanner: false,
               // title: S().title,
-              initialRoute: '/',
+              // initialRoute: '/',
               routes: routs,
               locale: value.locale,
               theme: ThemeData(

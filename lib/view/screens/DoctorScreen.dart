@@ -1,3 +1,4 @@
+import 'package:Al_Zab_township_guide/controller/provider/DoctorProvider/DoctorProvider.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/controller/Constant/ServiceCollectios.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
@@ -10,13 +11,11 @@ import '../widget/constant/Constant.dart';
 import '../widget/constant/app_theme.dart';
 
 class DoctorScreen extends StatelessWidget {
-  static const ROUTE = "SecondScreen";
-
-  const DoctorScreen({super.key});
+  static const ROUTE = "DoctorScreen";
 
   @override
   Widget build(BuildContext context) {
-    context.read<Providers>().getData(ServiceCollectios.Doctor.name);
+    final d = context.watch<DoctorProvider>().getDataAll();
     context.read<Providers>().title = Text(
       S.of(context).Doctor,
       style: const TextStyle(
@@ -24,7 +23,7 @@ class DoctorScreen extends StatelessWidget {
       ),
     );
     context.read<Providers>().actionsicon = const Icon(Icons.search);
-    return Consumer<Providers>(
+    return Consumer<DoctorProvider>(
       builder: (context, value, child) {
         return Scaffold(
           appBar: AppBar(
@@ -43,19 +42,19 @@ class DoctorScreen extends StatelessWidget {
             actions: [
               IconButton(
                 onPressed: () {
-                  value.changewidget(
-                    S.of(context).doctor, const TextStyle(
-        color: AppTheme.notWhite,
-      ),
-                  );
+                  //             value.changewidget(
+                  //               S.of(context).doctor, const TextStyle(
+                  //   color: AppTheme.notWhite,
+                  // ),
+                  //             );
                 },
                 icon: Icon(
-                  value.actionsicon.icon,
+                  Icons.abc,
                   color: AppTheme.notWhite,
                 ),
               )
             ],
-            title: value.title,
+            title: Text(S.of(context).Doctor),
             centerTitle: true,
             flexibleSpace: Container(
               decoration: const BoxDecoration(
@@ -72,7 +71,7 @@ class DoctorScreen extends StatelessWidget {
             ),
             systemOverlayStyle: SystemUiOverlayStyle.light,
           ),
-          body: value.s.isEmpty
+          body: value.doctors!.isEmpty
               ? Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -87,14 +86,14 @@ class DoctorScreen extends StatelessWidget {
                   ),
                 )
               : ListView.builder(
-                  itemCount: value.s.length,
+                  itemCount: value.doctors!.length,
                   itemBuilder: (BuildContext context, int index) {
                     return CardViewList(
-                      name: value.s[index]['name'],
-                      presence: value.s[index]['presence'],
-                      specialization: value.s[index]['specialization'],
-                      number: value.s[index]['number'],
-                      title: value.s[index]['title'],
+                      name: value.doctors![index].name,
+                      presence: value.doctors![index].presence,
+                      specialization: value.doctors![index].specialization,
+                      number: value.doctors![index].name,
+                      title: value.doctors![index].title,
                     );
                   },
                 ),
