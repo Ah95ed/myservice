@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
 import 'package:Al_Zab_township_guide/controller/Constant/Constant.dart';
 import 'package:Al_Zab_township_guide/main.dart';
 import 'package:Al_Zab_township_guide/view/screens/OTPScreen.dart';
@@ -60,7 +61,7 @@ class Providers with ChangeNotifier {
   }
 
   Future<bool?> checkData() async {
-    bool isRegister = sharedPreferences!.getBool('isRegister') ?? false;
+    bool isRegister = shared!.getBool('isRegister') ?? false;
     notifyListeners();
     return isRegister;
   }

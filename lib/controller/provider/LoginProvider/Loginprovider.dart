@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
 import 'package:Al_Zab_township_guide/Models/SharedModel/SharedModel.dart';
 import 'package:Al_Zab_township_guide/main.dart';
 import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
@@ -39,7 +40,7 @@ class LoginProvider with ChangeNotifier {
     String? name,
     String? phone,
   }) async {
-    bool t = await sharedPreferences!.setBool('isRegister', true);
+    bool t = await shared!.setBool('isRegister', true);
 
     if (t) {
       // _name = name;

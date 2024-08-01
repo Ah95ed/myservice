@@ -1,4 +1,4 @@
-import 'package:Al_Zab_township_guide/Service/Language/Language.dart';
+import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
 import 'package:flutter/material.dart';
 
 class LanguageController with ChangeNotifier {

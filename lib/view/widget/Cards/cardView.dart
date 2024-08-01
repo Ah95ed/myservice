@@ -26,7 +26,7 @@ class CardViewList extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-            flex: 1,
+            flex: 3,
             child: Column(
               children: [
                 MultiText(name!, S.of(context).name),
@@ -37,7 +37,7 @@ class CardViewList extends StatelessWidget {
             ),
           ),
           Expanded(
-            flex: 0,
+           
             child: IconButton(
               icon: Icon(
                 Icons.call,

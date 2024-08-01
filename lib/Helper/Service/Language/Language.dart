@@ -1,4 +1,4 @@
-import 'package:Al_Zab_township_guide/Service/Language/keyabstract.dart';
+import 'package:Al_Zab_township_guide/Helper/Service/Language/keyabstract.dart';
 
 class Language implements KeyAbstract {
   @override

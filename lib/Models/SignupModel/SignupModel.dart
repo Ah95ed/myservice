@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
 import 'package:Al_Zab_township_guide/Models/SharedModel/SharedModel.dart';
 import 'package:Al_Zab_township_guide/main.dart';
 import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
@@ -126,7 +127,7 @@ class SignupModel {
       codeSent: (String verificationId, int? resendToken) {
         // setState(() {
         _verificationId = verificationId;
-        sharedPreferences!.setString( 'verificationId', _verificationId);
+        shared!.setString( 'verificationId', _verificationId);
         log('message verificationId -> $_verificationId');
         sharesModel!.managerScreenSplash(OtpScreen.Route, _ctx, false);
         //   _isLoading = false;

@@ -59,7 +59,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "title": MessageLookupByLibrary.simpleMessage("دليل مدينة الزاب"),
         "title_service": MessageLookupByLibrary.simpleMessage("العنوان :"),
         "type": MessageLookupByLibrary.simpleMessage("النوع :"),
-        "wait_service": MessageLookupByLibrary.simpleMessage("خدمة الانتظار"),
+        "wait_service": MessageLookupByLibrary.simpleMessage("أنتظر من فضلك "),
         "whocandonate":
             MessageLookupByLibrary.simpleMessage("من يمكنه التبرع بالدم ؟")
       };

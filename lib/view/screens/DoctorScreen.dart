@@ -1,7 +1,8 @@
+import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
 import 'package:Al_Zab_township_guide/controller/provider/DoctorProvider/DoctorProvider.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
-import 'package:Al_Zab_township_guide/controller/Constant/ServiceCollectios.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
+import 'package:Al_Zab_township_guide/main.dart';
 import 'package:Al_Zab_township_guide/view/widget/Cards/cardView.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -13,9 +14,12 @@ import '../widget/constant/app_theme.dart';
 class DoctorScreen extends StatelessWidget {
   static const ROUTE = "DoctorScreen";
 
+  DoctorScreen({Key? key}) {
+    MyApp.getContext()!.watch<DoctorProvider>().getDataAll();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final d = context.watch<DoctorProvider>().getDataAll();
     context.read<Providers>().title = Text(
       S.of(context).Doctor,
       style: const TextStyle(
