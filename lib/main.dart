@@ -6,6 +6,7 @@ import 'package:Al_Zab_township_guide/controller/provider/LoginProvider/Loginpro
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/controller/provider/SignupProvider/SignupProvider.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
+import 'package:Al_Zab_township_guide/view/Player.dart';
 import 'package:Al_Zab_township_guide/view/routing/routing.dart';
 import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
@@ -42,11 +43,11 @@ void main() async {
           lazy: false,
         ),
       ],
-      // child: MyApp(),
-      child: DevicePreview(
-        enabled: !kReleaseMode,
-        builder: (context) => const MyApp(),
-      ),
+      child: MyApp(),
+      // child: DevicePreview(
+      //   enabled: !kReleaseMode,
+      //   builder: (context) => const MyApp(),
+      // ),
     ),
   );
 }
@@ -81,7 +82,7 @@ class MyApp extends StatelessWidget {
             ),
             useMaterial3: true,
           ),
-          home: MainScreen(),
+          home: VideoApp(),
         );
       },
     );

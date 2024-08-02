@@ -20,53 +20,53 @@ class MainScreen extends StatelessWidget {
       extendBody: true,
       backgroundColor: AppTheme.nearlyWhite,
       resizeToAvoidBottomInset: false,
-      bottomNavigationBar: Padding(
-        padding: EdgeInsets.symmetric(
-          vertical: getHight(1.5),
-          horizontal: getWidth(0.5),
+      bottomNavigationBar: Container(
+        margin: EdgeInsets.symmetric(
+          horizontal: getWidth(2),
+          vertical: getheight(2.5),
         ),
-        child: GNav(
-            selectedIndex: read.index,
-            onTabChange: (value) {
-              read.changeSelect(value);
+        decoration: BoxDecoration(boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.4),
+              blurRadius: 24,
+              offset: const Offset(5, 18))
+        ]),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(15),
+          child: BottomNavigationBar(
+            // backgroundColor: Colors.transparent,
+            selectedItemColor: ColorUsed.second,
+            unselectedItemColor: Colors.black,
+            currentIndex: read.index,
+            onTap: (index) {
+              read.changeSelect(index);
             },
-            rippleColor: ColorUsed.primary,
-            backgroundColor: Colors.transparent.withOpacity(0.2),
-            textStyle: TextStyle(color: Colors.white),
-            tabBorderRadius: 8,
-            curve: Curves.easeOutExpo,
-            duration: Duration(milliseconds: 500),
-            gap: 0,
-            color: ColorUsed.DarkGreen,
-            activeColor: Colors.white,
-            iconSize: 24,
-            tabBackgroundColor: ColorUsed.second,
-            padding: EdgeInsets.symmetric(
-              horizontal: getWidth(4),
-              vertical: getHight(2.5),
-            ),
-            tabs: [
-              GButton(
-                icon: Icons.medical_information,
-                text: S.of(context).doctor,
+            items: [
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.medical_information,
+                ),
+                label: S.current.doctor,
               ),
-              GButton(
-                icon: Icons.work_history,
-                text: S.of(context).professions,
+              BottomNavigationBarItem(
+                icon: Icon(Icons.work_history),
+                label: S.of(context).professions,
               ),
-              GButton(
-                icon: Icons.bloodtype,
-                text: S.of(context).blood_type,
+              BottomNavigationBarItem(
+                icon: Icon(Icons.bloodtype),
+                label: S.current.blood_type,
               ),
-              GButton(
-                icon: Icons.local_taxi,
-                text: S.of(context).Cars,
+              BottomNavigationBarItem(
+                icon: Icon(Icons.local_taxi),
+                label: S.current.Cars,
               ),
-              GButton(
-                icon: Icons.motorcycle_sharp,
-                text: S.of(context).Doctor,
+              BottomNavigationBarItem(
+                icon: Icon(Icons.motorcycle_sharp),
+                label: S.current.internal_transfer,
               ),
-            ]),
+            ],
+          ),
+        ),
       ),
       body: context.watch<MainController>().bodys[read.index],
     );

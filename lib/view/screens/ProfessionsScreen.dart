@@ -1,3 +1,4 @@
+import 'package:Al_Zab_township_guide/Helper/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/controller/Constant/ServiceCollectios.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
@@ -28,16 +29,7 @@ class ProfessionsScreen extends StatelessWidget {
           appBar: AppBar(
             backgroundColor: Colors.transparent,
             elevation: 5.0,
-            toolbarHeight: 10.h,
-            leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: const Icon(
-                Icons.arrow_back,
-                color: AppTheme.notWhite,
-              ),
-            ),
+            toolbarHeight: getheight(8),
             actions: [
               IconButton(
                 onPressed: () {

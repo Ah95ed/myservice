@@ -1,3 +1,4 @@
+import 'package:Al_Zab_township_guide/Helper/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/controller/Constant/ServiceCollectios.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
@@ -9,22 +10,9 @@ import 'package:sizer/sizer.dart';
 import '../widget/constant/Constant.dart';
 import '../widget/constant/app_theme.dart';
 
-class SatotaScreen extends StatefulWidget {
+class SatotaScreen extends StatelessWidget {
   static const ROUTE = '/SatotaScreen';
   const SatotaScreen({super.key});
-
-  @override
-  State<SatotaScreen> createState() => _SatotaScreenState();
-}
-
-class _SatotaScreenState extends State<SatotaScreen> {
-  late BuildContext c;
-
-  @override
-  void dispose() async {
-    // TODO: implement dispose
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,23 +22,15 @@ class _SatotaScreenState extends State<SatotaScreen> {
       style: const TextStyle(color: AppTheme.notWhite),
     );
     context.read<Providers>().actionsicon = const Icon(Icons.search);
-    c = context;
+  
     return Consumer<Providers>(
       builder: (context, value, child) {
         return Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.transparent,
             elevation: 5.0,
-            toolbarHeight: 10.h,
-            leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: const Icon(
-                Icons.arrow_back,
-                color: AppTheme.notWhite,
-              ),
-            ),
+            toolbarHeight: getheight(8),
+        
             actions: [
               IconButton(
                 onPressed: () {
@@ -91,7 +71,7 @@ class _SatotaScreenState extends State<SatotaScreen> {
                     children: [
                       const CircularProgressIndicator(),
                       SizedBox(
-                        height: 2.h,
+                        height: getheight(2),
                       ),
                       Text(S.of(context).wait_service),
                     ],

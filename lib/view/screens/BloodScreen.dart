@@ -1,3 +1,4 @@
+import 'package:Al_Zab_township_guide/Helper/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/controller/Constant/Constant.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
@@ -16,6 +17,7 @@ class BloodScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final read = context.read<Providers>();
     return Scaffold(
       extendBodyBehindAppBar: true,
       extendBody: true,
@@ -24,17 +26,7 @@ class BloodScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 5.0,
-        toolbarHeight: 10.h,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: const Icon(
-            Icons.arrow_back,
-            color: AppTheme.nearlyWhite,
-            size: 24,
-          ),
-        ),
+        toolbarHeight: getheight(8),
         title: Text(
           S.of(context).blood_type,
           style: TextStyle(
@@ -70,31 +62,36 @@ class BloodScreen extends StatelessWidget {
           ),
         ),
         transformAlignment: Alignment.center,
-        margin: const EdgeInsets.only(
-            top: 80.0, bottom: 120.0, left: 16.0, right: 16.0),
-        padding: const EdgeInsets.all(8.0),
+        margin: EdgeInsets.only(
+          top: getheight(22.0),
+          bottom: getheight(22.0),
+          left: getWidth(2.0),
+          right: getWidth(2.0),
+        ),
+        padding: EdgeInsets.symmetric(
+          horizontal: getWidth(2),
+          vertical: getheight(0.1),
+        ),
         alignment: Alignment.center,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Row(
               children: [
                 ButtonSelect(
                   title: Constant.A_Plus,
                   onPressed: () {
-                    context.read<Providers>().managerScreen(
-                        ShowDonors.ROUTE, context,
+                    read.managerScreen(ShowDonors.ROUTE, context,
                         object: DataSend(Constant.A_Plus));
                   },
                 ),
-                const SizedBox(
-                  width: 8.0,
+                 SizedBox(
+                  width: getWidth(4),
                 ),
                 ButtonSelect(
                   title: Constant.A_Minus,
                   onPressed: () {
-                    context.read<Providers>().managerScreen(
-                        ShowDonors.ROUTE, context,
+                    read.managerScreen(ShowDonors.ROUTE, context,
                         object: DataSend(Constant.A_Minus));
                   },
                 ),
@@ -105,19 +102,17 @@ class BloodScreen extends StatelessWidget {
                 ButtonSelect(
                   title: Constant.B_Plus,
                   onPressed: () {
-                    context.read<Providers>().managerScreen(
-                        ShowDonors.ROUTE, context,
+                    read.managerScreen(ShowDonors.ROUTE, context,
                         object: DataSend(Constant.B_Plus));
                   },
                 ),
-                const SizedBox(
-                  width: 8.0,
+                 SizedBox(
+                  width: getWidth(4),
                 ),
                 ButtonSelect(
                   title: Constant.B_Minus,
                   onPressed: () {
-                    context.read<Providers>().managerScreen(
-                        ShowDonors.ROUTE, context,
+                    read.managerScreen(ShowDonors.ROUTE, context,
                         object: DataSend(Constant.B_Minus));
                   },
                 ),
@@ -128,19 +123,17 @@ class BloodScreen extends StatelessWidget {
                 ButtonSelect(
                   title: Constant.O_Plus,
                   onPressed: () {
-                    context.read<Providers>().managerScreen(
-                        ShowDonors.ROUTE, context,
+                    read.managerScreen(ShowDonors.ROUTE, context,
                         object: DataSend(Constant.O_Plus));
                   },
                 ),
-                const SizedBox(
-                  width: 8.0,
+                 SizedBox(
+                  width: getWidth(4),
                 ),
                 ButtonSelect(
                   title: Constant.O_Minus,
                   onPressed: () {
-                    context.read<Providers>().managerScreen(
-                        ShowDonors.ROUTE, context,
+                    read.managerScreen(ShowDonors.ROUTE, context,
                         object: DataSend(Constant.O_Minus));
                   },
                 ),
@@ -151,19 +144,17 @@ class BloodScreen extends StatelessWidget {
                 ButtonSelect(
                   title: Constant.AB_Plus,
                   onPressed: () {
-                    context.read<Providers>().managerScreen(
-                        ShowDonors.ROUTE, context,
+                    read.managerScreen(ShowDonors.ROUTE, context,
                         object: DataSend(Constant.AB_Plus));
                   },
                 ),
-                const SizedBox(
-                  width: 8.0,
+                 SizedBox(
+                  width: getWidth(4),
                 ),
                 ButtonSelect(
                   title: Constant.AB_Minus,
                   onPressed: () {
-                    context.read<Providers>().managerScreen(
-                        ShowDonors.ROUTE, context,
+                    read.managerScreen(ShowDonors.ROUTE, context,
                         object: DataSend(Constant.AB_Minus));
                   },
                 ),

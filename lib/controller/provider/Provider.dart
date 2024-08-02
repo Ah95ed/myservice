@@ -114,7 +114,7 @@ class Providers with ChangeNotifier {
     s.clear();
     FirebaseFirestore firestoreInstance = FirebaseFirestore.instance;
     final collectionRef = firestoreInstance.collection(collection);
-    final querySnapshot = await collectionRef.where('bool', isEqualTo: true).get();
+    final querySnapshot = await collectionRef.get();
     s = querySnapshot.docs.map((e) => e).toList();
     notifyListeners();
   }

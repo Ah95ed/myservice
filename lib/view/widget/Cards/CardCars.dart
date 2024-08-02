@@ -1,8 +1,8 @@
+import 'package:Al_Zab_township_guide/Helper/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sizer/sizer.dart';
 import '../staticWidget/Multi_text.dart';
 import '../constant/Constant.dart';
 
@@ -21,14 +21,14 @@ class CardCars extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // var s = S;
+   
     return Card(
       elevation: 8,
-      shadowColor: Colors.teal,
+     
       child: Row(
         children: [
           Expanded(
-            flex: 1,
+            flex: 4,
             child: Column(
               children: [
                 MultiText(name, S.of(context).name),
@@ -39,12 +39,12 @@ class CardCars extends StatelessWidget {
             ),
           ),
           Expanded(
-            flex: 0,
+           
             child: IconButton(
               icon: Icon(
                 Icons.call,
-                size: 4.h,
-                color: ColorUsed.primary,
+                size: getWidth(10),
+                color: ColorUsed.second,
               ),
               onPressed: () async {
                 context.read<Providers>().callNumber(number);

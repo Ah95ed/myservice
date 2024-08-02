@@ -1,4 +1,5 @@
 import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
+import 'package:Al_Zab_township_guide/Helper/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/controller/provider/DoctorProvider/DoctorProvider.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
@@ -14,12 +15,11 @@ import '../widget/constant/app_theme.dart';
 class DoctorScreen extends StatelessWidget {
   static const ROUTE = "DoctorScreen";
 
-  DoctorScreen({Key? key}) {
-    // MyApp.getContext()!.watch<DoctorProvider>().getDataAll();
-  }
+  DoctorScreen({Key? key});
 
   @override
   Widget build(BuildContext context) {
+    MyApp.getContext()!.read<DoctorProvider>().getDataAll();
     context.read<Providers>().title = Text(
       S.of(context).Doctor,
       style: const TextStyle(
@@ -34,15 +34,7 @@ class DoctorScreen extends StatelessWidget {
             backgroundColor: Colors.transparent,
             elevation: 5.0,
             toolbarHeight: 10.h,
-            leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: const Icon(
-                Icons.arrow_back,
-                color: AppTheme.notWhite,
-              ),
-            ),
+            
             actions: [
               IconButton(
                 onPressed: () {
@@ -58,7 +50,11 @@ class DoctorScreen extends StatelessWidget {
                 ),
               )
             ],
-            title: Text(S.of(context).Doctor),
+            title: Text(S.of(context).Doctor,style: TextStyle(
+              fontSize: setFontSize(18),
+              fontWeight: FontWeight.bold,
+              color: AppTheme.notWhite,
+            ),),
             centerTitle: true,
             flexibleSpace: Container(
               decoration: const BoxDecoration(

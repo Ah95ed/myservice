@@ -1,3 +1,4 @@
+import 'package:Al_Zab_township_guide/Helper/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:flutter/material.dart';
@@ -21,8 +22,7 @@ class CardViewList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 8.sp,
-      shadowColor: Colors.tealAccent,
+      elevation:setFontSize(8),
       child: Row(
         children: [
           Expanded(
@@ -37,7 +37,6 @@ class CardViewList extends StatelessWidget {
             ),
           ),
           Expanded(
-           
             child: IconButton(
               icon: Icon(
                 Icons.call,
