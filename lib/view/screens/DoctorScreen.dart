@@ -15,7 +15,7 @@ class DoctorScreen extends StatelessWidget {
   static const ROUTE = "DoctorScreen";
 
   DoctorScreen({Key? key}) {
-    MyApp.getContext()!.watch<DoctorProvider>().getDataAll();
+    // MyApp.getContext()!.watch<DoctorProvider>().getDataAll();
   }
 
   @override
@@ -53,7 +53,7 @@ class DoctorScreen extends StatelessWidget {
                   //             );
                 },
                 icon: Icon(
-                  Icons.abc,
+                  Icons.search,
                   color: AppTheme.notWhite,
                 ),
               )

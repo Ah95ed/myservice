@@ -21,7 +21,7 @@ class CardCars extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var s = S;
+    // var s = S;
     return Card(
       elevation: 8,
       shadowColor: Colors.teal,

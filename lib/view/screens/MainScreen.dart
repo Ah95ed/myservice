@@ -1,156 +1,74 @@
-import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
+import 'package:Al_Zab_township_guide/Helper/Size/SizedApp.dart';
+import 'package:Al_Zab_township_guide/controller/provider/BloodController/MainController.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
-import 'package:Al_Zab_township_guide/view/screens/BloodScreen.dart';
-import 'package:Al_Zab_township_guide/view/screens/DoctorScreen.dart';
-import 'package:Al_Zab_township_guide/view/screens/ProfessionsScreen.dart';
-import 'package:Al_Zab_township_guide/view/screens/SatotaScreen.dart';
+import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/app_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:provider/provider.dart';
-import 'package:sizer/sizer.dart';
-import 'package:Al_Zab_township_guide/view/screens/TheCars.dart';
-import 'package:Al_Zab_township_guide/view/widget/ButtonSelect.dart';
-import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
 
-// ignore: must_be_immutable
 class MainScreen extends StatelessWidget {
   // ignore: constant_identifier_names
   static const ROUTE = "MainScreen";
   const MainScreen({super.key});
-  
+
   @override
   Widget build(BuildContext context) {
+    final read = context.read<MainController>();
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 2.0,
-        toolbarHeight: 10.h ,
-        title: Text(
-          S.of(context).Select_Service,
-          style: TextStyle(
-            color: AppTheme.white,
-            fontSize: 20.sp,
-            fontWeight: FontWeight.bold,
-          ),
+      extendBodyBehindAppBar: true,
+      extendBody: true,
+      backgroundColor: AppTheme.nearlyWhite,
+      resizeToAvoidBottomInset: false,
+      bottomNavigationBar: Padding(
+        padding: EdgeInsets.symmetric(
+          vertical: getHight(1.5),
+          horizontal: getWidth(0.5),
         ),
-        centerTitle: true,
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(20),
-              bottomRight: Radius.circular(20),
+        child: GNav(
+            selectedIndex: read.index,
+            onTabChange: (value) {
+              read.changeSelect(value);
+            },
+            rippleColor: ColorUsed.primary,
+            backgroundColor: Colors.transparent.withOpacity(0.2),
+            textStyle: TextStyle(color: Colors.white),
+            tabBorderRadius: 8,
+            curve: Curves.easeOutExpo,
+            duration: Duration(milliseconds: 500),
+            gap: 0,
+            color: ColorUsed.DarkGreen,
+            activeColor: Colors.white,
+            iconSize: 24,
+            tabBackgroundColor: ColorUsed.second,
+            padding: EdgeInsets.symmetric(
+              horizontal: getWidth(4),
+              vertical: getHight(2.5),
             ),
-            gradient: LinearGradient(
-              colors: [ColorUsed.primary, ColorUsed.second],
-              begin: Alignment.bottomCenter,
-              end: Alignment.topCenter,
-            ),
-          ),
-        ),
-        systemOverlayStyle: SystemUiOverlayStyle.light,
-      ),
-      //! body
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Column(
-          
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                border: Border.all(
-                  width: 3.0,
-                  color: ColorUsed.primary,
-                ),
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(20),
-                ),
+            tabs: [
+              GButton(
+                icon: Icons.medical_information,
+                text: S.of(context).doctor,
               ),
-              transformAlignment: Alignment.center,
-              margin: const EdgeInsets.only(
-                top: 80.0,
-                bottom: 120.0,
-                left: 16.0,
-                right: 16.0,
+              GButton(
+                icon: Icons.work_history,
+                text: S.of(context).professions,
               ),
-              padding: const EdgeInsets.all(8.0),
-              alignment: Alignment.center,
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Row(
-                      children: [
-                        ButtonSelect(
-                          title: S.of(context).blood_type,
-                          onPressed: () {
-                            context
-                                .read<Providers>()
-                                .managerScreen(BloodScreen.ROUTE, context);
-                          },
-                        ),
-                        const SizedBox(
-                          width: 5.0,
-                        ),
-                        ButtonSelect(
-                          title: S.of(context).doctor,
-                          onPressed: () {
-                            context.read<Providers>().managerScreen(
-                                  DoctorScreen.ROUTE,
-                                  context,
-                                );
-                          },
-                        ),
-                      ],
-                    ), // runs after the above w/new duration
-
-                    const SizedBox(
-                      height: 48.0,
-                    ),
-                    Row(
-                      children: [
-                        ButtonSelect(
-                          title: S.of(context).line,
-                          onPressed: () {
-                            context
-                                .read<Providers>()
-                                .managerScreen(TheCars.ROUTE, context);
-                          },
-                        ),
-                        const SizedBox(
-                          width: 5.0,
-                        ),
-                        ButtonSelect(
-                          title: S.of(context).professions,
-                          onPressed: () {
-                            context.read<Providers>().managerScreen(
-                                ProfessionsScreen.ROUTE, context);
-                          },
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 48.0,
-                    ),
-                    Row(
-                      children: [
-                        ButtonSelect(
-                          title: S().internal_transfer,
-                          onPressed: () {
-                            context
-                                .read<Providers>()
-                                .managerScreen(SatotaScreen.ROUTE, context);
-                          },
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              
-            ),
-         
-          ],
-        ),
+              GButton(
+                icon: Icons.bloodtype,
+                text: S.of(context).blood_type,
+              ),
+              GButton(
+                icon: Icons.local_taxi,
+                text: S.of(context).Cars,
+              ),
+              GButton(
+                icon: Icons.motorcycle_sharp,
+                text: S.of(context).Doctor,
+              ),
+            ]),
       ),
+      body: context.watch<MainController>().bodys[read.index],
     );
   }
 }

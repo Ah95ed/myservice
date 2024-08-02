@@ -17,11 +17,14 @@ class BloodScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      extendBody: true,
+      backgroundColor: AppTheme.nearlyWhite,
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 5.0,
         toolbarHeight: 10.h,
-        actions: [],
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
