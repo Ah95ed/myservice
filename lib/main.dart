@@ -82,13 +82,14 @@ class MyApp extends StatelessWidget {
             ),
             useMaterial3: true,
           ),
-          home: VideoApp(),
+          home: MainScreen(),
         );
       },
     );
   }
 
   static BuildContext? getContext() {
+  
     return navigatorKey.currentContext;
   }
 }

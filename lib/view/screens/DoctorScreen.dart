@@ -5,6 +5,7 @@ import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/main.dart';
 import 'package:Al_Zab_township_guide/view/widget/Cards/cardView.dart';
+import 'package:Al_Zab_township_guide/view/widget/Drawer/CustomDrawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -30,11 +31,11 @@ class DoctorScreen extends StatelessWidget {
     return Consumer<DoctorProvider>(
       builder: (context, value, child) {
         return Scaffold(
+          drawer: Customdrawer(),
           appBar: AppBar(
             backgroundColor: Colors.transparent,
             elevation: 5.0,
-            toolbarHeight: 10.h,
-            
+            toolbarHeight: getheight(8),
             actions: [
               IconButton(
                 onPressed: () {
@@ -48,13 +49,16 @@ class DoctorScreen extends StatelessWidget {
                   Icons.search,
                   color: AppTheme.notWhite,
                 ),
-              )
+              ),
             ],
-            title: Text(S.of(context).Doctor,style: TextStyle(
-              fontSize: setFontSize(18),
-              fontWeight: FontWeight.bold,
-              color: AppTheme.notWhite,
-            ),),
+            title: Text(
+              S.of(context).Doctor,
+              style: TextStyle(
+                fontSize: setFontSize(18),
+                fontWeight: FontWeight.bold,
+                color: AppTheme.notWhite,
+              ),
+            ),
             centerTitle: true,
             flexibleSpace: Container(
               decoration: const BoxDecoration(

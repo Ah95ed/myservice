@@ -1,10 +1,10 @@
 import 'package:Al_Zab_township_guide/Helper/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/controller/provider/BloodController/MainController.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
+import 'package:Al_Zab_township_guide/view/widget/Drawer/CustomDrawer.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/app_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:provider/provider.dart';
 
 class MainScreen extends StatelessWidget {
@@ -16,6 +16,7 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final read = context.read<MainController>();
     return Scaffold(
+      drawer: Customdrawer(),
       extendBodyBehindAppBar: true,
       extendBody: true,
       backgroundColor: AppTheme.nearlyWhite,

@@ -10,13 +10,21 @@
        <data android:scheme = "tel"/>
    </intent>
 
- </queries>
-    <application
-        android:label="AL Zab Township Guide"
+   <!-- android:label="AL Zab Township Guide"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:usesCleartextTraffic="true"
+        android:enableOnBackInvokedCallback="true" -->
+
+ </queries>
+    <application
+        android:label="@string/app_name"
+        android:name="${applicationName}"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:usesCleartextTraffic="true"
         android:enableOnBackInvokedCallback="true"
+        
         >
         
         <activity

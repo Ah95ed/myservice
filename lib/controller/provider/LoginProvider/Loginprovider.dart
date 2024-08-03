@@ -1,8 +1,6 @@
 import 'dart:developer';
 import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
 import 'package:Al_Zab_township_guide/Models/SharedModel/SharedModel.dart';
-import 'package:Al_Zab_township_guide/main.dart';
-import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
