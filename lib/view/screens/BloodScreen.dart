@@ -4,6 +4,7 @@ import 'package:Al_Zab_township_guide/controller/Constant/Constant.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/view/screens/ShowDonors.dart';
 import 'package:Al_Zab_township_guide/view/widget/ButtonSelect.dart';
+import 'package:Al_Zab_township_guide/view/widget/Drawer/CustomDrawer.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/app_theme.dart';
 import 'package:flutter/material.dart';
@@ -23,34 +24,35 @@ class BloodScreen extends StatelessWidget {
       extendBody: true,
       backgroundColor: AppTheme.nearlyWhite,
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 5.0,
-        toolbarHeight: getheight(8),
-        title: Text(
-          S.of(context).blood_type,
-          style: TextStyle(
-            color: AppTheme.white,
-            fontSize: 20.sp,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        centerTitle: true,
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(20),
-              bottomRight: Radius.circular(20),
-            ),
-            gradient: LinearGradient(
-              colors: [ColorUsed.primary, ColorUsed.second],
-              begin: Alignment.bottomCenter,
-              end: Alignment.topCenter,
-            ),
-          ),
-        ),
-        systemOverlayStyle: SystemUiOverlayStyle.light,
-      ),
+      // drawer: Customdrawer(),
+      // appBar: AppBar(
+      //   backgroundColor: Colors.transparent,
+      //   elevation: 5.0,
+      //   toolbarHeight: getheight(8),
+      //   title: Text(
+      //     S.of(context).blood_type,
+      //     style: TextStyle(
+      //       color: AppTheme.white,
+      //       fontSize: 20.sp,
+      //       fontWeight: FontWeight.bold,
+      //     ),
+      //   ),
+      //   centerTitle: true,
+      //   flexibleSpace: Container(
+      //     decoration: const BoxDecoration(
+      //       borderRadius: BorderRadius.only(
+      //         bottomLeft: Radius.circular(20),
+      //         bottomRight: Radius.circular(20),
+      //       ),
+      //       gradient: LinearGradient(
+      //         colors: [ColorUsed.primary, ColorUsed.second],
+      //         begin: Alignment.bottomCenter,
+      //         end: Alignment.topCenter,
+      //       ),
+      //     ),
+      //   ),
+      //   systemOverlayStyle: SystemUiOverlayStyle.light,
+      // ),
       body: Container(
         decoration: BoxDecoration(
           border: Border.all(

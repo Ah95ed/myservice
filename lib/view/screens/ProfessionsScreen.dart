@@ -26,42 +26,6 @@ class ProfessionsScreen extends StatelessWidget {
     return Consumer<Providers>(
       builder: (context, value, child) {
         return Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.transparent,
-            elevation: 5.0,
-            toolbarHeight: getheight(8),
-            actions: [
-              IconButton(
-                onPressed: () {
-                  value.changewidget(
-                      S.of(context).professions,
-                      const TextStyle(
-                        color: AppTheme.notWhite,
-                      ));
-                },
-                icon: Icon(
-                  value.actionsicon.icon,
-                  color: AppTheme.notWhite,
-                ),
-              )
-            ],
-            title: value.title,
-            centerTitle: true,
-            flexibleSpace: Container(
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(20),
-                  bottomRight: Radius.circular(20),
-                ),
-                gradient: LinearGradient(
-                  colors: [ColorUsed.primary, ColorUsed.second],
-                  begin: Alignment.bottomCenter,
-                  end: Alignment.topCenter,
-                ),
-              ),
-            ),
-            systemOverlayStyle: SystemUiOverlayStyle.light,
-          ),
           body: value.s.isEmpty
               ? Center(
                   child: Column(

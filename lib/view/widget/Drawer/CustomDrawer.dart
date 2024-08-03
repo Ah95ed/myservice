@@ -4,12 +4,14 @@ import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
 import 'package:flutter/material.dart';
 
 class Customdrawer extends StatelessWidget {
-  const Customdrawer({super.key});
+   Customdrawer({super.key});
+  
 
   @override
   Widget build(BuildContext context) {
+
     return Drawer(
-      key: key,
+   
       // backgroundColor: Colors.white,
       child: ListView(padding: EdgeInsets.zero, children: [
         DrawerHeader(

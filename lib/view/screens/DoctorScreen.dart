@@ -32,50 +32,7 @@ class DoctorScreen extends StatelessWidget {
       builder: (context, value, child) {
         return Scaffold(
           drawer: Customdrawer(),
-          appBar: AppBar(
-            backgroundColor: Colors.transparent,
-            elevation: 5.0,
-            toolbarHeight: getheight(8),
-            actions: [
-              IconButton(
-                onPressed: () {
-                  //             value.changewidget(
-                  //               S.of(context).doctor, const TextStyle(
-                  //   color: AppTheme.notWhite,
-                  // ),
-                  //             );
-                },
-                icon: Icon(
-                  Icons.search,
-                  color: AppTheme.notWhite,
-                ),
-              ),
-            ],
-            title: Text(
-              S.of(context).Doctor,
-              style: TextStyle(
-                fontSize: setFontSize(18),
-                fontWeight: FontWeight.bold,
-                color: AppTheme.notWhite,
-              ),
-            ),
-            centerTitle: true,
-            flexibleSpace: Container(
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(20),
-                  bottomRight: Radius.circular(20),
-                ),
-                gradient: LinearGradient(
-                  colors: [ColorUsed.primary, ColorUsed.second],
-                  begin: Alignment.bottomCenter,
-                  end: Alignment.topCenter,
-                ),
-              ),
-            ),
-            systemOverlayStyle: SystemUiOverlayStyle.light,
-          ),
-          body: value.doctors!.isEmpty
+        body: value.doctors!.isEmpty
               ? Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
