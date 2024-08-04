@@ -28,12 +28,29 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Select Service"),
         "already_member":
             MessageLookupByLibrary.simpleMessage("Already Member ? "),
+        "blood": MessageLookupByLibrary.simpleMessage("Blood"),
+        "blood_donation":
+            MessageLookupByLibrary.simpleMessage("Blood Donation"),
+        "blood_request": MessageLookupByLibrary.simpleMessage("Blood Request"),
+        "blood_transfer":
+            MessageLookupByLibrary.simpleMessage("Blood Transfer"),
         "blood_type": MessageLookupByLibrary.simpleMessage("Blood Type"),
         "blooddonors": MessageLookupByLibrary.simpleMessage("Blood Donors :"),
+        "change_language":
+            MessageLookupByLibrary.simpleMessage("Change Language"),
+        "change_password":
+            MessageLookupByLibrary.simpleMessage("Change Password"),
+        "delete_account":
+            MessageLookupByLibrary.simpleMessage("Delete Account"),
         "doctor": MessageLookupByLibrary.simpleMessage("Doctors"),
         "don_t_have_account":
             MessageLookupByLibrary.simpleMessage("Don\'t have Account ?"),
+        "donate": MessageLookupByLibrary.simpleMessage("Donate"),
+        "donate_blood": MessageLookupByLibrary.simpleMessage("Donate Blood"),
+        "donate_organ": MessageLookupByLibrary.simpleMessage("Donate Organ"),
+        "donate_plasma": MessageLookupByLibrary.simpleMessage("Donate Plasma"),
         "donors": MessageLookupByLibrary.simpleMessage("Donors"),
+        "edit_Data": MessageLookupByLibrary.simpleMessage("Edit Data"),
         "email_exist": MessageLookupByLibrary.simpleMessage("Email is Exist  "),
         "enter_email": MessageLookupByLibrary.simpleMessage("Enter Email"),
         "enter_password":
@@ -45,12 +62,28 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Internal Transfer"),
         "line": MessageLookupByLibrary.simpleMessage("Lines"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
+        "logout": MessageLookupByLibrary.simpleMessage("Logout"),
+        "more_options": MessageLookupByLibrary.simpleMessage("More Options"),
         "name": MessageLookupByLibrary.simpleMessage("Name :"),
         "number_phone": MessageLookupByLibrary.simpleMessage("Number Phone"),
+        "organ": MessageLookupByLibrary.simpleMessage("Organ"),
+        "organ_donation":
+            MessageLookupByLibrary.simpleMessage("Organ Donation"),
+        "organ_request": MessageLookupByLibrary.simpleMessage("Organ Request"),
+        "organ_transfer":
+            MessageLookupByLibrary.simpleMessage("Organ Transfer"),
+        "plasma": MessageLookupByLibrary.simpleMessage("Plasma"),
+        "plasma_donation":
+            MessageLookupByLibrary.simpleMessage("Plasma Donation"),
+        "plasma_request":
+            MessageLookupByLibrary.simpleMessage("Plasma Request"),
+        "plasma_transfer":
+            MessageLookupByLibrary.simpleMessage("Plasma Transfer"),
         "presence": MessageLookupByLibrary.simpleMessage("Presence"),
         "profession": MessageLookupByLibrary.simpleMessage("Profession :"),
         "professions": MessageLookupByLibrary.simpleMessage("Professions"),
         "register_now": MessageLookupByLibrary.simpleMessage("Register Now"),
+        "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "source": MessageLookupByLibrary.simpleMessage("Go to the source"),
         "specialization":
             MessageLookupByLibrary.simpleMessage("Specialization :"),

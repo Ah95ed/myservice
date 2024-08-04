@@ -369,6 +369,236 @@ class S {
       args: [],
     );
   }
+
+  /// `More Options`
+  String get more_options {
+    return Intl.message(
+      'More Options',
+      name: 'more_options',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change Password`
+  String get change_password {
+    return Intl.message(
+      'Change Password',
+      name: 'change_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete Account`
+  String get delete_account {
+    return Intl.message(
+      'Delete Account',
+      name: 'delete_account',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit Data`
+  String get edit_Data {
+    return Intl.message(
+      'Edit Data',
+      name: 'edit_Data',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Settings`
+  String get settings {
+    return Intl.message(
+      'Settings',
+      name: 'settings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change Language`
+  String get change_language {
+    return Intl.message(
+      'Change Language',
+      name: 'change_language',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Logout`
+  String get logout {
+    return Intl.message(
+      'Logout',
+      name: 'logout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Donate`
+  String get donate {
+    return Intl.message(
+      'Donate',
+      name: 'donate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Donate Blood`
+  String get donate_blood {
+    return Intl.message(
+      'Donate Blood',
+      name: 'donate_blood',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Donate Plasma`
+  String get donate_plasma {
+    return Intl.message(
+      'Donate Plasma',
+      name: 'donate_plasma',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Donate Organ`
+  String get donate_organ {
+    return Intl.message(
+      'Donate Organ',
+      name: 'donate_organ',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Blood`
+  String get blood {
+    return Intl.message(
+      'Blood',
+      name: 'blood',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Plasma`
+  String get plasma {
+    return Intl.message(
+      'Plasma',
+      name: 'plasma',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Organ`
+  String get organ {
+    return Intl.message(
+      'Organ',
+      name: 'organ',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Blood Request`
+  String get blood_request {
+    return Intl.message(
+      'Blood Request',
+      name: 'blood_request',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Plasma Request`
+  String get plasma_request {
+    return Intl.message(
+      'Plasma Request',
+      name: 'plasma_request',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Organ Request`
+  String get organ_request {
+    return Intl.message(
+      'Organ Request',
+      name: 'organ_request',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Blood Donation`
+  String get blood_donation {
+    return Intl.message(
+      'Blood Donation',
+      name: 'blood_donation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Plasma Donation`
+  String get plasma_donation {
+    return Intl.message(
+      'Plasma Donation',
+      name: 'plasma_donation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Organ Donation`
+  String get organ_donation {
+    return Intl.message(
+      'Organ Donation',
+      name: 'organ_donation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Blood Transfer`
+  String get blood_transfer {
+    return Intl.message(
+      'Blood Transfer',
+      name: 'blood_transfer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Plasma Transfer`
+  String get plasma_transfer {
+    return Intl.message(
+      'Plasma Transfer',
+      name: 'plasma_transfer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Organ Transfer`
+  String get organ_transfer {
+    return Intl.message(
+      'Organ Transfer',
+      name: 'organ_transfer',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

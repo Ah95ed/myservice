@@ -1,5 +1,3 @@
-import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
-import 'package:Al_Zab_township_guide/Helper/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/controller/provider/DoctorProvider/DoctorProvider.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
@@ -7,10 +5,8 @@ import 'package:Al_Zab_township_guide/main.dart';
 import 'package:Al_Zab_township_guide/view/widget/Cards/cardView.dart';
 import 'package:Al_Zab_township_guide/view/widget/Drawer/CustomDrawer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
-import '../widget/constant/Constant.dart';
 import '../widget/constant/app_theme.dart';
 
 class DoctorScreen extends StatelessWidget {
