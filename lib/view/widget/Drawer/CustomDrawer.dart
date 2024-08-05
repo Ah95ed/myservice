@@ -20,18 +20,18 @@ class Customdrawer extends StatelessWidget {
     return Drawer(
       // backgroundColor: Colors.white,
 
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: [
-          DrawerHeader(
-            margin: EdgeInsets.all(0),
-            padding: EdgeInsets.symmetric(
-                vertical: getheight(2), horizontal: getheight(2)),
-            duration: Duration(milliseconds: 2000),
-            decoration: BoxDecoration(
-              color: ColorUsed.primary,
-            ),
-            child: Text(
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            // DrawerHeader(
+            //   margin: EdgeInsets.all(0),
+            //   padding: EdgeInsets.symmetric(
+            //       vertical: getheight(2), horizontal: getheight(2)),
+            //   duration: Duration(milliseconds: 2000),
+            //   decoration: BoxDecoration(
+            //     color: ColorUsed.primary,
+            //   ),
+            Text(
               S.of(context).more_options,
               style: TextStyle(
                 fontSize: setFontSize(16),
@@ -39,111 +39,111 @@ class Customdrawer extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-          ),
-          ListTile(
-            leading: Icon(Icons.app_registration),
-            title: Text(
-              S.of(context).register_now,
-              style: TextStyle(
-                fontSize: setFontSize(12),
-                fontWeight: FontWeight.w500,
-                color: ColorUsed.DarkGreen,
-              ),
-            ),
-            onTap: () {
-              read.managerScreen(SignupScreen.Route, context);
-            },
-          ),
-          Divider(
-            thickness: getWidth(0.5),
-            color: ColorUsed.DarkGreen,
-          ),
-          ListTile(
-            leading: Icon(Icons.login),
-            title: Text(
-              S.of(context).login,
-              style: TextStyle(
-                fontSize: setFontSize(12),
-                fontWeight: FontWeight.w500,
-                color: ColorUsed.DarkGreen,
-              ),
-            ),
-            onTap: () {
-              read.managerScreen(LoginScreen.Route, context);
-            },
-          ),
-          Divider(
-            thickness: getWidth(0.5),
-            color: ColorUsed.DarkGreen,
-          ),
-          ListTile(
-            leading: Icon(Icons.edit),
-            title: Text(
-              S.of(context).edit_Data,
-              style: TextStyle(
-                fontSize: setFontSize(12),
-                fontWeight: FontWeight.w500,
-                color: ColorUsed.DarkGreen,
-              ),
-            ),
-            onTap: () {
-              // here to open edit Screen
-              // read.managerScreen(, context)
-            },
-          ),
-          Divider(
-            thickness: getWidth(0.5),
-            color: ColorUsed.DarkGreen,
-          ),
-          ListTile(
-            leading: Icon(Icons.settings),
-            title: Text(S.of(context).settings),
-            onTap: () {},
-          ),
-          Divider(
-            thickness: getWidth(0.5),
-            color: ColorUsed.DarkGreen,
-          ),
-          ListTile(
-            leading: Icon(Icons.star),
-            title: Text(
-              S.of(context).whocandonate,
-              style: TextStyle(
-                fontSize: setFontSize(12),
-                fontWeight: FontWeight.w500,
-                color: ColorUsed.DarkGreen,
-              ),
-            ),
-            onTap: () {
-              read.managerScreen(WhoCanDonateScreen.route, context);
-             
-            },
-          ),
-          Divider(
-            thickness: getWidth(0.5),
-            color: ColorUsed.DarkGreen,
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(
-              vertical: getheight(20),
-              horizontal: getWidth(6),
-            ),
-            child: ListTile(
+            SizedBox(height: getheight(10),),
+            ListTile(
+              leading: Icon(Icons.app_registration),
               title: Text(
-                S.of(context).team_policy,
+                S.of(context).register_now,
                 style: TextStyle(
-                  fontSize: setFontSize(10),
-                  fontWeight: FontWeight.w400,
+                  fontSize: setFontSize(12),
+                  fontWeight: FontWeight.w500,
                   color: ColorUsed.DarkGreen,
                 ),
               ),
               onTap: () {
-                //https://github.com/Alqdees/private/blob/main/index.html
-                read.launchInBrowser(Uri.parse(Constant.PrivacyPolicy));
+                read.managerScreen(SignupScreen.Route, context);
               },
             ),
-          ),
-        ],
+            Divider(
+              thickness: getWidth(0.5),
+              color: ColorUsed.DarkGreen,
+            ),
+            ListTile(
+              leading: Icon(Icons.login),
+              title: Text(
+                S.of(context).login,
+                style: TextStyle(
+                  fontSize: setFontSize(12),
+                  fontWeight: FontWeight.w500,
+                  color: ColorUsed.DarkGreen,
+                ),
+              ),
+              onTap: () {
+                read.managerScreen(LoginScreen.Route, context);
+              },
+            ),
+            Divider(
+              thickness: getWidth(0.5),
+              color: ColorUsed.DarkGreen,
+            ),
+            ListTile(
+              leading: Icon(Icons.edit),
+              title: Text(
+                S.of(context).edit_Data,
+                style: TextStyle(
+                  fontSize: setFontSize(12),
+                  fontWeight: FontWeight.w500,
+                  color: ColorUsed.DarkGreen,
+                ),
+              ),
+              onTap: () {
+                // here to open edit Screen
+                // read.managerScreen(, context)
+              },
+            ),
+            Divider(
+              thickness: getWidth(0.5),
+              color: ColorUsed.DarkGreen,
+            ),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text(S.of(context).settings),
+              onTap: () {},
+            ),
+            Divider(
+              thickness: getWidth(0.5),
+              color: ColorUsed.DarkGreen,
+            ),
+            ListTile(
+              leading: Icon(Icons.star),
+              title: Text(
+                S.of(context).whocandonate,
+                style: TextStyle(
+                  fontSize: setFontSize(12),
+                  fontWeight: FontWeight.w500,
+                  color: ColorUsed.DarkGreen,
+                ),
+              ),
+              onTap: () {
+                read.managerScreen(WhoCanDonateScreen.route, context);
+              },
+            ),
+            Divider(
+              thickness: getWidth(0.5),
+              color: ColorUsed.DarkGreen,
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                vertical: getheight(2),
+                horizontal: getWidth(6),
+              ),
+              child: ListTile(
+                title: Text(
+                  S.of(context).team_policy,
+                  style: TextStyle(
+                    fontSize: setFontSize(10),
+                    fontWeight: FontWeight.w400,
+                    color: ColorUsed.DarkGreen,
+                  ),
+                ),
+                onTap: () {
+                  //https://github.com/Alqdees/private/blob/main/index.html
+                  read.launchInBrowser(Uri.parse(Constant.PrivacyPolicy));
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

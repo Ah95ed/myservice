@@ -1,5 +1,5 @@
-
-
+import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
+import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
 import 'package:Al_Zab_township_guide/controller/provider/BloodController/MainController.dart';
 import 'package:Al_Zab_township_guide/controller/provider/DoctorProvider/DoctorProvider.dart';
@@ -43,6 +43,10 @@ void main() async {
           create: (_) => MainController(),
           lazy: false,
         ),
+        ChangeNotifierProvider(
+          create: (_) => LanguageController(),
+          lazy: false,
+        ),
       ],
       child: MyApp(),
 
@@ -61,31 +65,39 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Sizer(
-      builder: (context, orientations, device) {
-        S.load(Locale.fromSubtags(languageCode: 'en'));
-        return MaterialApp(
-          navigatorKey: navigatorKey,
-          localizationsDelegates: [
-            S.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: S.delegate.supportedLocales,
-
-          debugShowCheckedModeBanner: false,
-          title: S.current.title,
-          routes: routs,
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(
-              seedColor: ColorUsed.primary,
-            ),
-            useMaterial3: true,
+    return Consumer<LanguageController>(
+      builder: (context, v, child) {
+        S.load(
+          Locale.fromSubtags(
+            languageCode: shared!.getString('lang') ?? 'en',
           ),
-          // home: MainScreen(),
-          home:shared!.getBool('spalsh') != null ?MyCustomSplashScreen(): MainScreen()  ,
         );
+        // Logger.logger( ' ------>>>  ${shared!.getString('lang') ?? 'en'} rebuild '  );
+        return Sizer(builder: (context, orientations, device) {
+          return MaterialApp(
+            navigatorKey: navigatorKey,
+            localizationsDelegates: [
+              S.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: S.delegate.supportedLocales,
+            debugShowCheckedModeBanner: false,
+            locale: v.language,
+            title: S.current.title,
+            routes: routs,
+            theme: ThemeData(
+              colorScheme: ColorScheme.fromSeed(
+                seedColor: ColorUsed.primary,
+              ),
+              useMaterial3: true,
+            ),
+            home: shared!.getBool('spalsh') == null
+                ? MyCustomSplashScreen()
+                : MainScreen(),
+          );
+        });
       },
     );
   }

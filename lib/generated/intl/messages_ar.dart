@@ -33,6 +33,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "blood_transfer": MessageLookupByLibrary.simpleMessage("نقل الدم"),
         "blood_type": MessageLookupByLibrary.simpleMessage("فصيلة الدم"),
         "blooddonors": MessageLookupByLibrary.simpleMessage("متبرعون بالدم :"),
+        "chanage_lang": MessageLookupByLibrary.simpleMessage("تغيير اللغة"),
         "change_language": MessageLookupByLibrary.simpleMessage("تغيير اللغة"),
         "change_password":
             MessageLookupByLibrary.simpleMessage("تغيير الباسورد"),
@@ -81,7 +82,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "team_policy": MessageLookupByLibrary.simpleMessage(
             "شروط الخدمة | سياسة الخصوصية"),
         "time": MessageLookupByLibrary.simpleMessage("الوقت :"),
-        "title": MessageLookupByLibrary.simpleMessage("دليل مدينة الزاب"),
+        "title": MessageLookupByLibrary.simpleMessage("دليل ناحية الزاب"),
         "title_service": MessageLookupByLibrary.simpleMessage("العنوان :"),
         "type": MessageLookupByLibrary.simpleMessage("النوع :"),
         "wait_service": MessageLookupByLibrary.simpleMessage("أنتظر من فضلك "),

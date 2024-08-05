@@ -129,9 +129,7 @@ class _MyCustomSplashScreenState extends State<MyCustomSplashScreen>
                     'assets/asd.png',
                     fit: BoxFit.fill,
                   )
-                  // child: Text(
-                  //   'YOUR APP\'S LOGO',
-                  // ),
+                 
                   ),
             ),
           ),

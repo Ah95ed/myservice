@@ -53,5 +53,6 @@
      "organ_donation" : "Organ Donation",
      "blood_transfer" : "Blood Transfer",
      "plasma_transfer" : "Plasma Transfer",
-     "organ_transfer" : "Organ Transfer"
+     "organ_transfer" : "Organ Transfer",
+     "chanage_lang" : "Change Language"
 }

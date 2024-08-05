@@ -599,6 +599,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Change Language`
+  String get chanage_lang {
+    return Intl.message(
+      'Change Language',
+      name: 'chanage_lang',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

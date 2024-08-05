@@ -1,9 +1,11 @@
 import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
+import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
 import 'package:flutter/material.dart';
 
 class LanguageController with ChangeNotifier {
 
     Locale _locale = Locale('ar');
+
 
   Locale get locale => _locale;
 
@@ -23,15 +25,17 @@ class LanguageController with ChangeNotifier {
       notifyListeners();
     }
   }
-  // Locale language = sharedPreferences!.getString("lang") == null
-  //     ? const Locale('en')
-  //     : Locale(
-  //         sharedPreferences!.getString("lang")!,
-  //       );
+  Locale language = shared!.getString("lang") == null
+      ? const Locale('en')
+      : Locale(
+          shared!.getString("lang")!,
+        );
 
-  // void changeLanguage(String? language) {
-  //   Locale lang = Locale(language ?? "en");
-  //   sharedPreferences!.setString("lang", language!);
-  //   notifyListeners();
-  // }
+  
+
+  void changeLanguage(String? lang) async {
+   this.language = Locale(lang ?? "en");
+   await shared!.setString("lang", lang!);
+    notifyListeners();
+  }
 }

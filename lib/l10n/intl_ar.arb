@@ -1,5 +1,5 @@
 {
-    "title": "دليل مدينة الزاب",
+    "title": "دليل ناحية الزاب",
     "professions": "المهن",
     "line": "خطوط",
     "internal_transfer": "التحويل الداخلي",
@@ -53,5 +53,6 @@
     "organ_donation": "تبرع العمل",
     "blood_transfer": "نقل الدم",
     "plasma_transfer": "نقل الفصل",
-    "organ_transfer": "نقل العمل"
+    "organ_transfer": "نقل العمل",
+    "chanage_lang": "تغيير اللغة"
 }

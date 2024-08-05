@@ -36,6 +36,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Blood Transfer"),
         "blood_type": MessageLookupByLibrary.simpleMessage("Blood Type"),
         "blooddonors": MessageLookupByLibrary.simpleMessage("Blood Donors :"),
+        "chanage_lang": MessageLookupByLibrary.simpleMessage("Change Language"),
         "change_language":
             MessageLookupByLibrary.simpleMessage("Change Language"),
         "change_password":
