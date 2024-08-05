@@ -18,7 +18,9 @@ Future<void> init() async {
     appEmail: 'amhmeed31@gmail.com',
     otpLength: 4,
   );
-  T? get<T>(String name) {
+ 
+}
+ T? getShared<T>(String name) {
     switch (T) {
       case bool:
         return shared!.getBool(name) as T?;
@@ -33,11 +35,11 @@ Future<void> init() async {
         return shared!.getDouble(name) as T?;
 
       default:
-        throw ArgumentError();
+        return null;
     }
   }
 
-  void set<T>(String name, T value) {
+  void setShared<T>(String name, T value) {
     switch (T) {
       case bool:
         shared!.setBool(name, value as bool) as T?;
@@ -55,4 +57,3 @@ Future<void> init() async {
         throw ArgumentError();
     }
   }
-}

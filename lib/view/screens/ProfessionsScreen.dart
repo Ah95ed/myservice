@@ -19,7 +19,7 @@ class ProfessionsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     context.read<Providers>().getData(ServiceCollectios.professions.name);
     context.read<Providers>().title = Text(
-      S.current.professions,
+      S.of(context).professions,
       style: const TextStyle(color: AppTheme.notWhite),
     );
     context.read<Providers>().actionsicon = const Icon(Icons.search);

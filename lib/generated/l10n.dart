@@ -50,10 +50,10 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `AL Zab Township Guide`
+  /// `ALZab Township Guide`
   String get title {
     return Intl.message(
-      'AL Zab Township Guide',
+      'ALZab Township Guide',
       name: 'title',
       desc: '',
       args: [],

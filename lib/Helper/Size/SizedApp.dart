@@ -7,7 +7,7 @@ double getheight(double height) {
   return MediaQuery.of(MyApp.getContext()!).size.height * height / 100;
 }
 
-double getWidth(double width) {
+ double getWidth(double width) {
 
   return MediaQuery.of(MyApp.getContext()!).size.width * width / 100;
 }

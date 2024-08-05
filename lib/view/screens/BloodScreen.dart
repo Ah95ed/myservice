@@ -24,35 +24,7 @@ class BloodScreen extends StatelessWidget {
       extendBody: true,
       backgroundColor: AppTheme.nearlyWhite,
       resizeToAvoidBottomInset: false,
-      // drawer: Customdrawer(),
-      // appBar: AppBar(
-      //   backgroundColor: Colors.transparent,
-      //   elevation: 5.0,
-      //   toolbarHeight: getheight(8),
-      //   title: Text(
-      //     S.of(context).blood_type,
-      //     style: TextStyle(
-      //       color: AppTheme.white,
-      //       fontSize: 20.sp,
-      //       fontWeight: FontWeight.bold,
-      //     ),
-      //   ),
-      //   centerTitle: true,
-      //   flexibleSpace: Container(
-      //     decoration: const BoxDecoration(
-      //       borderRadius: BorderRadius.only(
-      //         bottomLeft: Radius.circular(20),
-      //         bottomRight: Radius.circular(20),
-      //       ),
-      //       gradient: LinearGradient(
-      //         colors: [ColorUsed.primary, ColorUsed.second],
-      //         begin: Alignment.bottomCenter,
-      //         end: Alignment.topCenter,
-      //       ),
-      //     ),
-      //   ),
-      //   systemOverlayStyle: SystemUiOverlayStyle.light,
-      // ),
+    
       body: Container(
         decoration: BoxDecoration(
           border: Border.all(

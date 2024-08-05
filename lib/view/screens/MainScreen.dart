@@ -59,7 +59,7 @@ class MainScreen extends StatelessWidget {
             // backgroundColor: Colors.transparent,
             selectedItemColor: ColorUsed.second,
             unselectedItemColor: Colors.black,
-            currentIndex: read.index,
+            currentIndex : read.index,
             onTap: (index) {
               read.changeSelect(index);
             },
@@ -68,7 +68,7 @@ class MainScreen extends StatelessWidget {
                 icon: Icon(
                   Icons.medical_information,
                 ),
-                label: S.current.doctor,
+                label: S.of(context).doctor,
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.work_history),
@@ -76,15 +76,15 @@ class MainScreen extends StatelessWidget {
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.bloodtype),
-                label: S.current.blood_type,
+                label: S.of(context).blood_type,
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.local_taxi),
-                label: S.current.Cars,
+                label: S.of(context).Cars,
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.motorcycle_sharp),
-                label: S.current.internal_transfer,
+                label: S.of(context).internal_transfer,
               ),
             ],
           ),

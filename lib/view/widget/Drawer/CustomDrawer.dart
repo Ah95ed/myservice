@@ -2,6 +2,9 @@ import 'package:Al_Zab_township_guide/Helper/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/controller/Constant/Constant.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
+import 'package:Al_Zab_township_guide/view/screens/LoginScreen/login_screen.dart';
+import 'package:Al_Zab_township_guide/view/screens/SignupScreen/signup_screen.dart';
+import 'package:Al_Zab_township_guide/view/screens/WhoCanDonateScreen%20.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -9,16 +12,18 @@ import 'package:provider/provider.dart';
 class Customdrawer extends StatelessWidget {
   Customdrawer({super.key});
 
+  //! need controller Drawer Page
+
   @override
   Widget build(BuildContext context) {
     final read = context.read<Providers>();
     return Drawer(
       // backgroundColor: Colors.white,
+
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
           DrawerHeader(
-            
             margin: EdgeInsets.all(0),
             padding: EdgeInsets.symmetric(
                 vertical: getheight(2), horizontal: getheight(2)),
@@ -27,7 +32,7 @@ class Customdrawer extends StatelessWidget {
               color: ColorUsed.primary,
             ),
             child: Text(
-              S.current.more_options,
+              S.of(context).more_options,
               style: TextStyle(
                 fontSize: setFontSize(16),
                 fontWeight: FontWeight.w500,
@@ -38,7 +43,7 @@ class Customdrawer extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.app_registration),
             title: Text(
-              S.current.register_now,
+              S.of(context).register_now,
               style: TextStyle(
                 fontSize: setFontSize(12),
                 fontWeight: FontWeight.w500,
@@ -46,7 +51,7 @@ class Customdrawer extends StatelessWidget {
               ),
             ),
             onTap: () {
-              // Navigator.pop(context);
+              read.managerScreen(SignupScreen.Route, context);
             },
           ),
           Divider(
@@ -54,23 +59,27 @@ class Customdrawer extends StatelessWidget {
             color: ColorUsed.DarkGreen,
           ),
           ListTile(
+            leading: Icon(Icons.login),
             title: Text(
-              S.current.login,
+              S.of(context).login,
               style: TextStyle(
                 fontSize: setFontSize(12),
                 fontWeight: FontWeight.w500,
                 color: ColorUsed.DarkGreen,
               ),
             ),
-            onTap: () {},
+            onTap: () {
+              read.managerScreen(LoginScreen.Route, context);
+            },
           ),
           Divider(
             thickness: getWidth(0.5),
             color: ColorUsed.DarkGreen,
           ),
           ListTile(
+            leading: Icon(Icons.edit),
             title: Text(
-              S.current.edit_Data,
+              S.of(context).edit_Data,
               style: TextStyle(
                 fontSize: setFontSize(12),
                 fontWeight: FontWeight.w500,
@@ -87,7 +96,8 @@ class Customdrawer extends StatelessWidget {
             color: ColorUsed.DarkGreen,
           ),
           ListTile(
-            title: Text(S.current.settings),
+            leading: Icon(Icons.settings),
+            title: Text(S.of(context).settings),
             onTap: () {},
           ),
           Divider(
@@ -95,8 +105,9 @@ class Customdrawer extends StatelessWidget {
             color: ColorUsed.DarkGreen,
           ),
           ListTile(
+            leading: Icon(Icons.star),
             title: Text(
-              S.current.whocandonate,
+              S.of(context).whocandonate,
               style: TextStyle(
                 fontSize: setFontSize(12),
                 fontWeight: FontWeight.w500,
@@ -104,7 +115,8 @@ class Customdrawer extends StatelessWidget {
               ),
             ),
             onTap: () {
-              read.launchInBrowser(Uri.parse(Constant.Link));
+              read.managerScreen(WhoCanDonateScreen.route, context);
+             
             },
           ),
           Divider(
@@ -118,7 +130,7 @@ class Customdrawer extends StatelessWidget {
             ),
             child: ListTile(
               title: Text(
-                S.current.team_policy,
+                S.of(context).team_policy,
                 style: TextStyle(
                   fontSize: setFontSize(10),
                   fontWeight: FontWeight.w400,
