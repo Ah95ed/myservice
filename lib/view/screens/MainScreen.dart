@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
@@ -5,23 +7,224 @@ import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
 import 'package:Al_Zab_township_guide/Helper/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/controller/provider/BloodController/MainController.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
+import 'package:Al_Zab_township_guide/main.dart';
 import 'package:Al_Zab_township_guide/view/widget/Drawer/CustomDrawer.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
-class MainScreen extends StatelessWidget {
+class MainScreen extends StatefulWidget {
   static const ROUTE = "MainScreen";
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
   MainScreen({super.key});
+
+  @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey =
+   GlobalKey<ScaffoldState>();
+  late TutorialCoachMark tutorialCoachMark;
+
+  @override
+  void initState() {
+    createTutorial();
+    addiem();
+    Future.delayed(Duration(milliseconds:1500), showTutorial);
+
+    super.initState();
+  }
+
+  void showTutorial() {
+    tutorialCoachMark.show(context: context);
+  }
+
+  List<TargetFocus> targets = [];
+  void createTutorial() {
+    tutorialCoachMark = TutorialCoachMark(
+      targets: targets,
+      colorShadow: Colors.red,
+      textSkip: "SKIP",
+      paddingFocus: 10,
+      opacityShadow: 0.5,
+      imageFilter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
+      onFinish: () {
+        print("finish");
+      },
+      onClickTarget: (target) {
+        print('onClickTarget: $target');
+      },
+      onClickTargetWithTapPosition: (target, tapDetails) {
+        Logger.logger("target: $target");
+        
+        print("target: $target");
+        print(
+            "clicked at position local: ${tapDetails.localPosition} - global: ${tapDetails.globalPosition}");
+      },
+      onClickOverlay: (target) {
+        print('onClickOverlay: $target');
+      },
+      onSkip: () {
+        print("skip");
+        return true;
+      },
+    );
+  }
+
+  GlobalKey navdoctor = GlobalKey();
+  GlobalKey donors = GlobalKey();
+  GlobalKey work = GlobalKey();
+  GlobalKey taxi = GlobalKey();
+  GlobalKey stota = GlobalKey();
+
+  addiem() {
+    targets.add(
+      TargetFocus(
+        identify: "keyBottomNavigation1",
+        keyTarget: navdoctor,
+        alignSkip: Alignment.topRight,
+        enableOverlayTab: true,
+        contents: [
+          TargetContent(
+            align: ContentAlign.top,
+            builder: (context, controller) {
+              return const Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    "Titulo lorem ipsum",
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              );
+            },
+          ),
+        ],
+      ),
+    );
+    targets.add(
+      TargetFocus(
+        identify: "keyBottomNavigation1",
+        keyTarget: work,
+        alignSkip: Alignment.topRight,
+        enableOverlayTab: true,
+        contents: [
+          TargetContent(
+            align: ContentAlign.top,
+            builder: (context, controller) {
+              return const Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    "Titulo lorem ipsum",
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              );
+            },
+          ),
+        ],
+      ),
+    );
+     //doctor ,work ,donors ,taxi ,stota
+     targets.add(
+      TargetFocus(
+        identify: "keyBottomNavigation2",
+        keyTarget:donors,
+        alignSkip: Alignment.topRight,
+        enableOverlayTab: true,
+        contents: [
+          TargetContent(
+            align: ContentAlign.top,
+            builder: (context, controller) {
+              return const Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    "Titulo lorem ipsum",
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              );
+            },
+          ),
+        ],
+      ),
+    );
+     //doctor ,work ,donors ,taxi ,stota
+     targets.add(
+      TargetFocus(
+        identify: "keyBottomNavigation3",
+        keyTarget:taxi,
+        alignSkip: Alignment.topRight,
+        enableOverlayTab: true,
+        contents: [
+          TargetContent(
+            align: ContentAlign.top,
+            builder: (context, controller) {
+              return const Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    "Titulo lorem ipsum",
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              );
+            },
+          ),
+        ],
+      ),
+    );
+     //doctor ,work ,donors ,taxi ,stota
+     targets.add(
+      TargetFocus(
+        identify: "keyBottomNavigation4",
+        keyTarget:stota,
+        alignSkip: Alignment.topRight,
+        enableOverlayTab: true,
+        contents: [
+          TargetContent(
+            align: ContentAlign.top,
+            builder: (context, controller) {
+              return const Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    "Titulo lorem ipsum",
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              );
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final read = context.read<MainController>();
 
     return Scaffold(
-      
       key: _scaffoldKey,
       drawer: Customdrawer(),
       extendBodyBehindAppBar: true,
@@ -29,7 +232,6 @@ class MainScreen extends StatelessWidget {
       backgroundColor: ColorUsed.PrimaryBackground,
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
         ),
@@ -72,7 +274,7 @@ class MainScreen extends StatelessWidget {
                     ),
                     TextButton(
                       onPressed: () {
-                         if (shared!.getString('lang') == 'ar') {
+                        if (shared!.getString('lang') == 'ar') {
                           Navigator.of(context).pop();
                           return;
                         }
@@ -111,24 +313,30 @@ class MainScreen extends StatelessWidget {
             },
             items: [
               BottomNavigationBarItem(
+                key: navdoctor,
                 icon: Icon(
                   Icons.medical_information,
                 ),
                 label: S.of(context).doctor,
               ),
+             
               BottomNavigationBarItem(
+                key: work,
                 icon: Icon(Icons.work_history),
                 label: S.of(context).professions,
               ),
               BottomNavigationBarItem(
+                key: donors,
                 icon: Icon(Icons.bloodtype),
                 label: S.of(context).blood_type,
               ),
               BottomNavigationBarItem(
+                key: taxi,
                 icon: Icon(Icons.local_taxi),
                 label: S.of(context).Cars,
               ),
               BottomNavigationBarItem(
+                key: stota,
                 icon: Icon(Icons.motorcycle_sharp),
                 label: S.of(context).internal_transfer,
               ),
