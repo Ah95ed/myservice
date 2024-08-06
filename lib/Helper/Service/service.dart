@@ -18,42 +18,44 @@ Future<void> init() async {
     appEmail: 'amhmeed31@gmail.com',
     otpLength: 4,
   );
- 
 }
- T? getShared<T>(String name) {
-    switch (T) {
-      case bool:
-        return shared!.getBool(name) as T?;
 
-      case String:
-        return shared!.getString(name) as T?;
+T? getShared<T>(String name) {
+  init();
+  switch (T) {
+    case bool:
+      return shared!.getBool(name) as T?;
 
-      case int:
-        return shared!.getInt(name) as T?;
+    case String:
+      return shared!.getString(name) as T?;
 
-      case double:
-        return shared!.getDouble(name) as T?;
+    case int:
+      return shared!.getInt(name) as T?;
 
-      default:
-        return null;
-    }
+    case double:
+      return shared!.getDouble(name) as T?;
+
+    default:
+      return null;
   }
+}
 
-  void setShared<T>(String name, T value) {
-    switch (T) {
-      case bool:
-        shared!.setBool(name, value as bool) as T?;
-        break;
-      case String:
-        shared!.setString(name, value as String) as T?;
-        break;
-      case int:
-        shared!.setInt(name, value as int) as T?;
-        break;
-      case double:
-        shared!.setDouble(name, value as double) as T?;
-        break;
-      default:
-        throw ArgumentError();
-    }
+void setShared<T>(String name, T value) {
+  init();
+  switch (T) {
+    case bool:
+      shared!.setBool(name, value as bool);
+      break;
+    case String:
+      shared!.setString(name, value as String);
+      break;
+    case int:
+      shared!.setInt(name, value as int);
+      break;
+    case double:
+      shared!.setDouble(name, value as double);
+      break;
+    default:
+      throw ArgumentError();
   }
+}

@@ -94,6 +94,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "register_now": MessageLookupByLibrary.simpleMessage("سجل الآن"),
         "search": MessageLookupByLibrary.simpleMessage("بحث"),
         "settings": MessageLookupByLibrary.simpleMessage("الاعدادات"),
+        "skip": MessageLookupByLibrary.simpleMessage("تخطي"),
         "source": MessageLookupByLibrary.simpleMessage("انتقل إلى المصدر"),
         "specialization": MessageLookupByLibrary.simpleMessage("التخصص :"),
         "team_policy": MessageLookupByLibrary.simpleMessage(

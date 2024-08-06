@@ -130,8 +130,7 @@ class SignupModel {
         shared!.setString( 'verificationId', _verificationId);
         log('message verificationId -> $_verificationId');
         sharesModel!.managerScreenSplash(OtpScreen.Route, _ctx, false);
-        //   _isLoading = false;
-        // });
+      
       },
       codeAutoRetrievalTimeout: (String verificationId) {
         // setState(() {

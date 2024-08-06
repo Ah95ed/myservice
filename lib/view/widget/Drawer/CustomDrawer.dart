@@ -67,7 +67,10 @@ class Customdrawer extends StatelessWidget {
               ),
             ),
             onTap: () {
-              read.managerScreen(LoginScreen.Route, context);
+              read.managerScreen(
+                LoginScreen.Route,
+                context,
+              );
             },
           ),
           Divider(
@@ -87,12 +90,12 @@ class Customdrawer extends StatelessWidget {
             onTap: () {
               // here to open edit Screen
               // read.managerScreen(, context)
-               showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return CustomDialog();
-              },
-            );
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return CustomDialog();
+                },
+              );
             },
           ),
           Divider(

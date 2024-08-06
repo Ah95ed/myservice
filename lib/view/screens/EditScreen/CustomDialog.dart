@@ -1,11 +1,17 @@
 import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
 import 'package:Al_Zab_township_guide/Helper/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/Models/EditAndDelete/EditModel.dart';
+import 'package:Al_Zab_township_guide/Models/SignupModel/SignupModel.dart';
 import 'package:Al_Zab_township_guide/controller/Constant/ServiceCollectios.dart';
+import 'package:Al_Zab_township_guide/controller/provider/OTPEmailProvider/OTPEmailProvider.dart';
+import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
+import 'package:Al_Zab_township_guide/controller/provider/SignupProvider/SignupProvider.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
+import 'package:Al_Zab_township_guide/view/screens/OTPScreen.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CustomDialog extends StatefulWidget {
   @override
@@ -19,6 +25,8 @@ class _CustomDialogState extends State<CustomDialog> {
 
   @override
   Widget build(BuildContext context) {
+    Logger.logger(' ${ServiceCollectios.Doctor.name}');
+    final read = context.read<Providers>();
     return AlertDialog(
       title: Text(
         S.current.edit_Data_and_delete,
@@ -38,20 +46,7 @@ class _CustomDialogState extends State<CustomDialog> {
                 ),
               ),
               onChanged: (newValue) {
-                if (newValue == S.current.doctor) {
-                  _selectedValue = ServiceCollectios.Doctor.name;
-                  
-                } else if (newValue == S.current.Cars) {
-                  _selectedValue = ServiceCollectios.line.name;
-                  
-                } else if (newValue == S.current.professions) {
-                  _selectedValue = ServiceCollectios.professions.name;
-                  
-                } else if (newValue == S.current.internal_transfer) {
-                  _selectedValue = ServiceCollectios.Satota.name;
-                  
-                }
-
+                _selectedValue = newValue;
                 setState(() {
                   // _selectedValue = newValue;
                 });
@@ -91,7 +86,7 @@ class _CustomDialogState extends State<CustomDialog> {
         ),
       ),
       actions: <Widget>[
-        TextButton(
+        ElevatedButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -101,9 +96,20 @@ class _CustomDialogState extends State<CustomDialog> {
         ),
         ElevatedButton(
           onPressed: () async {
+            if (_selectedValue!.contains(S.current.doctor)) {
+              _selectedValue = ServiceCollectios.Doctor.name.toString();
+            } else if (_selectedValue == S.current.blood_type) {
+              // _selectedValue = ServiceCollectios.line.name;
+            } else if (_selectedValue == S.current.Cars) {
+              _selectedValue = ServiceCollectios.line.name.toString();
+            } else if (_selectedValue == S.current.professions) {
+              _selectedValue = ServiceCollectios.professions.name.toString();
+            } else if (_selectedValue == S.current.internal_transfer) {
+              _selectedValue = ServiceCollectios.Satota.name.toString();
+            }
             if (_formKey.currentState!.validate()) {
               QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-                  .collection('Doctor')
+                  .collection(_selectedValue!)
                   .where('number', isEqualTo: _textController.text)
                   .get()
                   .then((value) async {
@@ -112,12 +118,14 @@ class _CustomDialogState extends State<CustomDialog> {
                 return value;
               });
               querySnapshot.docs.map((e) {
+                context.read<OTPEmailProvider>().sendCode('07824854526');
+                // Logger.logger('message map ${e.data}');
                 Logger.logger('message map ${e.data()}');
+                //   read.managerScreen(
+                //   OtpScreen.Route,
+                //   context,object: e.data()
+                // );
               }).toList();
-
-              // Editmodel().searchAcrossCollections(
-              //   _selectedValue!, _textController.text ,
-              // );
 
               Navigator.of(context).pop();
             }
@@ -126,5 +134,12 @@ class _CustomDialogState extends State<CustomDialog> {
         ),
       ],
     );
+  }
+
+  @override
+  void dispose() {
+    _textController.dispose();
+    // TODO: implement dispose
+    super.dispose();
   }
 }

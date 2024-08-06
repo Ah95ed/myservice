@@ -4,12 +4,14 @@ import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
 import 'package:Al_Zab_township_guide/controller/provider/BloodController/MainController.dart';
 import 'package:Al_Zab_township_guide/controller/provider/DoctorProvider/DoctorProvider.dart';
 import 'package:Al_Zab_township_guide/controller/provider/LoginProvider/Loginprovider.dart';
+import 'package:Al_Zab_township_guide/controller/provider/OTPEmailProvider/OTPEmailProvider.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/controller/provider/SignupProvider/SignupProvider.dart';
 import 'package:Al_Zab_township_guide/view/routing/routing.dart';
 import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/MyCustomSplashScreen.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
@@ -19,8 +21,9 @@ import 'generated/l10n.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await init();
+  
 
+  await init();
   runApp(
     MultiProvider(
       providers: [
@@ -47,6 +50,10 @@ void main() async {
           create: (_) => LanguageController(),
           lazy: false,
         ),
+         ChangeNotifierProvider(
+          create: (_) => OTPEmailProvider(),
+          lazy: false,
+        ),
       ],
       child: MyApp(),
 
@@ -56,6 +63,8 @@ void main() async {
       // ),
     ),
   );
+
+
 }
 
 class MyApp extends StatelessWidget {

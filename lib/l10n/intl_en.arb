@@ -66,6 +66,7 @@
      "cancel" : "Cancel" ,
      "done" : "Done",
      "search" : "Search",
-     "confirm" : "Confirm"
+     "confirm" : "Confirm",
+     "skip" : "Skip"
 
 }

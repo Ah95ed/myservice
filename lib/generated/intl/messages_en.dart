@@ -106,6 +106,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "register_now": MessageLookupByLibrary.simpleMessage("Register Now"),
         "search": MessageLookupByLibrary.simpleMessage("Search"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
+        "skip": MessageLookupByLibrary.simpleMessage("Skip"),
         "source": MessageLookupByLibrary.simpleMessage("Go to the source"),
         "specialization":
             MessageLookupByLibrary.simpleMessage("Specialization :"),

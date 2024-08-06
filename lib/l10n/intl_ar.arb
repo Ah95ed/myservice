@@ -74,5 +74,7 @@
     "confirm": "تاكيد",
     "search": "بحث",
     "done": "تم",
-    "please_enter_what_you_want": "الرجاء ادخال ما تريد"
+    "please_enter_what_you_want": "الرجاء ادخال ما تريد",
+    "skip": "تخطي"
+
 }
