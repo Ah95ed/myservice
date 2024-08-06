@@ -36,11 +36,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Blood Transfer"),
         "blood_type": MessageLookupByLibrary.simpleMessage("Blood Type"),
         "blooddonors": MessageLookupByLibrary.simpleMessage("Blood Donors :"),
+        "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "chanage_lang": MessageLookupByLibrary.simpleMessage("Change Language"),
         "change_language":
             MessageLookupByLibrary.simpleMessage("Change Language"),
         "change_password":
             MessageLookupByLibrary.simpleMessage("Change Password"),
+        "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "delete_account":
             MessageLookupByLibrary.simpleMessage("Delete Account"),
         "doctor": MessageLookupByLibrary.simpleMessage("Doctors"),
@@ -50,8 +52,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "donate_blood": MessageLookupByLibrary.simpleMessage("Donate Blood"),
         "donate_organ": MessageLookupByLibrary.simpleMessage("Donate Organ"),
         "donate_plasma": MessageLookupByLibrary.simpleMessage("Donate Plasma"),
+        "done": MessageLookupByLibrary.simpleMessage("Done"),
         "donors": MessageLookupByLibrary.simpleMessage("Donors"),
-        "edit_Data": MessageLookupByLibrary.simpleMessage("Edit Data"),
+        "edit_Data_and_delete":
+            MessageLookupByLibrary.simpleMessage("Edit Data and Delete"),
         "email_exist": MessageLookupByLibrary.simpleMessage("Email is Exist  "),
         "enter_email": MessageLookupByLibrary.simpleMessage("Enter Email"),
         "enter_password":
@@ -80,10 +84,27 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Plasma Request"),
         "plasma_transfer":
             MessageLookupByLibrary.simpleMessage("Plasma Transfer"),
+        "please_enter_description":
+            MessageLookupByLibrary.simpleMessage("Please Enter Description"),
+        "please_enter_email":
+            MessageLookupByLibrary.simpleMessage("Please Enter Email"),
+        "please_enter_name":
+            MessageLookupByLibrary.simpleMessage("Please Enter Name"),
+        "please_enter_password":
+            MessageLookupByLibrary.simpleMessage("Please Enter Password"),
+        "please_enter_phone":
+            MessageLookupByLibrary.simpleMessage("Please Enter Phone"),
+        "please_enter_title":
+            MessageLookupByLibrary.simpleMessage("Please Enter Title"),
+        "please_enter_what_you_want":
+            MessageLookupByLibrary.simpleMessage("Please Enter What You Want"),
+        "please_select_an_option":
+            MessageLookupByLibrary.simpleMessage("Please select an Service"),
         "presence": MessageLookupByLibrary.simpleMessage("Presence"),
         "profession": MessageLookupByLibrary.simpleMessage("Profession :"),
         "professions": MessageLookupByLibrary.simpleMessage("Professions"),
         "register_now": MessageLookupByLibrary.simpleMessage("Register Now"),
+        "search": MessageLookupByLibrary.simpleMessage("Search"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "source": MessageLookupByLibrary.simpleMessage("Go to the source"),
         "specialization":

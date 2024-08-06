@@ -400,11 +400,11 @@ class S {
     );
   }
 
-  /// `Edit Data`
-  String get edit_Data {
+  /// `Edit Data and Delete`
+  String get edit_Data_and_delete {
     return Intl.message(
-      'Edit Data',
-      name: 'edit_Data',
+      'Edit Data and Delete',
+      name: 'edit_Data_and_delete',
       desc: '',
       args: [],
     );
@@ -605,6 +605,126 @@ class S {
     return Intl.message(
       'Change Language',
       name: 'chanage_lang',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please select an Service`
+  String get please_select_an_option {
+    return Intl.message(
+      'Please select an Service',
+      name: 'please_select_an_option',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please Enter Phone`
+  String get please_enter_phone {
+    return Intl.message(
+      'Please Enter Phone',
+      name: 'please_enter_phone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please Enter Name`
+  String get please_enter_name {
+    return Intl.message(
+      'Please Enter Name',
+      name: 'please_enter_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please Enter Email`
+  String get please_enter_email {
+    return Intl.message(
+      'Please Enter Email',
+      name: 'please_enter_email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please Enter Password`
+  String get please_enter_password {
+    return Intl.message(
+      'Please Enter Password',
+      name: 'please_enter_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please Enter Title`
+  String get please_enter_title {
+    return Intl.message(
+      'Please Enter Title',
+      name: 'please_enter_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please Enter Description`
+  String get please_enter_description {
+    return Intl.message(
+      'Please Enter Description',
+      name: 'please_enter_description',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please Enter What You Want`
+  String get please_enter_what_you_want {
+    return Intl.message(
+      'Please Enter What You Want',
+      name: 'please_enter_what_you_want',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Done`
+  String get done {
+    return Intl.message(
+      'Done',
+      name: 'done',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search`
+  String get search {
+    return Intl.message(
+      'Search',
+      name: 'search',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm`
+  String get confirm {
+    return Intl.message(
+      'Confirm',
+      name: 'confirm',
       desc: '',
       args: [],
     );

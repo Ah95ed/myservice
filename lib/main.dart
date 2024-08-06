@@ -69,7 +69,7 @@ class MyApp extends StatelessWidget {
       builder: (context, v, child) {
         S.load(
           Locale.fromSubtags(
-            languageCode: shared!.getString('lang') ?? 'en',
+            languageCode: shared!.getString('lang') ?? 'ar',
           ),
         );
         // Logger.logger( ' ------>>>  ${shared!.getString('lang') ?? 'en'} rebuild '  );

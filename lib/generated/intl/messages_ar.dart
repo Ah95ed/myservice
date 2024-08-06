@@ -33,10 +33,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "blood_transfer": MessageLookupByLibrary.simpleMessage("نقل الدم"),
         "blood_type": MessageLookupByLibrary.simpleMessage("فصيلة الدم"),
         "blooddonors": MessageLookupByLibrary.simpleMessage("متبرعون بالدم :"),
+        "cancel": MessageLookupByLibrary.simpleMessage("الغاء"),
         "chanage_lang": MessageLookupByLibrary.simpleMessage("تغيير اللغة"),
         "change_language": MessageLookupByLibrary.simpleMessage("تغيير اللغة"),
         "change_password":
             MessageLookupByLibrary.simpleMessage("تغيير الباسورد"),
+        "confirm": MessageLookupByLibrary.simpleMessage("تاكيد"),
         "delete_account": MessageLookupByLibrary.simpleMessage("حذف الحساب"),
         "doctor": MessageLookupByLibrary.simpleMessage("أطباء"),
         "don_t_have_account":
@@ -45,8 +47,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "donate_blood": MessageLookupByLibrary.simpleMessage("التبرع بالدم"),
         "donate_organ": MessageLookupByLibrary.simpleMessage("التبرع بالعمل"),
         "donate_plasma": MessageLookupByLibrary.simpleMessage("التبرع بالفصل"),
+        "done": MessageLookupByLibrary.simpleMessage("تم"),
         "donors": MessageLookupByLibrary.simpleMessage("متبرعين"),
-        "edit_Data": MessageLookupByLibrary.simpleMessage("تعديل البيانات"),
+        "edit_Data_and_delete":
+            MessageLookupByLibrary.simpleMessage("تعديل البيانات و حذفها"),
         "email_exist":
             MessageLookupByLibrary.simpleMessage(" الايميل مسجل بالفعل"),
         "enter_email":
@@ -72,10 +76,23 @@ class MessageLookup extends MessageLookupByLibrary {
         "plasma_donation": MessageLookupByLibrary.simpleMessage("تبرع الفصل"),
         "plasma_request": MessageLookupByLibrary.simpleMessage("طلب الفصل"),
         "plasma_transfer": MessageLookupByLibrary.simpleMessage("نقل الفصل"),
+        "please_enter_email": MessageLookupByLibrary.simpleMessage(
+            "الرجاء ادخال البريد الالكتروني"),
+        "please_enter_name":
+            MessageLookupByLibrary.simpleMessage("الرجاء ادخال الاسم"),
+        "please_enter_phone":
+            MessageLookupByLibrary.simpleMessage("الرجاء ادخال رقم الهاتف"),
+        "please_enter_title":
+            MessageLookupByLibrary.simpleMessage("الرجاء ادخال العنوان"),
+        "please_enter_what_you_want":
+            MessageLookupByLibrary.simpleMessage("الرجاء ادخال ما تريد"),
+        "please_select_an_option":
+            MessageLookupByLibrary.simpleMessage("الرجاء تحديد خدمة"),
         "presence": MessageLookupByLibrary.simpleMessage("الحضور"),
         "profession": MessageLookupByLibrary.simpleMessage("المهنة :"),
         "professions": MessageLookupByLibrary.simpleMessage("المهن"),
         "register_now": MessageLookupByLibrary.simpleMessage("سجل الآن"),
+        "search": MessageLookupByLibrary.simpleMessage("بحث"),
         "settings": MessageLookupByLibrary.simpleMessage("الاعدادات"),
         "source": MessageLookupByLibrary.simpleMessage("انتقل إلى المصدر"),
         "specialization": MessageLookupByLibrary.simpleMessage("التخصص :"),

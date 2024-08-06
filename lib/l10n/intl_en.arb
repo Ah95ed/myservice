@@ -34,7 +34,7 @@
      "more_options" : "More Options",
      "change_password" : "Change Password",
      "delete_account" : "Delete Account",
-     "edit_Data" : "Edit Data",
+     "edit_Data_and_delete" : "Edit Data and Delete",
      "settings" : "Settings",
      "change_language" : "Change Language",
      "logout" : "Logout",
@@ -54,5 +54,18 @@
      "blood_transfer" : "Blood Transfer",
      "plasma_transfer" : "Plasma Transfer",
      "organ_transfer" : "Organ Transfer",
-     "chanage_lang" : "Change Language"
+     "chanage_lang" : "Change Language",
+     "please_select_an_option" : "Please select an Service",
+     "please_enter_phone" : "Please Enter Phone",
+     "please_enter_name" : "Please Enter Name",
+     "please_enter_email" : "Please Enter Email",
+     "please_enter_password" : "Please Enter Password",
+     "please_enter_title" : "Please Enter Title",
+     "please_enter_description" : "Please Enter Description",
+     "please_enter_what_you_want" : "Please Enter What You Want",
+     "cancel" : "Cancel" ,
+     "done" : "Done",
+     "search" : "Search",
+     "confirm" : "Confirm"
+
 }

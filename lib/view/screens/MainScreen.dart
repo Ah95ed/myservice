@@ -21,6 +21,7 @@ class MainScreen extends StatelessWidget {
     final read = context.read<MainController>();
 
     return Scaffold(
+      
       key: _scaffoldKey,
       drawer: Customdrawer(),
       extendBodyBehindAppBar: true,
@@ -28,6 +29,7 @@ class MainScreen extends StatelessWidget {
       backgroundColor: ColorUsed.PrimaryBackground,
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
+        
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
         ),

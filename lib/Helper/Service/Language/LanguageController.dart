@@ -26,7 +26,7 @@ class LanguageController with ChangeNotifier {
     }
   }
   Locale language = shared!.getString("lang") == null
-      ? const Locale('en')
+      ? const Locale('ar')
       : Locale(
           shared!.getString("lang")!,
         );
@@ -34,7 +34,7 @@ class LanguageController with ChangeNotifier {
   
 
   void changeLanguage(String? lang) async {
-   this.language = Locale(lang ?? "en");
+   this.language = Locale(lang ?? "ar");
    await shared!.setString("lang", lang!);
     notifyListeners();
   }

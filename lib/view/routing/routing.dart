@@ -1,5 +1,6 @@
 import 'package:Al_Zab_township_guide/view/screens/BloodScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/DoctorScreen.dart';
+import 'package:Al_Zab_township_guide/view/screens/EditScreen/EditScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/MyCustomSplashScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/OTPScreen.dart';
@@ -26,4 +27,5 @@ Map<String, WidgetBuilder> routs = {
   MyCustomSplashScreen.Route: (context) =>  MyCustomSplashScreen(),
   WhoCanDonateScreen.route: (context) => const WhoCanDonateScreen(),
   OtpScreen.Route: (context) => OtpScreen(),
+  Editscreen.Route: (context) => const Editscreen(),
 };
