@@ -1,30 +1,43 @@
 import 'dart:ui';
 
+<<<<<<< HEAD
 import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
+=======
+>>>>>>> 8e4e3d3f396e2413d01c8b7685c25cffc59aebea
 import 'package:Al_Zab_township_guide/controller/provider/BloodController/MainController.dart';
+import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
-import 'package:Al_Zab_township_guide/main.dart';
+
+import 'package:Al_Zab_township_guide/view/screens/BloodScreen.dart';
+import 'package:Al_Zab_township_guide/view/screens/DoctorScreen.dart';
+import 'package:Al_Zab_township_guide/view/screens/ProfessionsScreen.dart';
+import 'package:Al_Zab_township_guide/view/screens/SatotaScreen.dart';
+import 'package:Al_Zab_township_guide/view/screens/TheCars.dart';
+import 'package:Al_Zab_township_guide/view/widget/ButtonSelect.dart';
 import 'package:Al_Zab_township_guide/view/widget/Drawer/CustomDrawer.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:sizer/sizer.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
 class MainScreen extends StatefulWidget {
   static const ROUTE = "MainScreen";
-  MainScreen({super.key});
+  const MainScreen({super.key});
 
   @override
   State<MainScreen> createState() => _MainScreenState();
 }
 
 class _MainScreenState extends State<MainScreen> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   late TutorialCoachMark tutorialCoachMark;
 
   @override
@@ -39,7 +52,7 @@ class _MainScreenState extends State<MainScreen> {
 
     super.initState();
   }
-
+  // ! lيرنا الحسن
   @override
   Widget build(BuildContext context) {
     final read = context.read<MainController>();
@@ -174,6 +187,7 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   List<TargetFocus> targets = [];
+
   void createTutorial() {
     tutorialCoachMark = TutorialCoachMark(
       targets: targets,
@@ -207,12 +221,16 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   GlobalKey navdoctor = GlobalKey();
-  GlobalKey donors = GlobalKey();
-  GlobalKey work = GlobalKey();
-  GlobalKey taxi = GlobalKey();
-  GlobalKey stota = GlobalKey();
-  GlobalKey lang = GlobalKey();
 
+  GlobalKey donors = GlobalKey();
+
+  GlobalKey work = GlobalKey();
+
+  GlobalKey taxi = GlobalKey();
+
+  GlobalKey stota = GlobalKey();
+
+  GlobalKey lang = GlobalKey();
 
   addItem() {
     targets.add(
