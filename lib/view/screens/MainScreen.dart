@@ -19,9 +19,30 @@ import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
-class MainScreen extends StatelessWidget {
+class MainScreen extends StatefulWidget {
   static const ROUTE = "MainScreen";
   const MainScreen({super.key});
+
+  @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
+
+   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  late TutorialCoachMark tutorialCoachMark;
+
+  @override
+  void initState() {
+    if (shared!.getBool('tutorial') == null) {
+      Logger.logger('message initState ${shared!.getBool('tutorial')}');
+      createTutorial();
+      addItem();
+      Future.delayed(Duration(milliseconds: 1500), showTutorial);
+    }
+
+    super.initState();
+  }
   // ! lيرنا الحسن
   @override
   Widget build(BuildContext context) {
@@ -157,6 +178,7 @@ class MainScreen extends StatelessWidget {
   }
 
   List<TargetFocus> targets = [];
+
   void createTutorial() {
     tutorialCoachMark = TutorialCoachMark(
       targets: targets,
@@ -190,12 +212,16 @@ class MainScreen extends StatelessWidget {
   }
 
   GlobalKey navdoctor = GlobalKey();
-  GlobalKey donors = GlobalKey();
-  GlobalKey work = GlobalKey();
-  GlobalKey taxi = GlobalKey();
-  GlobalKey stota = GlobalKey();
-  GlobalKey lang = GlobalKey();
 
+  GlobalKey donors = GlobalKey();
+
+  GlobalKey work = GlobalKey();
+
+  GlobalKey taxi = GlobalKey();
+
+  GlobalKey stota = GlobalKey();
+
+  GlobalKey lang = GlobalKey();
 
   addItem() {
     targets.add(
@@ -365,6 +391,4 @@ class MainScreen extends StatelessWidget {
       ),
     );
   }
-  
-  
 }
