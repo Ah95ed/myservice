@@ -1,6 +1,6 @@
 import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
-import 'package:Al_Zab_township_guide/Helper/Size/SizedApp.dart';
+import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/Models/EditAndDelete/EditModel.dart';
 import 'package:Al_Zab_township_guide/Models/SignupModel/SignupModel.dart';
 import 'package:Al_Zab_township_guide/controller/Constant/Constant.dart';
@@ -9,6 +9,7 @@ import 'package:Al_Zab_township_guide/controller/provider/OTPEmailProvider/OTPEm
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/controller/provider/SignupProvider/SignupProvider.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
+import 'package:Al_Zab_township_guide/main.dart';
 import 'package:Al_Zab_township_guide/view/screens/OTPScreen.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -103,6 +104,8 @@ class _CustomDialogState extends State<CustomDialog> {
               _selectedValue = 'Doctor';
             } else if (_selectedValue == S.current.blood_type) {
               searchTypes(_textController.text);
+            Navigator.of(context).pop();
+
               // _selectedValue = ServiceCollectios.line.name;
             } else if (_selectedValue == S.current.Cars) {
               _selectedValue = 'line';
@@ -154,6 +157,7 @@ class _CustomDialogState extends State<CustomDialog> {
   @override
   void dispose() {
     _textController.dispose();
+
     // TODO: implement dispose
     super.dispose();
   }
@@ -161,11 +165,11 @@ class _CustomDialogState extends State<CustomDialog> {
   void searchTypes(String n) async {
     if (shared!.getInt('num') == null) {
       shared!.setInt('num', 1);
-    }else{
+    } else {
       int? nshaerd = shared!.getInt('num');
-    shared!.setInt('num', nshaerd!+1);
+      shared!.setInt('num', nshaerd! + 1);
     }
-    
+
     for (var e in types) {
       CollectionReference querySnapshot =
           await FirebaseFirestore.instance.collection(e);
@@ -190,6 +194,7 @@ class _CustomDialogState extends State<CustomDialog> {
           // );
         },
       );
+      
     }
   }
 }

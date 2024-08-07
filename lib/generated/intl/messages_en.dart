@@ -43,8 +43,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "change_password":
             MessageLookupByLibrary.simpleMessage("Change Password"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
+        "date": MessageLookupByLibrary.simpleMessage("Date"),
         "delete_account":
             MessageLookupByLibrary.simpleMessage("Delete Account"),
+        "description": MessageLookupByLibrary.simpleMessage("Description"),
         "desctiption_message":
             MessageLookupByLibrary.simpleMessage("Description"),
         "doctor": MessageLookupByLibrary.simpleMessage("Doctors"),
@@ -65,6 +67,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "forget_password":
             MessageLookupByLibrary.simpleMessage("Forget Password ?"),
         "from": MessageLookupByLibrary.simpleMessage("From :"),
+        "if_you_need_send_me": MessageLookupByLibrary.simpleMessage(
+            "If you encounter a problem, contact me on social media"),
         "internal_transfer":
             MessageLookupByLibrary.simpleMessage("Internal Transfer"),
         "line": MessageLookupByLibrary.simpleMessage("Lines"),
@@ -109,6 +113,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "professions": MessageLookupByLibrary.simpleMessage("Professions"),
         "register_now": MessageLookupByLibrary.simpleMessage("Register Now"),
         "search": MessageLookupByLibrary.simpleMessage("Search"),
+        "send": MessageLookupByLibrary.simpleMessage("Send"),
+        "send_developer":
+            MessageLookupByLibrary.simpleMessage("Send Message To Developer"),
+        "send_request": MessageLookupByLibrary.simpleMessage("Send Request"),
+        "service_type": MessageLookupByLibrary.simpleMessage("Service Type"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "skip": MessageLookupByLibrary.simpleMessage("Skip"),
         "source": MessageLookupByLibrary.simpleMessage("Go to the source"),
@@ -121,6 +130,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "title_service": MessageLookupByLibrary.simpleMessage("Title :"),
         "type": MessageLookupByLibrary.simpleMessage("Type :"),
         "wait_service": MessageLookupByLibrary.simpleMessage("Waiting Service"),
+        "what_you_want": MessageLookupByLibrary.simpleMessage("What You Want"),
         "whocandonate":
             MessageLookupByLibrary.simpleMessage("Who Can Donate Blood ?")
       };

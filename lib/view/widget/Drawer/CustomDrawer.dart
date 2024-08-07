@@ -1,4 +1,4 @@
-import 'package:Al_Zab_township_guide/Helper/Size/SizedApp.dart';
+import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/controller/Constant/Constant.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
@@ -13,11 +13,13 @@ import 'package:provider/provider.dart';
 
 class Customdrawer extends StatelessWidget {
   Customdrawer({super.key});
+  late BuildContext ctx;
 
   //! need controller Drawer Page
 
   @override
   Widget build(BuildContext context) {
+    this.ctx = context;
     final read = context.read<Providers>();
     return Drawer(
       child: ListView(
@@ -93,9 +95,11 @@ class Customdrawer extends StatelessWidget {
               showDialog(
                 context: context,
                 builder: (BuildContext context) {
+                 
                   return CustomDialog();
                 },
               );
+               Scaffold.of(ctx).closeDrawer();
             },
           ),
           Divider(

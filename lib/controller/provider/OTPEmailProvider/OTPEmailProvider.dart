@@ -6,6 +6,7 @@ import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/main.dart';
 import 'package:Al_Zab_township_guide/view/screens/MessageDeveloper.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,8 +21,10 @@ class OTPEmailProvider with ChangeNotifier {
         await FirebaseAuth.instance.signInWithCredential(credential);
       },
       verificationFailed: (FirebaseAuthException e) {
-        // Logger.logger('Verification failed: ${e.message}');
-        // Logger.logger(shared!.getInt('num').toString());
+        Logger.logger('Verification failed: ${e.message}');
+
+        // Handle other errors
+
         if (shared!.getInt('num') == 3) {
           MyApp.getContext()!
               .read<Providers>()

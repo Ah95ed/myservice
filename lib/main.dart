@@ -8,10 +8,10 @@ import 'package:Al_Zab_township_guide/controller/provider/OTPEmailProvider/OTPEm
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/controller/provider/SignupProvider/SignupProvider.dart';
 import 'package:Al_Zab_township_guide/view/routing/routing.dart';
-import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/MessageDeveloper.dart';
 import 'package:Al_Zab_township_guide/view/screens/MyCustomSplashScreen.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -82,7 +82,6 @@ class MyApp extends StatelessWidget {
             languageCode: shared!.getString('lang') ?? 'ar',
           ),
         );
-        // Logger.logger( ' ------>>>  ${shared!.getString('lang') ?? 'en'} rebuild '  );
         return Sizer(builder: (context, orientations, device) {
           return MaterialApp(
             navigatorKey: navigatorKey,

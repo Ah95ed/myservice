@@ -29,5 +29,5 @@ Map<String, WidgetBuilder> routs = {
   WhoCanDonateScreen.route: (context) => const WhoCanDonateScreen(),
   OtpScreen.Route: (context) => OtpScreen(),
   Editscreen.Route: (context) => const Editscreen(),
-  MessageDeveloper.Route: (context) => const MessageDeveloper(),
+  MessageDeveloper.Route: (context) =>  MessageDeveloper(),
 };

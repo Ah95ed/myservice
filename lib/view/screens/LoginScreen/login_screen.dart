@@ -3,7 +3,7 @@ import 'package:Al_Zab_township_guide/controller/provider/LoginProvider/Loginpro
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/view/screens/SignupScreen/signup_screen.dart';
 import 'package:Al_Zab_township_guide/view/widget/LoginWidget/HaveAccount.dart';
-import 'package:Al_Zab_township_guide/view/widget/LoginWidget/LoginBody.dart';
+import 'package:Al_Zab_township_guide/view/widget/staticWidget/TextFieldCustom.dart';
 import 'package:Al_Zab_township_guide/view/widget/LoginWidget/Loginimageshow.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
 import 'package:Al_Zab_township_guide/view/widget/staticWidget/CustomMaterialButton.dart';

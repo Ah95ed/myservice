@@ -4,7 +4,7 @@ import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
-import 'package:Al_Zab_township_guide/Helper/Size/SizedApp.dart';
+import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/controller/provider/BloodController/MainController.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/main.dart';
@@ -30,7 +30,8 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     if (shared!.getBool('tutorial') == null) {
-      Logger.logger('message initState ${shared!.getBool('tutorial')}');
+      Logger.logger('''message initState
+        ${shared!.getBool('tutorial')}''');
       createTutorial();
       addItem();
       Future.delayed(Duration(milliseconds: 1500), showTutorial);

@@ -1,3 +1,4 @@
+import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +26,7 @@ class _TextFieldCustomState extends State<TextFieldCustom> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding:  EdgeInsets.symmetric(horizontal: getWidth(2)),
       child: TextFormField(
         obscureText:
             widget.input == TextInputType.visiblePassword ?

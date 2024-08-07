@@ -759,6 +759,86 @@ class S {
       args: [],
     );
   }
+
+  /// `Service Type`
+  String get service_type {
+    return Intl.message(
+      'Service Type',
+      name: 'service_type',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send`
+  String get send {
+    return Intl.message(
+      'Send',
+      name: 'send',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send Message To Developer`
+  String get send_developer {
+    return Intl.message(
+      'Send Message To Developer',
+      name: 'send_developer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send Request`
+  String get send_request {
+    return Intl.message(
+      'Send Request',
+      name: 'send_request',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Date`
+  String get date {
+    return Intl.message(
+      'Date',
+      name: 'date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description`
+  String get description {
+    return Intl.message(
+      'Description',
+      name: 'description',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `What You Want`
+  String get what_you_want {
+    return Intl.message(
+      'What You Want',
+      name: 'what_you_want',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `If you encounter a problem, contact me on social media`
+  String get if_you_need_send_me {
+    return Intl.message(
+      'If you encounter a problem, contact me on social media',
+      name: 'if_you_need_send_me',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
