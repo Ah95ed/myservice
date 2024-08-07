@@ -4,5 +4,6 @@
     "editor.guides.bracketPairs": true,
     "editor.guides.bracketPairsHorizontal": true,
     "dart.previewFlutterUiGuides": true,
-    "dart.previewFlutterUiGuidesCustomTracking": true
+    "dart.previewFlutterUiGuidesCustomTracking": true,
+    "workbench.preferredDarkColorTheme": "Default Dark Modern"
 }

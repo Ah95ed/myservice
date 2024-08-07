@@ -1,4 +1,5 @@
-import 'package:Al_Zab_township_guide/controller/Constant/provider/Provider.dart';
+import 'package:Al_Zab_township_guide/Helper/Size/SizedApp.dart';
+import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -18,8 +19,8 @@ class WhoCanDonateScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        elevation: 5.0,
-        toolbarHeight: 10.h,
+        elevation: 3.0,
+        toolbarHeight: getheight(8),
         actions: const [],
         leading: IconButton(
           onPressed: () {
@@ -35,7 +36,7 @@ class WhoCanDonateScreen extends StatelessWidget {
           S.of(context).whocandonate,
           style: TextStyle(
             color: AppTheme.white,
-            fontSize: 20.sp,
+            fontSize: setFontSize(16),
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -47,7 +48,7 @@ class WhoCanDonateScreen extends StatelessWidget {
               bottomRight: Radius.circular(20),
             ),
             gradient: LinearGradient(
-              colors: [ColorUsed.primary, ColorUsed.second],
+              colors: [ColorUsed.primary, ColorUsed.second,],
               begin: Alignment.bottomCenter,
               end: Alignment.topCenter,
             ),
@@ -73,8 +74,9 @@ class WhoCanDonateScreen extends StatelessWidget {
                               title: Text(
                                 c,
                                 style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 10.sp),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: setFontSize(10),
+                                ),
                               ),
                             ),
                           )

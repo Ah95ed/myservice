@@ -28,12 +28,37 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Select Service"),
         "already_member":
             MessageLookupByLibrary.simpleMessage("Already Member ? "),
+        "blood": MessageLookupByLibrary.simpleMessage("Blood"),
+        "blood_donation":
+            MessageLookupByLibrary.simpleMessage("Blood Donation"),
+        "blood_request": MessageLookupByLibrary.simpleMessage("Blood Request"),
+        "blood_transfer":
+            MessageLookupByLibrary.simpleMessage("Blood Transfer"),
         "blood_type": MessageLookupByLibrary.simpleMessage("Blood Type"),
         "blooddonors": MessageLookupByLibrary.simpleMessage("Blood Donors :"),
+        "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "chanage_lang": MessageLookupByLibrary.simpleMessage("Change Language"),
+        "change_language":
+            MessageLookupByLibrary.simpleMessage("Change Language"),
+        "change_password":
+            MessageLookupByLibrary.simpleMessage("Change Password"),
+        "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
+        "delete_account":
+            MessageLookupByLibrary.simpleMessage("Delete Account"),
+        "desctiption_message":
+            MessageLookupByLibrary.simpleMessage("Description"),
         "doctor": MessageLookupByLibrary.simpleMessage("Doctors"),
         "don_t_have_account":
             MessageLookupByLibrary.simpleMessage("Don\'t have Account ?"),
+        "donate": MessageLookupByLibrary.simpleMessage("Donate"),
+        "donate_blood": MessageLookupByLibrary.simpleMessage("Donate Blood"),
+        "donate_organ": MessageLookupByLibrary.simpleMessage("Donate Organ"),
+        "donate_plasma": MessageLookupByLibrary.simpleMessage("Donate Plasma"),
+        "done": MessageLookupByLibrary.simpleMessage("Done"),
         "donors": MessageLookupByLibrary.simpleMessage("Donors"),
+        "edit_Data_and_delete":
+            MessageLookupByLibrary.simpleMessage("Edit Data and Delete"),
+        "email_exist": MessageLookupByLibrary.simpleMessage("Email is Exist  "),
         "enter_email": MessageLookupByLibrary.simpleMessage("Enter Email"),
         "enter_password":
             MessageLookupByLibrary.simpleMessage("Enter Password"),
@@ -44,19 +69,55 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Internal Transfer"),
         "line": MessageLookupByLibrary.simpleMessage("Lines"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
+        "logout": MessageLookupByLibrary.simpleMessage("Logout"),
+        "messagedeveloper":
+            MessageLookupByLibrary.simpleMessage("Message The Developer"),
+        "more_options": MessageLookupByLibrary.simpleMessage("More Options"),
         "name": MessageLookupByLibrary.simpleMessage("Name :"),
         "number_phone": MessageLookupByLibrary.simpleMessage("Number Phone"),
+        "organ": MessageLookupByLibrary.simpleMessage("Organ"),
+        "organ_donation":
+            MessageLookupByLibrary.simpleMessage("Organ Donation"),
+        "organ_request": MessageLookupByLibrary.simpleMessage("Organ Request"),
+        "organ_transfer":
+            MessageLookupByLibrary.simpleMessage("Organ Transfer"),
+        "plasma": MessageLookupByLibrary.simpleMessage("Plasma"),
+        "plasma_donation":
+            MessageLookupByLibrary.simpleMessage("Plasma Donation"),
+        "plasma_request":
+            MessageLookupByLibrary.simpleMessage("Plasma Request"),
+        "plasma_transfer":
+            MessageLookupByLibrary.simpleMessage("Plasma Transfer"),
+        "please_enter_description":
+            MessageLookupByLibrary.simpleMessage("Please Enter Description"),
+        "please_enter_email":
+            MessageLookupByLibrary.simpleMessage("Please Enter Email"),
+        "please_enter_name":
+            MessageLookupByLibrary.simpleMessage("Please Enter Name"),
+        "please_enter_password":
+            MessageLookupByLibrary.simpleMessage("Please Enter Password"),
+        "please_enter_phone":
+            MessageLookupByLibrary.simpleMessage("Please Enter Phone"),
+        "please_enter_title":
+            MessageLookupByLibrary.simpleMessage("Please Enter Title"),
+        "please_enter_what_you_want":
+            MessageLookupByLibrary.simpleMessage("Please Enter What You Want"),
+        "please_select_an_option":
+            MessageLookupByLibrary.simpleMessage("Please select an Service"),
         "presence": MessageLookupByLibrary.simpleMessage("Presence"),
         "profession": MessageLookupByLibrary.simpleMessage("Profession :"),
         "professions": MessageLookupByLibrary.simpleMessage("Professions"),
         "register_now": MessageLookupByLibrary.simpleMessage("Register Now"),
+        "search": MessageLookupByLibrary.simpleMessage("Search"),
+        "settings": MessageLookupByLibrary.simpleMessage("Settings"),
+        "skip": MessageLookupByLibrary.simpleMessage("Skip"),
         "source": MessageLookupByLibrary.simpleMessage("Go to the source"),
         "specialization":
             MessageLookupByLibrary.simpleMessage("Specialization :"),
         "team_policy": MessageLookupByLibrary.simpleMessage(
             "Terms of Service | Privacy Policy"),
         "time": MessageLookupByLibrary.simpleMessage("Time :"),
-        "title": MessageLookupByLibrary.simpleMessage("AL Zab Township Guide"),
+        "title": MessageLookupByLibrary.simpleMessage("ALZab Township Guide"),
         "title_service": MessageLookupByLibrary.simpleMessage("Title :"),
         "type": MessageLookupByLibrary.simpleMessage("Type :"),
         "wait_service": MessageLookupByLibrary.simpleMessage("Waiting Service"),

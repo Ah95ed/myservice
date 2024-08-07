@@ -8,7 +8,7 @@ class ColorUsed {
   static const Color PrimaryBackground = Color(0xFFD3c3B9);
 }
 class AppConfig {
-  static const email = 'blood.donations.lb@gmail.com';
+  static const emailDonate = 'blood.donations.lb@gmail.com';
   static const bloodDonationInfoLink =
       'https://www.moph.gov.lb/en/Pages/4/3262/blood-transfusion-';
 }

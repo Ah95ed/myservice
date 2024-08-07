@@ -46,48 +46,6 @@
       "api_key": [
         {
           "current_key": "AIzaSyDwLmR_6r0CPKZrlzVyPA-_ZD4aLnhNXr0"
-        },
-        {
-          "current_key": "AIzaSyAoiL4XqfR0EVMec7pTcISVpubLd2-a9MM"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "470738266549-cklbt5tjnmsindoj2tp9vksj56cmotd3.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "470738266549-5h5i8orqgcj8upr7f13a73t5a1l9ucie.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.ecommerceApp"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:470738266549:android:0cf9e9eea0aa8e7c3211fc",
-        "android_client_info": {
-          "package_name": "com.example.Al_Zab_township_guide"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "470738266549-cklbt5tjnmsindoj2tp9vksj56cmotd3.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDwLmR_6r0CPKZrlzVyPA-_ZD4aLnhNXr0"
-        },
-        {
-          "current_key": "AIzaSyAoiL4XqfR0EVMec7pTcISVpubLd2-a9MM"
         }
       ],
       "services": {

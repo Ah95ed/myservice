@@ -1,43 +1,46 @@
-import 'package:Al_Zab_township_guide/controller/Constant/provider/Provider.dart';
+import 'dart:ui';
+
+import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
+import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
+import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
+import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
+import 'package:Al_Zab_township_guide/Helper/Size/SizedApp.dart';
+import 'package:Al_Zab_township_guide/controller/provider/BloodController/MainController.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
-import 'package:Al_Zab_township_guide/view/screens/BloodScreen.dart';
-import 'package:Al_Zab_township_guide/view/screens/DoctorScreen.dart';
-import 'package:Al_Zab_township_guide/view/screens/ProfessionsScreen.dart';
-import 'package:Al_Zab_township_guide/view/screens/SatotaScreen.dart';
+import 'package:Al_Zab_township_guide/main.dart';
+import 'package:Al_Zab_township_guide/view/widget/Drawer/CustomDrawer.dart';
+import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/app_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:sizer/sizer.dart';
-import 'package:Al_Zab_township_guide/view/screens/TheCars.dart';
-import 'package:Al_Zab_township_guide/view/widget/ButtonSelect.dart';
-import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
+import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
-// ignore: must_be_immutable
-class MainScreen extends StatelessWidget {
-  // ignore: constant_identifier_names
+class MainScreen extends StatefulWidget {
   static const ROUTE = "MainScreen";
   const MainScreen({super.key});
-  
   // ! lيرنا الحسن
   @override
   Widget build(BuildContext context) {
+    final read = context.read<MainController>();
+
     return Scaffold(
+      key: _scaffoldKey,
+      drawer: Customdrawer(),
+      extendBodyBehindAppBar: true,
+      extendBody: true,
+      backgroundColor: ColorUsed.PrimaryBackground,
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(0, 0, 0, 0),
+        backgroundColor: Colors.transparent,
         elevation: 2.0,
         toolbarHeight: 10.h ,
-        title: Row(
-          children: [
-             Text(
-            S.of(context).Select_Service,
-            style: TextStyle(
-              color: AppTheme.white,
-              fontSize: 20.sp,
-              fontWeight: FontWeight.bold,
-            ),
+        title: Text(
+          S.of(context).Select_Service,
+          style: TextStyle(
+            color: AppTheme.white,
+            fontSize: 20.sp,
+            fontWeight: FontWeight.bold,
           ),
-          ],
         ),
         centerTitle: true,
         flexibleSpace: Container(
