@@ -9,6 +9,7 @@ import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/controller/provider/SignupProvider/SignupProvider.dart';
 import 'package:Al_Zab_township_guide/view/routing/routing.dart';
 import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
+import 'package:Al_Zab_township_guide/view/screens/MessageDeveloper.dart';
 import 'package:Al_Zab_township_guide/view/screens/MyCustomSplashScreen.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
 import 'package:flutter/foundation.dart';
@@ -104,7 +105,7 @@ class MyApp extends StatelessWidget {
             ),
             home: shared!.getBool('spalsh') == null
                 ? MyCustomSplashScreen()
-                : MainScreen(),
+                : MessageDeveloper(),
           );
         });
       },

@@ -45,6 +45,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "delete_account":
             MessageLookupByLibrary.simpleMessage("Delete Account"),
+        "desctiption_message":
+            MessageLookupByLibrary.simpleMessage("Description"),
         "doctor": MessageLookupByLibrary.simpleMessage("Doctors"),
         "don_t_have_account":
             MessageLookupByLibrary.simpleMessage("Don\'t have Account ?"),
@@ -68,6 +70,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "line": MessageLookupByLibrary.simpleMessage("Lines"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "logout": MessageLookupByLibrary.simpleMessage("Logout"),
+        "messagedeveloper":
+            MessageLookupByLibrary.simpleMessage("Message The Developer"),
         "more_options": MessageLookupByLibrary.simpleMessage("More Options"),
         "name": MessageLookupByLibrary.simpleMessage("Name :"),
         "number_phone": MessageLookupByLibrary.simpleMessage("Number Phone"),

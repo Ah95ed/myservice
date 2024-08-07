@@ -739,6 +739,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Message The Developer`
+  String get messagedeveloper {
+    return Intl.message(
+      'Message The Developer',
+      name: 'messagedeveloper',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description`
+  String get desctiption_message {
+    return Intl.message(
+      'Description',
+      name: 'desctiption_message',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

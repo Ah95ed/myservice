@@ -83,34 +83,7 @@ class SignupScreen extends StatelessWidget {
                       CustomMaterialButton(
                           title: S.of(context).login,
                           onPressed: () async {
-                            
-                            // if (name.text.isEmpty ||
-                            //     email.text.isEmpty ||
-                            //     phone.text.isEmpty ||
-                            //     password.text.isEmpty) {
-                            //   ScaffoldMessenger.of(context).showSnackBar(
-                            //     SnackBar(
-                            //       content: Text(Please fill all fields),
-                            //     ),
-                            //   );
-                            //   return;
-                            // }
-                            // if(password.text.length <6){
-                            //   ScaffoldMessenger.of(context).showSnackBar(
-                            //     SnackBar(
-                            //       content: Text(Password must be at least 6 characters),
-                            //     ),
-                            //   );
-                            //   return;
-                            // }
-                            // if(phone.text.length < 11) {
-                            //   ScaffoldMessenger.of(context).showSnackBar(
-                            //     SnackBar(
-                            //       content: Text(Phone number must be at least 11 characters),
-                            //     ),
-                            //   );
-                            //   return;
-                            // }
+                          
                             provider.startLoading();
                             await provider.sendCode(
                               SignupModel(

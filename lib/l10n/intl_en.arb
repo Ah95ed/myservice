@@ -67,6 +67,8 @@
      "done" : "Done",
      "search" : "Search",
      "confirm" : "Confirm",
-     "skip" : "Skip"
+     "skip" : "Skip",
+     "messagedeveloper" : "Message The Developer",
+     "desctiption_message" : "Description"
 
 }
