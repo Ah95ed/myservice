@@ -1,4 +1,5 @@
-import 'package:Al_Zab_township_guide/controller/Constant/provider/Provider.dart';
+import 'package:Al_Zab_township_guide/controller/provider/LoginProvider/Loginprovider.dart';
+import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:email_otp/email_otp.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -12,7 +13,8 @@ class OtpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final p = context.watch<Providers>();
+    final p = context.watch<LoginProvider>();
+    final providers = context.read<Providers>();
     return Scaffold(
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
@@ -129,7 +131,14 @@ class OtpScreen extends StatelessWidget {
               ),
               onPressed: () async {
                 if (EmailOTP.verifyOTP(otp: otpNumber.text)) {
-                  await p.saveData(context);
+                  await p.saveData(
+                    context,
+                    providers.email!,
+                    password: providers.password!,
+                    name: providers.name!,
+                    phone: providers.phone!,
+           
+                  );
                 }
               },
               child: const Text(

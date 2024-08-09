@@ -50,10 +50,10 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `AL Zab Township Guide`
+  /// `ALZab Township Guide`
   String get title {
     return Intl.message(
-      'AL Zab Township Guide',
+      'ALZab Township Guide',
       name: 'title',
       desc: '',
       args: [],
@@ -355,6 +355,526 @@ class S {
     return Intl.message(
       'Already Member ? ',
       name: 'already_member',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email is Exist  `
+  String get email_exist {
+    return Intl.message(
+      'Email is Exist  ',
+      name: 'email_exist',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `More Options`
+  String get more_options {
+    return Intl.message(
+      'More Options',
+      name: 'more_options',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change Password`
+  String get change_password {
+    return Intl.message(
+      'Change Password',
+      name: 'change_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete Account`
+  String get delete_account {
+    return Intl.message(
+      'Delete Account',
+      name: 'delete_account',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit Data and Delete`
+  String get edit_Data_and_delete {
+    return Intl.message(
+      'Edit Data and Delete',
+      name: 'edit_Data_and_delete',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Settings`
+  String get settings {
+    return Intl.message(
+      'Settings',
+      name: 'settings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change Language`
+  String get change_language {
+    return Intl.message(
+      'Change Language',
+      name: 'change_language',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Logout`
+  String get logout {
+    return Intl.message(
+      'Logout',
+      name: 'logout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Donate`
+  String get donate {
+    return Intl.message(
+      'Donate',
+      name: 'donate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Donate Blood`
+  String get donate_blood {
+    return Intl.message(
+      'Donate Blood',
+      name: 'donate_blood',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Donate Plasma`
+  String get donate_plasma {
+    return Intl.message(
+      'Donate Plasma',
+      name: 'donate_plasma',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Donate Organ`
+  String get donate_organ {
+    return Intl.message(
+      'Donate Organ',
+      name: 'donate_organ',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Blood`
+  String get blood {
+    return Intl.message(
+      'Blood',
+      name: 'blood',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Plasma`
+  String get plasma {
+    return Intl.message(
+      'Plasma',
+      name: 'plasma',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Organ`
+  String get organ {
+    return Intl.message(
+      'Organ',
+      name: 'organ',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Blood Request`
+  String get blood_request {
+    return Intl.message(
+      'Blood Request',
+      name: 'blood_request',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Plasma Request`
+  String get plasma_request {
+    return Intl.message(
+      'Plasma Request',
+      name: 'plasma_request',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Organ Request`
+  String get organ_request {
+    return Intl.message(
+      'Organ Request',
+      name: 'organ_request',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Blood Donation`
+  String get blood_donation {
+    return Intl.message(
+      'Blood Donation',
+      name: 'blood_donation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Plasma Donation`
+  String get plasma_donation {
+    return Intl.message(
+      'Plasma Donation',
+      name: 'plasma_donation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Organ Donation`
+  String get organ_donation {
+    return Intl.message(
+      'Organ Donation',
+      name: 'organ_donation',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Blood Transfer`
+  String get blood_transfer {
+    return Intl.message(
+      'Blood Transfer',
+      name: 'blood_transfer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Plasma Transfer`
+  String get plasma_transfer {
+    return Intl.message(
+      'Plasma Transfer',
+      name: 'plasma_transfer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Organ Transfer`
+  String get organ_transfer {
+    return Intl.message(
+      'Organ Transfer',
+      name: 'organ_transfer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change Language`
+  String get chanage_lang {
+    return Intl.message(
+      'Change Language',
+      name: 'chanage_lang',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please select an Service`
+  String get please_select_an_option {
+    return Intl.message(
+      'Please select an Service',
+      name: 'please_select_an_option',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please Enter Phone`
+  String get please_enter_phone {
+    return Intl.message(
+      'Please Enter Phone',
+      name: 'please_enter_phone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please Enter Name`
+  String get please_enter_name {
+    return Intl.message(
+      'Please Enter Name',
+      name: 'please_enter_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please Enter Email`
+  String get please_enter_email {
+    return Intl.message(
+      'Please Enter Email',
+      name: 'please_enter_email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please Enter Password`
+  String get please_enter_password {
+    return Intl.message(
+      'Please Enter Password',
+      name: 'please_enter_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please Enter Title`
+  String get please_enter_title {
+    return Intl.message(
+      'Please Enter Title',
+      name: 'please_enter_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please Enter Description`
+  String get please_enter_description {
+    return Intl.message(
+      'Please Enter Description',
+      name: 'please_enter_description',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please Enter What You Want`
+  String get please_enter_what_you_want {
+    return Intl.message(
+      'Please Enter What You Want',
+      name: 'please_enter_what_you_want',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Done`
+  String get done {
+    return Intl.message(
+      'Done',
+      name: 'done',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search`
+  String get search {
+    return Intl.message(
+      'Search',
+      name: 'search',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm`
+  String get confirm {
+    return Intl.message(
+      'Confirm',
+      name: 'confirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Skip`
+  String get skip {
+    return Intl.message(
+      'Skip',
+      name: 'skip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Message The Developer`
+  String get messagedeveloper {
+    return Intl.message(
+      'Message The Developer',
+      name: 'messagedeveloper',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description`
+  String get desctiption_message {
+    return Intl.message(
+      'Description',
+      name: 'desctiption_message',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Service Type`
+  String get service_type {
+    return Intl.message(
+      'Service Type',
+      name: 'service_type',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send`
+  String get send {
+    return Intl.message(
+      'Send',
+      name: 'send',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send Message To Developer`
+  String get send_developer {
+    return Intl.message(
+      'Send Message To Developer',
+      name: 'send_developer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send Request`
+  String get send_request {
+    return Intl.message(
+      'Send Request',
+      name: 'send_request',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Date`
+  String get date {
+    return Intl.message(
+      'Date',
+      name: 'date',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Description`
+  String get description {
+    return Intl.message(
+      'Description',
+      name: 'description',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `What You Want`
+  String get what_you_want {
+    return Intl.message(
+      'What You Want',
+      name: 'what_you_want',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `If you encounter a problem, contact me on social media`
+  String get if_you_need_send_me {
+    return Intl.message(
+      'If you encounter a problem, contact me on social media',
+      name: 'if_you_need_send_me',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `One the Field is Empty`
+  String get fields {
+    return Intl.message(
+      'One the Field is Empty',
+      name: 'fields',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Done To Send Developer Message `
+  String get done_to_send {
+    return Intl.message(
+      'Done To Send Developer Message ',
+      name: 'done_to_send',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Number Not Found`
+  String get not_phond_found {
+    return Intl.message(
+      'Number Not Found',
+      name: 'not_phond_found',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `If you encounter a problem, contact me `
+  String get go_to_developer_page {
+    return Intl.message(
+      'If you encounter a problem, contact me ',
+      name: 'go_to_developer_page',
       desc: '',
       args: [],
     );
