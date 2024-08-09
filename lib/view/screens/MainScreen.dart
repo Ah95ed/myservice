@@ -1,30 +1,15 @@
 import 'dart:ui';
-
-<<<<<<< HEAD
 import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
-import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
-import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
-=======
->>>>>>> 8e4e3d3f396e2413d01c8b7685c25cffc59aebea
 import 'package:Al_Zab_township_guide/controller/provider/BloodController/MainController.dart';
-import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
-
-import 'package:Al_Zab_township_guide/view/screens/BloodScreen.dart';
-import 'package:Al_Zab_township_guide/view/screens/DoctorScreen.dart';
-import 'package:Al_Zab_township_guide/view/screens/ProfessionsScreen.dart';
-import 'package:Al_Zab_township_guide/view/screens/SatotaScreen.dart';
-import 'package:Al_Zab_township_guide/view/screens/TheCars.dart';
-import 'package:Al_Zab_township_guide/view/widget/ButtonSelect.dart';
+import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/widget/Drawer/CustomDrawer.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/app_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:sizer/sizer.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
 
 class MainScreen extends StatefulWidget {
@@ -36,15 +21,12 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-
-   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   late TutorialCoachMark tutorialCoachMark;
 
   @override
   void initState() {
     if (shared!.getBool('tutorial') == null) {
-      Logger.logger('''message initState
-        ${shared!.getBool('tutorial')}''');
       createTutorial();
       addItem();
       Future.delayed(Duration(milliseconds: 1500), showTutorial);
@@ -52,7 +34,7 @@ class _MainScreenState extends State<MainScreen> {
 
     super.initState();
   }
-  // ! lيرنا الحسن
+
   @override
   Widget build(BuildContext context) {
     final read = context.read<MainController>();
@@ -65,12 +47,16 @@ class _MainScreenState extends State<MainScreen> {
       backgroundColor: ColorUsed.PrimaryBackground,
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
+        
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(15),
+            bottomRight: Radius.circular(15),
+          ),
         ),
         leading: IconButton(
           icon: Icon(
-           
+            key: menu,
             Icons.menu,
             color: Colors.white,
           ),
@@ -83,7 +69,7 @@ class _MainScreenState extends State<MainScreen> {
         toolbarHeight: getheight(10),
         actions: [
           IconButton(
-             key: lang,
+            key: lang,
             icon: Icon(
               Icons.language,
               color: AppTheme.notWhite,
@@ -126,9 +112,10 @@ class _MainScreenState extends State<MainScreen> {
         ],
       ),
       bottomNavigationBar: Container(
+      
         margin: EdgeInsets.symmetric(
           horizontal: getWidth(2),
-          vertical: getheight(2.5),
+          vertical: getheight(5),
         ),
         decoration: BoxDecoration(boxShadow: [
           BoxShadow(
@@ -191,7 +178,7 @@ class _MainScreenState extends State<MainScreen> {
   void createTutorial() {
     tutorialCoachMark = TutorialCoachMark(
       targets: targets,
-      colorShadow: Colors.red,
+      colorShadow: ColorUsed.primary,
       textSkip: S.current.skip,
       paddingFocus: 10,
       opacityShadow: 0.5,
@@ -231,7 +218,7 @@ class _MainScreenState extends State<MainScreen> {
   GlobalKey stota = GlobalKey();
 
   GlobalKey lang = GlobalKey();
-
+  GlobalKey menu = GlobalKey();
   addItem() {
     targets.add(
       TargetFocus(
@@ -344,7 +331,7 @@ class _MainScreenState extends State<MainScreen> {
       ),
     );
     //doctor ,work ,donors ,taxi ,stota
- 
+
     targets.add(
       TargetFocus(
         identify: "keyBottomNavigation4",
@@ -372,7 +359,7 @@ class _MainScreenState extends State<MainScreen> {
         ],
       ),
     );
-       targets.add(
+    targets.add(
       TargetFocus(
         identify: "keyBottomNavigation4",
         keyTarget: lang,
@@ -381,6 +368,33 @@ class _MainScreenState extends State<MainScreen> {
         contents: [
           TargetContent(
             align: ContentAlign.bottom,
+            builder: (context, controller) {
+              return const Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    "Titulo lorem ipsum",
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              );
+            },
+          ),
+        ],
+      ),
+    );
+    targets.add(
+      TargetFocus(
+        identify: "keyBottomNavigation2",
+        keyTarget: menu,
+        alignSkip: Alignment.topRight,
+        enableOverlayTab: true,
+        contents: [
+          TargetContent(
+            align: ContentAlign.top,
             builder: (context, controller) {
               return const Column(
                 mainAxisSize: MainAxisSize.min,

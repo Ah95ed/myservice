@@ -1,3 +1,4 @@
+import 'package:Al_Zab_township_guide/controller/provider/DeveloperController/DeveloperController.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
@@ -18,10 +19,9 @@ class MessageDeveloper extends StatelessWidget {
   final TextEditingController type = TextEditingController();
   final TextEditingController description = TextEditingController();
 
-  //! Here need design for Message Developer
-  //! Mirna
   @override
   Widget build(BuildContext context) {
+    final read = context.read<DeveloperController>();
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -58,14 +58,14 @@ class MessageDeveloper extends StatelessWidget {
               ),
               Spacer(),
               TextFieldCustom(
-                text: name,
+                text: number,
                 input: TextInputType.phone,
                 icons: Icons.phone,
                 hint: S.of(context).number_phone,
               ),
               Spacer(),
               TextFieldCustom(
-                text: name,
+                text: type,
                 input: TextInputType.text,
                 icons: Icons.design_services,
                 hint: S.of(context).service_type,
@@ -80,7 +80,27 @@ class MessageDeveloper extends StatelessWidget {
               Spacer(),
               CustomMaterialButton(
                 title: S.current.send,
-                onPressed: () {},
+                onPressed: () {
+                  if (name.text.isEmpty ||
+                      number.text.isEmpty ||
+                      type.text.isEmpty ||
+                      description.text.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(S.current.fields),
+                        duration: Duration(seconds: 2),
+                      ),
+                    );
+                    return;
+                  }
+                  read.sendDataToDeveloper({
+                    'name': name.text,
+                    'number': number.text,
+                    "type": type.text,
+                    'description': description.text,
+                  }, number.text);
+                  
+                },
               ),
               Spacer(),
               Padding(

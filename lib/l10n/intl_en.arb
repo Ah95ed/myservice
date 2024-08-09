@@ -77,5 +77,9 @@
     "date": "Date",
     "description": "Description",
     "what_you_want": "What You Want",
-    "if_you_need_send_me": "If you encounter a problem, contact me on social media"
+    "if_you_need_send_me": "If you encounter a problem, contact me on social media",
+    "fields": "One the Field is Empty",
+    "done_to_send" : "Done To Send Developer Message ",
+    "not_phond_found":"Number Not Found",
+    "go_to_developer_page": "If you encounter a problem, contact me "
 }

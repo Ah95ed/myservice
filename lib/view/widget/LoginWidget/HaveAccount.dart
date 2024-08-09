@@ -30,7 +30,7 @@ class HaveAccount extends StatelessWidget {
         TextButton(
           autofocus: true,
           onPressed: () =>
-              {read.managerScreen(route!, context,)},
+              {read.managerScreenSplash(route!, context,false)},
           child: Text(
            s2!,
             style: TextStyle(

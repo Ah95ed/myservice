@@ -57,6 +57,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "donate_organ": MessageLookupByLibrary.simpleMessage("Donate Organ"),
         "donate_plasma": MessageLookupByLibrary.simpleMessage("Donate Plasma"),
         "done": MessageLookupByLibrary.simpleMessage("Done"),
+        "done_to_send": MessageLookupByLibrary.simpleMessage(
+            "Done To Send Developer Message "),
         "donors": MessageLookupByLibrary.simpleMessage("Donors"),
         "edit_Data_and_delete":
             MessageLookupByLibrary.simpleMessage("Edit Data and Delete"),
@@ -64,9 +66,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "enter_email": MessageLookupByLibrary.simpleMessage("Enter Email"),
         "enter_password":
             MessageLookupByLibrary.simpleMessage("Enter Password"),
+        "fields":
+            MessageLookupByLibrary.simpleMessage("One the Field is Empty"),
         "forget_password":
             MessageLookupByLibrary.simpleMessage("Forget Password ?"),
         "from": MessageLookupByLibrary.simpleMessage("From :"),
+        "go_to_developer_page": MessageLookupByLibrary.simpleMessage(
+            "If you encounter a problem, contact me "),
         "if_you_need_send_me": MessageLookupByLibrary.simpleMessage(
             "If you encounter a problem, contact me on social media"),
         "internal_transfer":
@@ -78,6 +84,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Message The Developer"),
         "more_options": MessageLookupByLibrary.simpleMessage("More Options"),
         "name": MessageLookupByLibrary.simpleMessage("Name :"),
+        "not_phond_found":
+            MessageLookupByLibrary.simpleMessage("Number Not Found"),
         "number_phone": MessageLookupByLibrary.simpleMessage("Number Phone"),
         "organ": MessageLookupByLibrary.simpleMessage("Organ"),
         "organ_donation":

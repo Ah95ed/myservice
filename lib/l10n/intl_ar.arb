@@ -75,6 +75,18 @@
     "search": "بحث",
     "done": "تم",
     "please_enter_what_you_want": "الرجاء ادخال ما تريد",
-    "skip": "تخطي"
-
+    "skip": "تخطي",
+    "messagedeveloper": "رسالة المطور",
+    "desctiption_message": "الوصف",
+    "service_type": "نوع الخدمة",
+    "send": "إرسال",
+    "send_developer": "إرسال رسالة إلى المطور",
+    "send_request": "إرسال طلب",
+    "date": "تاريخ",
+    "description": "الوصف",
+    "what_you_want": "ما تريد",
+    "if_you_need_send_me": "إذا واجهتك مشكلة، تواصل معي على وسائل التواصل الاجتماعي",
+    "fields": "أحد الحقول فارغ",
+    "done_to_send": "تم ارسال رسالة للمطور",
+    "go_to_developer_page" : "أذا واجهتك مشكلة، تواصل معي"
 }

@@ -839,6 +839,46 @@ class S {
       args: [],
     );
   }
+
+  /// `One the Field is Empty`
+  String get fields {
+    return Intl.message(
+      'One the Field is Empty',
+      name: 'fields',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Done To Send Developer Message `
+  String get done_to_send {
+    return Intl.message(
+      'Done To Send Developer Message ',
+      name: 'done_to_send',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Number Not Found`
+  String get not_phond_found {
+    return Intl.message(
+      'Number Not Found',
+      name: 'not_phond_found',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `If you encounter a problem, contact me `
+  String get go_to_developer_page {
+    return Intl.message(
+      'If you encounter a problem, contact me ',
+      name: 'go_to_developer_page',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

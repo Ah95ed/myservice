@@ -1,17 +1,14 @@
 import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
-import 'package:Al_Zab_township_guide/Models/EditAndDelete/EditModel.dart';
-import 'package:Al_Zab_township_guide/Models/SignupModel/SignupModel.dart';
 import 'package:Al_Zab_township_guide/controller/Constant/Constant.dart';
-import 'package:Al_Zab_township_guide/controller/Constant/ServiceCollectios.dart';
 import 'package:Al_Zab_township_guide/controller/provider/OTPEmailProvider/OTPEmailProvider.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
-import 'package:Al_Zab_township_guide/controller/provider/SignupProvider/SignupProvider.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/main.dart';
-import 'package:Al_Zab_township_guide/view/screens/OTPScreen.dart';
+import 'package:Al_Zab_township_guide/view/screens/MessageDeveloper.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
+import 'package:Al_Zab_township_guide/view/widget/staticWidget/CustomMaterialButton.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -86,60 +83,68 @@ class _CustomDialogState extends State<CustomDialog> {
                 return null;
               },
             ),
+            SizedBox(
+              height: getheight(2.5),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text(
+                    S.current.cancel,
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () async {
+                    if (_selectedValue!.contains(S.current.doctor)) {
+                      _selectedValue = 'Doctor';
+                      searchService(_selectedValue);
+                      Navigator.of(context).pop();
+                    } else if (_selectedValue == S.current.blood_type) {
+                      searchTypes(_textController.text);
+                      Navigator.of(context).pop();
+
+                      // _selectedValue = ServiceCollectios.line.name;
+                    } else if (_selectedValue == S.current.Cars) {
+                      _selectedValue = 'line';
+                      searchService(_selectedValue);
+                    } else if (_selectedValue == S.current.professions) {
+                      _selectedValue = 'professions';
+                      searchService(_selectedValue);
+                    } else if (_selectedValue == S.current.internal_transfer) {
+                      _selectedValue = 'Satota';
+                      searchService(_selectedValue);
+                    }
+                  },
+                  child: Text(S.current.confirm),
+                ),
+              ],
+            )
           ],
         ),
       ),
-      actions: <Widget>[
-        ElevatedButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          child: Text(
-            S.current.cancel,
+      actions: [
+        Center(
+          child: Text(S.current.go_to_developer_page),
+        ),
+        SizedBox(
+          height: getheight(2),
+        ),
+        Center(
+          child: CustomMaterialButton(
+            title: S.current.send_developer,
+            onPressed: () {
+               Navigator.of(context).pop();
+              read!.managerScreen(MessageDeveloper.Route, context);
+              // Navigator.of(context).pop();
+            },
           ),
-        ),
-        ElevatedButton(
-          onPressed: () async {
-            if (_selectedValue!.contains(S.current.doctor)) {
-              _selectedValue = 'Doctor';
-            } else if (_selectedValue == S.current.blood_type) {
-              searchTypes(_textController.text);
-            Navigator.of(context).pop();
-
-              // _selectedValue = ServiceCollectios.line.name;
-            } else if (_selectedValue == S.current.Cars) {
-              _selectedValue = 'line';
-            } else if (_selectedValue == S.current.professions) {
-              _selectedValue = 'professions';
-            } else if (_selectedValue == S.current.internal_transfer) {
-              _selectedValue = 'Satota';
-            }
-            // if (_formKey.currentState!.validate()) {
-            //   QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-            //       .collection(_selectedValue!)
-            //       .where('number', isEqualTo: _textController.text)
-            //       .get()
-            //       .then((value) async {
-            //     Logger.logger('message: value ${value.docs}');
-
-            //     return value;
-            //   });
-            //   querySnapshot.docs.map((e) {
-            //     context.read<OTPEmailProvider>().sendCode('07824854526');
-            //     // Logger.logger('message map ${e.data}');
-            //     Logger.logger('message map ${e.data()}');
-            //     //   read.managerScreen(
-            //     //   OtpScreen.Route,
-            //     //   context,object: e.data()
-            //     // );
-            //   }).toList();
-
-            //   Navigator.of(context).pop();
-            // }
-          },
-          child: Text(S.current.confirm),
-        ),
+        )
       ],
+      // actionsAlignment: MainAxisAlignment.center,
     );
   }
 
@@ -183,18 +188,33 @@ class _CustomDialogState extends State<CustomDialog> {
             context.read<OTPEmailProvider>().sendCode(n);
             break;
           }
-
-          // r.docs.map(
-          //   (e) {
-          //     if(n == e.get('number')){
-          //       Logger.logger('message is exist ${ e.get('number')}');
-          //     }
-          //     Logger.logger('message map ${ e.get('number')}');
-          //   },
-          // );
         },
       );
-      
     }
+  }
+
+  void searchService(String? selectedValue) async {
+    CollectionReference querySnapshot =
+        await FirebaseFirestore.instance.collection(selectedValue!);
+    querySnapshot.where('number', isEqualTo: _textController.text).get().then(
+      (value) async {
+        value.docs.map((v) {
+          if (v.exists) {
+            context.read<OTPEmailProvider>().sendCode(v.get('number'));
+            return;
+          }
+          ScaffoldMessenger.of(MyApp.getContext()!).showSnackBar(
+            SnackBar(content: Text(S.current.not_phond_found)),
+          );
+          Logger.logger('message: value ${v.get('number')}');
+        }).toList();
+        // return value;
+      },
+      onError: (e) {
+        ScaffoldMessenger.of(MyApp.getContext()!).showSnackBar(
+          SnackBar(content: Text(e.toString())),
+        );
+      },
+    );
   }
 }

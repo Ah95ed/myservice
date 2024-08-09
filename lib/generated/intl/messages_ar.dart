@@ -39,7 +39,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "change_password":
             MessageLookupByLibrary.simpleMessage("تغيير الباسورد"),
         "confirm": MessageLookupByLibrary.simpleMessage("تاكيد"),
+        "date": MessageLookupByLibrary.simpleMessage("تاريخ"),
         "delete_account": MessageLookupByLibrary.simpleMessage("حذف الحساب"),
+        "description": MessageLookupByLibrary.simpleMessage("الوصف"),
+        "desctiption_message": MessageLookupByLibrary.simpleMessage("الوصف"),
         "doctor": MessageLookupByLibrary.simpleMessage("أطباء"),
         "don_t_have_account":
             MessageLookupByLibrary.simpleMessage("ليس لديك حساب؟"),
@@ -48,6 +51,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "donate_organ": MessageLookupByLibrary.simpleMessage("التبرع بالعمل"),
         "donate_plasma": MessageLookupByLibrary.simpleMessage("التبرع بالفصل"),
         "done": MessageLookupByLibrary.simpleMessage("تم"),
+        "done_to_send":
+            MessageLookupByLibrary.simpleMessage("تم ارسال رسالة للمطور"),
         "donors": MessageLookupByLibrary.simpleMessage("متبرعين"),
         "edit_Data_and_delete":
             MessageLookupByLibrary.simpleMessage("تعديل البيانات و حذفها"),
@@ -56,14 +61,21 @@ class MessageLookup extends MessageLookupByLibrary {
         "enter_email":
             MessageLookupByLibrary.simpleMessage("أدخل البريد الإلكتروني"),
         "enter_password": MessageLookupByLibrary.simpleMessage("ادخل الباسورد"),
+        "fields": MessageLookupByLibrary.simpleMessage("أحد الحقول فارغ"),
         "forget_password":
             MessageLookupByLibrary.simpleMessage("هل نسيت الباسورد ؟"),
         "from": MessageLookupByLibrary.simpleMessage("من :"),
+        "go_to_developer_page":
+            MessageLookupByLibrary.simpleMessage("أذا واجهتك مشكلة، تواصل معي"),
+        "if_you_need_send_me": MessageLookupByLibrary.simpleMessage(
+            "إذا واجهتك مشكلة، تواصل معي على وسائل التواصل الاجتماعي"),
         "internal_transfer":
             MessageLookupByLibrary.simpleMessage("التحويل الداخلي"),
         "line": MessageLookupByLibrary.simpleMessage("خطوط"),
         "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
         "logout": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
+        "messagedeveloper":
+            MessageLookupByLibrary.simpleMessage("رسالة المطور"),
         "more_options":
             MessageLookupByLibrary.simpleMessage("المزيد من الخيارات"),
         "name": MessageLookupByLibrary.simpleMessage("الاسم :"),
@@ -93,6 +105,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "professions": MessageLookupByLibrary.simpleMessage("المهن"),
         "register_now": MessageLookupByLibrary.simpleMessage("سجل الآن"),
         "search": MessageLookupByLibrary.simpleMessage("بحث"),
+        "send": MessageLookupByLibrary.simpleMessage("إرسال"),
+        "send_developer":
+            MessageLookupByLibrary.simpleMessage("إرسال رسالة إلى المطور"),
+        "send_request": MessageLookupByLibrary.simpleMessage("إرسال طلب"),
+        "service_type": MessageLookupByLibrary.simpleMessage("نوع الخدمة"),
         "settings": MessageLookupByLibrary.simpleMessage("الاعدادات"),
         "skip": MessageLookupByLibrary.simpleMessage("تخطي"),
         "source": MessageLookupByLibrary.simpleMessage("انتقل إلى المصدر"),
@@ -104,6 +121,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "title_service": MessageLookupByLibrary.simpleMessage("العنوان :"),
         "type": MessageLookupByLibrary.simpleMessage("النوع :"),
         "wait_service": MessageLookupByLibrary.simpleMessage("أنتظر من فضلك "),
+        "what_you_want": MessageLookupByLibrary.simpleMessage("ما تريد"),
         "whocandonate":
             MessageLookupByLibrary.simpleMessage("من يمكنه التبرع بالدم ؟")
       };

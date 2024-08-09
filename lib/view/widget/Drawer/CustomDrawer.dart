@@ -58,27 +58,7 @@ class Customdrawer extends StatelessWidget {
             thickness: getWidth(0.5),
             color: ColorUsed.DarkGreen,
           ),
-          ListTile(
-            leading: Icon(Icons.login),
-            title: Text(
-              S.of(context).login,
-              style: TextStyle(
-                fontSize: setFontSize(12),
-                fontWeight: FontWeight.w500,
-                color: ColorUsed.DarkGreen,
-              ),
-            ),
-            onTap: () {
-              read.managerScreen(
-                LoginScreen.Route,
-                context,
-              );
-            },
-          ),
-          Divider(
-            thickness: getWidth(0.5),
-            color: ColorUsed.DarkGreen,
-          ),
+         
           ListTile(
             leading: Icon(Icons.edit),
             title: Text(
@@ -90,8 +70,7 @@ class Customdrawer extends StatelessWidget {
               ),
             ),
             onTap: () {
-              // here to open edit Screen
-              // read.managerScreen(, context)
+               Scaffold.of(ctx).closeDrawer();
               showDialog(
                 context: context,
                 builder: (BuildContext context) {
@@ -99,7 +78,7 @@ class Customdrawer extends StatelessWidget {
                   return CustomDialog();
                 },
               );
-               Scaffold.of(ctx).closeDrawer();
+              
             },
           ),
           Divider(

@@ -5,6 +5,7 @@ import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/main.dart';
 import 'package:Al_Zab_township_guide/view/screens/MessageDeveloper.dart';
+import 'package:Al_Zab_township_guide/view/screens/OTPScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +36,9 @@ class OTPEmailProvider with ChangeNotifier {
         // setState(() {
         _verificationId = verificationId;
         shared!.setString('verificationId', _verificationId);
-        Logger.logger('message verificationId -> $_verificationId');
+        MyApp.getContext()!
+              .read<Providers>()
+              .managerScreen(OtpScreen.Route, MyApp.getContext()!);
       },
       codeAutoRetrievalTimeout: (String verificationId) {
         // setState(() {

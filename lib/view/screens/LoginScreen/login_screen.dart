@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:Al_Zab_township_guide/controller/provider/LoginProvider/Loginprovider.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
+import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/screens/SignupScreen/signup_screen.dart';
 import 'package:Al_Zab_township_guide/view/widget/LoginWidget/HaveAccount.dart';
 import 'package:Al_Zab_township_guide/view/widget/staticWidget/TextFieldCustom.dart';
@@ -19,8 +20,6 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-
     final providerLogin = context.read<LoginProvider>();
     return Scaffold(
       body: SingleChildScrollView(
@@ -29,7 +28,9 @@ class LoginScreen extends StatelessWidget {
           color: ColorUsed.PrimaryBackground,
           child: Column(
             children: [
-              Login_Image(height: 40.h,),
+              Login_Image(
+                height: 40.h,
+              ),
               SizedBox(
                 height: 6.h,
               ),
@@ -40,6 +41,9 @@ class LoginScreen extends StatelessWidget {
                 input: TextInputType.emailAddress,
                 icons: Icons.email,
                 hint: S.of(context).enter_email,
+              ),
+              SizedBox(
+                height: getheight(2),
               ),
 
 // //! password
@@ -52,7 +56,7 @@ class LoginScreen extends StatelessWidget {
               ),
               //! forget password
               SizedBox(
-                height: 2.h,
+                height: getheight(2)
               ),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 5.w),
@@ -81,11 +85,11 @@ class LoginScreen extends StatelessWidget {
                     password.text,
                     context,
                   );
-                  // log(message ${email.text});
-                  // log(message ${password.text});
                 },
               ),
-              SizedBox(height: 1.h,),
+              SizedBox(
+                height: 1.h,
+              ),
               HaveAccount(
                 s1: S.of(context).don_t_have_account,
                 s2: S.of(context).register_now,
