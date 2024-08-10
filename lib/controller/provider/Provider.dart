@@ -1,7 +1,6 @@
 import 'dart:developer';
 import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
 import 'package:Al_Zab_township_guide/controller/Constant/Constant.dart';
-import 'package:Al_Zab_township_guide/main.dart';
 import 'package:Al_Zab_township_guide/view/screens/OTPScreen.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/app_theme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -29,6 +28,10 @@ class Providers with ChangeNotifier {
     super.dispose();
     title = const Text('');
     actionsicon = const Icon(Icons.search);
+    notifyListeners();
+  }
+
+  void refresh() {
     notifyListeners();
   }
 

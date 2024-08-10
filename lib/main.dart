@@ -106,7 +106,7 @@ class MyApp extends StatelessWidget {
               ),
               home: shared!.getBool('spalsh') == null
                   ? MyCustomSplashScreen()
-                  : SignupScreen()      ,
+                  : MainScreen()      ,
             );
           },
         );

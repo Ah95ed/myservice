@@ -20,7 +20,7 @@ class LoginProvider with ChangeNotifier {
         email: email,
         password: password,
       );
-      saveData(context, email);
+      // saveData(context, email);
       // managerScreenSplash(MainScreen.ROUTE, context, false);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
@@ -33,19 +33,16 @@ class LoginProvider with ChangeNotifier {
 
   Future<void> saveData(
     BuildContext context,
-    String email, {
-    String? password,
-    String? name,
-    String? phone,
-  }) async {
+    Map<String, String> data,
+  ) async {
     bool t = await shared!.setBool('isRegister', true);
 
     if (t) {
-      // _name = name;
-      // _email = email;
-      // _password = password;
-      // _phone = phone;
-      // await registerFirebase(email);
+      _name = data['name'];
+      _email = data['email'];
+      _password = data['password'];
+      _phone = data['phone'];
+      await registerFirebase(_email!);
       // managerScreenSplash(MainScreen.ROUTE, context, false);
     }
     notifyListeners();

@@ -949,6 +949,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Phone Number is Exist`
+  String get is_number_exist {
+    return Intl.message(
+      'Phone Number is Exist',
+      name: 'is_number_exist',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Exit`
+  String get exit {
+    return Intl.message(
+      'Exit',
+      name: 'exit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add Service`
+  String get add_service {
+    return Intl.message(
+      'Add Service',
+      name: 'add_service',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

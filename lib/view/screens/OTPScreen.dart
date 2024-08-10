@@ -1,5 +1,7 @@
 import 'package:Al_Zab_township_guide/controller/provider/LoginProvider/Loginprovider.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
+import 'package:Al_Zab_township_guide/controller/provider/SignupProvider/SignupProvider.dart';
+import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:email_otp/email_otp.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -13,7 +15,7 @@ class OtpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final p = context.watch<LoginProvider>();
+    final signup = context.read<SignupProvider>();
     final providers = context.read<Providers>();
     return Scaffold(
       body: SingleChildScrollView(
@@ -131,18 +133,13 @@ class OtpScreen extends StatelessWidget {
               ),
               onPressed: () async {
                 if (EmailOTP.verifyOTP(otp: otpNumber.text)) {
-                  await p.saveData(
+                  await signup.saveData(
                     context,
-                    providers.email!,
-                    password: providers.password!,
-                    name: providers.name!,
-                    phone: providers.phone!,
-           
                   );
                 }
               },
-              child: const Text(
-                "Confirm",
+              child:Text(
+                S.current.confirm,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 22.0,

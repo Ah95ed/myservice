@@ -88,5 +88,8 @@
     "desc_taxi": "here you find name, phone and address of taxi",
     "desc_transfer": "Here you find name, phone and address of transfer Only within the borders of Zab ",
     "desc_lang": "change language",
-    "desc_more":"more options"
+    "desc_more": "more options",
+    "is_number_exist": "Phone Number is Exist",
+    "exit": "Exit",
+    "add_service" : "Add Service"
 }

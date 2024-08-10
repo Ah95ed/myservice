@@ -182,10 +182,10 @@ class _CustomDialogState extends State<CustomDialog> {
         (r) {
           for (var element in r.docs) {
             if (n == element.get('number')) {
-              context.read<OTPEmailProvider>().sendCode(n);
+              // context.read<OTPEmailProvider>().sendCode(n);
               break;
             }
-            context.read<OTPEmailProvider>().sendCode(n);
+            // context.read<OTPEmailProvider>().sendCode(n);
             break;
           }
         },
@@ -200,7 +200,7 @@ class _CustomDialogState extends State<CustomDialog> {
       (value) async {
         value.docs.map((v) {
           if (v.exists) {
-            context.read<OTPEmailProvider>().sendCode(v.get('number'));
+            // context.read<OTPEmailProvider>().sendCode(v.get('number'));
             return;
           }
           ScaffoldMessenger.of(MyApp.getContext()!).showSnackBar(

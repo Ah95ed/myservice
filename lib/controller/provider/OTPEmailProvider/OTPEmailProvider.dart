@@ -12,39 +12,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class OTPEmailProvider with ChangeNotifier {
-  String _verificationId = '';
-  Future<void> sendCode(String phone) async {
-    String num = phone.substring(1);
-    await FirebaseAuth.instance.verifyPhoneNumber(
-      phoneNumber: '+964$num',
-      verificationCompleted: (PhoneAuthCredential credential) async {
-        // Auto-retrieval or instant verification.
-        await FirebaseAuth.instance.signInWithCredential(credential);
-      },
-      verificationFailed: (FirebaseAuthException e) {
-        Logger.logger('Verification failed: ${e.message}');
 
-        // Handle other errors
 
-        if (shared!.getInt('num') == 3) {
-          MyApp.getContext()!
-              .read<Providers>()
-              .managerScreen(MessageDeveloper.Route, MyApp.getContext()!);
-        }
-      },
-      codeSent: (String verificationId, int? resendToken) {
-        // setState(() {
-        _verificationId = verificationId;
-        shared!.setString('verificationId', _verificationId);
-        MyApp.getContext()!
-              .read<Providers>()
-              .managerScreen(OtpScreen.Route, MyApp.getContext()!);
-      },
-      codeAutoRetrievalTimeout: (String verificationId) {
-        // setState(() {
-        _verificationId = verificationId;
-        // });
-      },
-    );
-  }
+
+
+
+  
 }

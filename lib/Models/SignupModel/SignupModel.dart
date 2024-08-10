@@ -1,15 +1,15 @@
 import 'dart:developer';
+import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
 import 'package:Al_Zab_township_guide/Models/SharedModel/SharedModel.dart';
-import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
-import 'package:Al_Zab_township_guide/main.dart';
+import 'package:Al_Zab_township_guide/generated/l10n.dart';
+import 'package:Al_Zab_township_guide/view/screens/LoginScreen/login_screen.dart';
 import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/OTPScreen.dart';
 import 'package:email_otp/email_otp.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class SignupModel {
   String? _name;
@@ -19,6 +19,7 @@ class SignupModel {
   String? _token;
 
   bool isSignup = false;
+  DatabaseReference? database;
 
   SignupModel({
     String? name,
@@ -32,6 +33,9 @@ class SignupModel {
     _password = password;
     _phone = phone;
     _token = token;
+    database = FirebaseDatabase.instance.refFromURL(
+      'https://blood-types-77ce2-default-rtdb.firebaseio.com/',
+    );
     sharesModel = SharedModel();
   }
   String? get name => _name;
@@ -50,80 +54,11 @@ class SignupModel {
   SharedModel? sharesModel;
   late BuildContext _ctx;
 
-  Future<void> register(
-    BuildContext context,
-  ) async {
-    this._ctx = context;
-    try {
-      final checkemail = await _auth.fetchSignInMethodsForEmail(email!);
-      if (checkemail.isEmpty) {
-        isSignup = true;
-        final UserCredential userCredential =
-            await _auth.createUserWithEmailAndPassword(
-          email: email!,
-          password: password!,
-        );
-        User? user = await FirebaseAuth.instance.currentUser;
-        token = await user!.getIdToken();
-        await registerInRealTime();
-      } else {
-        isSignup = false;
-        log('message email is Exist ');
-        await ScaffoldMessenger.of(_ctx).showSnackBar(
-          SnackBar(
-            content: Text('email is Exist '),
-            duration: Duration(seconds: 2),
-          ),
-        );
-      }
-    } catch (e) {
-      await ScaffoldMessenger.of(_ctx).showSnackBar(
-        SnackBar(
-          content: Text('email is Exist $e'),
-          duration: Duration(seconds: 3),
-        ),
-      );
-      log('message register -> $e');
-    }
-  }
-
-  Future<void> registerInRealTime() async {
-    final DatabaseReference database = FirebaseDatabase.instance.refFromURL(
-      'https://blood-types-77ce2-default-rtdb.firebaseio.com/',
-    );
-    await database.child('auth').child(phone!).set({
-      'name': name,
-      'email': email,
-      'phone': phone,
-      'password': password,
-      'token': token,
-    }).then((value) {
-      sharesModel!.managerScreenSplash(
-        MainScreen.ROUTE,
-        _ctx,
-        false,
-      );
-      // log('message registerInRealTime ->  ');
-    }).onError((bool, error) {
-      isSignup = false;
-      log('message registerInRealTime -> $error');
-      ScaffoldMessenger.of(_ctx).showSnackBar(
-        SnackBar(
-          content: Text('Error Register'),
-        ),
-      );
-    });
-  }
-
   Future<void> sendCodeEmail() async {
     await EmailOTP.sendOTP(
       email: email!,
     ).then((v) {
-      if (v) {
-        MyApp.getContext()!
-            .read<Providers>()
-            .managerScreen(OtpScreen.Route, MyApp.getContext()!);
-      }
+      isSignup = v;
     });
   }
 
@@ -152,5 +87,100 @@ class SignupModel {
         // });
       },
     );
+  }
+
+  Future<void> register(
+    BuildContext context,
+  ) async {
+    this._ctx = context;
+    try {
+      final checkemail = await _auth.fetchSignInMethodsForEmail(email!);
+      if (checkemail.isEmpty) {
+        isSignup = true;
+        final UserCredential userCredential =
+            await _auth.createUserWithEmailAndPassword(
+          email: email!,
+          password: password!,
+        );
+        User? user = await FirebaseAuth.instance.currentUser;
+        _token = await user!.getIdToken();
+        await registerInRealTime();
+      } else {
+        isSignup = false;
+        log('message email is Exist ');
+        await ScaffoldMessenger.of(_ctx).showSnackBar(
+          SnackBar(
+            content: Text('email is Exist '),
+            duration: Duration(seconds: 2),
+          ),
+        );
+      }
+    } catch (e) {
+      await ScaffoldMessenger.of(_ctx).showSnackBar(
+        SnackBar(
+          content: Text('email is Exist $e'),
+          duration: Duration(seconds: 3),
+        ),
+      );
+      log('message register -> $e');
+    }
+  }
+
+  Future<void> saveData(
+    BuildContext context,
+    Map<String, String> data,
+  ) async {
+    this._ctx = context;
+    bool t = await shared!.setBool('isRegister', true);
+
+    if (t) {
+      _name = data['name'];
+      _email = data['email'];
+      _password = data['password'];
+      _phone = data['phone'];
+      await registerInRealTime();
+      //  sharesModel!. managerScreenSplash(MainScreen.ROUTE, context, false);
+    }
+  }
+
+  Future<void> registerInRealTime() async {
+    DataSnapshot dataSnapshot =
+        await database!.child('auth').child(_phone!).get();
+    if (dataSnapshot.exists) {
+      Logger.logger('message ---==> ${_phone!} ');
+      ScaffoldMessenger.of(_ctx).showSnackBar(
+        SnackBar(
+          content: Text(S.current.is_number_exist),
+        ),
+      );
+      sharesModel!.managerScreenSplash(LoginScreen.Route, _ctx, false);
+      return;
+    }
+    await database!.child('auth').child(_phone!).set({
+      'name': _name,
+      'email': _email,
+      'phone': _phone,
+      'password': _password,
+      // 'token': _token,
+    }).then((value) {
+      isSignup = true;
+      shared!.setString('nameUser', _name!);
+      shared!.setString('emailUser', _email!);
+      shared!.setString('phoneUser', _phone!);
+      sharesModel!.managerScreenSplash(
+        MainScreen.ROUTE,
+        _ctx,
+        false,
+      );
+      // log('message registerInRealTime ->  ');
+    }).onError((bool, error) {
+      isSignup = false;
+      log('message registerInRealTime -> $error');
+      ScaffoldMessenger.of(_ctx).showSnackBar(
+        SnackBar(
+          content: Text('Error Register'),
+        ),
+      );
+    });
   }
 }

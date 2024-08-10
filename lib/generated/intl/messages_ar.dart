@@ -25,6 +25,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Cars": MessageLookupByLibrary.simpleMessage("سيارات"),
         "Doctor": MessageLookupByLibrary.simpleMessage("طبيب"),
         "Select_Service": MessageLookupByLibrary.simpleMessage("اختر الخدمة"),
+        "add_service": MessageLookupByLibrary.simpleMessage("أضافة خدمة"),
         "already_member":
             MessageLookupByLibrary.simpleMessage("مسجل بالفعل ؟ "),
         "blood": MessageLookupByLibrary.simpleMessage("الدم"),
@@ -73,6 +74,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enter_email":
             MessageLookupByLibrary.simpleMessage("أدخل البريد الإلكتروني"),
         "enter_password": MessageLookupByLibrary.simpleMessage("ادخل الباسورد"),
+        "exit": MessageLookupByLibrary.simpleMessage("تسجيل خروج"),
         "fields": MessageLookupByLibrary.simpleMessage("أحد الحقول فارغ"),
         "forget_password":
             MessageLookupByLibrary.simpleMessage("هل نسيت الباسورد ؟"),
@@ -83,6 +85,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "إذا واجهتك مشكلة، تواصل معي على وسائل التواصل الاجتماعي"),
         "internal_transfer":
             MessageLookupByLibrary.simpleMessage("التحويل الداخلي"),
+        "is_number_exist":
+            MessageLookupByLibrary.simpleMessage("هذا الرقم مسجل بالفعل"),
         "line": MessageLookupByLibrary.simpleMessage("خطوط"),
         "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
         "logout": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),

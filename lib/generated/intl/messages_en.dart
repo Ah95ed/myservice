@@ -26,6 +26,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "Doctor": MessageLookupByLibrary.simpleMessage("Doctor"),
         "Select_Service":
             MessageLookupByLibrary.simpleMessage("Select Service"),
+        "add_service": MessageLookupByLibrary.simpleMessage("Add Service"),
         "already_member":
             MessageLookupByLibrary.simpleMessage("Already Member ? "),
         "blood": MessageLookupByLibrary.simpleMessage("Blood"),
@@ -78,6 +79,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enter_email": MessageLookupByLibrary.simpleMessage("Enter Email"),
         "enter_password":
             MessageLookupByLibrary.simpleMessage("Enter Password"),
+        "exit": MessageLookupByLibrary.simpleMessage("Exit"),
         "fields":
             MessageLookupByLibrary.simpleMessage("One the Field is Empty"),
         "forget_password":
@@ -89,6 +91,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "If you encounter a problem, contact me on social media"),
         "internal_transfer":
             MessageLookupByLibrary.simpleMessage("Internal Transfer"),
+        "is_number_exist":
+            MessageLookupByLibrary.simpleMessage("Phone Number is Exist"),
         "line": MessageLookupByLibrary.simpleMessage("Lines"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "logout": MessageLookupByLibrary.simpleMessage("Logout"),

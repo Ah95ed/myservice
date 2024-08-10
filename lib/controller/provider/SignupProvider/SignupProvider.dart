@@ -30,18 +30,34 @@ class SignupProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> saveData(
+    BuildContext context,
+    // Map<String, String> data,
+  ) async {
+   
+    if (register == null) return;
+    await model.saveData(context, register!);
+  }
+
+  Map<String, String>? register;
   Future<void> sendCode(
     SignupModel m,
     BuildContext context,
   ) async {
-
     model = await SignupModel(
       name: m.name,
       email: m.email,
       password: m.password,
       phone: m.phone,
     );
+    this.register = {
+      'name': m.name!,
+      'email': m.email!,
+      'phone': m.phone!,
+      'password': m.password!
+    };
     await model.sendCodeEmail();
+    isSignup = await model.isSignup;
     notifyListeners();
   }
 }

@@ -46,6 +46,7 @@ class _MainScreenState extends State<MainScreen> {
       extendBody: true,
       backgroundColor: ColorUsed.PrimaryBackground,
       resizeToAvoidBottomInset: false,
+    
       appBar: AppBar(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
