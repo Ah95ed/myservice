@@ -30,15 +30,18 @@ class SignupProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> sendCode(SignupModel m,BuildContext context ) async {
-  
-     model = await SignupModel(
+  Future<void> sendCode(
+    SignupModel m,
+    BuildContext context,
+  ) async {
+
+    model = await SignupModel(
       name: m.name,
       email: m.email,
       password: m.password,
       phone: m.phone,
     );
-      await model.sendCode();
+    await model.sendCodeEmail();
     notifyListeners();
   }
 }

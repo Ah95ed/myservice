@@ -79,7 +79,14 @@
     "what_you_want": "What You Want",
     "if_you_need_send_me": "If you encounter a problem, contact me on social media",
     "fields": "One the Field is Empty",
-    "done_to_send" : "Done To Send Developer Message ",
-    "not_phond_found":"Number Not Found",
-    "go_to_developer_page": "If you encounter a problem, contact me "
+    "done_to_send": "Done To Send Developer Message ",
+    "not_phond_found": "Number Not Found",
+    "go_to_developer_page": "If you encounter a problem, contact me ",
+    "desc_doctor": "Here you will find the names, specializations and numbers of doctors’ clinics in Al-Zab",
+    "desc_professionals": "Here you will find the names, specializations and numbers of professionals in Al-Zab",
+    "desc_donors": "Here you find the blood types of donors",
+    "desc_taxi": "here you find name, phone and address of taxi",
+    "desc_transfer": "Here you find name, phone and address of transfer Only within the borders of Zab ",
+    "desc_lang": "change language",
+    "desc_more":"more options"
 }

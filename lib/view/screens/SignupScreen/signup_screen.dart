@@ -28,7 +28,6 @@ class SignupScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final providerSignup = context.read<SignupProvider>();
 
     return Consumer<SignupProvider>(
       builder: (context, provider, child) {
@@ -36,17 +35,17 @@ class SignupScreen extends StatelessWidget {
           resizeToAvoidBottomInset: false,
           body: SingleChildScrollView(
             child: Container(
-              height: SizerUtil.height,
-              width: SizerUtil.width,
+              height: getheight(100),
+              width: getWidth(100),
               color: ColorUsed.PrimaryBackground,
               child: provider.isSignup
                   ? Center(
-                      child: CircularProgressIndicator(),
+                      child: const CircularProgressIndicator(),
                     )
                   : Column(
                       children: [
                         Login_Image(
-                          height: 30.h,
+                          height: getheight(30),
                         ),
                         SizedBox(
                           height: getheight(4),
@@ -91,7 +90,7 @@ class SignupScreen extends StatelessWidget {
                           height: 2.h,
                         ),
                         CustomMaterialButton(
-                            title: S.of(context).login,
+                            title: S.of(context).register_now,
                             onPressed: () async {
                               provider.startLoading();
                               if (name.text.isEmpty ||

@@ -879,6 +879,76 @@ class S {
       args: [],
     );
   }
+
+  /// `Here you will find the names, specializations and numbers of doctors’ clinics in Al-Zab`
+  String get desc_doctor {
+    return Intl.message(
+      'Here you will find the names, specializations and numbers of doctors’ clinics in Al-Zab',
+      name: 'desc_doctor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Here you will find the names, specializations and numbers of professionals in Al-Zab`
+  String get desc_professionals {
+    return Intl.message(
+      'Here you will find the names, specializations and numbers of professionals in Al-Zab',
+      name: 'desc_professionals',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Here you find the blood types of donors`
+  String get desc_donors {
+    return Intl.message(
+      'Here you find the blood types of donors',
+      name: 'desc_donors',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `here you find name, phone and address of taxi`
+  String get desc_taxi {
+    return Intl.message(
+      'here you find name, phone and address of taxi',
+      name: 'desc_taxi',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Here you find name, phone and address of transfer Only within the borders of Zab `
+  String get desc_transfer {
+    return Intl.message(
+      'Here you find name, phone and address of transfer Only within the borders of Zab ',
+      name: 'desc_transfer',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `change language`
+  String get desc_lang {
+    return Intl.message(
+      'change language',
+      name: 'desc_lang',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `more options`
+  String get desc_more {
+    return Intl.message(
+      'more options',
+      name: 'desc_more',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

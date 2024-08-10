@@ -47,7 +47,6 @@ class _MainScreenState extends State<MainScreen> {
       backgroundColor: ColorUsed.PrimaryBackground,
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(15),
@@ -112,7 +111,6 @@ class _MainScreenState extends State<MainScreen> {
         ],
       ),
       bottomNavigationBar: Container(
-      
         margin: EdgeInsets.symmetric(
           horizontal: getWidth(2),
           vertical: getheight(5),
@@ -230,14 +228,16 @@ class _MainScreenState extends State<MainScreen> {
           TargetContent(
             align: ContentAlign.top,
             builder: (context, controller) {
-              return const Column(
+              return Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    "Titulo lorem ipsum",
+                    S.current.desc_doctor,
                     style: TextStyle(
                       color: Colors.white,
+                      fontSize: setFontSize(18),
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ],
@@ -257,14 +257,16 @@ class _MainScreenState extends State<MainScreen> {
           TargetContent(
             align: ContentAlign.top,
             builder: (context, controller) {
-              return const Column(
+              return Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    "Titulo lorem ipsum",
+                    S.current.desc_professionals,
                     style: TextStyle(
                       color: Colors.white,
+                      fontSize: setFontSize(18),
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ],
@@ -285,14 +287,19 @@ class _MainScreenState extends State<MainScreen> {
           TargetContent(
             align: ContentAlign.top,
             builder: (context, controller) {
-              return const Column(
-                mainAxisSize: MainAxisSize.min,
+              return Column(
+                mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(
-                    "Titulo lorem ipsum",
-                    style: TextStyle(
-                      color: Colors.white,
+                  Padding(
+                    padding:EdgeInsets.symmetric(vertical: getheight(8)),
+                    child: Text(
+                      S.current.desc_donors,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: setFontSize(18),
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ],
@@ -313,14 +320,16 @@ class _MainScreenState extends State<MainScreen> {
           TargetContent(
             align: ContentAlign.top,
             builder: (context, controller) {
-              return const Column(
+              return Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    "Titulo lorem ipsum",
+                    S.current.desc_taxi,
                     style: TextStyle(
                       color: Colors.white,
+                      fontSize: setFontSize(18),
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ],
@@ -342,14 +351,16 @@ class _MainScreenState extends State<MainScreen> {
           TargetContent(
             align: ContentAlign.top,
             builder: (context, controller) {
-              return const Column(
+              return Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    "Titulo lorem ipsum",
+                    S.current.desc_transfer,
                     style: TextStyle(
                       color: Colors.white,
+                      fontSize: setFontSize(18),
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ],
@@ -369,14 +380,16 @@ class _MainScreenState extends State<MainScreen> {
           TargetContent(
             align: ContentAlign.bottom,
             builder: (context, controller) {
-              return const Column(
+              return Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    "Titulo lorem ipsum",
+                    S.current.desc_lang,
                     style: TextStyle(
                       color: Colors.white,
+                      fontSize: setFontSize(18),
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ],
@@ -390,20 +403,22 @@ class _MainScreenState extends State<MainScreen> {
       TargetFocus(
         identify: "keyBottomNavigation2",
         keyTarget: menu,
-        alignSkip: Alignment.topRight,
+        alignSkip: Alignment.center,
         enableOverlayTab: true,
         contents: [
           TargetContent(
-            align: ContentAlign.top,
+            align: ContentAlign.bottom,
             builder: (context, controller) {
-              return const Column(
+              return Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    "Titulo lorem ipsum",
+                    S.current.desc_more,
                     style: TextStyle(
                       color: Colors.white,
+                      fontSize: setFontSize(18),
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ],

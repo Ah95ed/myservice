@@ -1,12 +1,15 @@
 import 'dart:developer';
 import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
 import 'package:Al_Zab_township_guide/Models/SharedModel/SharedModel.dart';
+import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/main.dart';
 import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/OTPScreen.dart';
+import 'package:email_otp/email_otp.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SignupModel {
   String? _name;
@@ -112,6 +115,18 @@ class SignupModel {
     });
   }
 
+  Future<void> sendCodeEmail() async {
+    await EmailOTP.sendOTP(
+      email: email!,
+    ).then((v) {
+      if (v) {
+        MyApp.getContext()!
+            .read<Providers>()
+            .managerScreen(OtpScreen.Route, MyApp.getContext()!);
+      }
+    });
+  }
+
   String _verificationId = '';
   Future<void> sendCode() async {
     String num = phone!.substring(1);
@@ -127,10 +142,9 @@ class SignupModel {
       codeSent: (String verificationId, int? resendToken) {
         // setState(() {
         _verificationId = verificationId;
-        shared!.setString( 'verificationId', _verificationId);
+        shared!.setString('verificationId', _verificationId);
         log('message verificationId -> $_verificationId');
         sharesModel!.managerScreenSplash(OtpScreen.Route, _ctx, false);
-      
       },
       codeAutoRetrievalTimeout: (String verificationId) {
         // setState(() {

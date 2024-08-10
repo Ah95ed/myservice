@@ -41,6 +41,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirm": MessageLookupByLibrary.simpleMessage("تاكيد"),
         "date": MessageLookupByLibrary.simpleMessage("تاريخ"),
         "delete_account": MessageLookupByLibrary.simpleMessage("حذف الحساب"),
+        "desc_doctor": MessageLookupByLibrary.simpleMessage(
+            "هنا تجد اسماء وتخصص وارقام عيادات الاطباء في الزاب"),
+        "desc_donors": MessageLookupByLibrary.simpleMessage(
+            "هنا تجد فصائل الدم للمتبرعين"),
+        "desc_lang": MessageLookupByLibrary.simpleMessage("تغيير اللغة "),
+        "desc_more": MessageLookupByLibrary.simpleMessage("خيارات اضافية"),
+        "desc_professionals": MessageLookupByLibrary.simpleMessage(
+            "هنا تجد اسماء وتخصص وارقام المهنين في الزاب"),
+        "desc_taxi": MessageLookupByLibrary.simpleMessage(
+            "هنا تجد اسم ورقم وعنوان اصحاب مراكب الاجرة"),
+        "desc_transfer": MessageLookupByLibrary.simpleMessage(
+            "هنا تجد اصحاب النقل الداخلي في الزاب"),
         "description": MessageLookupByLibrary.simpleMessage("الوصف"),
         "desctiption_message": MessageLookupByLibrary.simpleMessage("الوصف"),
         "doctor": MessageLookupByLibrary.simpleMessage("أطباء"),

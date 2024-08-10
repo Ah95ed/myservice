@@ -13,7 +13,7 @@ Future<void> init() async {
   EmailOTP.config(
     appName: S().title,
     otpType: OTPType.numeric,
-    expiry: 30000,
+    expiry: 60000,
     emailTheme: EmailTheme.v6,
     appEmail: 'amhmeed31@gmail.com',
     otpLength: 4,

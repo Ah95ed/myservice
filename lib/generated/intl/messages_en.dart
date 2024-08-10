@@ -46,6 +46,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "date": MessageLookupByLibrary.simpleMessage("Date"),
         "delete_account":
             MessageLookupByLibrary.simpleMessage("Delete Account"),
+        "desc_doctor": MessageLookupByLibrary.simpleMessage(
+            "Here you will find the names, specializations and numbers of doctors’ clinics in Al-Zab"),
+        "desc_donors": MessageLookupByLibrary.simpleMessage(
+            "Here you find the blood types of donors"),
+        "desc_lang": MessageLookupByLibrary.simpleMessage("change language"),
+        "desc_more": MessageLookupByLibrary.simpleMessage("more options"),
+        "desc_professionals": MessageLookupByLibrary.simpleMessage(
+            "Here you will find the names, specializations and numbers of professionals in Al-Zab"),
+        "desc_taxi": MessageLookupByLibrary.simpleMessage(
+            "here you find name, phone and address of taxi"),
+        "desc_transfer": MessageLookupByLibrary.simpleMessage(
+            "Here you find name, phone and address of transfer Only within the borders of Zab "),
         "description": MessageLookupByLibrary.simpleMessage("Description"),
         "desctiption_message":
             MessageLookupByLibrary.simpleMessage("Description"),
