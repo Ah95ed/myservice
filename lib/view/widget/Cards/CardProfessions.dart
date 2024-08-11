@@ -1,7 +1,7 @@
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
+import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
 import '../staticWidget/Multi_text.dart';
 
@@ -29,7 +29,7 @@ class CardProfessions extends StatelessWidget {
               children: [
                 MultiText(name, S.of(context).name),
                 SizedBox(
-                  height: 1.h,
+                  height: getheight(2),
                 ),
                 MultiText(
                   nameProfession,
@@ -44,7 +44,7 @@ class CardProfessions extends StatelessWidget {
                 icon: Icon(
                   Icons.call,
                   color: ColorUsed.primary,
-                  size: 5.h,
+                  size: getheight(4),
                 ),
                 onPressed: onPressed),
           ),

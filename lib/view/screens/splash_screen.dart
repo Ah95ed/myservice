@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
-import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/LoginScreen/login_screen.dart';
 import 'package:Al_Zab_township_guide/view/screens/SignupScreen/signup_screen.dart';
 import 'package:flutter/material.dart';

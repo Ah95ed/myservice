@@ -1,16 +1,12 @@
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/controller/Constant/Constant.dart';
-import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/view/screens/ShowDonors.dart';
 import 'package:Al_Zab_township_guide/view/widget/ButtonSelect.dart';
-import 'package:Al_Zab_township_guide/view/widget/Drawer/CustomDrawer.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/app_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:sizer/sizer.dart';
 
 class BloodScreen extends StatelessWidget {
   static const ROUTE = "BloodScreen";

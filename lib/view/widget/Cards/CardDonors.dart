@@ -1,8 +1,8 @@
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
+import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sizer/sizer.dart';
 import 'package:Al_Zab_township_guide/view/widget/staticWidget/Multi_text.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
 
@@ -22,13 +22,16 @@ class CardDonors extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 8.sp,
+      elevation: 4,
       child: Row(
         children: [
           Expanded(
             flex: 2,
             child: Padding(
-              padding: EdgeInsets.all(1.w),
+              padding: EdgeInsets.symmetric(
+                horizontal: getWidth(2),
+                vertical: getheight(2),
+              ),
               child: Column(
                 children: [
                   MultiText(name, S.of(context).name),
@@ -43,7 +46,7 @@ class CardDonors extends StatelessWidget {
             child: IconButton(
               icon: Icon(
                 Icons.call,
-                size: 4.h,
+                size: getheight(4),
                 color: ColorUsed.primary,
               ),
               onPressed: () async {

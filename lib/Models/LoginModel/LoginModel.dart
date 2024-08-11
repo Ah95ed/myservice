@@ -1,12 +1,14 @@
-import 'dart:developer';
-
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
+import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 class LoginModel {
-  String? name,email,phone,password;
+  String? name, email, phone, password;
+  late DatabaseReference databaseReference;
 
-  LoginModel({this.name, this.email, this.phone, this.password});
+  LoginModel({this.name, this.email, this.phone, this.password}) {
+    databaseReference = FirebaseDatabase.instance
+        .refFromURL('https://blood-types-77ce2-default-rtdb.firebaseio.com/');
+  }
 
   LoginModel.fromJson(Map<String, dynamic> json) {
     name = json['name'];
@@ -24,31 +26,44 @@ class LoginModel {
     return data;
   }
 
+  late DataSnapshot dataSnapshot;
 
-
-  Future<void> loginFirebase(
-    String email,
-    String password,
-    BuildContext context,
+  Future<void> checkData(
+    String phone,
+    String pass,
   ) async {
-    try {
-      // UserCredential userCredential =
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: email,
-        password: password,
+    dataSnapshot = await databaseReference.child('auth').child(phone).get();
+    if (await dataSnapshot.exists) {
+      await loginFirebase(
+        phone,
+        pass,
       );
-      
-      // managerScreenSplash(MainScreen.ROUTE, context, false);
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        log('No user found for that email.');
-      } else if (e.code == 'wrong-password') {
-        log('Wrong password provided.');
-      }
+    } else {
+      isLogin = false;
+      return;
     }
   }
 
+  bool isLogin = false;
 
-
-
+  Future<bool> loginFirebase(
+    String phone,
+    String password,
+  ) async {
+    databaseReference.child('auth').child(phone).once().then(
+      (v) {
+        final data = v.snapshot.value as Map;
+        if (data['password'] == password) {
+          // isLogin = true;
+          shared!.setString('nameUser', data['name']);
+          shared!.setString('emailUser', data['email']);
+          shared!.setString('phoneUser', data['phone']);
+          shared!.setBool('isRegister', true);
+          return isLogin= true;
+        }
+        return isLogin;
+      },
+    );
+    return isLogin;
+  }
 }

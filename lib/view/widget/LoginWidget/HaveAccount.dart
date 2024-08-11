@@ -1,8 +1,8 @@
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
+import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sizer/sizer.dart';
 
 class HaveAccount extends StatelessWidget {
    HaveAccount({
@@ -25,7 +25,7 @@ class HaveAccount extends StatelessWidget {
           ),
         ),
         SizedBox(
-          width: 0.1.w,
+          width: getWidth(1.0),
         ),
         TextButton(
           autofocus: true,

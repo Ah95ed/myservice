@@ -1,6 +1,7 @@
+import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
+
 
 class CustomMaterialButton extends StatelessWidget {
   String? title;
@@ -15,12 +16,12 @@ class CustomMaterialButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
-        horizontal: 1.0.w,
-        vertical: 1.0.w,
+        horizontal: getWidth(1),
+        vertical: getheight(2),
       ),
       child: MaterialButton(
-        height: 6.h,
-        minWidth: 40.w,
+        height: getheight(6),
+        minWidth: getWidth(40),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8.0),
           side: const BorderSide(

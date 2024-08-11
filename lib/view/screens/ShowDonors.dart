@@ -1,12 +1,12 @@
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/controller/Constant/Constant.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
+import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/widget/Cards/CardDonors.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:sizer/sizer.dart';
 import '../widget/constant/Constant.dart';
 
 // ignore: must_be_immutable
@@ -30,7 +30,7 @@ class ShowDonors extends StatelessWidget {
             appBar: AppBar(
               backgroundColor: Colors.transparent,
               elevation: 5.0,
-              toolbarHeight: 10.h,
+              toolbarHeight: getheight(10),
               leading: IconButton(
                 onPressed: () {
                   Navigator.pop(context);
@@ -81,7 +81,7 @@ class ShowDonors extends StatelessWidget {
                       children: [
                         const CircularProgressIndicator(),
                         SizedBox(
-                          height: 2.h,
+                          height: getheight(2),
                         ),
                         Text(S.of(context).wait_service)
                       ],

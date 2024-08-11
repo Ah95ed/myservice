@@ -91,5 +91,6 @@
     "desc_more": "more options",
     "is_number_exist": "Phone Number is Exist",
     "exit": "Exit",
-    "add_service" : "Add Service"
+    "add_service" : "Add Service",
+    "checkdata" : "Check Data"
 }

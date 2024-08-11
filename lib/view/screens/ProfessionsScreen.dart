@@ -4,10 +4,7 @@ import 'package:Al_Zab_township_guide/controller/Constant/ServiceCollectios.dart
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/view/widget/Cards/CardProfessions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:sizer/sizer.dart';
-import '../widget/constant/Constant.dart';
 import '../widget/constant/app_theme.dart';
 
 class ProfessionsScreen extends StatelessWidget {
@@ -34,7 +31,7 @@ class ProfessionsScreen extends StatelessWidget {
                     children: [
                       const CircularProgressIndicator(),
                       SizedBox(
-                        height: 2.h,
+                        height: getheight(2),
                       ),
                       Text(S.of(context).wait_service)
                     ],

@@ -1,7 +1,6 @@
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 import '../staticWidget/Multi_text.dart';
 import '../constant/Constant.dart';
 
@@ -26,7 +25,7 @@ class CardSatota extends StatelessWidget {
               children: [
                 MultiText(name, S.of(context).name),
                 SizedBox(
-                  height: 1.h,
+                  height: getheight(1),
                 ),
                 MultiText(
                   location,

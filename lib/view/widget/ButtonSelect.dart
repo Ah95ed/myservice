@@ -1,7 +1,6 @@
+import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/app_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
-
 import 'constant/Constant.dart';
 
 // ignore: must_be_immutable
@@ -32,7 +31,7 @@ class ButtonSelect extends StatelessWidget {
           title,
           style: TextStyle(
             color: AppTheme.notWhite,
-            fontSize: 16.sp,
+            fontSize: setFontSize(16),
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -45,7 +44,7 @@ class ButtonSelect extends StatelessWidget {
     minimumSize: const Size(28.0, 24.0),
     maximumSize: const Size(400, 200),
     fixedSize: const Size(0.0, 55.0),
-    padding: EdgeInsets.symmetric(horizontal: 10.h),
+    padding: EdgeInsets.symmetric(horizontal: getWidth(10)),
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.all(
         Radius.circular(8.0),

@@ -1,12 +1,11 @@
-import 'dart:developer';
 import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
 import 'package:Al_Zab_township_guide/controller/Constant/Constant.dart';
+import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/screens/OTPScreen.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/app_theme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_otp/email_otp.dart';
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Providers with ChangeNotifier {
@@ -42,13 +41,9 @@ class Providers with ChangeNotifier {
     String phone,
     BuildContext context,
   ) async {
-    log('message Providers');
-// EmailOTP.sendOTP(email: email)
     EmailOTP.config(
       appEmail: Constant.appEmail,
       appName: Constant.appName,
-
-      // userEmail: email,
       otpLength: 4,
       otpType: OTPType.numeric,
     );
@@ -78,7 +73,7 @@ class Providers with ChangeNotifier {
         controller: number,
         keyboardType: TextInputType.text,
         style: TextStyle(
-            fontSize: 15.sp,
+            fontSize: setFontSize(14),
             fontWeight: FontWeight.bold,
             color: AppTheme.notWhite),
         textAlign: TextAlign.start,

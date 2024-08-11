@@ -1,11 +1,10 @@
-import 'package:Al_Zab_township_guide/controller/provider/LoginProvider/Loginprovider.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/controller/provider/SignupProvider/SignupProvider.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
+import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:email_otp/email_otp.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sizer/sizer.dart';
 import '../widget/constant/Constant.dart';
 
 class OtpScreen extends StatelessWidget {
@@ -83,11 +82,11 @@ class OtpScreen extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             SizedBox(
-              height: 5.h,
+              height:getheight(5),
             ),
             SizedBox(
               height: 60,
-              width: 60.w,
+              width: getWidth(60),
               child: AspectRatio(
                 aspectRatio: 0.5,
                 child: TextField(

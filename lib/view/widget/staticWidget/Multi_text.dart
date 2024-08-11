@@ -1,5 +1,5 @@
+import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
 class MultiText extends StatelessWidget {
   String str, con;
@@ -10,37 +10,40 @@ class MultiText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(2.w),
+      padding: EdgeInsets.symmetric(
+        horizontal: getWidth(2),
+        vertical: getheight(4),
+      ),
       child: Row(
         children: [
           SizedBox(
-            height: 1.h,
+            height: getheight(1),
           ),
           Expanded(
             flex: 0,
             child: Text(
               con,
               style: TextStyle(
-                  fontSize: 14.sp,
+                  fontSize: setFontSize(14),
                   color: Colors.black,
                   fontWeight: FontWeight.bold),
             ),
           ),
           SizedBox(
-            width: 2.w,
+            width: getWidth(2),
           ),
           Expanded(
             flex: 2,
             child: Text(
               str,
               style: TextStyle(
-                  fontSize: 14.sp,
+                  fontSize: setFontSize(14),
                   color: Colors.black,
                   fontWeight: FontWeight.bold),
             ),
           ),
           SizedBox(
-            height: 1.h,
+            height: getheight(2),
           ),
         ],
       ),

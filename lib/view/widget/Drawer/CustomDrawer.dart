@@ -4,7 +4,6 @@ import 'package:Al_Zab_township_guide/controller/Constant/Constant.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/view/screens/EditScreen/CustomDialog.dart';
-import 'package:Al_Zab_township_guide/view/screens/LoginScreen/login_screen.dart';
 import 'package:Al_Zab_township_guide/view/screens/SignupScreen/signup_screen.dart';
 import 'package:Al_Zab_township_guide/view/screens/WhoCanDonateScreen%20.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
@@ -43,11 +42,23 @@ class Customdrawer extends StatelessWidget {
                     children: [
                       Text(
                         shared!.getString('nameUser') ?? '',
+                        style: TextStyle(
+                          fontSize: setFontSize(15),
+                          fontWeight: FontWeight.bold,
+                          color: AppTheme.notWhite,
+                        ),
                       ),
                       SizedBox(
-                        height: getheight(0.1),
+                        height: getheight(0.5),
                       ),
-                      Text(shared!.getString('emailUser') ?? ''),
+                      Text(
+                        shared!.getString('emailUser') ?? '',
+                        style: TextStyle(
+                          fontSize: setFontSize(15),
+                          fontWeight: FontWeight.bold,
+                          color: AppTheme.notWhite,
+                        ),
+                      ),
                     ],
                   ),
           ),
@@ -55,12 +66,12 @@ class Customdrawer extends StatelessWidget {
             height: getheight(0.2),
           ),
           ListTile(
-            leading: shared!.getString('nameUser') == null
-                ? Icon(Icons.app_registration)
-                : Icon(Icons.exit_to_app),
-            title: shared!.getString('nameUser') == null
+            leading: shared!.getBool('isRegister') == true
+                ? Icon(Icons.exit_to_app)
+                : Icon(Icons.app_registration),
+            title: shared!.getBool('isRegister') == true
                 ? Text(
-                    S.of(context).register_now,
+                    S.of(context).exit,
                     style: TextStyle(
                       fontSize: setFontSize(12),
                       fontWeight: FontWeight.w500,
@@ -68,7 +79,7 @@ class Customdrawer extends StatelessWidget {
                     ),
                   )
                 : Text(
-                    S.of(context).exit,
+                    S.of(context).register_now,
                     style: TextStyle(
                       fontSize: setFontSize(12),
                       fontWeight: FontWeight.w500,
@@ -76,14 +87,16 @@ class Customdrawer extends StatelessWidget {
                     ),
                   ),
             onTap: () {
-              if (shared!.getString('nameUser') == null) {
+              if (shared!.getBool('isRegister') == true) {
+                shared!.remove('nameUser');
+                shared!.remove('emailUser');
+                shared!.remove('phoneUser');
+                shared!.remove('isRegister');
+                Scaffold.of(ctx).closeDrawer();
+                context.read<Providers>().refresh();
+              } else {
                 read.managerScreen(SignupScreen.Route, context);
-                return;
               }
-              shared!.remove('nameUser');
-              shared!.remove('emailUser');
-              shared!.remove('phoneUser');
-              Provider.of<Providers>(context).refresh();
             },
           ),
           Divider(
@@ -157,20 +170,28 @@ class Customdrawer extends StatelessWidget {
                 context,
                 actions: [
                   CupertinoActionSheetAction(
-                    child: const Text('Action 1'),
+                    child: Text(S.current.doctor),
                     onPressed: () {},
                   ),
                   CupertinoActionSheetAction(
-                    child: const Text('Action 2'),
+                    child: Text(S.current.blood_donation),
                     onPressed: () {},
                   ),
                   CupertinoActionSheetAction(
-                    child: const Text('Action 3'),
+                    child: Text(S.current.Cars),
+                    onPressed: () {},
+                  ),
+                  CupertinoActionSheetAction(
+                    child: Text(S.current.professions),
+                    onPressed: () {},
+                  ),
+                  CupertinoActionSheetAction(
+                    child: Text(S.current.internal_transfer),
                     onPressed: () {},
                   ),
                 ],
                 title: S.current.Select_Service,
-                message: 'Hi',
+                // message: '---------  ----------',
               );
             },
           ),
@@ -240,14 +261,21 @@ class BottomSheets {
     BuildContext context, {
     required List<Widget> actions,
     required String title,
-    required String message,
+    // required String message,
   }) {
     return showCupertinoModalPopup(
       context: context,
       builder: (BuildContext context) {
         return CupertinoActionSheet(
-          title: Text(title),
-          message: Text(message),
+          title: Text(
+            title,
+            style: TextStyle(
+              fontSize: setFontSize(15),
+              fontWeight: FontWeight.bold,
+              color: ColorUsed.DarkGreen,
+            ),
+          ),
+          // message: Text(message),
           actions: actions,
           cancelButton: CupertinoActionSheetAction(
             isDestructiveAction: true,

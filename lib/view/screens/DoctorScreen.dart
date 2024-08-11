@@ -2,11 +2,11 @@ import 'package:Al_Zab_township_guide/controller/provider/DoctorProvider/DoctorP
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/main.dart';
+import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/widget/Cards/cardView.dart';
 import 'package:Al_Zab_township_guide/view/widget/Drawer/CustomDrawer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sizer/sizer.dart';
 import '../widget/constant/app_theme.dart';
 
 class DoctorScreen extends StatelessWidget {
@@ -36,7 +36,7 @@ class DoctorScreen extends StatelessWidget {
                     children: [
                       const CircularProgressIndicator(),
                       SizedBox(
-                        height: 2.h,
+                        height: getheight(2),
                       ),
                       Text(S.of(context).wait_service)
                     ],

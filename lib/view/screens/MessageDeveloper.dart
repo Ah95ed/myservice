@@ -2,14 +2,12 @@ import 'package:Al_Zab_township_guide/controller/provider/DeveloperController/De
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
-import 'package:Al_Zab_township_guide/view/widget/constant/app_theme.dart';
 import 'package:Al_Zab_township_guide/view/widget/staticWidget/TextFieldCustom.dart';
 import 'package:Al_Zab_township_guide/view/widget/LoginWidget/Loginimageshow.dart';
 import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
 import 'package:Al_Zab_township_guide/view/widget/staticWidget/CustomMaterialButton.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sizer/sizer.dart';
 
 class MessageDeveloper extends StatelessWidget {
   MessageDeveloper({super.key});
