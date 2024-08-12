@@ -29,16 +29,17 @@ class _MainScreenState extends State<MainScreen> {
     if (shared!.getBool('tutorial') == null) {
       createTutorial();
       addItem();
-      Future.delayed(Duration(milliseconds: 1500), showTutorial);
+      Future.delayed(
+        Duration(milliseconds: 1500),
+        showTutorial,
+      );
     }
-
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     final read = context.read<MainController>();
-
     return Scaffold(
       key: _scaffoldKey,
       drawer: Customdrawer(),
@@ -46,7 +47,6 @@ class _MainScreenState extends State<MainScreen> {
       extendBody: true,
       backgroundColor: ColorUsed.PrimaryBackground,
       resizeToAvoidBottomInset: false,
-    
       appBar: AppBar(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
@@ -153,7 +153,7 @@ class _MainScreenState extends State<MainScreen> {
               BottomNavigationBarItem(
                 key: taxi,
                 icon: Icon(Icons.local_taxi),
-                label: S.of(context).Cars,
+                label: S.of(context).cars,
               ),
               BottomNavigationBarItem(
                 key: stota,
@@ -293,7 +293,7 @@ class _MainScreenState extends State<MainScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Padding(
-                    padding:EdgeInsets.symmetric(vertical: getheight(8)),
+                    padding: EdgeInsets.symmetric(vertical: getheight(8)),
                     child: Text(
                       S.current.desc_donors,
                       style: TextStyle(

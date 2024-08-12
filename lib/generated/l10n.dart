@@ -91,10 +91,10 @@ class S {
   }
 
   /// `Doctors`
-  String get doctor {
+  String get doctors {
     return Intl.message(
       'Doctors',
-      name: 'doctor',
+      name: 'doctors',
       desc: '',
       args: [],
     );
@@ -111,20 +111,20 @@ class S {
   }
 
   /// `Cars`
-  String get Cars {
+  String get cars {
     return Intl.message(
       'Cars',
-      name: 'Cars',
+      name: 'cars',
       desc: '',
       args: [],
     );
   }
 
   /// `Doctor`
-  String get Doctor {
+  String get doctor {
     return Intl.message(
       'Doctor',
-      name: 'Doctor',
+      name: 'doctor',
       desc: '',
       args: [],
     );
@@ -141,10 +141,10 @@ class S {
   }
 
   /// `Select Service`
-  String get Select_Service {
+  String get select_service {
     return Intl.message(
       'Select Service',
-      name: 'Select_Service',
+      name: 'select_service',
       desc: '',
       args: [],
     );
@@ -975,6 +975,46 @@ class S {
     return Intl.message(
       'Add Service',
       name: 'add_service',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Check Data`
+  String get checkdata {
+    return Intl.message(
+      'Check Data',
+      name: 'checkdata',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Set Language`
+  String get setlang {
+    return Intl.message(
+      'Set Language',
+      name: 'setlang',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Register First `
+  String get register_first {
+    return Intl.message(
+      'Register First ',
+      name: 'register_first',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ali`
+  String get ali {
+    return Intl.message(
+      'Ali',
+      name: 'ali',
       desc: '',
       args: [],
     );

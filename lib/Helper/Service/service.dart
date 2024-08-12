@@ -10,6 +10,7 @@ Future<void> init() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   shared = await SharedPreferences.getInstance();
+
   EmailOTP.config(
     appName: S().title,
     otpType: OTPType.numeric,

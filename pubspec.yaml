@@ -1,46 +1,50 @@
 name: Al_Zab_township_guide
 description: A new Flutter project.
 
-publish_to: 'none' 
+publish_to: 'none'
 version: 1.0.0+1
 environment:
   sdk: '>=3.5.0 <4.0.0'
- 
+
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons:
-  firebase_core:
-  firebase_auth:
+  cupertino_icons: null
+  firebase_core: null
+  firebase_auth: null
   email_otp: ^3.0.2
-  cloud_firestore:
-  provider:
-  url_launcher: 
-  shared_preferences:
+  cloud_firestore: null
+  provider: null
+  url_launcher: null
+  shared_preferences: null
   flutter_localizations:
     sdk: flutter
   # sizer: 
-  firebase_database: 
+  firebase_database: null
   device_preview: ^1.2.0
   intl: ^0.19.0
   tutorial_coach_mark: ^1.2.11
 
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
-   
-
 
   flutter_lints: ^4.0.0
 
 flutter:
   generate: true
+flutter_gen:
+  localizations:
+    arb-dir: lib/l10n
+    template-arb-file: intl_en.arb
+    output-localization-file: app_localizations.dart
+    precompiled: true
 
   uses-material-design: true
-  
+
   assets:
     - assets/
 
 flutter_intl:
   enabled: true
+

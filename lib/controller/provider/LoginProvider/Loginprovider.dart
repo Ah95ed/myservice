@@ -12,8 +12,11 @@ class LoginProvider with ChangeNotifier {
   LoginProvider() {
     model = LoginModel();
   }
-
- 
+  @override
+  void dispose() {
+    isLoading = false;
+    super.dispose();
+  }
 
   Future<void> login(
     BuildContext context,
@@ -28,18 +31,18 @@ class LoginProvider with ChangeNotifier {
     Logger.logger('message Provider Loggin -> $isLoading');
     notifyListeners();
   }
-  void startLoading() {
-    isLoading = true;
-    notifyListeners();
-  }
+//   void startLoading() {
+//     isLoading = true;
+//     notifyListeners();
+//   }
 
-  void stopLoading() {
-    isLoading = false;
-    notifyListeners();
-  }
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-  }
+//   void stopLoading() {
+//     isLoading = false;
+//     notifyListeners();
+//   }
+//   @override
+//   void dispose() {
+//     // TODO: implement dispose
+//     super.dispose();
+//   }
 }

@@ -22,11 +22,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "Cars": MessageLookupByLibrary.simpleMessage("Cars"),
-        "Doctor": MessageLookupByLibrary.simpleMessage("Doctor"),
-        "Select_Service":
-            MessageLookupByLibrary.simpleMessage("Select Service"),
         "add_service": MessageLookupByLibrary.simpleMessage("Add Service"),
+        "ali": MessageLookupByLibrary.simpleMessage("Ali"),
         "already_member":
             MessageLookupByLibrary.simpleMessage("Already Member ? "),
         "blood": MessageLookupByLibrary.simpleMessage("Blood"),
@@ -38,11 +35,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "blood_type": MessageLookupByLibrary.simpleMessage("Blood Type"),
         "blooddonors": MessageLookupByLibrary.simpleMessage("Blood Donors :"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "cars": MessageLookupByLibrary.simpleMessage("Cars"),
         "chanage_lang": MessageLookupByLibrary.simpleMessage("Change Language"),
         "change_language":
             MessageLookupByLibrary.simpleMessage("Change Language"),
         "change_password":
             MessageLookupByLibrary.simpleMessage("Change Password"),
+        "checkdata": MessageLookupByLibrary.simpleMessage("Check Data"),
         "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "date": MessageLookupByLibrary.simpleMessage("Date"),
         "delete_account":
@@ -62,7 +61,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "description": MessageLookupByLibrary.simpleMessage("Description"),
         "desctiption_message":
             MessageLookupByLibrary.simpleMessage("Description"),
-        "doctor": MessageLookupByLibrary.simpleMessage("Doctors"),
+        "doctor": MessageLookupByLibrary.simpleMessage("Doctor"),
+        "doctors": MessageLookupByLibrary.simpleMessage("Doctors"),
         "don_t_have_account":
             MessageLookupByLibrary.simpleMessage("Don\'t have Account ?"),
         "donate": MessageLookupByLibrary.simpleMessage("Donate"),
@@ -135,13 +135,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "presence": MessageLookupByLibrary.simpleMessage("Presence"),
         "profession": MessageLookupByLibrary.simpleMessage("Profession :"),
         "professions": MessageLookupByLibrary.simpleMessage("Professions"),
+        "register_first":
+            MessageLookupByLibrary.simpleMessage("Register First "),
         "register_now": MessageLookupByLibrary.simpleMessage("Register Now"),
         "search": MessageLookupByLibrary.simpleMessage("Search"),
+        "select_service":
+            MessageLookupByLibrary.simpleMessage("Select Service"),
         "send": MessageLookupByLibrary.simpleMessage("Send"),
         "send_developer":
             MessageLookupByLibrary.simpleMessage("Send Message To Developer"),
         "send_request": MessageLookupByLibrary.simpleMessage("Send Request"),
         "service_type": MessageLookupByLibrary.simpleMessage("Service Type"),
+        "setlang": MessageLookupByLibrary.simpleMessage("Set Language"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "skip": MessageLookupByLibrary.simpleMessage("Skip"),
         "source": MessageLookupByLibrary.simpleMessage("Go to the source"),

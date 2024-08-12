@@ -18,7 +18,7 @@ class DoctorScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     MyApp.getContext()!.read<DoctorProvider>().getDataAll();
     context.read<Providers>().title = Text(
-      S.of(context).Doctor,
+      S.of(context).doctor,
       style: const TextStyle(
         color: AppTheme.notWhite,
       ),

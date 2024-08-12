@@ -22,9 +22,6 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "Cars": MessageLookupByLibrary.simpleMessage("سيارات"),
-        "Doctor": MessageLookupByLibrary.simpleMessage("طبيب"),
-        "Select_Service": MessageLookupByLibrary.simpleMessage("اختر الخدمة"),
         "add_service": MessageLookupByLibrary.simpleMessage("أضافة خدمة"),
         "already_member":
             MessageLookupByLibrary.simpleMessage("مسجل بالفعل ؟ "),
@@ -35,6 +32,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "blood_type": MessageLookupByLibrary.simpleMessage("فصيلة الدم"),
         "blooddonors": MessageLookupByLibrary.simpleMessage("متبرعون بالدم :"),
         "cancel": MessageLookupByLibrary.simpleMessage("الغاء"),
+        "cars": MessageLookupByLibrary.simpleMessage("سيارات"),
         "chanage_lang": MessageLookupByLibrary.simpleMessage("تغيير اللغة"),
         "change_language": MessageLookupByLibrary.simpleMessage("تغيير اللغة"),
         "change_password":
@@ -56,7 +54,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "هنا تجد اصحاب النقل الداخلي في الزاب"),
         "description": MessageLookupByLibrary.simpleMessage("الوصف"),
         "desctiption_message": MessageLookupByLibrary.simpleMessage("الوصف"),
-        "doctor": MessageLookupByLibrary.simpleMessage("أطباء"),
+        "doctor": MessageLookupByLibrary.simpleMessage("طبيب"),
+        "doctors": MessageLookupByLibrary.simpleMessage("أطباء"),
         "don_t_have_account":
             MessageLookupByLibrary.simpleMessage("ليس لديك حساب؟"),
         "donate": MessageLookupByLibrary.simpleMessage("التبرع"),
@@ -121,6 +120,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "professions": MessageLookupByLibrary.simpleMessage("المهن"),
         "register_now": MessageLookupByLibrary.simpleMessage("سجل الآن"),
         "search": MessageLookupByLibrary.simpleMessage("بحث"),
+        "select_service": MessageLookupByLibrary.simpleMessage("اختر الخدمة"),
         "send": MessageLookupByLibrary.simpleMessage("إرسال"),
         "send_developer":
             MessageLookupByLibrary.simpleMessage("إرسال رسالة إلى المطور"),

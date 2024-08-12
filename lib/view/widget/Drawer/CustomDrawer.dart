@@ -1,8 +1,9 @@
+import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
+import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/controller/Constant/Constant.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
-import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/view/screens/EditScreen/CustomDialog.dart';
 import 'package:Al_Zab_township_guide/view/screens/SignupScreen/signup_screen.dart';
 import 'package:Al_Zab_township_guide/view/screens/WhoCanDonateScreen%20.dart';
@@ -165,34 +166,44 @@ class Customdrawer extends StatelessWidget {
               ),
             ),
             onTap: () {
-              Navigator.of(context).pop();
-              BottomSheets.showCupertinoBottomReuse(
-                context,
-                actions: [
-                  CupertinoActionSheetAction(
-                    child: Text(S.current.doctor),
-                    onPressed: () {},
+              if (shared!.getBool('isRegister') == true) {
+                Navigator.of(context).pop();
+                BottomSheets.showCupertinoBottomReuse(
+                  context,
+                  actions: [
+                    CupertinoActionSheetAction(
+                      child: Text(S.current.doctor),
+                      onPressed: () {},
+                    ),
+                    CupertinoActionSheetAction(
+                      child: Text(S.current.blood_donation),
+                      onPressed: () {},
+                    ),
+                    CupertinoActionSheetAction(
+                      child: Text(S.current.cars),
+                      onPressed: () {},
+                    ),
+                    CupertinoActionSheetAction(
+                      child: Text(S.current.professions),
+                      onPressed: () {},
+                    ),
+                    CupertinoActionSheetAction(
+                      child: Text(S.current.internal_transfer),
+                      onPressed: () {},
+                    ),
+                  ],
+                  title: S.current.select_service,
+                  // message: '---------  ----------',
+                );
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      'سجل اولاً',
+                    ),
                   ),
-                  CupertinoActionSheetAction(
-                    child: Text(S.current.blood_donation),
-                    onPressed: () {},
-                  ),
-                  CupertinoActionSheetAction(
-                    child: Text(S.current.Cars),
-                    onPressed: () {},
-                  ),
-                  CupertinoActionSheetAction(
-                    child: Text(S.current.professions),
-                    onPressed: () {},
-                  ),
-                  CupertinoActionSheetAction(
-                    child: Text(S.current.internal_transfer),
-                    onPressed: () {},
-                  ),
-                ],
-                title: S.current.Select_Service,
-                // message: '---------  ----------',
-              );
+                );
+              }
             },
           ),
           Divider(

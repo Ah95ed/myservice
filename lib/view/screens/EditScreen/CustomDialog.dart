@@ -39,7 +39,7 @@ class _CustomDialogState extends State<CustomDialog> {
             DropdownButtonFormField<String>(
               value: _selectedValue,
               hint: Text(
-                S.current.Select_Service,
+                S.current.select_service,
                 style: TextStyle(
                   color: ColorUsed.second,
                   fontSize: setFontSize(14),
@@ -54,7 +54,7 @@ class _CustomDialogState extends State<CustomDialog> {
               items: <String>[
                 S.current.doctor,
                 S.current.blood_type,
-                S.current.Cars,
+                S.current.cars,
                 S.current.professions,
                 S.current.internal_transfer,
               ].map<DropdownMenuItem<String>>(
@@ -107,7 +107,7 @@ class _CustomDialogState extends State<CustomDialog> {
                       Navigator.of(context).pop();
 
                       // _selectedValue = ServiceCollectios.line.name;
-                    } else if (_selectedValue == S.current.Cars) {
+                    } else if (_selectedValue == S.current.cars) {
                       _selectedValue = 'line';
                       searchService(_selectedValue);
                     } else if (_selectedValue == S.current.professions) {

@@ -3,12 +3,12 @@
     "professions": "Professions",
     "line": "Lines",
     "internal_transfer": "Internal Transfer",
-    "doctor": "Doctors",
+    "doctors": "Doctors",
     "blood_type": "Blood Type",
-    "Cars": "Cars",
-    "Doctor": "Doctor",
+    "cars": "Cars",
+    "doctor": "Doctor",
     "donors": "Donors",
-    "Select_Service": "Select Service",
+    "select_service": "Select Service",
     "name": "Name :",
     "type": "Type :",
     "team_policy": "Terms of Service | Privacy Policy",
@@ -91,6 +91,9 @@
     "desc_more": "more options",
     "is_number_exist": "Phone Number is Exist",
     "exit": "Exit",
-    "add_service" : "Add Service",
-    "checkdata" : "Check Data"
+    "add_service": "Add Service",
+    "checkdata": "Check Data",
+     "setlang" : "Set Language",
+     "register_first": "Register First ",
+     "ali" : "Ali"
 }
