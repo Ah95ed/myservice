@@ -106,7 +106,8 @@ class Language implements KeyAbstract {
       "exit": "تسجيل خروج",
       "add_service": "أضافة خدمة",
       "check_data": "تحقق من بياناتك المدخلة",
-      "register_first": "سجل اولاً"
+      "register_first": "سجل اولاً",
+      "confirm_otp": "تاكيد الرمز",
     },
     "en": {
       "title": "ALZab Township Guide",
@@ -211,6 +212,7 @@ class Language implements KeyAbstract {
       "register_first": "Register First ",
       "ali": "Ali",
       "something_wrong": "Something Wrong",
+      "confirm_otp": "Confirm OTP"
     },
   };
 }

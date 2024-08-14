@@ -4,7 +4,7 @@ import 'package:Al_Zab_township_guide/view/screens/EditScreen/EditScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/MessageDeveloper.dart';
 import 'package:Al_Zab_township_guide/view/screens/MyCustomSplashScreen.dart';
-import 'package:Al_Zab_township_guide/view/screens/OTPScreen.dart';
+import 'package:Al_Zab_township_guide/view/screens/OTPScreenEmail.dart';
 import 'package:Al_Zab_township_guide/view/screens/ProfessionsScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/SatotaScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/ShowDonors.dart';
@@ -27,7 +27,7 @@ Map<String, WidgetBuilder> routs = {
   LoginScreen.Route: (context) => LoginScreen(),
   MyCustomSplashScreen.Route: (context) =>  MyCustomSplashScreen(),
   WhoCanDonateScreen.route: (context) => const WhoCanDonateScreen(),
-  OtpScreen.Route: (context) => OtpScreen(),
+  OtpScreenEmail.Route: (context) => OtpScreenEmail(),
   Editscreen.Route: (context) => const Editscreen(),
   MessageDeveloper.Route: (context) =>  MessageDeveloper(),
 };

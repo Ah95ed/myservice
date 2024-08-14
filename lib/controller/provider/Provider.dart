@@ -1,7 +1,7 @@
 import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
 import 'package:Al_Zab_township_guide/controller/Constant/Constant.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
-import 'package:Al_Zab_township_guide/view/screens/OTPScreen.dart';
+import 'package:Al_Zab_township_guide/view/screens/OTPScreenEmail.dart';
 import 'package:Al_Zab_township_guide/Models/constant/app_theme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_otp/email_otp.dart';
@@ -52,7 +52,7 @@ class Providers with ChangeNotifier {
       this.email = email;
       this.phone = phone;
       this.password = password;
-      managerScreen(OtpScreen.Route, context);
+      managerScreen(OtpScreenEmail.Route, context);
     }
 
     notifyListeners();

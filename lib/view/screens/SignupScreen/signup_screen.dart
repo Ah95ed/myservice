@@ -3,7 +3,7 @@ import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/controller/provider/SignupProvider/SignupProvider.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
-import 'package:Al_Zab_township_guide/view/screens/OTPScreen.dart';
+import 'package:Al_Zab_township_guide/view/screens/OTPScreenEmail.dart';
 import 'package:Al_Zab_township_guide/view/widget/LoginWidget/Loginimageshow.dart';
 import 'package:Al_Zab_township_guide/Models/constant/Constant.dart';
 import 'package:flutter/material.dart';
@@ -231,7 +231,7 @@ class _SignupScreenState extends State<SignupScreen>
                 
                               if (await provider.isSignup) {
                                 context.read<Providers>().managerScreen(
-                                      OtpScreen.Route,
+                                      OtpScreenEmail.Route,
                                       context,
                                     );
                                 provider.stopLoading();

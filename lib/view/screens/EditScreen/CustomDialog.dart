@@ -1,12 +1,13 @@
 import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
-import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
+import 'package:Al_Zab_township_guide/Models/constant/Constant.dart';
+import 'package:Al_Zab_township_guide/Models/constant/app_theme.dart';
 import 'package:Al_Zab_township_guide/controller/Constant/Constant.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/main.dart';
+import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/screens/MessageDeveloper.dart';
-import 'package:Al_Zab_township_guide/Models/constant/Constant.dart';
 import 'package:Al_Zab_township_guide/view/widget/staticWidget/CustomMaterialButton.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -21,11 +22,11 @@ class _CustomDialogState extends State<CustomDialog> {
   final _formKey = GlobalKey<FormState>();
   String? _selectedValue;
   TextEditingController _textController = TextEditingController();
-  Providers? read;
+  // Providers? read;
 
   @override
   Widget build(BuildContext context) {
-    read = context.read<Providers>();
+    final read = context.read<Providers>();
 
     return AlertDialog(
       title: Text(
@@ -89,14 +90,44 @@ class _CustomDialogState extends State<CustomDialog> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 ElevatedButton(
+                  autofocus: true,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: ColorUsed.second,
+                    foregroundColor: ColorUsed.second,
+                    shadowColor: ColorUsed.second,
+                    elevation: 5,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    side: const BorderSide(
+                      color: ColorUsed.second,
+                    ),
+                  ),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
                   child: Text(
                     S.current.cancel,
+                    style: TextStyle(
+                      fontSize: setFontSize(16),
+                      color: AppTheme.notWhite,
+                    ),
                   ),
                 ),
                 ElevatedButton(
+                  autofocus: true,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: ColorUsed.second,
+                    foregroundColor: ColorUsed.second,
+                    shadowColor: ColorUsed.second,
+                    elevation: 5,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    side: const BorderSide(
+                      color: ColorUsed.second,
+                    ),
+                  ),
                   onPressed: () async {
                     if (_selectedValue!.contains(S.current.doctor)) {
                       _selectedValue = 'Doctor';
@@ -118,7 +149,13 @@ class _CustomDialogState extends State<CustomDialog> {
                       searchService(_selectedValue);
                     }
                   },
-                  child: Text(S.current.confirm),
+                  child: Text(
+                    S.current.confirm,
+                    style: TextStyle(
+                      fontSize: setFontSize(16),
+                      color: AppTheme.notWhite,
+                    ),
+                  ),
                 ),
               ],
             )
@@ -127,7 +164,13 @@ class _CustomDialogState extends State<CustomDialog> {
       ),
       actions: [
         Center(
-          child: Text(S.current.go_to_developer_page),
+          child: Text(
+            S.current.go_to_developer_page,
+            style: TextStyle(
+              fontSize: setFontSize(16),
+              color: ColorUsed.DarkGreen,
+            ),
+          ),
         ),
         SizedBox(
           height: getheight(2),
@@ -136,8 +179,8 @@ class _CustomDialogState extends State<CustomDialog> {
           child: CustomMaterialButton(
             title: S.current.send_developer,
             onPressed: () {
-               Navigator.of(context).pop();
-              read!.managerScreen(MessageDeveloper.Route, context);
+              Navigator.of(context).pop();
+              read.managerScreen(MessageDeveloper.Route, context);
               // Navigator.of(context).pop();
             },
           ),

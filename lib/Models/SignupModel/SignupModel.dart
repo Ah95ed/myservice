@@ -5,7 +5,7 @@ import 'package:Al_Zab_township_guide/Models/SharedModel/SharedModel.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/view/screens/LoginScreen/login_screen.dart';
 import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
-import 'package:Al_Zab_township_guide/view/screens/OTPScreen.dart';
+import 'package:Al_Zab_township_guide/view/screens/OTPScreenEmail.dart';
 import 'package:email_otp/email_otp.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -79,7 +79,7 @@ class SignupModel {
         _verificationId = verificationId;
         shared!.setString('verificationId', _verificationId);
         log('message verificationId -> $_verificationId');
-        sharesModel!.managerScreenSplash(OtpScreen.Route, _ctx, false);
+        sharesModel!.managerScreenSplash(OtpScreenEmail.Route, _ctx, false);
       },
       codeAutoRetrievalTimeout: (String verificationId) {
         // setState(() {

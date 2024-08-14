@@ -1,3 +1,5 @@
+import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
+import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/controller/provider/SignupProvider/SignupProvider.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
@@ -7,10 +9,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../Models/constant/Constant.dart';
 
-class OtpScreen extends StatelessWidget {
+class OtpScreenEmail extends StatelessWidget {
   static const Route = "/OtpScreen";
   TextEditingController otpNumber = TextEditingController();
-  OtpScreen({Key? key}) : super(key: key);
+  OtpScreenEmail({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +49,7 @@ class OtpScreen extends StatelessWidget {
                       margin: const EdgeInsets.only(top: 50),
                       height: 80,
                       child: Image.asset(
-                        "assets/asd.png",
+                        path,
                       ),
                     ),
                     Container(
@@ -57,8 +59,8 @@ class OtpScreen extends StatelessWidget {
                       ),
                       alignment: Alignment.bottomRight,
                     ),
-                    const Text(
-                      'OTP Verifying',
+                     Text(
+                      Translation[''],
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
