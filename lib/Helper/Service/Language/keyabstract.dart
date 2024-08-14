@@ -3,5 +3,5 @@
 abstract class KeyAbstract{
 
 
-  Map<String, Map<String,String>> get keyMap;
+static  Map<String, Map<String,String>>  keyMap = {};
 }

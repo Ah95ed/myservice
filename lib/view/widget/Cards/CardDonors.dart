@@ -4,7 +4,7 @@ import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:Al_Zab_township_guide/view/widget/staticWidget/Multi_text.dart';
-import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
+import 'package:Al_Zab_township_guide/Models/constant/Constant.dart';
 
 // ignore: must_be_immutable
 class CardDonors extends StatelessWidget {
@@ -21,40 +21,59 @@ class CardDonors extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 4,
-      child: Row(
-        children: [
-          Expanded(
-            flex: 2,
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: getWidth(2),
-                vertical: getheight(2),
-              ),
-              child: Column(
-                children: [
-                  MultiText(name, S.of(context).name),
-                  MultiText(type, S.of(context).type),
-                  MultiText(title, S.of(context).title_service),
-                ],
-              ),
+    return Expanded(
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: getWidth(1),
+          vertical: getheight(0.5),
+        ),
+        child: Container(
+          
+          // height: getheight(20),
+          decoration: BoxDecoration(
+            
+            border: Border.all(
+              width: getWidth(0.2),
+              color: ColorUsed.DarkGreen,
+            ),
+            borderRadius: const BorderRadius.all(
+              Radius.circular(20),
             ),
           ),
-          Expanded(
-            flex: 0,
-            child: IconButton(
-              icon: Icon(
-                Icons.call,
-                size: getheight(4),
-                color: ColorUsed.primary,
+          child: Row(
+            children: [
+              Expanded(
+                flex: 3,
+                child: Column(
+                  children: [
+                    MultiText(name, S.of(context).name),
+                    SizedBox(
+                      height: getheight(0.5),
+                    ),
+                    MultiText(type, S.of(context).type),
+                    SizedBox(
+                      height: getheight(0.5),
+                    ),
+                    MultiText(title, S.of(context).title_service),
+                  ],
+                ),
               ),
-              onPressed: () async {
-                context.read<Providers>().callNumber(number);
-              },
-            ),
+              Expanded(
+                flex: 1,
+                child: IconButton(
+                  icon: Icon(
+                    Icons.call,
+                    size: getheight(4),
+                    color: ColorUsed.primary,
+                  ),
+                  onPressed: () async {
+                    context.read<Providers>().callNumber(number);
+                  },
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

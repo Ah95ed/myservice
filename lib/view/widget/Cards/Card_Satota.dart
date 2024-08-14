@@ -2,7 +2,7 @@ import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import '../staticWidget/Multi_text.dart';
-import '../constant/Constant.dart';
+import '../../../Models/constant/Constant.dart';
 
 class CardSatota extends StatelessWidget {
   // const Professions({super.key});

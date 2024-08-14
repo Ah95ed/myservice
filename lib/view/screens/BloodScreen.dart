@@ -3,8 +3,8 @@ import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/controller/Constant/Constant.dart';
 import 'package:Al_Zab_township_guide/view/screens/ShowDonors.dart';
 import 'package:Al_Zab_township_guide/view/widget/ButtonSelect.dart';
-import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
-import 'package:Al_Zab_township_guide/view/widget/constant/app_theme.dart';
+import 'package:Al_Zab_township_guide/Models/constant/Constant.dart';
+import 'package:Al_Zab_township_guide/Models/constant/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

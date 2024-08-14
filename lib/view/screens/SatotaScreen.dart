@@ -5,7 +5,7 @@ import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/view/widget/Cards/Card_Satota.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../widget/constant/app_theme.dart';
+import '../../Models/constant/app_theme.dart';
 
 class SatotaScreen extends StatelessWidget {
   static const ROUTE = '/SatotaScreen';

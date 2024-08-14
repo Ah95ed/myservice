@@ -9,11 +9,10 @@ import 'package:Al_Zab_township_guide/controller/provider/LoginProvider/Loginpro
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
-import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/SignupScreen/signup_screen.dart';
 import 'package:Al_Zab_township_guide/view/widget/LoginWidget/Loginimageshow.dart';
-import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
-import 'package:Al_Zab_township_guide/view/widget/constant/app_theme.dart';
+import 'package:Al_Zab_township_guide/Models/constant/Constant.dart';
+import 'package:Al_Zab_township_guide/Models/constant/app_theme.dart';
 
 class LoginScreen extends StatefulWidget {
   static const Route = 'login screen';
@@ -206,27 +205,6 @@ class _LoginScreenState extends State<LoginScreen>
                                   phone.text,
                                   password.text,
                                 );
-                                if  ( await provider.isLoading) {
-                                  context.read<Providers>().managerScreenSplash(
-                                        MainScreen.ROUTE,
-                                        context,
-                                        false,
-                                      );
-                                  Logger.logger(
-                                      'message login 1 -> ${provider.isLoading}');
-                                  return;
-                                } else {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text('تأكد من الرقم والباسورد'),
-                                      duration: Duration(seconds: 3),
-                                    ),
-                                  );
-                                  Logger.logger(
-                                      'message login 2 -> ${provider.isLoading}');
-
-                                  return;
-                                }
                               },
                               child: Container(
                                 margin: EdgeInsets.only(

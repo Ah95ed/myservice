@@ -1,5 +1,9 @@
 import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
+import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
+import 'package:Al_Zab_township_guide/main.dart';
+import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:provider/provider.dart';
 
 class LoginModel {
   String? name, email, phone, password;
@@ -39,31 +43,33 @@ class LoginModel {
         pass,
       );
     } else {
-      isLogin = false;
+      await shared!.setBool('isRegister', false);
       return;
     }
   }
 
-  bool isLogin = false;
-
-  Future<bool> loginFirebase(
+  Future<void> loginFirebase(
     String phone,
     String password,
   ) async {
     databaseReference.child('auth').child(phone).once().then(
-      (v) {
+      (v) async {
         final data = v.snapshot.value as Map;
         if (data['password'] == password) {
           // isLogin = true;
-          shared!.setString('nameUser', data['name']);
-          shared!.setString('emailUser', data['email']);
-          shared!.setString('phoneUser', data['phone']);
-          shared!.setBool('isRegister', true);
-          return isLogin= true;
+          await shared!.setString('nameUser', data['name']);
+          await shared!.setString('emailUser', data['email']);
+          await shared!.setString('phoneUser', data['phone']);
+          await shared!.setBool('isRegister', true);
+          MyApp.getContext()!.read<Providers>().managerScreenSplash(
+                MainScreen.ROUTE,
+                MyApp.getContext()!,
+                false,
+              );
         }
-        return isLogin;
+        // return isLogin;
       },
     );
-    return isLogin;
+    // return isLogin;
   }
 }

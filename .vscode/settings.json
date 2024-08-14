@@ -5,5 +5,9 @@
     "editor.guides.bracketPairsHorizontal": true,
     "dart.previewFlutterUiGuides": true,
     "dart.previewFlutterUiGuidesCustomTracking": true,
-    "workbench.preferredDarkColorTheme": "Default Dark Modern"
+    "workbench.preferredDarkColorTheme": "Default Dark Modern",
+    "editor.codeActionsOnSave": {
+        "source.fixAll": "explicit",
+        "source.organizeImports": "explicit"
+    }
 }

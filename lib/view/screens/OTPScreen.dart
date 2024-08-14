@@ -5,7 +5,7 @@ import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:email_otp/email_otp.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../widget/constant/Constant.dart';
+import '../../Models/constant/Constant.dart';
 
 class OtpScreen extends StatelessWidget {
   static const Route = "/OtpScreen";

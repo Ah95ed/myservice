@@ -149,6 +149,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "setlang": MessageLookupByLibrary.simpleMessage("Set Language"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "skip": MessageLookupByLibrary.simpleMessage("Skip"),
+        "something_wrong":
+            MessageLookupByLibrary.simpleMessage("Something Wrong"),
         "source": MessageLookupByLibrary.simpleMessage("Go to the source"),
         "specialization":
             MessageLookupByLibrary.simpleMessage("Specialization :"),

@@ -1,9 +1,10 @@
 import 'dart:async';
+import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
-import 'package:Al_Zab_township_guide/view/widget/constant/app_theme.dart';
+import 'package:Al_Zab_township_guide/Models/constant/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class MyCustomSplashScreen extends StatefulWidget {
@@ -24,6 +25,7 @@ class _MyCustomSplashScreenState extends State<MyCustomSplashScreen>
 
   @override
   void initState() {
+    Logger.logger('message $path');
     super.initState();
 
     _controller =
@@ -58,7 +60,7 @@ class _MyCustomSplashScreenState extends State<MyCustomSplashScreen>
     });
 
     Timer(Duration(seconds: 4), () {
-       shared!.setBool('spalsh', true);
+      shared!.setBool('spalsh', true);
       setState(() {
         Navigator.pushReplacement(
           context,
@@ -72,15 +74,13 @@ class _MyCustomSplashScreenState extends State<MyCustomSplashScreen>
 
   @override
   void dispose() {
-   
-    
     _controller.dispose();
+
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    
     double _width = MediaQuery.of(context).size.width;
     double _height = MediaQuery.of(context).size.height;
 
@@ -124,11 +124,9 @@ class _MyCustomSplashScreenState extends State<MyCustomSplashScreen>
                     borderRadius: BorderRadius.circular(30),
                   ),
                   child: Image.asset(
-                    'assets/asd.png',
+                    path,
                     fit: BoxFit.fill,
-                  )
-                 
-                  ),
+                  )),
             ),
           ),
         ],

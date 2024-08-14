@@ -1,5 +1,5 @@
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
-import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
+import 'package:Al_Zab_township_guide/Models/constant/Constant.dart';
 import 'package:flutter/material.dart';
 
 class Login_Image extends StatelessWidget {
@@ -39,7 +39,7 @@ class Login_Image extends StatelessWidget {
       
           height: getheight(12),
           child: Image.asset(
-            "assets/asd.png",
+            "assets/logo/asd.png",
           ),
         ),
       ),

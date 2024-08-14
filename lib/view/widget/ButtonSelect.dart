@@ -1,7 +1,7 @@
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
-import 'package:Al_Zab_township_guide/view/widget/constant/app_theme.dart';
+import 'package:Al_Zab_township_guide/Models/constant/app_theme.dart';
 import 'package:flutter/material.dart';
-import 'constant/Constant.dart';
+import '../../Models/constant/Constant.dart';
 
 // ignore: must_be_immutable
 class ButtonSelect extends StatelessWidget {

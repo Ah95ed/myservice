@@ -1,27 +1,24 @@
-import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
+import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
-import 'package:Al_Zab_township_guide/generated/l10n.dart';
-import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
+import 'package:Al_Zab_township_guide/Models/constant/Constant.dart';
+import 'package:Al_Zab_township_guide/Models/constant/app_theme.dart';
 import 'package:Al_Zab_township_guide/controller/Constant/Constant.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
+import 'package:Al_Zab_township_guide/generated/l10n.dart';
+import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/screens/EditScreen/CustomDialog.dart';
 import 'package:Al_Zab_township_guide/view/screens/SignupScreen/signup_screen.dart';
-import 'package:Al_Zab_township_guide/view/screens/WhoCanDonateScreen%20.dart';
-import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
-import 'package:Al_Zab_township_guide/view/widget/constant/app_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class Customdrawer extends StatelessWidget {
   Customdrawer({super.key});
-  late BuildContext ctx;
 
   //! need controller Drawer Page
 
   @override
   Widget build(BuildContext context) {
-    this.ctx = context;
     final read = context.read<Providers>();
     return Drawer(
       child: ListView(
@@ -93,7 +90,7 @@ class Customdrawer extends StatelessWidget {
                 shared!.remove('emailUser');
                 shared!.remove('phoneUser');
                 shared!.remove('isRegister');
-                Scaffold.of(ctx).closeDrawer();
+                Scaffold.of(context).closeDrawer();
                 context.read<Providers>().refresh();
               } else {
                 read.managerScreen(SignupScreen.Route, context);
@@ -115,7 +112,7 @@ class Customdrawer extends StatelessWidget {
               ),
             ),
             onTap: () {
-              Scaffold.of(ctx).closeDrawer();
+              Scaffold.of(context).closeDrawer();
               showDialog(
                 context: context,
                 builder: (BuildContext context) {
@@ -130,26 +127,8 @@ class Customdrawer extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(Icons.settings),
-            title: Text(S.of(context).settings),
+            title: Text(Translation['settings']),
             onTap: () {},
-          ),
-          Divider(
-            thickness: getWidth(0.5),
-            color: ColorUsed.DarkGreen,
-          ),
-          ListTile(
-            leading: Icon(Icons.star),
-            title: Text(
-              S.of(context).whocandonate,
-              style: TextStyle(
-                fontSize: setFontSize(12),
-                fontWeight: FontWeight.w500,
-                color: ColorUsed.DarkGreen,
-              ),
-            ),
-            onTap: () {
-              read.managerScreen(WhoCanDonateScreen.route, context);
-            },
           ),
           Divider(
             thickness: getWidth(0.5),
@@ -166,29 +145,64 @@ class Customdrawer extends StatelessWidget {
               ),
             ),
             onTap: () {
+              Navigator.of(context).pop();
               if (shared!.getBool('isRegister') == true) {
-                Navigator.of(context).pop();
                 BottomSheets.showCupertinoBottomReuse(
                   context,
                   actions: [
                     CupertinoActionSheetAction(
-                      child: Text(S.current.doctor),
+                      child: Text(
+                        S.current.doctor,
+                        style: TextStyle(
+                          fontSize: setFontSize(14),
+                          fontWeight: FontWeight.bold,
+                          color: ColorUsed.second,
+                        ),
+                      ),
                       onPressed: () {},
                     ),
                     CupertinoActionSheetAction(
-                      child: Text(S.current.blood_donation),
+                      child: Text(
+                        S.current.blood_donation,
+                        style: TextStyle(
+                          fontSize: setFontSize(14),
+                          fontWeight: FontWeight.bold,
+                          color: ColorUsed.second,
+                        ),
+                      ),
                       onPressed: () {},
                     ),
                     CupertinoActionSheetAction(
-                      child: Text(S.current.cars),
+                      child: Text(
+                        S.current.cars,
+                        style: TextStyle(
+                          fontSize: setFontSize(14),
+                          fontWeight: FontWeight.bold,
+                          color: ColorUsed.second,
+                        ),
+                      ),
                       onPressed: () {},
                     ),
                     CupertinoActionSheetAction(
-                      child: Text(S.current.professions),
+                      child: Text(
+                        S.current.professions,
+                        style: TextStyle(
+                          fontSize: setFontSize(14),
+                          fontWeight: FontWeight.bold,
+                          color: ColorUsed.second,
+                        ),
+                      ),
                       onPressed: () {},
                     ),
                     CupertinoActionSheetAction(
-                      child: Text(S.current.internal_transfer),
+                      child: Text(
+                        S.current.internal_transfer,
+                        style: TextStyle(
+                          fontSize: setFontSize(14),
+                          fontWeight: FontWeight.bold,
+                          color: ColorUsed.second,
+                        ),
+                      ),
                       onPressed: () {},
                     ),
                   ],
@@ -198,8 +212,8 @@ class Customdrawer extends StatelessWidget {
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    content: Text(
-                      'سجل اولاً',
+                    content:  Text(
+                      Translation['register_first'],
                     ),
                   ),
                 );
@@ -290,7 +304,7 @@ class BottomSheets {
           actions: actions,
           cancelButton: CupertinoActionSheetAction(
             isDestructiveAction: true,
-            child: const Text('Cancel'),
+            child: Text('Cancel'),
             onPressed: () {
               Navigator.pop(context);
             },

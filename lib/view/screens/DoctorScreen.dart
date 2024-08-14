@@ -7,7 +7,7 @@ import 'package:Al_Zab_township_guide/view/widget/Cards/cardView.dart';
 import 'package:Al_Zab_township_guide/view/widget/Drawer/CustomDrawer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../widget/constant/app_theme.dart';
+import '../../Models/constant/app_theme.dart';
 
 class DoctorScreen extends StatelessWidget {
   static const ROUTE = "DoctorScreen";

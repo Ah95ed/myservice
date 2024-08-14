@@ -5,16 +5,13 @@ import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/screens/OTPScreen.dart';
 import 'package:Al_Zab_township_guide/view/widget/LoginWidget/Loginimageshow.dart';
-import 'package:Al_Zab_township_guide/view/widget/constant/Constant.dart';
+import 'package:Al_Zab_township_guide/Models/constant/Constant.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../LoginScreen/login_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/services.dart';
-import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
-import 'package:Al_Zab_township_guide/controller/provider/LoginProvider/Loginprovider.dart';
-import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
-import 'package:Al_Zab_township_guide/view/widget/constant/app_theme.dart';
+import 'package:Al_Zab_township_guide/Models/constant/app_theme.dart';
 
 class SignupScreen extends StatefulWidget {
   static const Route = "/SignupScreen";

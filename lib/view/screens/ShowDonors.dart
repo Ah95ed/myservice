@@ -3,11 +3,11 @@ import 'package:Al_Zab_township_guide/controller/Constant/Constant.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/widget/Cards/CardDonors.dart';
-import 'package:Al_Zab_township_guide/view/widget/constant/app_theme.dart';
+import 'package:Al_Zab_township_guide/Models/constant/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import '../widget/constant/Constant.dart';
+import '../../Models/constant/Constant.dart';
 
 // ignore: must_be_immutable
 class ShowDonors extends StatelessWidget {
@@ -27,77 +27,82 @@ class ShowDonors extends StatelessWidget {
     return Consumer<Providers>(
       builder: (context, value, child) {
         return Scaffold(
-            appBar: AppBar(
-              backgroundColor: Colors.transparent,
-              elevation: 5.0,
-              toolbarHeight: getheight(10),
-              leading: IconButton(
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 5.0,
+            toolbarHeight: getheight(10),
+            leading: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: const Icon(
+                Icons.arrow_back,
+                color: AppTheme.notWhite,
+              ),
+            ),
+            actions: [
+              IconButton(
                 onPressed: () {
-                  Navigator.pop(context);
+                  value.changewidget(
+                    S.of(context).donors,
+                    const TextStyle(
+                      color: AppTheme.notWhite,
+                    ),
+                  );
                 },
-                icon: const Icon(
-                  Icons.arrow_back,
+                icon: Icon(
+                  value.actionsicon.icon,
                   color: AppTheme.notWhite,
                 ),
-              ),
-              actions: [
-                IconButton(
-                  onPressed: () {
-                    value.changewidget(
-                      S.of(context).donors,
-                      const TextStyle(
-                        color: AppTheme.notWhite,
-                      ),
-                    );
-                  },
-                  icon: Icon(
-                    value.actionsicon.icon,
-                    color: AppTheme.notWhite,
-                  ),
-                )
-              ],
-              title: value.title,
-              centerTitle: true,
-              flexibleSpace: Container(
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(20),
-                    bottomRight: Radius.circular(20),
-                  ),
-                  gradient: LinearGradient(
-                    colors: [ColorUsed.primary, ColorUsed.second],
-                    begin: Alignment.bottomCenter,
-                    end: Alignment.topCenter,
-                  ),
+              )
+            ],
+            title: value.title,
+            centerTitle: true,
+            flexibleSpace: Container(
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(20),
+                  bottomRight: Radius.circular(20),
+                ),
+                gradient: LinearGradient(
+                  colors: [ColorUsed.primary, ColorUsed.second],
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter,
                 ),
               ),
-              systemOverlayStyle: SystemUiOverlayStyle.light,
             ),
-            body: value.s.isEmpty
-                ? Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const CircularProgressIndicator(),
-                        SizedBox(
-                          height: getheight(2),
-                        ),
-                        Text(S.of(context).wait_service)
-                      ],
-                    ),
-                  )
-                : ListView.builder(
-                    itemCount: value.s.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return CardDonors(
-                        name: value.s[index]['name'],
-                        type: dataSend.collection,
-                        title: value.s[index]['location'],
-                        number: value.s[index]['number'],
-                      );
-                    },
-                  ));
+            systemOverlayStyle: SystemUiOverlayStyle.light,
+          ),
+          body: value.s.isEmpty
+              ? Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const CircularProgressIndicator(),
+                      SizedBox(
+                        height: getheight(2),
+                      ),
+                      Text(S.of(context).wait_service)
+                    ],
+                  ),
+                )
+              : ListView.builder(
+                  shrinkWrap: true,
+                  physics: const BouncingScrollPhysics(),
+                  scrollDirection: Axis.vertical,
+            
+                  itemCount: value.s.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return CardDonors(
+                      name: value.s[index]['name'],
+                      type: dataSend.collection,
+                      title: value.s[index]['location'],
+                      number: value.s[index]['number'],
+                    );
+                  },
+                ),
+        );
       },
     );
   }

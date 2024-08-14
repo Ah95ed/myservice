@@ -1019,6 +1019,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Something Wrong`
+  String get something_wrong {
+    return Intl.message(
+      'Something Wrong',
+      name: 'something_wrong',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
