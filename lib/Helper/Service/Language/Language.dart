@@ -1,6 +1,7 @@
 import 'package:Al_Zab_township_guide/Helper/Service/Language/keyabstract.dart';
 
 class Language implements KeyAbstract {
+  static const String inter_otp_number = "inter_otp_number";
   static const String error_password = "error_password";
   static const String is_not_exist = "is_not_exist";
   static const String title = "title";
@@ -107,6 +108,7 @@ class Language implements KeyAbstract {
   @override
   static Map<String, Map<String, String>> keyMap = {
     'ar': {
+      inter_otp_number : "أدخل رمز التأكيد",
       title : "دليل ناحية الزاب",
      professions : "المهن",
      line : "خطوط",
@@ -205,6 +207,7 @@ class Language implements KeyAbstract {
 
     },
     "en": {
+      inter_otp_number : "Enter OTP Number",
       error_password: "Error Password",
       is_not_exist: "This number is not registered",
       title: "ALZab Township Guide",

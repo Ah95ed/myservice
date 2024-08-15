@@ -5,6 +5,7 @@ import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/MessageDeveloper.dart';
 import 'package:Al_Zab_township_guide/view/screens/MyCustomSplashScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/OTPScreenEmail.dart';
+import 'package:Al_Zab_township_guide/view/screens/OTPScreenNumber/OTPScreenNumber.dart';
 import 'package:Al_Zab_township_guide/view/screens/ProfessionsScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/SatotaScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/ShowDonors.dart';
@@ -30,4 +31,5 @@ Map<String, WidgetBuilder> routs = {
   OtpScreenEmail.Route: (context) => OtpScreenEmail(),
   Editscreen.Route: (context) => const Editscreen(),
   MessageDeveloper.Route: (context) =>  MessageDeveloper(),
+  OTPScreenNumber.Route: (context) =>  OTPScreenNumber(),
 };

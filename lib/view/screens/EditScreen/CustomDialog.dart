@@ -1,9 +1,9 @@
-import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
-import 'package:Al_Zab_township_guide/view/ThemeApp/app_theme.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/controller/provider/UpdateProvider/UpdateProvider.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
+import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
+import 'package:Al_Zab_township_guide/view/ThemeApp/app_theme.dart';
 import 'package:Al_Zab_township_guide/view/screens/MessageDeveloper.dart';
 import 'package:Al_Zab_township_guide/view/widget/staticWidget/CustomMaterialButton.dart';
 import 'package:flutter/material.dart';
@@ -18,13 +18,11 @@ class _CustomDialogState extends State<CustomDialog> {
   final _formKey = GlobalKey<FormState>();
   String? _selectedValue;
   TextEditingController _textController = TextEditingController();
-  // Providers? read;
 
   @override
   Widget build(BuildContext context) {
-    final providers = context.read<Providers>();
     final read = context.read<Updateprovider>();
-
+    final providers = context.read<Providers>();
     return AlertDialog(
       title: Text(
         S.current.edit_Data_and_delete,
@@ -128,22 +126,38 @@ class _CustomDialogState extends State<CustomDialog> {
                   onPressed: () async {
                     if (_selectedValue!.contains(S.current.doctor)) {
                       _selectedValue = 'Doctor';
-                      read.searchService(_selectedValue!, _textController.text);
+                      read.searchService(
+                        _selectedValue!,
+                        _textController.text,
+                        context,
+                      );
                       Navigator.of(context).pop();
                     } else if (_selectedValue == S.current.blood_type) {
-                    read.  searchTypes(_textController.text);
+                      read.searchTypes(context,_textController.text);
                       Navigator.of(context).pop();
 
                       // _selectedValue = ServiceCollectios.line.name;
                     } else if (_selectedValue == S.current.cars) {
                       _selectedValue = 'line';
-                      read.searchService(_selectedValue!, _textController.text);
+                    await  read.searchService(
+                        _selectedValue!,
+                        _textController.text,
+                        context,
+                      );
                     } else if (_selectedValue == S.current.professions) {
                       _selectedValue = 'professions';
-                      read.searchService(_selectedValue!, _textController.text);
+                      read.searchService(
+                        _selectedValue!,
+                        _textController.text,
+                        context,
+                      );
                     } else if (_selectedValue == S.current.internal_transfer) {
                       _selectedValue = 'Satota';
-                      read.searchService(_selectedValue!, _textController.text);
+                      read.searchService(
+                        _selectedValue!,
+                        _textController.text,
+                        context,
+                      );
                     }
                   },
                   child: Text(
@@ -190,7 +204,7 @@ class _CustomDialogState extends State<CustomDialog> {
   @override
   void dispose() {
     _textController.dispose();
-
+    _selectedValue = null;
     // TODO: implement dispose
     super.dispose();
   }

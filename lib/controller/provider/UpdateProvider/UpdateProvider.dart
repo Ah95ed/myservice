@@ -7,17 +7,20 @@ class Updateprovider extends ChangeNotifier {
   searchService(
     String collection,
     String number,
+    BuildContext ctx
   ) async {
     model = await UpdateModel();
+
     await model.searchService(
       collection,
       number,
+      ctx,
     );
     notifyListeners();
   }
-  searchTypes (String number) {
-    model = UpdateModel();
-    model.searchTypes(number);
+  searchTypes (BuildContext ctx,String number) async {
+    model =await UpdateModel ();
+   await model.searchTypes(ctx,number);
     notifyListeners();
   }
 }

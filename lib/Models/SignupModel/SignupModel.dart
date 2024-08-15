@@ -1,5 +1,7 @@
 import 'dart:developer';
 import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
+import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
+import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
 import 'package:Al_Zab_township_guide/Models/SharedModel/SharedModel.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
@@ -37,6 +39,14 @@ class SignupModel {
       'https://blood-types-77ce2-default-rtdb.firebaseio.com/',
     );
     sharesModel = SharedModel();
+     EmailOTP.config(
+    appName: Translation[Language.title],
+    otpType: OTPType.numeric,
+    expiry: 60000,
+    emailTheme: EmailTheme.v6,
+    appEmail: 'amhmeed31@gmail.com',
+    otpLength: 4,
+  );
   }
   String? get name => _name;
   String? get email => _email;

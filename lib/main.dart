@@ -9,10 +9,12 @@ import 'package:Al_Zab_township_guide/controller/provider/LoginProvider/Loginpro
 import 'package:Al_Zab_township_guide/controller/provider/OTPEmailProvider/OTPEmailProvider.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/controller/provider/SignupProvider/SignupProvider.dart';
+import 'package:Al_Zab_township_guide/controller/provider/UpdateProvider/UpdateProvider.dart';
 import 'package:Al_Zab_township_guide/view/routing/routing.dart';
 import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/MyCustomSplashScreen.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
+import 'package:Al_Zab_township_guide/view/screens/OTPScreenNumber/OTPScreenNumber.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
@@ -57,6 +59,10 @@ void main() async {
         ),
         ChangeNotifierProvider(
           create: (_) => DeveloperController(),
+          lazy: true,
+        ),
+           ChangeNotifierProvider(
+          create: (_) => Updateprovider(),
           lazy: true,
         ),
       ],
@@ -108,7 +114,7 @@ class MyApp extends StatelessWidget {
             ),
             useMaterial3: true,
           ),
-          // home: TestScreen(),
+          // home: OTPScreenNumber(),
           home: shared!.getBool('spalsh') == null
               ? MyCustomSplashScreen()
               : MainScreen(),
