@@ -1,5 +1,5 @@
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
-import 'package:Al_Zab_township_guide/Models/constant/Constant.dart';
+import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
 import 'package:flutter/material.dart';
 
 class Login_Image extends StatelessWidget {

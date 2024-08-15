@@ -1,5 +1,4 @@
 import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
-import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/controller/provider/SignupProvider/SignupProvider.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
@@ -7,7 +6,7 @@ import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:email_otp/email_otp.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../Models/constant/Constant.dart';
+import '../ThemeApp/ColorUsed.dart';
 
 class OtpScreenEmail extends StatelessWidget {
   static const Route = "/OtpScreen";
@@ -49,7 +48,7 @@ class OtpScreenEmail extends StatelessWidget {
                       margin: const EdgeInsets.only(top: 50),
                       height: 80,
                       child: Image.asset(
-                        path,
+                         'assets/logo/asd.png',
                       ),
                     ),
                     Container(

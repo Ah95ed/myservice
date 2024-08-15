@@ -2,9 +2,9 @@ import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../../Models/constant/Constant.dart';
+import '../ThemeApp/ColorUsed.dart';
 import '../../Models/constant/InfoGroup.dart';
-import '../../Models/constant/app_theme.dart';
+import '../ThemeApp/app_theme.dart';
 
 class WhoCanDonateScreen extends StatelessWidget {
   static const route = 'who-can-donate';

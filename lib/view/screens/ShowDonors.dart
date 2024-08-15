@@ -3,11 +3,11 @@ import 'package:Al_Zab_township_guide/controller/Constant/Constant.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/widget/Cards/CardDonors.dart';
-import 'package:Al_Zab_township_guide/Models/constant/app_theme.dart';
+import 'package:Al_Zab_township_guide/view/ThemeApp/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import '../../Models/constant/Constant.dart';
+import '../ThemeApp/ColorUsed.dart';
 
 // ignore: must_be_immutable
 class ShowDonors extends StatelessWidget {

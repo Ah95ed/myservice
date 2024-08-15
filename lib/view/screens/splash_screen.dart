@@ -4,7 +4,7 @@ import 'package:Al_Zab_township_guide/view/screens/LoginScreen/login_screen.dart
 import 'package:Al_Zab_township_guide/view/screens/SignupScreen/signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../Models/constant/Constant.dart';
+import '../ThemeApp/ColorUsed.dart';
 
 class SplashScreen extends StatefulWidget {
   static const Route = "SplashScreen";

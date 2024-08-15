@@ -1,10 +1,9 @@
 import 'dart:async';
-import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
-import 'package:Al_Zab_township_guide/Models/constant/app_theme.dart';
+import 'package:Al_Zab_township_guide/view/ThemeApp/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class MyCustomSplashScreen extends StatefulWidget {
@@ -25,7 +24,6 @@ class _MyCustomSplashScreenState extends State<MyCustomSplashScreen>
 
   @override
   void initState() {
-    Logger.logger('message $path');
     super.initState();
 
     _controller =
@@ -124,7 +122,7 @@ class _MyCustomSplashScreenState extends State<MyCustomSplashScreen>
                     borderRadius: BorderRadius.circular(30),
                   ),
                   child: Image.asset(
-                    path,
+                     'assets/logo/asd.png',
                     fit: BoxFit.fill,
                   )),
             ),

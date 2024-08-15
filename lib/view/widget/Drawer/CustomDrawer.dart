@@ -1,7 +1,7 @@
 import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
-import 'package:Al_Zab_township_guide/Models/constant/Constant.dart';
-import 'package:Al_Zab_township_guide/Models/constant/app_theme.dart';
+import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
+import 'package:Al_Zab_township_guide/view/ThemeApp/app_theme.dart';
 import 'package:Al_Zab_township_guide/controller/Constant/Constant.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
@@ -91,7 +91,7 @@ class Customdrawer extends StatelessWidget {
                 shared!.remove('phoneUser');
                 shared!.remove('isRegister');
                 Scaffold.of(context).closeDrawer();
-                context.read<Providers>().refresh();
+                // context.read<Providers>().refresh();
               } else {
                 read.managerScreen(SignupScreen.Route, context);
               }
@@ -304,7 +304,7 @@ class BottomSheets {
           actions: actions,
           cancelButton: CupertinoActionSheetAction(
             isDestructiveAction: true,
-            child: Text('Cancel'),
+            child: Text(Translation['']),
             onPressed: () {
               Navigator.pop(context);
             },

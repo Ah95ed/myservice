@@ -1,5 +1,3 @@
-import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
-import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:flutter/material.dart';
 
 class TestScreen extends StatelessWidget {

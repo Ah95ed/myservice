@@ -11,8 +11,8 @@ import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/screens/SignupScreen/signup_screen.dart';
 import 'package:Al_Zab_township_guide/view/widget/LoginWidget/Loginimageshow.dart';
-import 'package:Al_Zab_township_guide/Models/constant/Constant.dart';
-import 'package:Al_Zab_township_guide/Models/constant/app_theme.dart';
+import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
+import 'package:Al_Zab_township_guide/view/ThemeApp/app_theme.dart';
 
 class LoginScreen extends StatefulWidget {
   static const Route = 'login screen';
@@ -187,10 +187,23 @@ class _LoginScreenState extends State<LoginScreen>
                               highlightColor: Colors.transparent,
                               onTap: () async {
                                 HapticFeedback.lightImpact();
+
+                                showDialog(
+                                    barrierDismissible: false,
+                                    useSafeArea: false,
+                                    context: context,
+                                    builder: (context) {
+                                      return Center(
+                                        child: CircularProgressIndicator(
+                                          backgroundColor: Colors.transparent,
+                                        ),
+                                      );
+                                    });
                                 //! here to on click login
                                 // provider.startLoading();
                                 if (phone.text.isEmpty ||
                                     password.text.isEmpty) {
+                                  Navigator.of(context).pop();
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: Text(S.current.fields),
@@ -200,7 +213,7 @@ class _LoginScreenState extends State<LoginScreen>
                                   Logger.logger('message 123');
                                   return;
                                 }
-                               await provider.login(
+                                await provider.login(
                                   context,
                                   phone.text,
                                   password.text,

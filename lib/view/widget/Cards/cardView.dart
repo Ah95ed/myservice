@@ -4,7 +4,7 @@ import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:Al_Zab_township_guide/view/widget/staticWidget/Multi_text.dart';
-import '../../../Models/constant/Constant.dart';
+import '../../ThemeApp/ColorUsed.dart';
 
 // ignore: must_be_immutable
 class CardViewList extends StatelessWidget {

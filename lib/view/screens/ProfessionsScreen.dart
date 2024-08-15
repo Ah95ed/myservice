@@ -5,7 +5,7 @@ import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/view/widget/Cards/CardProfessions.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../Models/constant/app_theme.dart';
+import '../ThemeApp/app_theme.dart';
 
 class ProfessionsScreen extends StatelessWidget {
   static const ROUTE = 'ProfessionsScreen';

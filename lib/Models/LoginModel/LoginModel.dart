@@ -1,8 +1,10 @@
+import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/main.dart';
 import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class LoginModel {
@@ -43,6 +45,12 @@ class LoginModel {
         pass,
       );
     } else {
+      Navigator.of(MyApp.getContext()!).pop();
+      ScaffoldMessenger.of(MyApp.getContext()!).showSnackBar(
+        SnackBar(
+          content: Text(Translation['is_not_exist'])),
+     
+      );
       await shared!.setBool('isRegister', false);
       return;
     }
@@ -61,12 +69,21 @@ class LoginModel {
           await shared!.setString('emailUser', data['email']);
           await shared!.setString('phoneUser', data['phone']);
           await shared!.setBool('isRegister', true);
+          Navigator.of(MyApp.getContext()!).pop();
           MyApp.getContext()!.read<Providers>().managerScreenSplash(
                 MainScreen.ROUTE,
                 MyApp.getContext()!,
                 false,
               );
+          return;
         }
+        Navigator.of(MyApp.getContext()!).pop();
+        ScaffoldMessenger.of(MyApp.getContext()!).showSnackBar(
+        SnackBar(
+          content: Text(Translation['error_password'])),
+     
+      );
+        return;
         // return isLogin;
       },
     );
