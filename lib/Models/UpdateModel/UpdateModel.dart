@@ -1,11 +1,8 @@
-import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
 import 'package:Al_Zab_township_guide/controller/Constant/Constant.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
-import 'package:Al_Zab_township_guide/main.dart';
-import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/OTPScreenNumber/OTPScreenNumber.dart';
 import 'package:appwrite/appwrite.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -50,7 +47,7 @@ class UpdateModel {
         // return value;
       },
       onError: (e) {
-        ScaffoldMessenger.of(MyApp.getContext()!).showSnackBar(
+        ScaffoldMessenger.of(ctx).showSnackBar(
           SnackBar(
             content: Text(
               e.toString(),
@@ -87,7 +84,6 @@ class UpdateModel {
         (r) {
           for (var element in r.docs) {
             if (n == element.get('number')) {
-              Logger.logger('message ---===>>> ${element.get('number')!}');
               sendSMS(ctx, n);
               break;
             }
@@ -109,6 +105,7 @@ class UpdateModel {
       phone: '+964$num',
     )
         .then((v) {
+          // ! her u need save data to send otpscreennumber ~_~
       Provider.of<Providers>(c).managerScreen(OTPScreenNumber.Route, c);
     });
 // ! if u need token .. active this line ~_~
