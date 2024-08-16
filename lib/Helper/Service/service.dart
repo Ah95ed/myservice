@@ -1,8 +1,5 @@
 import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
 import 'package:Al_Zab_township_guide/firebase_options.dart';
-import 'package:Al_Zab_township_guide/generated/l10n.dart';
-import 'package:appwrite/appwrite.dart';
-import 'package:email_otp/email_otp.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

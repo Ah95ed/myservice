@@ -14,6 +14,7 @@ class SignupProvider extends ChangeNotifier {
       email: m.email,
       password: m.password,
       phone: m.phone,
+      context: context,
     );
     await model.register(context);
 
@@ -34,7 +35,6 @@ class SignupProvider extends ChangeNotifier {
     BuildContext context,
     // Map<String, String> data,
   ) async {
-   
     if (register == null) return;
     await model.saveData(context, register!);
   }
@@ -49,6 +49,7 @@ class SignupProvider extends ChangeNotifier {
       email: m.email,
       password: m.password,
       phone: m.phone,
+      context: context,
     );
     this.register = {
       'name': m.name!,
@@ -57,7 +58,7 @@ class SignupProvider extends ChangeNotifier {
       'password': m.password!
     };
     await model.sendCodeEmail();
-    isSignup = await model.isSignup;
+
     notifyListeners();
   }
 }

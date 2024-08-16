@@ -1,11 +1,12 @@
+import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/controller/provider/SignupProvider/SignupProvider.dart';
-import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:email_otp/email_otp.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../ThemeApp/ColorUsed.dart';
 
 class OtpScreenEmail extends StatelessWidget {
@@ -19,12 +20,17 @@ class OtpScreenEmail extends StatelessWidget {
     final providers = context.read<Providers>();
     return Scaffold(
       body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+      
+         
         scrollDirection: Axis.vertical,
         child: Column(
           children: [
             Container(
-              height: 300,
+              height: getheight(30),
               decoration: const BoxDecoration(
+                // color: Color(0xFF501063),
+
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(90),
                 ),
@@ -45,61 +51,47 @@ class OtpScreenEmail extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
-                      margin: const EdgeInsets.only(top: 50),
-                      height: 80,
+                      margin: EdgeInsets.symmetric(
+                        vertical: getheight(4),
+                      ),
+                      height: getheight(14),
                       child: Image.asset(
-                         'assets/logo/asd.png',
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(
-                        right: 20,
-                        top: 20,
-                      ),
-                      alignment: Alignment.bottomRight,
-                    ),
-                     Text(
-                      Translation[''],
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                        'assets/logo/asd.png',
                       ),
                     ),
                   ],
                 ),
               ),
             ),
-            const SizedBox(
-              height: 10,
+            SizedBox(
+              height: getheight(3),
             ),
-            const Text(
-              "Enter your OTP code Email",
+            Text(
+              Translation[Language.enter_otp_email],
               style: TextStyle(
-                fontSize: 18,
+                fontSize: setFontSize(16),
                 fontWeight: FontWeight.bold,
-                color: ColorUsed.primary,
+                color: ColorUsed.second,
               ),
               textAlign: TextAlign.center,
             ),
             SizedBox(
-              height:getheight(5),
+              height: getheight(3),
             ),
             SizedBox(
-              height: 60,
-              width: getWidth(60),
+              height: getheight(10),
+              width: getWidth(70),
               child: AspectRatio(
                 aspectRatio: 0.5,
                 child: TextField(
                   controller: otpNumber,
-                  autofocus: false,
-                  showCursor: false,
-                  readOnly: false,
+                  autofocus: true,
+                  showCursor: true,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 20,
+                  style: TextStyle(
+                    fontSize: setFontSize(15),
                     fontWeight: FontWeight.bold,
-                    color: ColorUsed.primary,
+                    color: ColorUsed.second,
                   ),
                   keyboardType: TextInputType.number,
                   maxLength: 4,
@@ -107,28 +99,31 @@ class OtpScreenEmail extends StatelessWidget {
                     counter: const Offstage(),
                     enabledBorder: OutlineInputBorder(
                         borderSide: const BorderSide(
-                          width: 2,
-                          color: ColorUsed.primary,
+                          width: 1,
+                          color: ColorUsed.DarkGreen,
                         ),
                         borderRadius: BorderRadius.circular(12)),
                     focusedBorder: OutlineInputBorder(
                         borderSide: const BorderSide(
-                          width: 2,
-                          color: ColorUsed.primary,
+                          width: 1,
+                          color: ColorUsed.DarkGreen,
                         ),
                         borderRadius: BorderRadius.circular(12)),
                   ),
                 ),
               ),
             ),
-            const SizedBox(
-              height: 30,
+            SizedBox(
+              height: getheight(3),
             ),
             OutlinedButton(
               style: OutlinedButton.styleFrom(
                 backgroundColor: ColorUsed.primary,
                 side: const BorderSide(
-                  color: ColorUsed.second,
+                  color: ColorUsed.DarkGreen,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
                 ),
               ),
               onPressed: () async {
@@ -136,13 +131,19 @@ class OtpScreenEmail extends StatelessWidget {
                   await signup.saveData(
                     context,
                   );
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(Translation[Language.otp_error],),
+                    ),
+                  );
                 }
               },
-              child:Text(
-                S.current.confirm,
+              child: Text(
+                Translation[Language.confirm_otp],
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 22.0,
+                  fontSize: setFontSize(18),
                 ),
               ),
             ),
