@@ -134,7 +134,24 @@ class OTPScreenNumber extends StatelessWidget {
               ),
               onPressed: () async {
                 
-                      showDialog(
+                     
+                    
+                Client client = await Client();
+                await client
+                    .setEndpoint('https://cloud.appwrite.io/v1')
+                    .setProject('66b5930400399d8fd3ee')
+                    .setSelfSigned(status: true);
+                final account = await Account(client);
+
+                final res = await account
+                    .createSession(
+                  userId: userId,
+                  secret: _textController.text,
+                )
+                    .then(
+                  (value) {
+                    if (value.current) {}
+                     showDialog(
                           context: context,
                           builder: (c) {
                             return AlertDialog(
@@ -158,6 +175,7 @@ class OTPScreenNumber extends StatelessWidget {
                                   ),
                                   onPressed: () {
                                     Navigator.of(context).pop();
+                                    
                                     read.deleteDataFromRealtimeAndFireStore(
                                         context);
                                     // showDi
@@ -166,11 +184,11 @@ class OTPScreenNumber extends StatelessWidget {
                                     Translation[Language.yes],
                                     style:  TextStyle(
                                       color: AppTheme.notWhite,
-                                      fontSize: setFontSize(16)
+                                      fontSize: setFontSize(14)
                                     ),
                                   ),
                                 ),
-                              SizedBox(width: getWidth(28),),
+                              SizedBox(width: getWidth(22),),
                                 ElevatedButton(
                                   autofocus: true,
                                   style: ElevatedButton.styleFrom(
@@ -192,46 +210,25 @@ class OTPScreenNumber extends StatelessWidget {
                                     Translation[Language.no],
                                     style: TextStyle(
                                       color: AppTheme.notWhite,
-                                      fontSize: setFontSize(16)
+                                      fontSize: setFontSize(14)
                                     ),
                                   ),
                                 ),
                               ],
                             );
                           });
-                    
-                // Client client = await Client();
-                // await client
-                //     .setEndpoint('https://cloud.appwrite.io/v1')
-                //     .setProject('66b5930400399d8fd3ee')
-                //     .setSelfSigned(status: true);
-                // final account = await Account(client);
-
-                // final res = await account
-                //     .createSession(
-                //   userId: userId,
-                //   secret: _textController.text,
-                // )
-                //     .then(
-                //   (value) {
-                //     if (value.current) {}
-                //     // Provider.of<Providers>(context).managerScreenSplash(
-                //     //   MainScreen.ROUTE,
-                //     //   context,
-                //     //   false,
-                //     // );
-                //   },
-                // ).catchError(
-                //   (e) {
-                //     ScaffoldMessenger.of(context).showSnackBar(
-                //       SnackBar(
-                //         content: Text(
-                //           e.toString(),
-                //         ),
-                //       ),
-                //     );
-                //   },
-                // );
+                  },
+                ).catchError(
+                  (e) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          e.toString(),
+                        ),
+                      ),
+                    );
+                  },
+                );
               },
               child: Text(
                 Translation[Language.confirm_otp],

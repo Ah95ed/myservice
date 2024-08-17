@@ -27,7 +27,7 @@ class _CustomDialogState extends State<CustomDialog> {
     final providers = context.read<Providers>();
     return AlertDialog(
       title: Text(
-        S.current.edit_Data_and_delete,
+        Translation[Language.edit_Data_and_delete],
       ),
       content: Form(
         key: _formKey,
@@ -37,7 +37,7 @@ class _CustomDialogState extends State<CustomDialog> {
             DropdownButtonFormField<String>(
               value: _selectedValue,
               hint: Text(
-                S.current.select_service,
+                Translation[Language.select_service],
                 style: TextStyle(
                   color: ColorUsed.second,
                   fontSize: setFontSize(14),

@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:Al_Zab_township_guide/view/widget/Dialog/DialogCirculerProgress.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -132,7 +133,7 @@ class _LoginScreenState extends State<LoginScreen>
                                       // },
                                     }),
                             ),
-                            SizedBox(width: getWidth(30)),
+                            SizedBox(width: getWidth(24)),
                             RichText(
                               text: TextSpan(
                                 text: S.current.don_t_have_account,
@@ -188,17 +189,7 @@ class _LoginScreenState extends State<LoginScreen>
                               onTap: () async {
                                 HapticFeedback.lightImpact();
 
-                                showDialog(
-                                    barrierDismissible: false,
-                                    useSafeArea: false,
-                                    context: context,
-                                    builder: (context) {
-                                      return Center(
-                                        child: CircularProgressIndicator(
-                                          backgroundColor: Colors.transparent,
-                                        ),
-                                      );
-                                    });
+                                showCirculerProgress(context);
                                 //! here to on click login
                                 // provider.startLoading();
                                 if (phone.text.isEmpty ||
@@ -210,7 +201,6 @@ class _LoginScreenState extends State<LoginScreen>
                                       duration: Duration(seconds: 3),
                                     ),
                                   );
-                                  Logger.logger('message 123');
                                   return;
                                 }
                                 await provider.login(

@@ -21,7 +21,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   late TutorialCoachMark tutorialCoachMark;
 
   @override
@@ -30,7 +30,7 @@ class _MainScreenState extends State<MainScreen> {
       createTutorial();
       addItem();
       Future.delayed(
-        Duration(milliseconds: 1500),
+        Duration(milliseconds: 1000),
         showTutorial,
       );
     }

@@ -1,16 +1,13 @@
-import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
 import 'package:Al_Zab_township_guide/controller/Constant/Constant.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
-import 'package:Al_Zab_township_guide/main.dart';
 import 'package:Al_Zab_township_guide/view/screens/OTPScreenNumber/OTPScreenNumber.dart';
 import 'package:appwrite/appwrite.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 class UpdateModel {
@@ -113,21 +110,28 @@ class UpdateModel {
     );
     await shared!.setString('userId', token.userId);
     await shared!.setString('numberDelete', number);
-   c.read<Providers>().managerScreen(
+    c.read<Providers>().managerScreen(
           OTPScreenNumber.Route,
           c,
-    
+        );
+  }
+
+  Future<void> deleteDataFromRealtimeAndFireStore(BuildContext c) async {
+    await Future.wait([
+      deletefromrealTime(c),
+      deleteFromFirStore(c),
+    ]);
+    ScaffoldMessenger.of(c).showSnackBar(
+      SnackBar(
+        content: Text(
+          Translation[Language.done],
+        ),
+        duration: Duration(seconds: 2),
+      ),
     );
-   
-
   }
 
-  deleteDataFromRealtimeAndFireStore(BuildContext c) async {
-   await deletefromrealTime(c);
-   await deleteFromFirStore(c);
-  }
-
-   deletefromrealTime(BuildContext c) async {
+  Future<void> deletefromrealTime(BuildContext c) async {
     await _databaseRef!
         .child('auth')
         .child(shared!.getString('numberDelete')!)
@@ -137,7 +141,7 @@ class UpdateModel {
         );
   }
 
-  deleteFromFirStore(BuildContext c) async {
+  Future<void> deleteFromFirStore(BuildContext c) async {
     await FirebaseFirestore.instance
         .collection(typeService!)
         .doc(DocumentID)

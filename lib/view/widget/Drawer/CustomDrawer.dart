@@ -1,14 +1,15 @@
+import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
-import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
-import 'package:Al_Zab_township_guide/view/ThemeApp/app_theme.dart';
 import 'package:Al_Zab_township_guide/controller/Constant/Constant.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
+import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
+import 'package:Al_Zab_township_guide/view/ThemeApp/app_theme.dart';
 import 'package:Al_Zab_township_guide/view/screens/EditScreen/CustomDialog.dart';
-import 'package:Al_Zab_township_guide/view/screens/OTPScreenNumber/OTPScreenNumber.dart';
 import 'package:Al_Zab_township_guide/view/screens/SignupScreen/signup_screen.dart';
+import 'package:Al_Zab_township_guide/view/widget/staticWidget/CustomMaterialButton.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -103,18 +104,21 @@ class Customdrawer extends StatelessWidget {
             color: ColorUsed.DarkGreen,
           ),
           ListTile(
-            leading: Icon(Icons.edit),
+            leading: Icon(
+              Icons.delete,
+              color: Colors.red.shade700,
+            ),
             title: Text(
-              S.of(context).edit_Data_and_delete,
+              Translation[Language.delete_account],
               style: TextStyle(
                 fontSize: setFontSize(12),
                 fontWeight: FontWeight.w500,
-                color: ColorUsed.DarkGreen,
+                color: Colors.red.shade700,
               ),
             ),
             onTap: () {
               Scaffold.of(context).closeDrawer();
-              
+
               showDialog(
                 context: context,
                 builder: (BuildContext context) {
@@ -147,9 +151,15 @@ class Customdrawer extends StatelessWidget {
               ),
             ),
             onTap: () {
-              Navigator.of(context).pop();
+              Scaffold.of(context).closeDrawer();
+              // showDialog(
+              //     context: context,
+              //     builder: (BuildContext context) {
+              //       return CustomDialog();
+              //     },
+              //   );
               if (shared!.getBool('isRegister') == true) {
-                BottomSheets.showCupertinoBottomReuse(
+              BottomSheets.showCupertinoBottomReuse(
                   context,
                   actions: [
                     CupertinoActionSheetAction(
@@ -214,11 +224,12 @@ class Customdrawer extends StatelessWidget {
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    content:  Text(
-                      Translation['register_first'],
+                    content: Text(
+                      Translation[Language.register_first],
                     ),
                   ),
                 );
+                //  Navigator.of(context).pop();
               }
             },
           ),
@@ -233,7 +244,7 @@ class Customdrawer extends StatelessWidget {
             ),
             child: ListTile(
               title: Text(
-                S.of(context).team_policy,
+                Translation[Language.team_policy],
                 style: TextStyle(
                   fontSize: setFontSize(10),
                   fontWeight: FontWeight.w400,
@@ -248,6 +259,92 @@ class Customdrawer extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  Future<void> showCustomBottomSheet(BuildContext context) async {
+    await showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      isScrollControlled: true,
+      builder: (BuildContext context) {
+        return DraggableScrollableSheet(
+          expand: false,
+          builder: (context, scrollController) {
+            return Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
+                ),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: ListView(
+                  controller: scrollController,
+                  children: [
+                    Container(
+                      height: 5,
+                      width: 40,
+                      margin: EdgeInsets.only(bottom: 20),
+                      decoration: BoxDecoration(
+                        color: Colors.grey[300],
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    Text(
+                      'Options',
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Divider(),
+                    ListTile(
+                      leading: Icon(Icons.share, color: Colors.blue),
+                      title: Text('Share'),
+                      onTap: () {
+                        Navigator.pop(context);
+                        // Handle share action
+                      },
+                    ),
+                    Divider(),
+                    ListTile(
+                      leading: Icon(Icons.link, color: Colors.green),
+                      title: Text('Get link'),
+                      onTap: () {
+                        Navigator.pop(context);
+                        // Handle get link action
+                      },
+                    ),
+                    Divider(),
+                    ListTile(
+                      leading: Icon(Icons.edit, color: Colors.orange),
+                      title: Text('Edit name'),
+                      onTap: () {
+                        Navigator.pop(context);
+                        // Handle edit name action
+                      },
+                    ),
+                    Divider(),
+                    ListTile(
+                      leading: Icon(Icons.delete, color: Colors.red),
+                      title: Text('Delete collection'),
+                      onTap: () {
+                        Navigator.pop(context);
+                        // Handle delete action
+                      },
+                    ),
+                    Divider(),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      },
     );
   }
 }
@@ -306,7 +403,7 @@ class BottomSheets {
           actions: actions,
           cancelButton: CupertinoActionSheetAction(
             isDestructiveAction: true,
-            child: Text(Translation['']),
+            child: Text(Translation[Language.cancel]),
             onPressed: () {
               Navigator.pop(context);
             },
@@ -315,4 +412,25 @@ class BottomSheets {
       },
     );
   }
+}
+
+Future<void> showAlertDialog(BuildContext context) async {
+  showDialog(
+    context: context,
+    builder: (_) {
+      return AlertDialog(
+        title: Translation[Language.select_service],
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            CustomMaterialButton(
+                title: Translation[Language.add_service],
+                onPressed: () async {
+                  Navigator.of(context).pop();
+                })
+          ],
+        ),
+      );
+    },
+  );
 }

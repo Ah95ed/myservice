@@ -109,6 +109,7 @@ class Language implements KeyAbstract {
   static const String something_wrong = "something_wrong";
   static const String check_data = "check_data";
   static const String no = "no";
+  // static const String delete_account = "delete_account";
 
   @override
   static Map<String, Map<String, String>> keyMap = {

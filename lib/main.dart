@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
 import 'package:Al_Zab_township_guide/controller/provider/BloodController/MainController.dart';
@@ -91,11 +92,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<LanguageController>(
       builder: (context, v, child) {
-        S.load(
-          Locale.fromSubtags(
-            languageCode: shared!.getString('lang') ?? 'ar',
-          ),
-        );
+        // S.load(
+        //   Locale.fromSubtags(
+        //     languageCode: shared!.getString('lang') ?? 'ar',
+        //   ),
+        // );
         return MaterialApp(
           navigatorKey: navigatorKey,
           localizationsDelegates: [
@@ -104,12 +105,13 @@ class MyApp extends StatelessWidget {
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
-          supportedLocales: S.delegate.supportedLocales,
+          supportedLocales:v.supportLanguage,
           debugShowCheckedModeBanner: false,
           locale: v.language,
-          title: S.current.title,
+          title: Translation[Language.title],
           routes: routs,
           theme: ThemeData(
+            
             colorScheme: ColorScheme.fromSeed(
               seedColor: ColorUsed.primary,
             ),
