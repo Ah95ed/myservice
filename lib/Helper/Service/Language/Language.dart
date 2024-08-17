@@ -1,6 +1,8 @@
 import 'package:Al_Zab_township_guide/Helper/Service/Language/keyabstract.dart';
 
 class Language implements KeyAbstract {
+  static const String yes = "yes";
+  static const sure_to_delete_account = 'sure_to_delete_account';
   static const otp_error = 'otp_error';
   static const String enter_otp_email = "enter_otp_email";
   static const String error_email = "error_email";
@@ -106,10 +108,14 @@ class Language implements KeyAbstract {
   static const String register_first = "register_first";
   static const String something_wrong = "something_wrong";
   static const String check_data = "check_data";
+  static const String no = "no";
 
   @override
   static Map<String, Map<String, String>> keyMap = {
     'ar': {
+      no : "لا",
+      yes : "نعم",
+      sure_to_delete_account : "هل انت متأكد من حذف الحساب؟",
       otp_error: "خطأ في رمز التأكيد",
       enter_otp_email: "أدخل رمز التأكيد",
       error_email: "البريد الالكتروني غير صحيح",
@@ -211,6 +217,9 @@ class Language implements KeyAbstract {
       error_password: "كلمة المرور غير صحيحة",
     },
     "en": {
+      no : "No",
+      yes : "Yes",
+      sure_to_delete_account : "Are you sure to delete your account ?",
       otp_error: 'Error in OTP Code',
       enter_otp_email: "Enter OTP Email",
       error_email: "Error Email",

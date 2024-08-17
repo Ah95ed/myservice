@@ -23,4 +23,10 @@ class Updateprovider extends ChangeNotifier {
    await model.searchTypes(ctx,number);
     notifyListeners();
   }
+
+  deleteDataFromRealtimeAndFireStore (BuildContext c) async {
+    model =await UpdateModel ();
+    await model.deleteDataFromRealtimeAndFireStore(c);
+    notifyListeners();
+  }
 }

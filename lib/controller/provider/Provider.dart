@@ -117,7 +117,10 @@ class Providers with ChangeNotifier {
     notifyListeners();
   }
 
-  void managerScreen(String route, BuildContext context, {Object? object}) {
+   managerScreen(
+    String route
+  , BuildContext context
+  , {Object? object}) {
     Navigator.pushNamed(context, route, arguments: object);
     notifyListeners();
   }

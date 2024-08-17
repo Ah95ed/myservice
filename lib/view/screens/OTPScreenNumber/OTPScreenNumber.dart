@@ -1,9 +1,11 @@
+import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
-import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
+import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
+import 'package:Al_Zab_township_guide/controller/provider/UpdateProvider/UpdateProvider.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
-import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
+import 'package:Al_Zab_township_guide/view/ThemeApp/app_theme.dart';
 import 'package:appwrite/appwrite.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -12,10 +14,14 @@ class OTPScreenNumber extends StatelessWidget {
   OTPScreenNumber({super.key});
   static const Route = '/OTPScreenNumber';
   TextEditingController _textController = TextEditingController();
-  late String token;
+  late String userId;
 
   @override
   Widget build(BuildContext context) {
+    userId = shared!.getString('userId') ?? "a";
+    final read = context.read<Updateprovider>();
+    Logger.logger('message OTPScreenNumber token ->');
+
     return Scaffold(
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
@@ -127,39 +133,105 @@ class OTPScreenNumber extends StatelessWidget {
                 ),
               ),
               onPressed: () async {
-                Client client = await Client();
-                await client
-                    .setEndpoint('https://cloud.appwrite.io/v1')
-                    .setProject('66b5930400399d8fd3ee')
-                    .setSelfSigned(status: true);
-                final account = await Account(client);
+                
+                      showDialog(
+                          context: context,
+                          builder: (c) {
+                            return AlertDialog(
+                              title: Text(
+                                Translation[Language.sure_to_delete_account],
+                              ),
+                              actions: [
+                                ElevatedButton(
+                                  autofocus: true,
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: ColorUsed.primary,
+                                    foregroundColor: ColorUsed.primary,
+                                    shadowColor: ColorUsed.primary,
+                                    elevation: 5,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    side: const BorderSide(
+                                      color: ColorUsed.primary,
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                    read.deleteDataFromRealtimeAndFireStore(
+                                        context);
+                                    // showDi
+                                  },
+                                  child: Text(
+                                    Translation[Language.yes],
+                                    style:  TextStyle(
+                                      color: AppTheme.notWhite,
+                                      fontSize: setFontSize(16)
+                                    ),
+                                  ),
+                                ),
+                              SizedBox(width: getWidth(28),),
+                                ElevatedButton(
+                                  autofocus: true,
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: ColorUsed.primary,
+                                    foregroundColor: ColorUsed.primary,
+                                    shadowColor: ColorUsed.primary,
+                                    elevation: 5,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    side: const BorderSide(
+                                      color: ColorUsed.primary,
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: Text(
+                                    Translation[Language.no],
+                                    style: TextStyle(
+                                      color: AppTheme.notWhite,
+                                      fontSize: setFontSize(16)
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            );
+                          });
+                    
+                // Client client = await Client();
+                // await client
+                //     .setEndpoint('https://cloud.appwrite.io/v1')
+                //     .setProject('66b5930400399d8fd3ee')
+                //     .setSelfSigned(status: true);
+                // final account = await Account(client);
 
-                await account
-                    .createSession(
-                  userId: token,
-                  secret: _textController.text,
-                )
-                    .then(
-                  (value) {
-                    Provider.of<Providers>(context).managerScreenSplash(
-                      MainScreen.ROUTE,
-                      context,
-                      false,
-                    );
-                  },
-                ).catchError(
-                  (e) {
-                    ScaffoldMessenger.of(
-                      context
-                    ).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          e.toString(),
-                        ),
-                      ),
-                    );
-                  },
-                );
+                // final res = await account
+                //     .createSession(
+                //   userId: userId,
+                //   secret: _textController.text,
+                // )
+                //     .then(
+                //   (value) {
+                //     if (value.current) {}
+                //     // Provider.of<Providers>(context).managerScreenSplash(
+                //     //   MainScreen.ROUTE,
+                //     //   context,
+                //     //   false,
+                //     // );
+                //   },
+                // ).catchError(
+                //   (e) {
+                //     ScaffoldMessenger.of(context).showSnackBar(
+                //       SnackBar(
+                //         content: Text(
+                //           e.toString(),
+                //         ),
+                //       ),
+                //     );
+                //   },
+                // );
               },
               child: Text(
                 Translation[Language.confirm_otp],

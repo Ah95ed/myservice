@@ -1,17 +1,25 @@
+import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
 import 'package:Al_Zab_township_guide/controller/Constant/Constant.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
+import 'package:Al_Zab_township_guide/main.dart';
 import 'package:Al_Zab_township_guide/view/screens/OTPScreenNumber/OTPScreenNumber.dart';
 import 'package:appwrite/appwrite.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 class UpdateModel {
+  String? name, number;
+  String? typeService, DocumentID;
   Client? client;
+  DatabaseReference? _databaseRef;
   UpdateModel() {
+    _databaseRef = FirebaseDatabase.instance.ref();
     client = Client();
     client!
         .setEndpoint('https://cloud.appwrite.io/v1')
@@ -20,17 +28,22 @@ class UpdateModel {
   }
   Future<void> searchService(
     String? selectedValue,
-    String number,
+    String n,
     BuildContext ctx,
   ) async {
     CollectionReference querySnapshot =
         await FirebaseFirestore.instance.collection(selectedValue!);
-    querySnapshot.where('number', isEqualTo: number).get().then(
+    querySnapshot.where('number', isEqualTo: n).get().then(
       (value) async {
         value.docs.map((v) {
           if (v.exists) {
             Navigator.of(ctx).pop();
-
+            DocumentID = v.id;
+            typeService = selectedValue;
+            sendSMS(
+              ctx,
+              n,
+            );
             return;
           } else {
             Navigator.of(ctx).pop();
@@ -70,13 +83,6 @@ class UpdateModel {
   ];
 
   Future<void> searchTypes(BuildContext ctx, String n) async {
-    if (shared!.getInt('num') == null) {
-      shared!.setInt('num', 1);
-    } else {
-      int? nshaerd = shared!.getInt('num');
-      shared!.setInt('num', nshaerd! + 1);
-    }
-
     for (var e in types) {
       CollectionReference querySnapshot =
           await FirebaseFirestore.instance.collection(e);
@@ -84,6 +90,8 @@ class UpdateModel {
         (r) {
           for (var element in r.docs) {
             if (n == element.get('number')) {
+              typeService = e;
+              DocumentID = element.id;
               sendSMS(ctx, n);
               break;
             }
@@ -99,17 +107,50 @@ class UpdateModel {
   ) async {
     String num = number.substring(1);
     final account = Account(client!);
-    await account
-        .createPhoneToken(
+    final token = await account.createPhoneToken(
       userId: ID.unique(),
       phone: '+964$num',
-    )
-        .then((v) {
-          // ! her u need save data to send otpscreennumber ~_~
-      Provider.of<Providers>(c).managerScreen(OTPScreenNumber.Route, c);
-    });
-// ! if u need token .. active this line ~_~
+    );
+    await shared!.setString('userId', token.userId);
+    await shared!.setString('numberDelete', number);
+   c.read<Providers>().managerScreen(
+          OTPScreenNumber.Route,
+          c,
+    
+    );
+   
 
-// final userId = token.userId;
+  }
+
+  deleteDataFromRealtimeAndFireStore(BuildContext c) async {
+   await deletefromrealTime(c);
+   await deleteFromFirStore(c);
+  }
+
+   deletefromrealTime(BuildContext c) async {
+    await _databaseRef!
+        .child('auth')
+        .child(shared!.getString('numberDelete')!)
+        .remove()
+        .then(
+          (t) {},
+        );
+  }
+
+  deleteFromFirStore(BuildContext c) async {
+    await FirebaseFirestore.instance
+        .collection(typeService!)
+        .doc(DocumentID)
+        .delete()
+        .then((v) {
+      Navigator.of(c).pop();
+      ScaffoldMessenger.of(c).showSnackBar(
+        SnackBar(
+          content: Text(
+            Translation[Language.done],
+          ),
+        ),
+      );
+    });
   }
 }

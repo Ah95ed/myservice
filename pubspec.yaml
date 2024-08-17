@@ -11,17 +11,14 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.8
   firebase_core:
-  firebase_auth:
   email_otp: ^3.0.2
   cloud_firestore:
   recaptcha_enterprise_flutter: ^18.5.1
   provider:
-  path_provider:
   url_launcher:
   shared_preferences:
   flutter_localizations:
     sdk: flutter
-  # sizer:
   firebase_database:
   device_preview: ^1.2.0
   intl: ^0.19.0
@@ -40,7 +37,6 @@ flutter:
 
   assets:
     - assets/logo/
-    # - assets/languages/
 
 flutter_intl:
   enabled: true

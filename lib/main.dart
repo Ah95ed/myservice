@@ -15,6 +15,7 @@ import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/MyCustomSplashScreen.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
 import 'package:Al_Zab_township_guide/view/screens/OTPScreenEmail.dart';
+import 'package:Al_Zab_township_guide/view/screens/OTPScreenNumber/OTPScreenNumber.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
@@ -114,10 +115,10 @@ class MyApp extends StatelessWidget {
             ),
             useMaterial3: true,
           ),
-          home: OtpScreenEmail(),
-          // home: shared!.getBool('spalsh') == null
-          //     ? MyCustomSplashScreen()
-          //     : MainScreen(),
+          // home: OTPScreenNumber(),
+          home: shared!.getBool('spalsh') == null
+              ? MyCustomSplashScreen()
+              : MainScreen(),
         );
       },
     );

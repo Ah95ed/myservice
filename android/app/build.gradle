@@ -71,11 +71,13 @@ android {
         versionName = '1.0.2'
     }
 
-}
+}// end android
+
 dependencies {
    implementation 'com.google.android.recaptcha:recaptcha:18.5.1'
    configurations.all {
-       exclude group: 'com.google.android.gms', module: 'play-services-safetynet'
+       exclude group: 'com.google.android.gms', 
+       module: 'play-services-safetynet'
    }
 }
 

@@ -1,3 +1,5 @@
+import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
+import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/controller/provider/UpdateProvider/UpdateProvider.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
@@ -124,22 +126,23 @@ class _CustomDialogState extends State<CustomDialog> {
                     ),
                   ),
                   onPressed: () async {
-                    if (_selectedValue!.contains(S.current.doctor)) {
+                    if (_selectedValue!
+                        .contains(Translation[Language.doctor])) {
                       _selectedValue = 'Doctor';
                       read.searchService(
                         _selectedValue!,
                         _textController.text,
                         context,
                       );
-                      Navigator.of(context).pop();
-                    } else if (_selectedValue == S.current.blood_type) {
-                      read.searchTypes(context,_textController.text);
-                      Navigator.of(context).pop();
+                    } else if (_selectedValue ==
+                        Translation[Language.blood_type]) {
+                      await read.searchTypes(context, _textController.text);
+                      // Navigator.of(context).pop();
 
                       // _selectedValue = ServiceCollectios.line.name;
                     } else if (_selectedValue == S.current.cars) {
                       _selectedValue = 'line';
-                    await  read.searchService(
+                      await read.searchService(
                         _selectedValue!,
                         _textController.text,
                         context,
@@ -201,11 +204,9 @@ class _CustomDialogState extends State<CustomDialog> {
     );
   }
 
-  @override
-  void dispose() {
-    _textController.dispose();
-    _selectedValue = null;
-    // TODO: implement dispose
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   _textController.dispose();
+  //   super.dispose();
+  // }
 }
