@@ -12,6 +12,7 @@ import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/controller/provider/SignupProvider/SignupProvider.dart';
 import 'package:Al_Zab_township_guide/controller/provider/UpdateProvider/UpdateProvider.dart';
 import 'package:Al_Zab_township_guide/view/routing/routing.dart';
+import 'package:Al_Zab_township_guide/view/screens/LineScreen/LineScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/MyCustomSplashScreen.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
@@ -117,10 +118,10 @@ class MyApp extends StatelessWidget {
             ),
             useMaterial3: true,
           ),
-          // home: OTPScreenNumber(),
-          home: shared!.getBool('spalsh') == null
-              ? MyCustomSplashScreen()
-              : MainScreen(),
+          home: LineScreen(),
+          // home: shared!.getBool('spalsh') == null
+          //     ? MyCustomSplashScreen()
+          //     : MainScreen(),
         );
       },
     );

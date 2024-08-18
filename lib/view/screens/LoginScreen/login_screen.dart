@@ -1,5 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:Al_Zab_township_guide/view/widget/Dialog/DialogCirculerProgress.dart';
+import 'package:Al_Zab_township_guide/view/widget/Dialogandsnakebar/DialogCirculerProgress.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -396,7 +396,7 @@ class component1 extends StatelessWidget {
   Widget build(BuildContext context) {
     // double _width = MediaQuery.of(context).size.width;
     return Container(
-      height: getheight(8),
+      height: getheight(7),
       width: getWidth(90),
       padding: EdgeInsets.symmetric(horizontal: getWidth(2)),
       decoration: BoxDecoration(
