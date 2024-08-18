@@ -1,5 +1,5 @@
 import 'package:Al_Zab_township_guide/Models/DoctorModel/DoctorModel.dart';
-import 'package:Al_Zab_township_guide/controller/Constant/ServiceCollectios.dart';
+import 'package:Al_Zab_township_guide/Helper/Constant/ServiceCollectios.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DoctorData {

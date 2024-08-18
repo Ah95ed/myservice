@@ -193,7 +193,7 @@ class _CustomDialogState extends State<CustomDialog> {
           child: CustomMaterialButton(
             title: S.current.send_developer,
             onPressed: () {
-              Navigator.of(context).pop();
+              Navigator.pop(context);
               providers.managerScreen(MessageDeveloper.Route, context);
               // Navigator.of(context).pop();
             },

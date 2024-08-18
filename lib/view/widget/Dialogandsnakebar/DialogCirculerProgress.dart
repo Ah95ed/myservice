@@ -23,8 +23,10 @@ showSnakeBar(BuildContext context, String message) {
       content: Text(
         message,
         style: TextStyle(
-          fontSize: setFontSize(14),
+          fontSize: setFontSize(16),
+          fontWeight: FontWeight.bold,
           color: AppTheme.notWhite,
+          
         ),
       ),
       duration: Duration(seconds: 3),

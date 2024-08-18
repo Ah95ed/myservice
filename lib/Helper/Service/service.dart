@@ -4,10 +4,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 SharedPreferences? shared;
-// late String path;
+
 
 Future<void> init() async {
-  // path = await 'assets/logo/asd.png';
+  
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );

@@ -1,5 +1,7 @@
+import 'package:Al_Zab_township_guide/Helper/Constant/ServiceCollectios.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
+import 'package:Al_Zab_township_guide/controller/provider/ServiceController/ServiceController.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/app_theme.dart';
@@ -7,6 +9,7 @@ import 'package:Al_Zab_township_guide/view/screens/LoginScreen/login_screen.dart
 import 'package:Al_Zab_township_guide/view/widget/Dialogandsnakebar/DialogCirculerProgress.dart';
 import 'package:Al_Zab_township_guide/view/widget/staticWidget/CustomMaterialButton.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class LineScreen extends StatelessWidget {
   static const Route = '/line screen';
@@ -18,6 +21,7 @@ class LineScreen extends StatelessWidget {
   TextEditingController direction = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    final read = context.read<ServiceController>();
     return Scaffold(
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
@@ -32,7 +36,7 @@ class LineScreen extends StatelessWidget {
                 height: getheight(25),
               ),
               SizedBox(
-                height: getheight(2),
+                height: getheight(4),
               ),
               component1(
                 name,
@@ -42,7 +46,7 @@ class LineScreen extends StatelessWidget {
                 false,
               ),
               SizedBox(
-                height: getheight(1),
+                height: getheight(1.5),
               ),
               component1(
                 phone,
@@ -52,7 +56,7 @@ class LineScreen extends StatelessWidget {
                 false,
               ),
               SizedBox(
-                height: getheight(1),
+                height: getheight(1.5),
               ),
               component1(
                 typevehicle,
@@ -62,7 +66,7 @@ class LineScreen extends StatelessWidget {
                 false,
               ),
               SizedBox(
-                height: getheight(1),
+                height: getheight(1.5),
               ),
               component1(
                 time,
@@ -72,7 +76,7 @@ class LineScreen extends StatelessWidget {
                 false,
               ),
               SizedBox(
-                height: getheight(1),
+                height: getheight(1.5),
               ),
               component1(
                 direction,
@@ -82,11 +86,11 @@ class LineScreen extends StatelessWidget {
                 false,
               ),
               SizedBox(
-                height: getheight(3),
+                height: getheight(2),
               ),
               CustomMaterialButton(
                 title: Translation[Language.send],
-                onPressed: () {
+                onPressed: () async {
                   if (name.text.isEmpty ||
                       phone.text.isEmpty ||
                       typevehicle.text.isEmpty ||
@@ -97,8 +101,19 @@ class LineScreen extends StatelessWidget {
                   }
                   // ! her to send data
                   // * so u need service controller and modele to all service ;
-                  
-                  showCirculerProgress(context);
+                  read.setDataInFirestore(
+                    context,
+                    ServiceCollectios.line.name,
+                    {
+                      "name": name.text,
+                      "number": phone.text,
+                      "time": time.text,
+                      "type": typevehicle.text,
+                      "from": direction.text,
+                      "bool": true,
+                    },
+                  );
+                 await showCirculerProgress(context);
                 },
               ),
             ],

@@ -1,13 +1,15 @@
+import 'package:Al_Zab_township_guide/Helper/Constant/Constant.dart';
+import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
-import 'package:Al_Zab_township_guide/controller/Constant/Constant.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/app_theme.dart';
 import 'package:Al_Zab_township_guide/view/screens/EditScreen/CustomDialog.dart';
+import 'package:Al_Zab_township_guide/view/screens/LineScreen/LineScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/SignupScreen/signup_screen.dart';
 import 'package:Al_Zab_township_guide/view/widget/staticWidget/CustomMaterialButton.dart';
 import 'package:flutter/cupertino.dart';
@@ -159,68 +161,75 @@ class Customdrawer extends StatelessWidget {
               //     },
               //   );
               if (shared!.getBool('isRegister') == true) {
-              BottomSheets.showCupertinoBottomReuse(
-                  context,
-                  actions: [
-                    CupertinoActionSheetAction(
-                      child: Text(
-                        S.current.doctor,
-                        style: TextStyle(
-                          fontSize: setFontSize(14),
-                          fontWeight: FontWeight.bold,
-                          color: ColorUsed.second,
-                        ),
-                      ),
-                      onPressed: () {},
-                    ),
-                    CupertinoActionSheetAction(
-                      child: Text(
-                        S.current.blood_donation,
-                        style: TextStyle(
-                          fontSize: setFontSize(14),
-                          fontWeight: FontWeight.bold,
-                          color: ColorUsed.second,
-                        ),
-                      ),
-                      onPressed: () {},
-                    ),
-                    CupertinoActionSheetAction(
-                      child: Text(
-                        S.current.cars,
-                        style: TextStyle(
-                          fontSize: setFontSize(14),
-                          fontWeight: FontWeight.bold,
-                          color: ColorUsed.second,
-                        ),
-                      ),
-                      onPressed: () {},
-                    ),
-                    CupertinoActionSheetAction(
-                      child: Text(
-                        S.current.professions,
-                        style: TextStyle(
-                          fontSize: setFontSize(14),
-                          fontWeight: FontWeight.bold,
-                          color: ColorUsed.second,
-                        ),
-                      ),
-                      onPressed: () {},
-                    ),
-                    CupertinoActionSheetAction(
-                      child: Text(
-                        S.current.internal_transfer,
-                        style: TextStyle(
-                          fontSize: setFontSize(14),
-                          fontWeight: FontWeight.bold,
-                          color: ColorUsed.second,
-                        ),
-                      ),
-                      onPressed: () {},
-                    ),
-                  ],
-                  title: S.current.select_service,
-                  // message: '---------  ----------',
-                );
+                showDialog(
+                    context: context,
+                    builder: (_) {
+                      return CustomDialogAddService();
+                    });
+                // showCupertinoBottomReuse(
+                //   context,
+                //   actions: [
+                //     CupertinoActionSheetAction(
+                //       child: Text(
+                //         S.current.doctor,
+                //         style: TextStyle(
+                //           fontSize: setFontSize(14),
+                //           fontWeight: FontWeight.bold,
+                //           color: ColorUsed.second,
+                //         ),
+                //       ),
+                //       onPressed: () {},
+                //     ),
+                //     CupertinoActionSheetAction(
+                //       child: Text(
+                //         S.current.blood_donation,
+                //         style: TextStyle(
+                //           fontSize: setFontSize(14),
+                //           fontWeight: FontWeight.bold,
+                //           color: ColorUsed.second,
+                //         ),
+                //       ),
+                //       onPressed: () {},
+                //     ),
+                //     CupertinoActionSheetAction(
+                //       child: Text(
+                //         Translation[Language.cars],
+                //         style: TextStyle(
+                //           fontSize: setFontSize(14),
+                //           fontWeight: FontWeight.bold,
+                //           color: ColorUsed.second,
+                //         ),
+                //       ),
+                //       onPressed: () {
+                //         read.managerScreen(LineScreen.Route, context);
+                //       },
+                //     ),
+                //     CupertinoActionSheetAction(
+                //       child: Text(
+                //         S.current.professions,
+                //         style: TextStyle(
+                //           fontSize: setFontSize(14),
+                //           fontWeight: FontWeight.bold,
+                //           color: ColorUsed.second,
+                //         ),
+                //       ),
+                //       onPressed: () {},
+                //     ),
+                //     CupertinoActionSheetAction(
+                //       child: Text(
+                //         S.current.internal_transfer,
+                //         style: TextStyle(
+                //           fontSize: setFontSize(14),
+                //           fontWeight: FontWeight.bold,
+                //           color: ColorUsed.second,
+                //         ),
+                //       ),
+                //       onPressed: () {},
+                //     ),
+                //   ],
+                //   title: S.current.select_service,
+                //   // message: '---------  ----------',
+                // );
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
@@ -349,6 +358,134 @@ class Customdrawer extends StatelessWidget {
   }
 }
 
+class CustomDialogAddService extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: Center(
+        child: Text(
+          Translation[Language.select_service],
+          style: TextStyle(
+            fontSize: setFontSize(16),
+            fontWeight: FontWeight.bold,
+            color: ColorUsed.DarkGreen,
+          ),
+        ),
+      ),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Divider(
+            thickness: getheight(0.2),
+            color: ColorUsed.DarkGreen,
+          ),
+          SizedBox(
+            height: getheight(1),
+          ),
+          ButtonDialogAddService(
+            () {
+              context.read<Providers>().managerScreen(
+                    LineScreen.Route,
+                    context,
+                  );
+            },
+            Translation[Language.line],
+          ),
+          SizedBox(
+            height: getheight(1),
+          ),
+          Divider(),
+          SizedBox(
+            height: getheight(1),
+          ),
+          ButtonDialogAddService(
+            () {},
+            Translation[Language.professions],
+          ),
+          SizedBox(
+            height: getheight(1),
+          ),
+          Divider(),
+          SizedBox(
+            height: getheight(1),
+          ),
+          ButtonDialogAddService(
+            () {},
+            Translation[Language.professions],
+          ),
+          SizedBox(
+            height: getheight(1),
+          ),
+          Divider(),
+          SizedBox(
+            height: getheight(1),
+          ),
+          ButtonDialogAddService(
+            () {},
+            Translation[Language.professions],
+          ),
+          SizedBox(
+            height: getheight(1),
+          ),
+          Divider(),
+          SizedBox(
+            height: getheight(1),
+          ),
+          ButtonDialogAddService(
+            () {
+              Logger.logger('message tjis this');
+            },
+            Translation[Language.professions],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ButtonDialogAddService extends StatelessWidget {
+  ButtonDialogAddService(
+    this.onPressd,
+    this.title, {
+    super.key,
+  });
+  String? title;
+  Function()? onPressd;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+        onTap: onPressd,
+        child: Container(
+          child: Center(
+            child: Text(
+              title!,
+              style: TextStyle(
+                fontSize: setFontSize(14),
+                color: ColorUsed.DarkGreen,
+                fontWeight: FontWeight.bold,
+                decorationThickness: 2,
+              ),
+            ),
+          ),
+          width: getWidth(100),
+          height: getheight(6),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: AppTheme.notWhite.withOpacity(0.3),
+            boxShadow: [
+              BoxShadow(
+                color: ColorUsed.primary.withOpacity(0.8),
+                spreadRadius: 0,
+                blurRadius: 1,
+                offset: Offset(0, 3),
+              ),
+            ],
+          ),
+        ));
+  }
+}
+
 class BottomSheets {
   /// show modal bottom sheet
   static Future<Type?> showModalBottomReuse(
@@ -379,39 +516,38 @@ class BottomSheets {
       },
     );
   }
+}
 
-  /// show cupertino bottom sheet
-  static Future<Type?> showCupertinoBottomReuse(
-    BuildContext context, {
-    required List<Widget> actions,
-    required String title,
-    // required String message,
-  }) {
-    return showCupertinoModalPopup(
-      context: context,
-      builder: (BuildContext context) {
-        return CupertinoActionSheet(
-          title: Text(
-            title,
-            style: TextStyle(
-              fontSize: setFontSize(15),
-              fontWeight: FontWeight.bold,
-              color: ColorUsed.DarkGreen,
-            ),
+Future<Type?> showCupertinoBottomReuse(
+  BuildContext context, {
+  required List<Widget> actions,
+  required String title,
+  // required String message,
+}) {
+  return showCupertinoModalPopup(
+    context: context,
+    builder: (BuildContext context) {
+      return CupertinoActionSheet(
+        title: Text(
+          title,
+          style: TextStyle(
+            fontSize: setFontSize(15),
+            fontWeight: FontWeight.bold,
+            color: ColorUsed.DarkGreen,
           ),
-          // message: Text(message),
-          actions: actions,
-          cancelButton: CupertinoActionSheetAction(
-            isDestructiveAction: true,
-            child: Text(Translation[Language.cancel]),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-        );
-      },
-    );
-  }
+        ),
+        // message: Text(message),
+        actions: actions,
+        cancelButton: CupertinoActionSheetAction(
+          isDestructiveAction: true,
+          child: Text(Translation[Language.cancel]),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      );
+    },
+  );
 }
 
 Future<void> showAlertDialog(BuildContext context) async {

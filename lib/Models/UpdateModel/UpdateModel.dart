@@ -1,7 +1,7 @@
 import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
-import 'package:Al_Zab_township_guide/controller/Constant/Constant.dart';
+import 'package:Al_Zab_township_guide/Helper/Constant/Constant.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/view/screens/OTPScreenNumber/OTPScreenNumber.dart';
 import 'package:appwrite/appwrite.dart';
