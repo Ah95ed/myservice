@@ -14,6 +14,7 @@ import 'package:Al_Zab_township_guide/view/screens/TheCars.dart';
 import 'package:Al_Zab_township_guide/view/screens/WhoCanDonateScreen%20.dart';
 import 'package:Al_Zab_township_guide/view/screens/LoginScreen/login_screen.dart';
 import 'package:Al_Zab_township_guide/view/screens/SignupScreen/signup_screen.dart';
+import 'package:Al_Zab_township_guide/view/screens/AddProfessions/AddProfessions.dart';
 import 'package:flutter/material.dart';
 
 Map<String, WidgetBuilder> routs = {
@@ -34,4 +35,5 @@ Map<String, WidgetBuilder> routs = {
   MessageDeveloper.Route: (context) =>  MessageDeveloper(),
   OTPScreenNumber.Route: (context) =>  OTPScreenNumber(),
   LineScreen.Route: (context) =>  LineScreen(),
+  AddProfessions.Route: (context) =>  AddProfessions(),
 };

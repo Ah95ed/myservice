@@ -1,10 +1,10 @@
 import 'package:Al_Zab_township_guide/Helper/Constant/ServiceCollectios.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
+import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
 import 'package:Al_Zab_township_guide/controller/provider/ServiceController/ServiceController.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
-import 'package:Al_Zab_township_guide/view/ThemeApp/app_theme.dart';
 import 'package:Al_Zab_township_guide/view/screens/LoginScreen/login_screen.dart';
 import 'package:Al_Zab_township_guide/view/widget/Dialogandsnakebar/DialogCirculerProgress.dart';
 import 'package:Al_Zab_township_guide/view/widget/LoginWidget/Loginimageshow.dart';
@@ -12,14 +12,11 @@ import 'package:Al_Zab_township_guide/view/widget/staticWidget/CustomMaterialBut
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class LineScreen extends StatelessWidget {
-  static const Route = '/line screen';
-  LineScreen({super.key});
+class AddProfessions extends StatelessWidget {
+  static const Route = '/AddProfessions';
+  AddProfessions({super.key});
   TextEditingController name = TextEditingController();
-  TextEditingController phone = TextEditingController();
-  TextEditingController time = TextEditingController();
-  TextEditingController typevehicle = TextEditingController();
-  TextEditingController direction = TextEditingController();
+  TextEditingController nameProfession = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final read = context.read<ServiceController>();
@@ -34,11 +31,11 @@ class LineScreen extends StatelessWidget {
           child: Column(
             children: [
               LogoService(
-                height: getheight(25),
-                title: Translation[Language.Addtransmissionline],
+                height: getheight(30),
+                title: Translation[Language.typeProfession],
               ),
               SizedBox(
-                height: getheight(1),
+                height: getheight(4),
               ),
               component1(
                 name,
@@ -51,39 +48,9 @@ class LineScreen extends StatelessWidget {
                 height: getheight(1.5),
               ),
               component1(
-                phone,
-                Icons.phone,
-                Translation[Language.number_phone],
-                false,
-                false,
-              ),
-              SizedBox(
-                height: getheight(1.5),
-              ),
-              component1(
-                typevehicle,
-                Icons.taxi_alert_rounded,
-                Translation[Language.cars],
-                false,
-                false,
-              ),
-              SizedBox(
-                height: getheight(1.5),
-              ),
-              component1(
-                time,
-                Icons.time_to_leave,
-                Translation[Language.time],
-                false,
-                false,
-              ),
-              SizedBox(
-                height: getheight(1.5),
-              ),
-              component1(
-                direction,
-                Icons.where_to_vote_sharp,
-                Translation[Language.line],
+                nameProfession,
+                Icons.work_history,
+                Translation[Language.typeProfession],
                 false,
                 false,
               ),
@@ -93,11 +60,7 @@ class LineScreen extends StatelessWidget {
               CustomMaterialButton(
                 title: Translation[Language.send],
                 onPressed: () async {
-                  if (name.text.isEmpty ||
-                      phone.text.isEmpty ||
-                      typevehicle.text.isEmpty ||
-                      time.text.isEmpty ||
-                      direction.text.isEmpty) {
+                  if (name.text.isEmpty || nameProfession.text.isEmpty) {
                     showSnakeBar(context, Translation[Language.fields]);
                     return;
                   }
@@ -105,17 +68,15 @@ class LineScreen extends StatelessWidget {
                   // * so u need service controller and modele to all service ;
                   read.setDataInFirestore(
                     context,
-                    ServiceCollectios.line.name,
+                    ServiceCollectios.professions.name,
                     {
                       "name": name.text,
-                      "number": phone.text,
-                      "time": time.text,
-                      "type": typevehicle.text,
-                      "from": direction.text,
-                      "bool": true,
+                      "nameProfession": nameProfession.text,
+                      'number':await shared!.getString('phoneUser'),
+                      "token": DateTime.now().toString(),
                     },
                   );
-                 await showCirculerProgress(context);
+                  await showCirculerProgress(context);
                 },
               ),
             ],

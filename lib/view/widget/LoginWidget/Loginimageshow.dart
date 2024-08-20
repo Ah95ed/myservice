@@ -1,5 +1,6 @@
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
+import 'package:Al_Zab_township_guide/view/ThemeApp/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class Login_Image extends StatelessWidget {
@@ -46,3 +47,71 @@ class Login_Image extends StatelessWidget {
     );
   }
 }
+
+
+
+class LogoService extends StatelessWidget {
+  LogoService({
+    this.height,
+    this.title,
+    super.key,
+  });
+  double? height;
+  String? title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+     
+      height: height,
+      width: getWidth(100),
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(100),
+        ),
+        boxShadow: const [
+          BoxShadow(
+            offset: Offset(2, 5),
+            blurRadius: 4,
+            color: ColorUsed.primary,
+          ),
+        ],
+        gradient: LinearGradient(
+          colors: [
+            ColorUsed.primary,
+            ColorUsed.second,
+          ],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        ),
+      ),
+      child: Column(
+        children: [
+          SizedBox(
+            height: getheight(8),
+          ),
+          Container(
+            height: getheight(12),
+            child: Image.asset(
+              "assets/logo/asd.png",
+            ),
+          ),
+          SizedBox(
+            height: getheight(2),
+          ),
+          Text(
+            title!,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: setFontSize(16),
+              fontWeight: FontWeight.bold,
+              color: AppTheme.notWhite,
+              fontFamily: "Cairo",
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+

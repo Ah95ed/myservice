@@ -7,22 +7,22 @@ import 'package:flutter/material.dart';
 
 class ServiceModel {
   late FirebaseFirestore firestoreInstance;
- late String phone;
+  late String phone;
   ServiceModel() {
     firestoreInstance = FirebaseFirestore.instance;
     phone = shared!.getString('phoneUser')!;
   }
 
-  setDataInFirestore(BuildContext context, String collection,
-      Map<String, dynamic> data) async {
-    await firestoreInstance
-    .collection(collection)
-    .doc(phone)
-    .set(data);
+  setDataInFirestore(
+    BuildContext context,
+    String collection,
+    Map<String, dynamic> data,
+  ) async {
+    await firestoreInstance.collection(collection).doc(phone).set(data);
 
-    Future.delayed(Duration(seconds: 2), () {
+    await Future.delayed(Duration(seconds: 2), () async {
       Navigator.pop(context);
-      showSnakeBar(
+      await showSnakeBar(
         context,
         Translation[Language.done],
       );

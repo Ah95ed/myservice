@@ -1,6 +1,7 @@
 import 'package:Al_Zab_township_guide/Helper/Service/Language/keyabstract.dart';
 
 class Language implements KeyAbstract {
+  static const String Addtransmissionline = "Addtransmissionline";
   static const String yes = "yes";
   static const sure_to_delete_account = 'sure_to_delete_account';
   static const otp_error = 'otp_error';
@@ -109,11 +110,14 @@ class Language implements KeyAbstract {
   static const String something_wrong = "something_wrong";
   static const String check_data = "check_data";
   static const String no = "no";
+  static const String typeProfession = "typeProfession";
   // static const String delete_account = "delete_account";
 
   @override
   static Map<String, Map<String, String>> keyMap = {
     'ar': {
+      Addtransmissionline:"اضافة خط",
+      typeProfession : "نوع المهنة",
       no : "لا",
       yes : "نعم",
       sure_to_delete_account : "هل انت متأكد من حذف الحساب؟",
@@ -218,6 +222,8 @@ class Language implements KeyAbstract {
       error_password: "كلمة المرور غير صحيحة",
     },
     "en": {
+      Addtransmissionline : "Add a Transmission Line",
+      typeProfession :"Type of profession",
       no : "No",
       yes : "Yes",
       sure_to_delete_account : "Are you sure to delete your account ?",
