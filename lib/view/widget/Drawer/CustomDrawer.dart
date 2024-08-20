@@ -1,5 +1,4 @@
 import 'package:Al_Zab_township_guide/Helper/Constant/Constant.dart';
-import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
@@ -9,11 +8,8 @@ import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/app_theme.dart';
 import 'package:Al_Zab_township_guide/view/screens/EditScreen/CustomDialog.dart';
-import 'package:Al_Zab_township_guide/view/screens/LineScreen/LineScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/SignupScreen/signup_screen.dart';
 import 'package:Al_Zab_township_guide/view/widget/Dialogandsnakebar/DialogCirculerProgress.dart';
-import 'package:Al_Zab_township_guide/view/widget/staticWidget/CustomMaterialButton.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -155,12 +151,7 @@ class Customdrawer extends StatelessWidget {
             ),
             onTap: () {
               Scaffold.of(context).closeDrawer();
-              // showDialog(
-              //     context: context,
-              //     builder: (BuildContext context) {
-              //       return CustomDialog();
-              //     },
-              //   );
+           
               if (shared!.getBool('isRegister') == true) {
                 showDialog(
                     context: context,

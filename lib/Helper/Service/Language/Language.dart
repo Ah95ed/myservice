@@ -1,6 +1,8 @@
 import 'package:Al_Zab_township_guide/Helper/Service/Language/keyabstract.dart';
 
 class Language implements KeyAbstract {
+  static const String location = "locaton";
+  static const String locationWork = "locationWork";
   static const String Addtransmissionline = "Addtransmissionline";
   static const String AddDoctor = "AddDoctor";
   static const String yes = "yes";
@@ -113,17 +115,23 @@ class Language implements KeyAbstract {
   static const String no = "no";
   static const String typeProfession = "typeProfession";
   static const String doctor_title = "doctor_title";
+  static const String addDonor = "addDonor";
+  static const String selectType = "selectType";
 
   @override
   static Map<String, Map<String, String>> keyMap = {
     'ar': {
-      doctor_title : "عنوان العيادة",
-      Addtransmissionline:"اضافة خط",
-      AddDoctor : "أضافة طبيب",
-      typeProfession : "نوع المهنة",
-      no : "لا",
-      yes : "نعم",
-      sure_to_delete_account : "هل انت متأكد من حذف الحساب؟",
+      location : "مكان المتبرع",
+      selectType : "اختر الفصيلة",
+      addDonor : "اضافة متبرع",
+      locationWork: "مكان العمل",
+      doctor_title: "عنوان العيادة",
+      Addtransmissionline: "اضافة خط",
+      AddDoctor: "أضافة طبيب",
+      typeProfession: "نوع المهنة",
+      no: "لا",
+      yes: "نعم",
+      sure_to_delete_account: "هل انت متأكد من حذف الحساب؟",
       otp_error: "خطأ في رمز التأكيد",
       enter_otp_email: "أدخل رمز التأكيد",
       error_email: "البريد الالكتروني غير صحيح",
@@ -225,13 +233,17 @@ class Language implements KeyAbstract {
       error_password: "كلمة المرور غير صحيحة",
     },
     "en": {
-      doctor_title : "Clinic Address",
-      Addtransmissionline : "Add a Transmission Line",
-      typeProfession :"Type of profession",
-      AddDoctor : "Add Doctors",
-      no : "No",
-      yes : "Yes",
-      sure_to_delete_account : "Are you sure to delete your account ?",
+      location : "Location",
+      selectType : "Select Type",
+      addDonor : "Add a Donor",
+      locationWork: "Location Work",
+      doctor_title: "Clinic Address",
+      Addtransmissionline: "Add a Transmission Line",
+      typeProfession: "Type of profession",
+      AddDoctor: "Add Doctors",
+      no: "No",
+      yes: "Yes",
+      sure_to_delete_account: "Are you sure to delete your account ?",
       otp_error: 'Error in OTP Code',
       enter_otp_email: "Enter OTP Email",
       error_email: "Error Email",
