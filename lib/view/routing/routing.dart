@@ -1,6 +1,6 @@
+import 'package:Al_Zab_township_guide/view/screens/AddDoctor/AddDoctor.dart';
 import 'package:Al_Zab_township_guide/view/screens/BloodScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/DoctorScreen.dart';
-import 'package:Al_Zab_township_guide/view/screens/EditScreen/EditScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/LineScreen/LineScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/MessageDeveloper.dart';
@@ -18,7 +18,6 @@ import 'package:Al_Zab_township_guide/view/screens/AddProfessions/AddProfessions
 import 'package:flutter/material.dart';
 
 Map<String, WidgetBuilder> routs = {
-  // ROUTE: (context) => const MyApp(),
   MainScreen.ROUTE: (context) =>  MainScreen(),
   DoctorScreen.ROUTE: (context) =>  DoctorScreen(),
   BloodScreen.ROUTE: (context) => BloodScreen(),
@@ -31,9 +30,9 @@ Map<String, WidgetBuilder> routs = {
   MyCustomSplashScreen.Route: (context) =>  MyCustomSplashScreen(),
   WhoCanDonateScreen.route: (context) => const WhoCanDonateScreen(),
   OtpScreenEmail.Route: (context) => OtpScreenEmail(),
-  Editscreen.Route: (context) => const Editscreen(),
   MessageDeveloper.Route: (context) =>  MessageDeveloper(),
   OTPScreenNumber.Route: (context) =>  OTPScreenNumber(),
   LineScreen.Route: (context) =>  LineScreen(),
   AddProfessions.Route: (context) =>  AddProfessions(),
+  AddDoctor.Route : (context) =>  AddDoctor(),
 };
