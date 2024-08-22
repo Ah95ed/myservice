@@ -46,7 +46,7 @@ class _AddSatotaState extends State<AddSatota> {
             children: [
               LogoService(
                 height: getheight(30),
-                title: Translation[Language.AddDoctor],
+                title: Translation[Language.addSatota],
               ),
               SizedBox(
                 height: getheight(4),

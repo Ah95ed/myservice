@@ -1,3 +1,4 @@
+import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
 import 'package:Al_Zab_township_guide/Helper/Constant/Constant.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
@@ -113,14 +114,17 @@ class Providers with ChangeNotifier {
     FirebaseFirestore firestoreInstance = FirebaseFirestore.instance;
     final collectionRef = firestoreInstance.collection(collection);
     final querySnapshot = await collectionRef.get();
-    s = querySnapshot.docs.map((e) => e).toList();
+    s = querySnapshot.docs.map((e) {
+      
+            
+
+      return e;
+    }).toList();
+  
     notifyListeners();
   }
 
-   managerScreen(
-    String route
-  , BuildContext context
-  , {Object? object}) {
+  managerScreen(String route, BuildContext context, {Object? object}) {
     Navigator.pushNamed(context, route, arguments: object);
     notifyListeners();
   }

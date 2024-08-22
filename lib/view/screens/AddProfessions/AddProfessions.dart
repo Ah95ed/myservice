@@ -32,7 +32,7 @@ class AddProfessions extends StatelessWidget {
             children: [
               LogoService(
                 height: getheight(30),
-                title: Translation[Language.typeProfession],
+                title: Translation[Language.professions],
               ),
               SizedBox(
                 height: getheight(4),

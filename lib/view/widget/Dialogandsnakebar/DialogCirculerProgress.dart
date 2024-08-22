@@ -5,7 +5,11 @@ import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/app_theme.dart';
+import 'package:Al_Zab_township_guide/view/screens/AddDoctor/AddDoctor.dart';
+import 'package:Al_Zab_township_guide/view/screens/AddProfessions/AddProfessions.dart';
+import 'package:Al_Zab_township_guide/view/screens/AddSatota/AddSatota.dart';
 import 'package:Al_Zab_township_guide/view/screens/LineScreen/LineScreen.dart';
+import 'package:Al_Zab_township_guide/view/screens/addDonor/AddDonor.dart';
 import 'package:Al_Zab_township_guide/view/widget/staticWidget/CustomMaterialButton.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -26,7 +30,7 @@ showCirculerProgress(BuildContext context) {
 }
 
 Future<void> showSnakeBar(BuildContext context, String message) async {
- await ScaffoldMessenger.of(context).showSnackBar(
+  await ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
       content: Text(
         message,
@@ -76,26 +80,30 @@ class CustomDialogAddService extends StatelessWidget {
           Divider(),
           CustomMaterialButton(
             onPressed: () {
-              // read.managerScreen();
+              read.managerScreen(AddProfessions.Route, context);
             },
-            title: Translation[Language.professions],
-          ),
-          Divider(),
-          CustomMaterialButton(
-            onPressed: () {},
-            title: Translation[Language.professions],
-          ),
-          Divider(),
-          CustomMaterialButton(
-            onPressed: () {},
             title: Translation[Language.professions],
           ),
           Divider(),
           CustomMaterialButton(
             onPressed: () {
-              Logger.logger('message tjis this');
+              read.managerScreen(AddDoctor.Route, context);
             },
-            title: Translation[Language.professions],
+            title: Translation[Language.doctor],
+          ),
+          Divider(),
+          CustomMaterialButton(
+            onPressed: () {
+              read.managerScreen(AddDonor.Route, context);
+            },
+            title: Translation[Language.donate],
+          ),
+          Divider(),
+          CustomMaterialButton(
+            onPressed: () {
+              read.managerScreen(AddSatota.Route, context);
+            },
+            title: Translation[Language.internal_transfer],
           ),
         ],
       ),

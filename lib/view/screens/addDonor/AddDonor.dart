@@ -60,7 +60,7 @@ class _AddDonorState extends State<AddDonor> {
             children: [
               LogoService(
                 height: getheight(30),
-                title: Translation[Language.AddDoctor],
+                title: Translation[Language.addDonor],
               ),
               SizedBox(
                 height: getheight(4),

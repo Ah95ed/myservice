@@ -1,16 +1,19 @@
 import 'dart:ui';
+
 import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
+import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
 import 'package:Al_Zab_township_guide/controller/provider/BloodController/MainController.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
-import 'package:Al_Zab_township_guide/view/widget/Drawer/CustomDrawer.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/app_theme.dart';
+import 'package:Al_Zab_township_guide/view/widget/Drawer/CustomDrawer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tutorial_coach_mark/tutorial_coach_mark.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MainScreen extends StatefulWidget {
   static const ROUTE = "MainScreen";
@@ -21,11 +24,11 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   late TutorialCoachMark tutorialCoachMark;
 
   @override
-  void initState() {
+  void initState()  {
     if (shared!.getBool('tutorial') == null) {
       createTutorial();
       addItem();
@@ -34,7 +37,64 @@ class _MainScreenState extends State<MainScreen> {
         showTutorial,
       );
     }
+    checkUpdate(context);
     super.initState();
+  }
+
+ Future<void> checkUpdate(BuildContext context) async {
+    if (await int.parse(re) < int.parse(packageInfo!.buildNumber)) {
+      showDialog(
+        context: context,
+        builder: (_) {
+          return AlertDialog(
+              title: Text(Translation[Language.update_app],style: TextStyle(
+                        fontSize: setFontSize(16),
+                        fontWeight: FontWeight.bold,
+                        color: ColorUsed.DarkGreen,
+                      ),),
+              content: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text(
+                      Translation[Language.cancel],
+                      style: TextStyle(
+                        fontSize: setFontSize(14),
+                        fontWeight: FontWeight.bold,
+                        color: ColorUsed.second,
+                      ),
+                    ),
+                  ),
+                  const Spacer(),
+                  TextButton(
+                    onPressed: () async {
+                      if (await launchUrl(
+                        Uri.parse(
+                            'https://play.google.com/store/apps/details?id=com.Blood.types'),
+                        mode: LaunchMode.platformDefault,
+                      )) {
+                        throw Exception('Could not launch googleplay');
+                      }
+                    },
+                    child: Text(
+                      Translation[Language.update],
+                      style: TextStyle(
+                        fontSize: setFontSize(14),
+                        fontWeight: FontWeight.bold,
+                        color: ColorUsed.second,
+                      ),
+                    ),
+                  ),
+                ],
+              )
+             
+              );
+        },
+      );
+    }
   }
 
   @override
@@ -403,8 +463,8 @@ class _MainScreenState extends State<MainScreen> {
     targets.add(
       TargetFocus(
         identify: "keyBottomNavigation2",
-        keyTarget: menu,
-        alignSkip: Alignment.center,
+       keyTarget: menu,
+        alignSkip: Alignment.bottomCenter,
         enableOverlayTab: true,
         contents: [
           TargetContent(
@@ -415,10 +475,10 @@ class _MainScreenState extends State<MainScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    S.current.desc_more,
+                    Translation[Language.desc_more],
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: setFontSize(18),
+                      fontSize: setFontSize(16),
                       fontWeight: FontWeight.bold,
                     ),
                   ),

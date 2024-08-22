@@ -37,7 +37,7 @@ class LineScreen extends StatelessWidget {
                 title: Translation[Language.Addtransmissionline],
               ),
               SizedBox(
-                height: getheight(1),
+                height: getheight(4),
               ),
               component1(
                 name,

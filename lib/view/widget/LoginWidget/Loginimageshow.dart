@@ -88,7 +88,7 @@ class LogoService extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(
-            height: getheight(8),
+            height: getheight(6),
           ),
           Container(
             height: getheight(12),
@@ -97,16 +97,16 @@ class LogoService extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: getheight(2),
+            height: getheight(0.5),
           ),
           Text(
             title!,
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: setFontSize(16),
+              fontSize: setFontSize(14),
               fontWeight: FontWeight.bold,
               color: AppTheme.notWhite,
-              fontFamily: "Cairo",
+         
             ),
           ),
         ],

@@ -21,58 +21,56 @@ class CardDonors extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: getWidth(1),
-          vertical: getheight(0.5),
-        ),
-        child: Container(
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        horizontal: getWidth(0.02),
+        vertical: getheight(0.2),
+      ),
+      child: Container(
+        
+        height: getheight(18),
+        decoration: BoxDecoration(
           
-          // height: getheight(20),
-          decoration: BoxDecoration(
-            
-            border: Border.all(
-              width: getWidth(0.2),
-              color: ColorUsed.DarkGreen,
-            ),
-            borderRadius: const BorderRadius.all(
-              Radius.circular(20),
-            ),
+          border: Border.all(
+            width: getWidth(0.2),
+            color: ColorUsed.DarkGreen,
           ),
-          child: Row(
-            children: [
-              Expanded(
-                flex: 3,
-                child: Column(
-                  children: [
-                    MultiText(name, S.of(context).name),
-                    SizedBox(
-                      height: getheight(0.5),
-                    ),
-                    MultiText(type, S.of(context).type),
-                    SizedBox(
-                      height: getheight(0.5),
-                    ),
-                    MultiText(title, S.of(context).title_service),
-                  ],
-                ),
-              ),
-              Expanded(
-                flex: 1,
-                child: IconButton(
-                  icon: Icon(
-                    Icons.call,
-                    size: getheight(4),
-                    color: ColorUsed.primary,
+          borderRadius: const BorderRadius.all(
+            Radius.circular(20),
+          ),
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              flex:6,
+              child: Column(
+                children: [
+                  MultiText(name, S.of(context).name),
+                  SizedBox(
+                    height: getheight(0.2),
                   ),
-                  onPressed: () async {
-                    context.read<Providers>().callNumber(number);
-                  },
-                ),
+                  MultiText(type, S.of(context).type),
+                  SizedBox(
+                    height: getheight(0.2),
+                  ),
+                  MultiText(title, S.of(context).title_service),
+                ],
               ),
-            ],
-          ),
+            ),
+            Expanded(
+              flex: 1,
+              child: IconButton(
+                icon: Icon(
+                  Icons.call,
+                  size: getheight(4),
+                  color: ColorUsed.primary,
+                ),
+                onPressed: () async {
+                  context.read<Providers>().callNumber(number);
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );

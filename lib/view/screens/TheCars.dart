@@ -41,11 +41,15 @@ class TheCars extends StatelessWidget {
                   ),
                 )
               : ListView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+
                   itemCount: value.s.length,
                   itemBuilder: (BuildContext context, int index) {
                     return CardCars(
                       name: value.s[index]['name'],
-                      type: value.s[index]['type'],
+                      type: value.s[index]['type']?? 'غيرمعرف',
                       time: value.s[index]['time'],
                       number: value.s[index]['number'],
                       from: value.s[index]['from'],

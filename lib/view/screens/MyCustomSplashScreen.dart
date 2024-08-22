@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
+import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
@@ -96,7 +98,7 @@ class _MyCustomSplashScreenState extends State<MyCustomSplashScreen>
                 duration: Duration(milliseconds: 1000),
                 opacity: _textOpacity,
                 child: Text(
-                  S.current.title,
+                  Translation[Language.title],
                   style: TextStyle(
                     color: AppTheme.darkGrey,
                     fontWeight: FontWeight.bold,

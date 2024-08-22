@@ -1,12 +1,13 @@
-import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/Helper/Constant/Constant.dart';
+import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
-import 'package:Al_Zab_township_guide/view/widget/Cards/CardDonors.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/app_theme.dart';
+import 'package:Al_Zab_township_guide/view/widget/Cards/CardDonors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+
 import '../ThemeApp/ColorUsed.dart';
 
 // ignore: must_be_immutable
@@ -87,20 +88,24 @@ class ShowDonors extends StatelessWidget {
                     ],
                   ),
                 )
-              : ListView.builder(
-                  shrinkWrap: true,
-                  physics: const BouncingScrollPhysics(),
-                  scrollDirection: Axis.vertical,
-            
-                  itemCount: value.s.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return CardDonors(
-                      name: value.s[index]['name'],
-                      type: dataSend.collection,
-                      title: value.s[index]['location'],
-                      number: value.s[index]['number'],
-                    );
-                  },
+              : 
+             SizedBox(
+                  height: getheight(100),
+                  width: getWidth(100),
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    physics: const BouncingScrollPhysics(),
+                    scrollDirection: Axis.vertical,
+                    itemCount: value.s.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return CardDonors(
+                        name: value.s[index]['name'],
+                        type: dataSend.collection,
+                        title: value.s[index]['location'],
+                        number: value.s[index]['number'],
+                      );
+                    },
+                  ),
                 ),
         );
       },
