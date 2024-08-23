@@ -19,7 +19,7 @@ class BloodScreen extends StatelessWidget {
       extendBodyBehindAppBar: true,
       extendBody: true,
       backgroundColor: AppTheme.nearlyWhite,
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
     
       body: Container(
         decoration: BoxDecoration(

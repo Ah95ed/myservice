@@ -4,6 +4,7 @@ import 'package:Al_Zab_township_guide/controller/provider/SignupProvider/SignupP
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/screens/OTPScreenEmail.dart';
+import 'package:Al_Zab_township_guide/view/widget/Dialogandsnakebar/DialogCirculerProgress.dart';
 import 'package:Al_Zab_township_guide/view/widget/LoginWidget/Loginimageshow.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
 import 'package:flutter/material.dart';
@@ -60,8 +61,13 @@ class _SignupScreenState extends State<SignupScreen>
   @override
   void dispose() {
     _controller.dispose();
+    name.dispose();
+    email.dispose();
+    phone.dispose();
+    password.dispose();
     super.dispose();
   }
+
   TextEditingController name = TextEditingController();
   TextEditingController email = TextEditingController();
 
@@ -82,8 +88,8 @@ class _SignupScreenState extends State<SignupScreen>
                   Expanded(
                     flex: 2,
                     child: Login_Image(
-                      // height: getheight(0),
-                    ),
+                        // height: getheight(0),
+                        ),
                   ),
                   Expanded(
                     flex: 4,
@@ -92,7 +98,7 @@ class _SignupScreenState extends State<SignupScreen>
                         SizedBox(
                           height: getheight(2),
                         ),
-                          component1(
+                        component1(
                           name,
                           Icons.person,
                           S.current.please_enter_name,
@@ -102,7 +108,7 @@ class _SignupScreenState extends State<SignupScreen>
                         SizedBox(
                           height: getheight(2),
                         ),
-                         component1(
+                        component1(
                           email,
                           Icons.email,
                           S.current.enter_email,
@@ -135,11 +141,10 @@ class _SignupScreenState extends State<SignupScreen>
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            
                             SizedBox(width: getWidth(30)),
                             RichText(
                               text: TextSpan(
-                                text: S.current.already_member ,
+                                text: S.current.already_member,
                                 style: TextStyle(
                                   color: ColorUsed.DarkGreen,
                                   fontSize: setFontSize(12),
@@ -166,8 +171,6 @@ class _SignupScreenState extends State<SignupScreen>
                           child: Container(
                             margin: EdgeInsets.only(
                               bottom: getheight(5),
-                              
-                              
                             ),
                             // height: getheight(100),
                             // width: getWidth(100),
@@ -193,56 +196,57 @@ class _SignupScreenState extends State<SignupScreen>
                               highlightColor: Colors.transparent,
                               onTap: () async {
                                 HapticFeedback.lightImpact();
-                                 provider.startLoading();
-                              if (name.text.isEmpty ||
-                                  email.text.isEmpty ||
-                                  phone.text.isEmpty ||
-                                  password.text.isEmpty) {
-                                provider.stopLoading();
+                                provider.startLoading();
+                                if (name.text.isEmpty ||
+                                    email.text.isEmpty ||
+                                    phone.text.isEmpty ||
+                                    password.text.isEmpty) {
+                                  provider.stopLoading();
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(S.current.fields),
+                                      duration: Duration(seconds: 3),
+                                    ),
+                                  );
+
+                                  return;
+                                }
+                                if (!email.text.contains('@')) {
+                                  provider.stopLoading();
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text('ادخل أيميل حقيقي'),
+                                      duration: Duration(seconds: 3),
+                                    ),
+                                  );
+                                  return;
+                                }
+                                showCirculerProgress(context);
+
+                                await provider.sendCode(
+                                  SignupModel(
+                                    name: name.text,
+                                    email: email.text,
+                                    phone: phone.text,
+                                    password: password.text,
+                                  ),
+                                  context,
+                                );
+
+                                if (await provider.isSignup) {
+                                  context.read<Providers>().managerScreen(
+                                        OtpScreenEmail.Route,
+                                        context,
+                                      );
+                                  provider.stopLoading();
+                                  return;
+                                }
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     content: Text(S.current.fields),
                                     duration: Duration(seconds: 3),
                                   ),
                                 );
-                 
-                                return;
-                              }
-                              if (!email.text.contains('@')) {
-                                provider.stopLoading();
-                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text('ادخل أيميل حقيقي'),
-                                    duration: Duration(seconds: 3),
-                                  ),
-                                );
-                                return;
-                              }
-                
-                              await provider.sendCode(
-                                SignupModel(
-                                  name: name.text,
-                                  email: email.text,
-                                  phone: phone.text,
-                                  password: password.text,
-                                ),
-                                context,
-                              );
-                
-                              if (await provider.isSignup) {
-                                context.read<Providers>().managerScreen(
-                                      OtpScreenEmail.Route,
-                                      context,
-                                    );
-                                provider.stopLoading();
-                                return;
-                              }
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(S.current.fields),
-                                  duration: Duration(seconds: 3),
-                                ),
-                              );
                               },
                               child: Container(
                                 margin: EdgeInsets.only(

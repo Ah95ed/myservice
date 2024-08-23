@@ -1,3 +1,5 @@
+import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
+import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
@@ -21,33 +23,37 @@ class CardViewList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation:setFontSize(8),
-      child: Row(
-        children: [
-          Expanded(
-            flex: 3,
-            child: Column(
-              children: [
-                MultiText(name!, S.of(context).name),
-                MultiText(presence!, S.of(context).time),
-                MultiText(specialization!, S.of(context).specialization),
-                MultiText(title!, S.of(context).title_service),
-              ],
-            ),
-          ),
-          Expanded(
-            child: IconButton(
-              icon: Icon(
-                Icons.call,
-                size: getheight(4),
-                color: ColorUsed.primary,
+      elevation:6,
+      child: SingleChildScrollView(
+        child: SizedBox(
+          child: Row(
+            children: [
+              Expanded(
+                flex: 6,
+                child: Column(
+                  children: [
+                    MultiText(name!, Translation[Language.name]),
+                    MultiText(presence!,Translation[Language.time]),
+                    MultiText(specialization!, S.of(context).specialization),
+                    MultiText(title!, S.of(context).title_service),
+                  ],
+                ),
               ),
-              onPressed: () {
-                context.read<Providers>().callNumber(number!);
-              },
-            ),
+              Expanded(
+                child: IconButton(
+                  icon: Icon(
+                    Icons.call,
+                    size: getheight(4),
+                    color: ColorUsed.primary,
+                  ),
+                  onPressed: () {
+                    context.read<Providers>().callNumber(number!);
+                  },
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

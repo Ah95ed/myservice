@@ -1,4 +1,3 @@
-import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
@@ -10,17 +9,30 @@ import 'package:appwrite/appwrite.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class OTPScreenNumber extends StatelessWidget {
+class OTPScreenNumber extends StatefulWidget {
   OTPScreenNumber({super.key});
   static const Route = '/OTPScreenNumber';
+
+  @override
+  State<OTPScreenNumber> createState() => _OTPScreenNumberState();
+}
+
+class _OTPScreenNumberState extends State<OTPScreenNumber> {
   TextEditingController _textController = TextEditingController();
+
   late String userId;
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _textController.dispose();
+
+  }
 
   @override
   Widget build(BuildContext context) {
     userId = shared!.getString('userId') ?? "a";
     final read = context.read<Updateprovider>();
-    Logger.logger('message OTPScreenNumber token ->');
 
     return Scaffold(
       body: SingleChildScrollView(

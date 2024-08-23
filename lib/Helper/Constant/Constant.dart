@@ -10,7 +10,7 @@ abstract class Constant {
   static const appEmail = 'amhmeed31@gmail.com';
   static const appName = 'AL-Zab Township Guide';
   static String Link = "https://www.blood.co.uk/who-can-give-blood/";
-  static const PrivacyPolicy = 'https://alqdees.github.io/private/';
+  static const PrivacyPolicy = 'https://alqdees.github.io/privatePolice/';
 }
 
 class DataSend {

@@ -11,14 +11,35 @@ import 'package:Al_Zab_township_guide/view/widget/staticWidget/CustomMaterialBut
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class LineScreen extends StatelessWidget {
+class LineScreen extends StatefulWidget {
   static const Route = '/line screen';
   LineScreen({super.key});
+
+  @override
+  State<LineScreen> createState() => _LineScreenState();
+}
+
+class _LineScreenState extends State<LineScreen> {
   TextEditingController name = TextEditingController();
+
   TextEditingController phone = TextEditingController();
+
   TextEditingController time = TextEditingController();
+
   TextEditingController typevehicle = TextEditingController();
+
   TextEditingController direction = TextEditingController();
+  @override
+  void dispose() {
+    name.dispose();
+    phone.dispose();
+    time.dispose();
+    typevehicle.dispose();
+    direction.dispose();
+    // TODO: implement dispose
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final read = context.read<ServiceController>();
@@ -114,7 +135,7 @@ class LineScreen extends StatelessWidget {
                       "bool": true,
                     },
                   );
-                 await showCirculerProgress(context);
+                  await showCirculerProgress(context);
                 },
               ),
             ],

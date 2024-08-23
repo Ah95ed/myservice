@@ -74,7 +74,8 @@ class ShowDonors extends StatelessWidget {
             ),
             systemOverlayStyle: SystemUiOverlayStyle.light,
           ),
-          body: value.s.isEmpty
+          body: 
+          value.s.isEmpty
               ? Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -93,16 +94,15 @@ class ShowDonors extends StatelessWidget {
                   height: getheight(100),
                   width: getWidth(100),
                   child: ListView.builder(
-                    shrinkWrap: true,
                     physics: const BouncingScrollPhysics(),
                     scrollDirection: Axis.vertical,
                     itemCount: value.s.length,
                     itemBuilder: (BuildContext context, int index) {
                       return CardDonors(
-                        name: value.s[index]['name'],
-                        type: dataSend.collection,
+                        name:  value.s[index]['name'],
+                        type:  dataSend.collection,
                         title: value.s[index]['location'],
-                        number: value.s[index]['number'],
+                        number:value.s[index]['number'],
                       );
                     },
                   ),

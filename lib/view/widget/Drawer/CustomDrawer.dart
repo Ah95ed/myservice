@@ -12,9 +12,10 @@ import 'package:Al_Zab_township_guide/view/screens/SignupScreen/signup_screen.da
 import 'package:Al_Zab_township_guide/view/widget/Dialogandsnakebar/DialogCirculerProgress.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:share_plus/share_plus.dart';
 
 class Customdrawer extends StatelessWidget {
-  Customdrawer({super.key});
+  const Customdrawer({super.key});
 
   //! need controller Drawer Page
 
@@ -131,6 +132,23 @@ class Customdrawer extends StatelessWidget {
             color: ColorUsed.DarkGreen,
           ),
           ListTile(
+            leading: Icon(Icons.share),
+            title: Text(Translation[Language.share_app]),
+            onTap: () async {
+              Scaffold.of(context).closeDrawer();
+
+              await Share.share(
+                'https://play.google.com/store/apps/details?id=com.Blood.types',
+                subject: 'رابط التطبيق على كوكل بلي',
+                
+              );
+            },
+          ),
+          Divider(
+            thickness: getWidth(0.5),
+            color: ColorUsed.DarkGreen,
+          ),
+          ListTile(
             leading: Icon(Icons.settings),
             title: Text(Translation['settings']),
             onTap: () {},
@@ -151,14 +169,13 @@ class Customdrawer extends StatelessWidget {
             ),
             onTap: () {
               Scaffold.of(context).closeDrawer();
-           
+
               if (shared!.getBool('isRegister') == true) {
                 showDialog(
                     context: context,
                     builder: (_) {
                       return CustomDialogAddService();
                     });
-               
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
@@ -169,6 +186,54 @@ class Customdrawer extends StatelessWidget {
                 );
                 //  Navigator.of(context).pop();
               }
+            },
+          ),
+           Divider(
+            thickness: getWidth(0.5),
+            color: ColorUsed.DarkGreen,
+          ),
+          ListTile(
+            leading: Icon(Icons.language),
+            title: Text(
+              Translation[Language.chanage_lang],
+              style: TextStyle(
+                fontSize: setFontSize(12),
+                fontWeight: FontWeight.w500,
+                color: ColorUsed.DarkGreen,
+              ),
+            ),
+            onTap: () async {
+             final read = context.read<LanguageController>();
+              await showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: Text(S.of(context).chanage_lang),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        if (shared!.getString('lang') == 'en') {
+                          Navigator.of(context).pop();
+                          return;
+                        }
+                        read.changeLanguage('en');
+                        Navigator.of(context).pop();
+                      },
+                      child: Text('English'),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        if (shared!.getString('lang') == 'ar') {
+                          Navigator.of(context).pop();
+                          return;
+                        }
+                        read.changeLanguage('ar');
+                        Navigator.of(context).pop();
+                      },
+                      child: Text('العربية'),
+                    ),
+                  ],
+                ),
+              );
             },
           ),
           Divider(
@@ -190,7 +255,6 @@ class Customdrawer extends StatelessWidget {
                 ),
               ),
               onTap: () {
-                //https://github.com/Alqdees/private/blob/main/index.html
                 read.launchInBrowser(Uri.parse(Constant.PrivacyPolicy));
               },
             ),
@@ -199,5 +263,4 @@ class Customdrawer extends StatelessWidget {
       ),
     );
   }
-
 }

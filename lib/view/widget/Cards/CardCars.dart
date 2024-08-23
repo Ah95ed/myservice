@@ -23,35 +23,40 @@ class CardCars extends StatelessWidget {
   Widget build(BuildContext context) {
    
     return Card(
-      elevation: 8,
+      elevation: 5,
      
-      child: Row(
-        children: [
-          Expanded(
-            flex: 4,
-            child: Column(
-              children: [
-                MultiText(name, S.of(context).name),
-                MultiText(type, S.of(context).type),
-                MultiText(time, S.of(context).time),
-                MultiText(from, S.of(context).from),
-              ],
-            ),
-          ),
-          Expanded(
-           
-            child: IconButton(
-              icon: Icon(
-                Icons.call,
-                size: getWidth(10),
-                color: ColorUsed.second,
+      child: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: SizedBox(
+          child: Row(
+            children: [
+              Expanded(
+                flex: 6,
+                child: Column(
+                  children: [
+                    MultiText(name, S.of(context).name),
+                    MultiText(type, S.of(context).type),
+                    MultiText(time, S.of(context).time),
+                    MultiText(from, S.of(context).from),
+                  ],
+                ),
               ),
-              onPressed: () async {
-                context.read<Providers>().callNumber(number);
-              },
-            ),
+              Expanded(
+               
+                child: IconButton(
+                  icon: Icon(
+                    Icons.call,
+                    size: getWidth(8),
+                    color: ColorUsed.second,
+                  ),
+                  onPressed: () async {
+                    context.read<Providers>().callNumber(number);
+                  },
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

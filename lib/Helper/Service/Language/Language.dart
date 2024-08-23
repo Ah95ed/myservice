@@ -120,16 +120,17 @@ class Language implements KeyAbstract {
   static const String update_app = "update_app";
   static const String addSatota = "addSatota";
   static const String update = "update";
-
+  static const String share_app = "share_app";
   @override
   static Map<String, Map<String, String>> keyMap = {
     'ar': {
-      addSatota :"أضافة ستوتة" ,
-      update : "تحديث",
-      update_app : "يوجد تحديث جديد",
-      location : "مكان المتبرع",
-      selectType : "اختر الفصيلة",
-      addDonor : "اضافة متبرع",
+      share_app: "مشاركة التطبيق",
+      addSatota: "أضافة ستوتة",
+      update: "تحديث",
+      update_app: "يوجد تحديث جديد ~_~",
+      location: "مكان المتبرع",
+      selectType: "اختر الفصيلة",
+      addDonor: "اضافة متبرع",
       locationWork: "مكان العمل",
       doctor_title: "عنوان العيادة",
       Addtransmissionline: "اضافة خط",
@@ -239,12 +240,13 @@ class Language implements KeyAbstract {
       error_password: "كلمة المرور غير صحيحة",
     },
     "en": {
-      addSatota : 'Add Satota',
-      update : "Update",
-      update_app : "New version available, please update",
-      location : "Location",
-      selectType : "Select Type",
-      addDonor : "Add a Donor",
+      share_app: "Share App",
+      addSatota: 'Add Satota',
+      update: "Update",
+      update_app: "New version available, please update",
+      location: "Location",
+      selectType: "Select Type",
+      addDonor: "Add a Donor",
       locationWork: "Location Work",
       doctor_title: "Clinic Address",
       Addtransmissionline: "Add a Transmission Line",

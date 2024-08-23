@@ -17,14 +17,9 @@ import 'package:Al_Zab_township_guide/view/routing/routing.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
 import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/MyCustomSplashScreen.dart';
-import 'package:Al_Zab_township_guide/view/screens/ShowDonors.dart';
-import 'package:device_preview/device_preview.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:package_info/package_info.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'generated/l10n.dart';
 
 void main() async {

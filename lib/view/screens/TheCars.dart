@@ -44,7 +44,7 @@ class TheCars extends StatelessWidget {
                   physics: const BouncingScrollPhysics(),
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
-
+                  
                   itemCount: value.s.length,
                   itemBuilder: (BuildContext context, int index) {
                     return CardCars(

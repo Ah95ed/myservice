@@ -12,11 +12,27 @@ import 'package:Al_Zab_township_guide/view/widget/staticWidget/CustomMaterialBut
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class AddProfessions extends StatelessWidget {
+class AddProfessions extends StatefulWidget {
   static const Route = '/AddProfessions';
   AddProfessions({super.key});
+
+  @override
+  State<AddProfessions> createState() => _AddProfessionsState();
+}
+
+class _AddProfessionsState extends State<AddProfessions> {
   TextEditingController name = TextEditingController();
+
   TextEditingController nameProfession = TextEditingController();
+
+  @override
+  void dispose() {
+    name.dispose();
+    nameProfession.dispose();
+    // TODO: implement dispose
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final read = context.read<ServiceController>();
@@ -72,7 +88,7 @@ class AddProfessions extends StatelessWidget {
                     {
                       "name": name.text,
                       "nameProfession": nameProfession.text,
-                      'number':await shared!.getString('phoneUser'),
+                      'number': await shared!.getString('phoneUser'),
                       "token": DateTime.now().toString(),
                     },
                   );

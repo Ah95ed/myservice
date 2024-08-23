@@ -66,9 +66,9 @@ android {
         
         minSdk = 23
         targetSdk = 34
-        //28 in google play  28 (6.4.3)
-        versionCode = 28
-        versionName = '6.4.4'
+        //29 in google play  28 (6.5.0)
+        versionCode = 30
+        versionName = '6.5.1'
     }
 
 }// end android

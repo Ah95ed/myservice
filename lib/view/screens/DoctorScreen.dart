@@ -1,7 +1,6 @@
 import 'package:Al_Zab_township_guide/controller/provider/DoctorProvider/DoctorProvider.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
-import 'package:Al_Zab_township_guide/main.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/widget/Cards/cardView.dart';
 import 'package:Al_Zab_township_guide/view/widget/Drawer/CustomDrawer.dart';
@@ -16,7 +15,7 @@ class DoctorScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    MyApp.getContext()!.read<DoctorProvider>().getDataAll();
+    context.read<DoctorProvider>().getDataAll();
     context.read<Providers>().title = Text(
       S.of(context).doctor,
       style: const TextStyle(
@@ -43,13 +42,13 @@ class DoctorScreen extends StatelessWidget {
                   ),
                 )
               : ListView.builder(
-                  itemCount: value.doctors!.length,
+                  itemCount:value.doctors!.length,
                   itemBuilder: (BuildContext context, int index) {
                     return CardViewList(
-                      name: value.doctors![index].name,
+                      name:  value.doctors![index].name,
                       presence: value.doctors![index].presence,
                       specialization: value.doctors![index].specialization,
-                      number: value.doctors![index].name,
+                      number: value.doctors![index].number,
                       title: value.doctors![index].title,
                     );
                   },

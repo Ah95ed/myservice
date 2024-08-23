@@ -8,7 +8,6 @@ import 'package:Al_Zab_township_guide/controller/provider/BloodController/MainCo
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
-import 'package:Al_Zab_township_guide/view/ThemeApp/app_theme.dart';
 import 'package:Al_Zab_township_guide/view/widget/Drawer/CustomDrawer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -28,7 +27,7 @@ class _MainScreenState extends State<MainScreen> {
   late TutorialCoachMark tutorialCoachMark;
 
   @override
-  void initState()  {
+  void initState() {
     if (shared!.getBool('tutorial') == null) {
       createTutorial();
       addItem();
@@ -37,61 +36,65 @@ class _MainScreenState extends State<MainScreen> {
         showTutorial,
       );
     }
+
     checkUpdate(context);
+
     super.initState();
   }
 
- Future<void> checkUpdate(BuildContext context) async {
-    if (await int.parse(re) < int.parse(packageInfo!.buildNumber)) {
+  Future<void> checkUpdate(BuildContext context) async {
+    if (await int.parse(re) > await int.parse(packageInfo!.buildNumber)) {
       showDialog(
         context: context,
         builder: (_) {
           return AlertDialog(
-              title: Text(Translation[Language.update_app],style: TextStyle(
-                        fontSize: setFontSize(16),
-                        fontWeight: FontWeight.bold,
-                        color: ColorUsed.DarkGreen,
-                      ),),
-              content: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: Text(
-                      Translation[Language.cancel],
-                      style: TextStyle(
-                        fontSize: setFontSize(14),
-                        fontWeight: FontWeight.bold,
-                        color: ColorUsed.second,
-                      ),
+            title: Text(
+              Translation[Language.update_app],
+              style: TextStyle(
+                fontSize: setFontSize(16),
+                fontWeight: FontWeight.bold,
+                color: ColorUsed.DarkGreen,
+              ),
+            ),
+            content: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text(
+                    Translation[Language.cancel],
+                    style: TextStyle(
+                      fontSize: setFontSize(14),
+                      fontWeight: FontWeight.bold,
+                      color: ColorUsed.second,
                     ),
                   ),
-                  const Spacer(),
-                  TextButton(
-                    onPressed: () async {
-                      if (await launchUrl(
-                        Uri.parse(
-                            'https://play.google.com/store/apps/details?id=com.Blood.types'),
-                        mode: LaunchMode.platformDefault,
-                      )) {
-                        throw Exception('Could not launch googleplay');
-                      }
-                    },
-                    child: Text(
-                      Translation[Language.update],
-                      style: TextStyle(
-                        fontSize: setFontSize(14),
-                        fontWeight: FontWeight.bold,
-                        color: ColorUsed.second,
-                      ),
+                ),
+                const Spacer(),
+                TextButton(
+                  onPressed: () async {
+                    if (await launchUrl(
+                      Uri.parse(
+                          'https://play.google.com/store/apps/details?id=com.Blood.types'),
+                      mode: LaunchMode.platformDefault,
+                    )) {
+                      throw Exception('Could not launch googleplay');
+                    }
+                  },
+                  child: Text(
+                    Translation[Language.update],
+                    style: TextStyle(
+                      fontSize: setFontSize(14),
+                      fontWeight: FontWeight.bold,
+                      color: ColorUsed.second,
                     ),
                   ),
-                ],
-              )
-             
-              );
+                ),
+              ],
+            ),
+          );
         },
       );
     }
@@ -100,14 +103,15 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     final read = context.read<MainController>();
+
     return Scaffold(
       key: _scaffoldKey,
-      drawer: Customdrawer(),
+      drawer: const Customdrawer(),
       extendBodyBehindAppBar: true,
       extendBody: true,
       backgroundColor: ColorUsed.PrimaryBackground,
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(
+      appBar:  AppBar(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(15),
@@ -127,50 +131,9 @@ class _MainScreenState extends State<MainScreen> {
         backgroundColor: ColorUsed.primary,
         elevation: 5,
         toolbarHeight: getheight(10),
-        actions: [
-          IconButton(
-            key: lang,
-            icon: Icon(
-              Icons.language,
-              color: AppTheme.notWhite,
-              semanticLabel: S.current.line,
-            ),
-            onPressed: () async {
-              final read = context.read<LanguageController>();
-              await showDialog(
-                context: context,
-                builder: (context) => AlertDialog(
-                  title: Text(S.of(context).chanage_lang),
-                  actions: [
-                    TextButton(
-                      onPressed: () {
-                        if (shared!.getString('lang') == 'en') {
-                          Navigator.of(context).pop();
-                          return;
-                        }
-                        read.changeLanguage('en');
-                        Navigator.of(context).pop();
-                      },
-                      child: Text('English'),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        if (shared!.getString('lang') == 'ar') {
-                          Navigator.of(context).pop();
-                          return;
-                        }
-                        read.changeLanguage('ar');
-                        Navigator.of(context).pop();
-                      },
-                      child: Text('العربية'),
-                    ),
-                  ],
-                ),
-              );
-            },
-          )
-        ],
+      
       ),
+      
       bottomNavigationBar: Container(
         margin: EdgeInsets.symmetric(
           horizontal: getWidth(2),
@@ -224,7 +187,11 @@ class _MainScreenState extends State<MainScreen> {
           ),
         ),
       ),
-      body: context.watch<MainController>().bodys[read.index],
+       body: SingleChildScrollView(child: SizedBox(
+        height: getheight(100),
+        width: getWidth(100),
+        child: context.watch<MainController>().bodys[read.index],
+      )),
     );
   }
 
@@ -463,7 +430,7 @@ class _MainScreenState extends State<MainScreen> {
     targets.add(
       TargetFocus(
         identify: "keyBottomNavigation2",
-       keyTarget: menu,
+        keyTarget: menu,
         alignSkip: Alignment.bottomCenter,
         enableOverlayTab: true,
         contents: [

@@ -23,12 +23,12 @@ class CardDonors extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
-        horizontal: getWidth(0.02),
-        vertical: getheight(0.2),
+        horizontal: getWidth(2),
+        vertical: getheight(1),
       ),
       child: Container(
         
-        height: getheight(18),
+        height: getheight(14),
         decoration: BoxDecoration(
           
           border: Border.all(
@@ -36,7 +36,7 @@ class CardDonors extends StatelessWidget {
             color: ColorUsed.DarkGreen,
           ),
           borderRadius: const BorderRadius.all(
-            Radius.circular(20),
+            Radius.circular(14),
           ),
         ),
         child: Row(
@@ -45,6 +45,9 @@ class CardDonors extends StatelessWidget {
               flex:6,
               child: Column(
                 children: [
+                   SizedBox(
+                    height: getheight(0.5),
+                  ),
                   MultiText(name, S.of(context).name),
                   SizedBox(
                     height: getheight(0.2),
