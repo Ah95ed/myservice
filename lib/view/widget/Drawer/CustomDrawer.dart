@@ -259,6 +259,26 @@ class Customdrawer extends StatelessWidget {
               },
             ),
           ),
+           Divider(
+            thickness: getWidth(0.5),
+            color: ColorUsed.DarkGreen,
+          ),
+Padding(
+            padding: EdgeInsets.symmetric(
+              vertical: getheight(2),
+              horizontal: getWidth(8),
+            ),
+            child:
+               Text(
+               re,
+                style: TextStyle(
+                  fontSize: setFontSize(10),
+                  fontWeight: FontWeight.w400,
+                  color: ColorUsed.DarkGreen,
+                ),
+              ),
+             
+          ),
         ],
       ),
     );

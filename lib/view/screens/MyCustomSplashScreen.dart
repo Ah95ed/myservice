@@ -23,15 +23,10 @@ class _MyCustomSplashScreenState extends State<MyCustomSplashScreen>
 
   late AnimationController _controller;
   late Animation<double> animation1;
+
 @override
-  void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
-    super.didChangeDependencies();
-    
-  }
-  @override
-  void initState() {
-    super.initState();
+void initState() {
+ super.initState();
 
     _controller =
         AnimationController(vsync: this, duration: Duration(seconds: 3));

@@ -7,6 +7,7 @@ import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/app_theme.dart';
 import 'package:Al_Zab_township_guide/view/screens/MessageDeveloper.dart';
+import 'package:Al_Zab_township_guide/view/widget/Dialogandsnakebar/DialogCirculerProgress.dart';
 import 'package:Al_Zab_township_guide/view/widget/staticWidget/CustomMaterialButton.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -18,9 +19,23 @@ class CustomDialog extends StatefulWidget {
 
 class _CustomDialogState extends State<CustomDialog> {
   final _formKey = GlobalKey<FormState>();
-  String? _selectedValue;
+  List<String> items = [
+    Translation[Language.doctor],
+    Translation[Language.line],
+    Translation[Language.blood_type],
+    Translation[Language.cars],
+    Translation[Language.internal_transfer],
+  ];
+  
   TextEditingController _textController = TextEditingController();
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _textController.dispose();
+  }
 
+   String? dropdownValue;
   @override
   Widget build(BuildContext context) {
     final read = context.read<Updateprovider>();
@@ -33,38 +48,15 @@ class _CustomDialogState extends State<CustomDialog> {
         key: _formKey,
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            DropdownButtonFormField<String>(
-              value: _selectedValue,
-              hint: Text(
-                Translation[Language.select_service],
-                style: TextStyle(
-                  color: ColorUsed.second,
-                  fontSize: setFontSize(14),
-                ),
-              ),
-              onChanged: (newValue) {
-                _selectedValue = newValue;
+          children: [
+            CustomDropdownMenu(
+              items: items,
+              selectedItem: Translation[Language.select_service],
+              onChanged: (value) {
                 setState(() {
-                  // _selectedValue = newValue;
+                  dropdownValue = value;
                 });
               },
-              items: <String>[
-                S.current.doctor,
-                S.current.blood_type,
-                S.current.cars,
-                S.current.professions,
-                S.current.internal_transfer,
-              ].map<DropdownMenuItem<String>>(
-                (String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                },
-              ).toList(),
-              validator: (value) =>
-                  value == null ? S.current.please_select_an_option : null,
             ),
             SizedBox(height: 16),
             TextFormField(
@@ -74,8 +66,8 @@ class _CustomDialogState extends State<CustomDialog> {
                 labelText: S.current.number_phone,
               ),
               validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return S.current.please_enter_phone;
+                if (value == null || value.isEmpty || value == '') {
+                  return Translation[Language.fields];
                 }
                 return null;
               },
@@ -126,38 +118,38 @@ class _CustomDialogState extends State<CustomDialog> {
                     ),
                   ),
                   onPressed: () async {
-                    if (_selectedValue!
-                        .contains(Translation[Language.doctor])) {
-                      _selectedValue = 'Doctor';
+                    showCirculerProgress(context);
+                    if (dropdownValue!.contains(Translation[Language.doctor])) {
+                      dropdownValue = 'Doctor';
                       read.searchService(
-                        _selectedValue!,
+                        dropdownValue!,
                         _textController.text,
                         context,
                       );
-                    } else if (_selectedValue ==
+                    } else if (dropdownValue ==
                         Translation[Language.blood_type]) {
                       await read.searchTypes(context, _textController.text);
                       // Navigator.of(context).pop();
 
-                      // _selectedValue = ServiceCollectios.line.name;
-                    } else if (_selectedValue == S.current.cars) {
-                      _selectedValue = 'line';
+                      // dropdownValue = ServiceCollectios.line.name;
+                    } else if (dropdownValue == S.current.cars) {
+                      dropdownValue = 'line';
                       await read.searchService(
-                        _selectedValue!,
+                        dropdownValue!,
                         _textController.text,
                         context,
                       );
-                    } else if (_selectedValue == S.current.professions) {
-                      _selectedValue = 'professions';
+                    } else if (dropdownValue == S.current.professions) {
+                      dropdownValue = 'professions';
                       read.searchService(
-                        _selectedValue!,
+                        dropdownValue!,
                         _textController.text,
                         context,
                       );
-                    } else if (_selectedValue == S.current.internal_transfer) {
-                      _selectedValue = 'Satota';
+                    } else if (dropdownValue == S.current.internal_transfer) {
+                      dropdownValue = 'Satota';
                       read.searchService(
-                        _selectedValue!,
+                        dropdownValue!,
                         _textController.text,
                         context,
                       );
@@ -204,9 +196,86 @@ class _CustomDialogState extends State<CustomDialog> {
     );
   }
 
-  // @override
-  // void dispose() {
-  //   _textController.dispose();
-  //   super.dispose();
-  // }
+
+}
+
+
+class CustomDropdownMenu extends StatefulWidget {
+  final List<String> items;
+  final String selectedItem;
+  final Function(String) onChanged;
+
+  const CustomDropdownMenu({
+    Key? key,
+    required this.items,
+    required this.selectedItem,
+    required this.onChanged,
+  }) : super(key: key);
+
+  @override
+  _CustomDropdownMenuState createState() => _CustomDropdownMenuState();
+}
+
+class _CustomDropdownMenuState extends State<CustomDropdownMenu> {
+  late String currentSelectedItem;
+
+  @override
+  void initState() {
+    super.initState();
+    currentSelectedItem = widget.selectedItem;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => _showDropdownMenu(context),
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey),
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(currentSelectedItem),
+            Icon(Icons.arrow_drop_down),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _showDropdownMenu(BuildContext context) async {
+    final selectedItem = await showModalBottomSheet<String>(
+      context: context,
+      builder: (context) {
+        return _buildDropdownMenu();
+      },
+    );
+
+    if (selectedItem != null) {
+      setState(() {
+        currentSelectedItem = selectedItem;
+        widget.onChanged(selectedItem);
+      });
+    }
+  }
+
+  Widget _buildDropdownMenu() {
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 10.0),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: widget.items.map((item) {
+          return ListTile(
+            title: Text(item),
+            onTap: () {
+              Navigator.pop(context, item);
+            },
+          );
+        }).toList(),
+      ),
+    );
+  }
 }

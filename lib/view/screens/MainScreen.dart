@@ -5,9 +5,11 @@ import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
 import 'package:Al_Zab_township_guide/controller/provider/BloodController/MainController.dart';
+import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
+import 'package:Al_Zab_township_guide/view/ThemeApp/app_theme.dart';
 import 'package:Al_Zab_township_guide/view/widget/Drawer/CustomDrawer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -28,6 +30,8 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   void initState() {
+    // TODO: implement initState
+    super.initState();
     if (shared!.getBool('tutorial') == null) {
       createTutorial();
       addItem();
@@ -36,10 +40,13 @@ class _MainScreenState extends State<MainScreen> {
         showTutorial,
       );
     }
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
 
     checkUpdate(context);
-
-    super.initState();
   }
 
   Future<void> checkUpdate(BuildContext context) async {
@@ -103,6 +110,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     final read = context.read<MainController>();
+    final readSerach = context.watch<Providers>();
 
     return Scaffold(
       key: _scaffoldKey,
@@ -110,8 +118,9 @@ class _MainScreenState extends State<MainScreen> {
       extendBodyBehindAppBar: true,
       extendBody: true,
       backgroundColor: ColorUsed.PrimaryBackground,
-      resizeToAvoidBottomInset: false,
-      appBar:  AppBar(
+      resizeToAvoidBottomInset: true,
+      appBar: AppBar(
+        title: readSerach.title,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(15),
@@ -131,9 +140,22 @@ class _MainScreenState extends State<MainScreen> {
         backgroundColor: ColorUsed.primary,
         elevation: 5,
         toolbarHeight: getheight(10),
-      
+        actions: [
+          Consumer<Providers>(
+            builder: (context, value, child) =>
+             IconButton(
+              icon: readSerach.actionsicon,
+              onPressed: () {
+                readSerach.changewidget('titles', TextStyle(
+                  fontSize: setFontSize(14),
+                  fontWeight: FontWeight.bold,
+                  color: AppTheme.notWhite,
+                ));
+              },
+            ),
+          ),
+        ],
       ),
-      
       bottomNavigationBar: Container(
         margin: EdgeInsets.symmetric(
           horizontal: getWidth(2),
@@ -187,7 +209,8 @@ class _MainScreenState extends State<MainScreen> {
           ),
         ),
       ),
-       body: SingleChildScrollView(child: SizedBox(
+      body: SingleChildScrollView(
+          child: SizedBox(
         height: getheight(100),
         width: getWidth(100),
         child: context.watch<MainController>().bodys[read.index],

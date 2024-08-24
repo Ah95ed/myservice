@@ -17,6 +17,9 @@ import 'package:Al_Zab_township_guide/view/routing/routing.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
 import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/MyCustomSplashScreen.dart';
+import 'package:Al_Zab_township_guide/view/screens/OTPScreenNumber/OTPScreenNumber.dart';
+import 'package:device_preview/device_preview.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
@@ -70,7 +73,7 @@ void main() async {
             lazy: true,
           ),
         ],
-        child: MyApp(),
+        child: const MyApp(),
         // child: DevicePreview(
         //   enabled: !kReleaseMode,
         //   builder: (context) =>  MyApp(),
@@ -83,12 +86,12 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
+ const MyApp({super.key});
   static final GlobalKey<NavigatorState> navigatorKey =
       GlobalKey<NavigatorState>();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context)  {
       // update(context);
     return Consumer<LanguageController>(
       builder: (context, v, child) {
@@ -117,7 +120,7 @@ class MyApp extends StatelessWidget {
             useMaterial3: true,
           ),
           // home: ShowDonors(),
-          home: shared!.getBool('spalsh') == null
+          home:  shared!.getBool('spalsh') == null
               ? MyCustomSplashScreen()
               : MainScreen(),
         );

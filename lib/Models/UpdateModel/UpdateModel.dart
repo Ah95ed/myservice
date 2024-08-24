@@ -12,7 +12,7 @@ import 'package:provider/provider.dart';
 
 class UpdateModel {
   String? name, number;
-  String? typeService, DocumentID;
+  String? typeService;
   Client? client;
   DatabaseReference? _databaseRef;
   UpdateModel() {
@@ -32,11 +32,12 @@ class UpdateModel {
         await FirebaseFirestore.instance.collection(selectedValue!);
     querySnapshot.where('number', isEqualTo: n).get().then(
       (value) async {
-        value.docs.map((v) {
+        value.docs.map((v) async {
           if (v.exists) {
             Navigator.of(ctx).pop();
-            DocumentID = v.id;
-            typeService = selectedValue;
+
+            shared!.setString('collection', selectedValue);
+            await shared!.setString('DocumentID', v.id);
             sendSMS(
               ctx,
               n,
@@ -84,12 +85,14 @@ class UpdateModel {
       CollectionReference querySnapshot =
           await FirebaseFirestore.instance.collection(e);
       querySnapshot.get().then(
-        (r) {
+        (r) async {
           for (var element in r.docs) {
             if (n == element.get('number')) {
-              typeService = e;
-              DocumentID = element.id;
-              sendSMS(ctx, n);
+              await shared!.setString('collection', e);
+              await shared!.setString('DocumentID', element.id);
+
+              await sendSMS(ctx, n);
+
               break;
             }
           }
@@ -108,19 +111,19 @@ class UpdateModel {
       userId: ID.unique(),
       phone: '+964$num',
     );
+    Navigator.pop(c);
     await shared!.setString('userId', token.userId);
     await shared!.setString('numberDelete', number);
-    c.read<Providers>().managerScreen(
-          OTPScreenNumber.Route,
-          c,
-        );
+    Provider.of<Providers>(c, listen: false)
+        .managerScreen(OTPScreenNumber.Route, c);
   }
 
+  String? Collection, DocumentID;
   Future<void> deleteDataFromRealtimeAndFireStore(BuildContext c) async {
-    await Future.wait([
-      deletefromrealTime(c),
-      deleteFromFirStore(c),
-    ]);
+    Collection = await shared!.getString('collection');
+    DocumentID = await shared!.getString('DocumentID');
+   await deleteFromFirStore(c);
+   await deletefromrealTime(c);
     ScaffoldMessenger.of(c).showSnackBar(
       SnackBar(
         content: Text(
@@ -137,13 +140,22 @@ class UpdateModel {
         .child(shared!.getString('numberDelete')!)
         .remove()
         .then(
-          (t) {},
+      (t) {
+        Navigator.of(c).pop();
+        ScaffoldMessenger.of(c).showSnackBar(
+          SnackBar(
+            content: Text(
+              Translation[Language.done],
+            ),
+          ),
         );
+      },
+    );
   }
 
   Future<void> deleteFromFirStore(BuildContext c) async {
     await FirebaseFirestore.instance
-        .collection(typeService!)
+        .collection(Collection!)
         .doc(DocumentID)
         .delete()
         .then((v) {

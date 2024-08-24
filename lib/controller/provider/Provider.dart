@@ -1,8 +1,8 @@
-import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
 import 'package:Al_Zab_township_guide/Helper/Constant/Constant.dart';
+import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
-import 'package:Al_Zab_township_guide/view/screens/OTPScreenEmail.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/app_theme.dart';
+import 'package:Al_Zab_township_guide/view/screens/OTPScreenEmail.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_otp/email_otp.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +17,11 @@ class Providers with ChangeNotifier {
     '',
     style: TextStyle(color: AppTheme.notWhite),
   );
-  Icon actionsicon = const Icon(Icons.search);
+  Icon actionsicon = const Icon(
+    Icons.search,
+    color: AppTheme.notWhite,
+    size: 22.0,
+  );
 
   final TextEditingController number = TextEditingController();
 
@@ -26,7 +30,50 @@ class Providers with ChangeNotifier {
     // TODO: implement dispose
     super.dispose();
     title = const Text('');
-    actionsicon = const Icon(Icons.search);
+    actionsicon = const Icon(
+      Icons.search,
+      color: AppTheme.notWhite,
+      size: 22.0,
+    );
+    notifyListeners();
+  }
+
+  void changewidget(String titles, TextStyle style) {
+    number.text = "";
+    if (actionsicon.icon == Icons.search) {
+      save = s;
+      actionsicon = const Icon(
+        Icons.close,
+        color: AppTheme.notWhite,
+        size: 22.0,
+      );
+      title = TextField(
+        controller: number,
+        keyboardType: TextInputType.text,
+        style: TextStyle(
+            fontSize: setFontSize(14),
+            fontWeight: FontWeight.bold,
+            color: AppTheme.notWhite),
+        textAlign: TextAlign.start,
+        onChanged: (value) {
+          searchName(value);
+        },
+      );
+    } else {
+      s = save;
+      save = [];
+      search = [];
+      number.text = "";
+      actionsicon = const Icon(
+        Icons.search,
+        color: AppTheme.notWhite,
+        size: 22.0,
+      );
+      title = Text(
+        titles,
+        style: style,
+      );
+    }
     notifyListeners();
   }
 
@@ -64,37 +111,6 @@ class Providers with ChangeNotifier {
     return isRegister;
   }
 
-  void changewidget(String titles, TextStyle style) {
-    number.text = "";
-    if (actionsicon.icon == Icons.search) {
-      save = s;
-      actionsicon = const Icon(Icons.close);
-      title = TextField(
-        controller: number,
-        keyboardType: TextInputType.text,
-        style: TextStyle(
-            fontSize: setFontSize(14),
-            fontWeight: FontWeight.bold,
-            color: AppTheme.notWhite),
-        textAlign: TextAlign.start,
-        onChanged: (value) {
-          searchName(value);
-        },
-      );
-    } else {
-      s = save;
-      save = [];
-      search = [];
-      number.text = "";
-      actionsicon = const Icon(Icons.search);
-      title = Text(
-        titles,
-        style: style,
-      );
-    }
-    notifyListeners();
-  }
-
   Future<void> searchName(String? name) async {
     if (name == null) return;
 
@@ -114,12 +130,9 @@ class Providers with ChangeNotifier {
     final collectionRef = firestoreInstance.collection(collection);
     final querySnapshot = await collectionRef.get();
     s = querySnapshot.docs.map((e) {
-      
-            
-
       return e;
     }).toList();
-  
+
     notifyListeners();
   }
 
