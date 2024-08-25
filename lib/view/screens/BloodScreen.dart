@@ -1,26 +1,43 @@
-import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
-import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/Helper/Constant/Constant.dart';
-import 'package:Al_Zab_township_guide/view/screens/ShowDonors.dart';
-import 'package:Al_Zab_township_guide/view/widget/ButtonSelect.dart';
+import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
+import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
+import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
+import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/app_theme.dart';
+import 'package:Al_Zab_township_guide/view/screens/ShowDonors.dart';
+import 'package:Al_Zab_township_guide/view/widget/ButtonSelect.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class BloodScreen extends StatelessWidget {
+class BloodScreen extends StatefulWidget {
   static const ROUTE = "BloodScreen";
   BloodScreen({super.key});
 
   @override
+  State<BloodScreen> createState() => _BloodScreenState();
+}
+class _BloodScreenState extends State<BloodScreen> {
+
+  @override
   Widget build(BuildContext context) {
-    final read = context.read<Providers>();
+    final read = context.watch<Providers>();
+    read.title = Text(
+      Translation[Language.selectType],
+      style: TextStyle(
+        color: AppTheme.notWhite,
+        fontSize: setFontSize(16),
+        fontWeight: FontWeight.bold,
+      ),
+    );
+    read.actionsicon = const Icon(
+      null,
+    );
     return Scaffold(
       extendBodyBehindAppBar: true,
       extendBody: true,
       backgroundColor: AppTheme.nearlyWhite,
       resizeToAvoidBottomInset: true,
-    
       body: Container(
         decoration: BoxDecoration(
           border: Border.all(
@@ -55,7 +72,7 @@ class BloodScreen extends StatelessWidget {
                         object: DataSend(Constant.A_Plus));
                   },
                 ),
-                 SizedBox(
+                SizedBox(
                   width: getWidth(4),
                 ),
                 ButtonSelect(
@@ -76,7 +93,7 @@ class BloodScreen extends StatelessWidget {
                         object: DataSend(Constant.B_Plus));
                   },
                 ),
-                 SizedBox(
+                SizedBox(
                   width: getWidth(4),
                 ),
                 ButtonSelect(
@@ -97,7 +114,7 @@ class BloodScreen extends StatelessWidget {
                         object: DataSend(Constant.O_Plus));
                   },
                 ),
-                 SizedBox(
+                SizedBox(
                   width: getWidth(4),
                 ),
                 ButtonSelect(
@@ -118,7 +135,7 @@ class BloodScreen extends StatelessWidget {
                         object: DataSend(Constant.AB_Plus));
                   },
                 ),
-                 SizedBox(
+                SizedBox(
                   width: getWidth(4),
                 ),
                 ButtonSelect(

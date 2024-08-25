@@ -146,7 +146,7 @@ class _MainScreenState extends State<MainScreen> {
              IconButton(
               icon: readSerach.actionsicon,
               onPressed: () {
-                readSerach.changewidget('titles', TextStyle(
+                readSerach.changewidget(TextStyle(
                   fontSize: setFontSize(14),
                   fontWeight: FontWeight.bold,
                   color: AppTheme.notWhite,
@@ -173,9 +173,9 @@ class _MainScreenState extends State<MainScreen> {
             // backgroundColor: Colors.transparent,
             selectedItemColor: ColorUsed.second,
             unselectedItemColor: Colors.black,
-            currentIndex: read.index,
+            currentIndex: readSerach.index,
             onTap: (index) {
-              read.changeSelect(index);
+              readSerach.changeSelect(index);
             },
             items: [
               BottomNavigationBarItem(
@@ -213,7 +213,7 @@ class _MainScreenState extends State<MainScreen> {
           child: SizedBox(
         height: getheight(100),
         width: getWidth(100),
-        child: context.watch<MainController>().bodys[read.index],
+        child: context.watch<Providers>().bodys[readSerach.index],
       )),
     );
   }

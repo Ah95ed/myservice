@@ -197,7 +197,9 @@ class _OTPScreenNumberState extends State<OTPScreenNumber> {
                                       fontSize: setFontSize(14)),
                                 ),
                               ),
-                              Spacer(),
+                              SizedBox(
+                                width:getWidth(8),
+                              ),
                               ElevatedButton(
                                 autofocus: true,
                                 style: ElevatedButton.styleFrom(

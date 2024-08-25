@@ -1,8 +1,15 @@
 import 'package:Al_Zab_township_guide/Helper/Constant/Constant.dart';
+import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
+import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/app_theme.dart';
+import 'package:Al_Zab_township_guide/view/screens/BloodScreen.dart';
+import 'package:Al_Zab_township_guide/view/screens/DoctorScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/OTPScreenEmail.dart';
+import 'package:Al_Zab_township_guide/view/screens/ProfessionsScreen.dart';
+import 'package:Al_Zab_township_guide/view/screens/SatotaScreen.dart';
+import 'package:Al_Zab_township_guide/view/screens/TheCars.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_otp/email_otp.dart';
 import 'package:flutter/material.dart';
@@ -13,35 +20,66 @@ class Providers with ChangeNotifier {
   List s = [];
   List search = [];
   List save = [];
-  Widget title = const Text(
-    '',
+  Widget title = Text(
+    Translation[Language.selectType],
     style: TextStyle(color: AppTheme.notWhite),
   );
   Icon actionsicon = const Icon(
-    Icons.search,
+    null,
     color: AppTheme.notWhite,
     size: 22.0,
   );
 
   final TextEditingController number = TextEditingController();
+  changewidgetSerach() {
+    if (index == 2) {
+      title = Text(
+        Translation[Language.selectType],
+        style: TextStyle(color: AppTheme.notWhite),
+      );
+      actionsicon = const Icon(
+        null,
+        color: AppTheme.notWhite,
+        size: 22.0,
+      );
+      notifyListeners();
+    }
+  }
 
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    title = const Text('');
-    actionsicon = const Icon(
-      Icons.search,
-      color: AppTheme.notWhite,
-      size: 22.0,
-    );
+    number.dispose();
     notifyListeners();
   }
 
-  void changewidget(String titles, TextStyle style) {
+  int index = 2;
+  int expanded = 1;
+
+  void changeSelect(int vlaue) {
+    index = vlaue;
+    changewidgetSerach();
+    onSelected();
+  }
+
+  void onSelected() {
+    this.expanded = 2;
+    notifyListeners();
+  }
+
+  final bodys = [
+    DoctorScreen(),
+    ProfessionsScreen(),
+    BloodScreen(),
+    TheCars(),
+    SatotaScreen()
+  ];
+
+  void changewidget(TextStyle style) {
     number.text = "";
     if (actionsicon.icon == Icons.search) {
-      save = s;
+      save = List.from(s);
       actionsicon = const Icon(
         Icons.close,
         color: AppTheme.notWhite,
@@ -55,22 +93,37 @@ class Providers with ChangeNotifier {
             fontWeight: FontWeight.bold,
             color: AppTheme.notWhite),
         textAlign: TextAlign.start,
+        onSubmitted: (value) {
+          if (value.isEmpty || value.length == 0) {
+            s = List.from(save);
+            save = [];
+                        notifyListeners();
+
+            return;
+          }
+          searchName(value);
+        },
         onChanged: (value) {
+          if (value.isEmpty || value.length == 0) {
+            s = List.from(save);
+            save = [];
+            notifyListeners();
+            return;
+          }
           searchName(value);
         },
       );
     } else {
-      s = save;
+      s = List.from(save);
       save = [];
       search = [];
-      number.text = "";
       actionsicon = const Icon(
         Icons.search,
         color: AppTheme.notWhite,
         size: 22.0,
       );
       title = Text(
-        titles,
+        '',
         style: style,
       );
     }
@@ -112,10 +165,16 @@ class Providers with ChangeNotifier {
   }
 
   Future<void> searchName(String? name) async {
-    if (name == null) return;
+    if (name == null || name.length == 0 || name == "" || name.isEmpty) {
+      s = save;
+      save = [];
+      search = [];
+
+      // notifyListeners();
+    }
 
     for (var element in s) {
-      if (element['name'].toString().contains(name)) {
+      if (element['name'].toString().contains(name!)) {
         search.add(element);
       }
     }
@@ -126,10 +185,10 @@ class Providers with ChangeNotifier {
 
   Future getData(String collection) async {
     s.clear();
-    FirebaseFirestore firestoreInstance = FirebaseFirestore.instance;
+    FirebaseFirestore firestoreInstance = await FirebaseFirestore.instance;
     final collectionRef = firestoreInstance.collection(collection);
     final querySnapshot = await collectionRef.get();
-    s = querySnapshot.docs.map((e) {
+    s = await querySnapshot.docs.map((e) {
       return e;
     }).toList();
 

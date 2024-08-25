@@ -148,15 +148,15 @@ class Customdrawer extends StatelessWidget {
             thickness: getWidth(0.5),
             color: ColorUsed.DarkGreen,
           ),
-          ListTile(
-            leading: Icon(Icons.settings),
-            title: Text(Translation['settings']),
-            onTap: () {},
-          ),
-          Divider(
-            thickness: getWidth(0.5),
-            color: ColorUsed.DarkGreen,
-          ),
+          // ListTile(
+          //   leading: Icon(Icons.settings),
+          //   title: Text(Translation['settings']),
+          //   onTap: () {},
+          // ),
+          // Divider(
+          //   thickness: getWidth(0.5),
+          //   color: ColorUsed.DarkGreen,
+          // ),
           ListTile(
             leading: Icon(Icons.edit),
             title: Text(
@@ -240,45 +240,33 @@ class Customdrawer extends StatelessWidget {
             thickness: getWidth(0.5),
             color: ColorUsed.DarkGreen,
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(
-              vertical: getheight(2),
-              horizontal: getWidth(8),
-            ),
-            child: ListTile(
-              title: Text(
-                Translation[Language.team_policy],
-                style: TextStyle(
-                  fontSize: setFontSize(10),
-                  fontWeight: FontWeight.w400,
-                  color: ColorUsed.DarkGreen,
-                ),
+          ListTile(
+            title: Text(
+              Translation[Language.team_policy],
+              style: TextStyle(
+                fontSize: setFontSize(10),
+                fontWeight: FontWeight.w400,
+                color: ColorUsed.DarkGreen,
               ),
-              onTap: () {
-                read.launchInBrowser(Uri.parse(Constant.PrivacyPolicy));
-              },
             ),
+            onTap: () {
+              read.launchInBrowser(Uri.parse(Constant.PrivacyPolicy));
+            },
           ),
            Divider(
             thickness: getWidth(0.5),
             color: ColorUsed.DarkGreen,
           ),
-Padding(
-            padding: EdgeInsets.symmetric(
-              vertical: getheight(2),
-              horizontal: getWidth(8),
-            ),
-            child:
-               Text(
-               re,
-                style: TextStyle(
-                  fontSize: setFontSize(10),
-                  fontWeight: FontWeight.w400,
-                  color: ColorUsed.DarkGreen,
+Center(
+  child: Text(
+   Translation[Language.version]+ ':- (${packageInfo!.version}) ' +packageInfo!.buildNumber,
+   style: TextStyle(
+     fontSize: setFontSize(10),
+     fontWeight: FontWeight.w400,
+     color: ColorUsed.DarkGreen,
+   ),
                 ),
-              ),
-             
-          ),
+),
         ],
       ),
     );

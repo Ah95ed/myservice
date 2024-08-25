@@ -1,10 +1,11 @@
-import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
-import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/Helper/Constant/ServiceCollectios.dart';
+import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
+import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/widget/Cards/CardProfessions.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../ThemeApp/app_theme.dart';
 
 class ProfessionsScreen extends StatelessWidget {
@@ -19,7 +20,11 @@ class ProfessionsScreen extends StatelessWidget {
       S.of(context).professions,
       style: const TextStyle(color: AppTheme.notWhite),
     );
-    context.read<Providers>().actionsicon = const Icon(Icons.search);
+    context.read<Providers>().actionsicon = const Icon(
+      Icons.search,
+      color: AppTheme.notWhite,
+      size: 22.0,
+    );
     return Consumer<Providers>(
       builder: (context, value, child) {
         return Scaffold(

@@ -44,6 +44,7 @@ class CardDonors extends StatelessWidget {
             Expanded(
               flex:6,
               child: Column(
+                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                    SizedBox(
                     height: getheight(0.5),

@@ -22,6 +22,7 @@ class CardSatota extends StatelessWidget {
           Expanded(
             flex: 4,
             child: Column(
+               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 MultiText(name, S.of(context).name),
                 SizedBox(

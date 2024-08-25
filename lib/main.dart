@@ -12,14 +12,10 @@ import 'package:Al_Zab_township_guide/controller/provider/OTPEmailProvider/OTPEm
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/controller/provider/ServiceController/ServiceController.dart';
 import 'package:Al_Zab_township_guide/controller/provider/SignupProvider/SignupProvider.dart';
-import 'package:Al_Zab_township_guide/controller/provider/UpdateProvider/UpdateProvider.dart';
 import 'package:Al_Zab_township_guide/view/routing/routing.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
 import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/MyCustomSplashScreen.dart';
-import 'package:Al_Zab_township_guide/view/screens/OTPScreenNumber/OTPScreenNumber.dart';
-import 'package:device_preview/device_preview.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
@@ -64,16 +60,13 @@ void main() async {
             create: (_) => DeveloperController(),
             lazy: true,
           ),
-          ChangeNotifierProvider(
-            create: (_) => Updateprovider(),
-            lazy: true,
-          ),
+        
           ChangeNotifierProvider(
             create: (_) => ServiceController(),
             lazy: true,
           ),
         ],
-        child: const MyApp(),
+        child: const  MyApp(),
         // child: DevicePreview(
         //   enabled: !kReleaseMode,
         //   builder: (context) =>  MyApp(),

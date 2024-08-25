@@ -31,6 +31,7 @@ class CardViewList extends StatelessWidget {
               Expanded(
                 flex: 6,
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     MultiText(name!, Translation[Language.name]),
                     MultiText(presence!,Translation[Language.time]),

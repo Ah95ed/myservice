@@ -40,6 +40,7 @@ flutter:
 
   assets:
     - assets/logo/
+    - shorebird.yaml
 
 flutter_intl:
   enabled: true
