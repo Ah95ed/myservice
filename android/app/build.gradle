@@ -51,6 +51,11 @@ android {
 }
         buildTypes {
            release {
+            
+      minifyEnabled true
+      shrinkResources true
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    
               // TODO: Add your own signing config for the release build.
               // Signing with the debug keys for now,
               // so `flutter run --release` works.
@@ -67,9 +72,18 @@ android {
         minSdk = 23
         targetSdk = 34
         //29 in google play  28 (6.5.0)
-        versionCode = 31
-        versionName = '6.5.2'
+        versionCode = 32
+        versionName = '6.5.3'
+        ndkVersion '27.0.12077973'
+        multiDexEnabled true
+        ndk {
+    //   debugSymbolLevel 'FULL'
+      abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
     }
+    }
+     configurations {
+    compile.exclude group: 'com.google.zxing'
+  }
 
 }// end android
 

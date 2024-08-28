@@ -40,159 +40,163 @@ class _CustomDialogState extends State<CustomDialog> {
   Widget build(BuildContext context) {
     final read = context.read<Updateprovider>();
     final providers = context.read<Providers>();
-    return AlertDialog(
-      title: Text(
-        Translation[Language.edit_Data_and_delete],
-      ),
-      content: Form(
-        key: _formKey,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            CustomDropdownMenu(
-              items: items,
-              selectedItem: Translation[Language.select_service],
-              onChanged: (value) {
-                setState(() {
-                  dropdownValue = value;
-                });
-              },
-            ),
-            SizedBox(height: 16),
-            TextFormField(
-              controller: _textController,
-              keyboardType: TextInputType.phone,
-              decoration: InputDecoration(
-                labelText: S.current.number_phone,
+    return SizedBox(
+      height: getheight(80),
+      child: AlertDialog(
+        title: Text(
+          Translation[Language.edit_Data_and_delete],
+        ),
+        content: Form(
+          
+          key: _formKey,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              CustomDropdownMenu(
+                items: items,
+                selectedItem: Translation[Language.select_service],
+                onChanged: (value) {
+                  setState(() {
+                    dropdownValue = value;
+                  });
+                },
               ),
-              validator: (value) {
-                if (value == null || value.isEmpty || value == '') {
-                  return Translation[Language.fields];
-                }
-                return null;
+              SizedBox(height: 16),
+              TextFormField(
+                controller: _textController,
+                keyboardType: TextInputType.phone,
+                decoration: InputDecoration(
+                  labelText: S.current.number_phone,
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty || value == '') {
+                    return Translation[Language.fields];
+                  }
+                  return null;
+                },
+              ),
+              SizedBox(
+                height: getheight(2.5),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  ElevatedButton(
+                    autofocus: true,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: ColorUsed.second,
+                      foregroundColor: ColorUsed.second,
+                      shadowColor: ColorUsed.second,
+                      elevation: 5,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      side: const BorderSide(
+                        color: ColorUsed.second,
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text(
+                      S.current.cancel,
+                      style: TextStyle(
+                        fontSize: setFontSize(16),
+                        color: AppTheme.notWhite,
+                      ),
+                    ),
+                  ),
+                  ElevatedButton(
+                    autofocus: true,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: ColorUsed.second,
+                      foregroundColor: ColorUsed.second,
+                      shadowColor: ColorUsed.second,
+                      elevation: 5,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      side: const BorderSide(
+                        color: ColorUsed.second,
+                      ),
+                    ),
+                    onPressed: () async {
+                      showCirculerProgress(context);
+                      if (dropdownValue!.contains(Translation[Language.doctor])) {
+                        dropdownValue = 'Doctor';
+                        read.searchService(
+                          dropdownValue!,
+                          _textController.text,
+                          context,
+                        );
+                      } else if (dropdownValue ==
+                          Translation[Language.blood_type]) {
+                        await read.searchTypes(context, _textController.text);
+                        // Navigator.of(context).pop();
+      
+                        // dropdownValue = ServiceCollectios.line.name;
+                      } else if (dropdownValue == S.current.cars) {
+                        dropdownValue = 'line';
+                        await read.searchService(
+                          dropdownValue!,
+                          _textController.text,
+                          context,
+                        );
+                      } else if (dropdownValue == S.current.professions) {
+                        dropdownValue = 'professions';
+                        read.searchService(
+                          dropdownValue!,
+                          _textController.text,
+                          context,
+                        );
+                      } else if (dropdownValue == S.current.internal_transfer) {
+                        dropdownValue = 'Satota';
+                        read.searchService(
+                          dropdownValue!,
+                          _textController.text,
+                          context,
+                        );
+                      }
+                    },
+                    child: Text(
+                      S.current.confirm,
+                      style: TextStyle(
+                        fontSize: setFontSize(16),
+                        color: AppTheme.notWhite,
+                      ),
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
+        ),
+        actions: [
+          Center(
+            child: Text(
+              S.current.go_to_developer_page,
+              style: TextStyle(
+                fontSize: setFontSize(16),
+                color: ColorUsed.DarkGreen,
+              ),
+            ),
+          ),
+          SizedBox(
+            height: getheight(2),
+          ),
+          Center(
+            child: CustomMaterialButton(
+              title: S.current.send_developer,
+              onPressed: () {
+                Navigator.pop(context);
+                providers.managerScreen(MessageDeveloper.Route, context);
+                // Navigator.of(context).pop();
               },
             ),
-            SizedBox(
-              height: getheight(2.5),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                ElevatedButton(
-                  autofocus: true,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: ColorUsed.second,
-                    foregroundColor: ColorUsed.second,
-                    shadowColor: ColorUsed.second,
-                    elevation: 5,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    side: const BorderSide(
-                      color: ColorUsed.second,
-                    ),
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Text(
-                    S.current.cancel,
-                    style: TextStyle(
-                      fontSize: setFontSize(16),
-                      color: AppTheme.notWhite,
-                    ),
-                  ),
-                ),
-                ElevatedButton(
-                  autofocus: true,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: ColorUsed.second,
-                    foregroundColor: ColorUsed.second,
-                    shadowColor: ColorUsed.second,
-                    elevation: 5,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    side: const BorderSide(
-                      color: ColorUsed.second,
-                    ),
-                  ),
-                  onPressed: () async {
-                    showCirculerProgress(context);
-                    if (dropdownValue!.contains(Translation[Language.doctor])) {
-                      dropdownValue = 'Doctor';
-                      read.searchService(
-                        dropdownValue!,
-                        _textController.text,
-                        context,
-                      );
-                    } else if (dropdownValue ==
-                        Translation[Language.blood_type]) {
-                      await read.searchTypes(context, _textController.text);
-                      // Navigator.of(context).pop();
-
-                      // dropdownValue = ServiceCollectios.line.name;
-                    } else if (dropdownValue == S.current.cars) {
-                      dropdownValue = 'line';
-                      await read.searchService(
-                        dropdownValue!,
-                        _textController.text,
-                        context,
-                      );
-                    } else if (dropdownValue == S.current.professions) {
-                      dropdownValue = 'professions';
-                      read.searchService(
-                        dropdownValue!,
-                        _textController.text,
-                        context,
-                      );
-                    } else if (dropdownValue == S.current.internal_transfer) {
-                      dropdownValue = 'Satota';
-                      read.searchService(
-                        dropdownValue!,
-                        _textController.text,
-                        context,
-                      );
-                    }
-                  },
-                  child: Text(
-                    S.current.confirm,
-                    style: TextStyle(
-                      fontSize: setFontSize(16),
-                      color: AppTheme.notWhite,
-                    ),
-                  ),
-                ),
-              ],
-            )
-          ],
-        ),
+          )
+        ],
+        // actionsAlignment: MainAxisAlignment.center,
       ),
-      actions: [
-        Center(
-          child: Text(
-            S.current.go_to_developer_page,
-            style: TextStyle(
-              fontSize: setFontSize(16),
-              color: ColorUsed.DarkGreen,
-            ),
-          ),
-        ),
-        SizedBox(
-          height: getheight(2),
-        ),
-        Center(
-          child: CustomMaterialButton(
-            title: S.current.send_developer,
-            onPressed: () {
-              Navigator.pop(context);
-              providers.managerScreen(MessageDeveloper.Route, context);
-              // Navigator.of(context).pop();
-            },
-          ),
-        )
-      ],
-      // actionsAlignment: MainAxisAlignment.center,
     );
   }
 

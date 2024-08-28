@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:Al_Zab_township_guide/Helper/Constant/Constant.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
@@ -19,7 +21,8 @@ class Providers with ChangeNotifier {
   String? name, email, phone, password;
   List s = [];
   List search = [];
-  List save = [];
+  // List save = [];
+
   Widget title = Text(
     Translation[Language.selectType],
     style: TextStyle(color: AppTheme.notWhite),
@@ -76,10 +79,11 @@ class Providers with ChangeNotifier {
     SatotaScreen()
   ];
 
+  List get data => search.isEmpty ? s : search;
   void changewidget(TextStyle style) {
     number.text = "";
     if (actionsicon.icon == Icons.search) {
-      save = List.from(s);
+      // save = List.from(s);
       actionsicon = const Icon(
         Icons.close,
         color: AppTheme.notWhite,
@@ -93,29 +97,15 @@ class Providers with ChangeNotifier {
             fontWeight: FontWeight.bold,
             color: AppTheme.notWhite),
         textAlign: TextAlign.start,
-        onSubmitted: (value) {
-          if (value.isEmpty || value.length == 0) {
-            s = List.from(save);
-            save = [];
-                        notifyListeners();
-
-            return;
-          }
-          searchName(value);
-        },
+       
         onChanged: (value) {
-          if (value.isEmpty || value.length == 0) {
-            s = List.from(save);
-            save = [];
-            notifyListeners();
-            return;
-          }
+        
           searchName(value);
         },
       );
     } else {
-      s = List.from(save);
-      save = [];
+      // s = List.from(save);
+      // save = [];
       search = [];
       actionsicon = const Icon(
         Icons.search,
@@ -166,20 +156,25 @@ class Providers with ChangeNotifier {
 
   Future<void> searchName(String? name) async {
     if (name == null || name.length == 0 || name == "" || name.isEmpty) {
-      s = save;
-      save = [];
       search = [];
+      // s = save;
+      // save = [];
+      // search = [];
 
-      // notifyListeners();
+      notifyListeners();
+      return;
     }
 
-    for (var element in s) {
-      if (element['name'].toString().contains(name!)) {
-        search.add(element);
-      }
-    }
-    s = search;
-    search = [];
+    search = s.where((e) {
+      return e['name'].contains(name);
+    }).toList();
+    // for (var element in s) {
+    //   if (element['name'].toString().contains(name!)) {
+    //     search.add(element);
+    //   }
+    // }
+    // s = search;
+    // search = [];
     notifyListeners();
   }
 

@@ -30,7 +30,7 @@ class TheCars extends StatelessWidget {
     return Consumer<Providers>(
       builder: (context, value, child) {
         return Scaffold(
-          body: value.s.isEmpty
+          body: value.data.isEmpty
               ? Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -48,14 +48,14 @@ class TheCars extends StatelessWidget {
                   physics: const BouncingScrollPhysics(),
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
-                  itemCount: value.s.length,
+                  itemCount: value.data.length,
                   itemBuilder: (BuildContext context, int index) {
                     return CardCars(
-                      name: value.s[index]['name'],
-                      type: value.s[index]['type'] ?? 'غيرمعرف',
-                      time: value.s[index]['time'],
-                      number: value.s[index]['number'],
-                      from: value.s[index]['from'],
+                      name: value.data[index]['name'],
+                      type: value.data[index]['type'] ?? 'غيرمعرف',
+                      time: value.data[index]['time'],
+                      number: value.data[index]['number'],
+                      from: value.data[index]['from'],
                     );
                   },
                 ),

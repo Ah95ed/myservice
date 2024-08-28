@@ -43,16 +43,15 @@ class ProfessionsScreen extends StatelessWidget {
                   ),
                 )
               : ListView.builder(
-                  itemCount: value.s.length,
+                  itemCount: value.data.length,
                   itemBuilder: (BuildContext context, int index) {
-                    // return const ImageListView(startIndex: 0);
                     return CardProfessions(
-                      name: value.s[index]['name'],
-                      nameProfession: value.s[index]['nameProfession'],
+                      name: value.data[index]['name'],
+                      nameProfession: value.data[index]['nameProfession'],
                       onPressed: () {
                         context
                             .read<Providers>()
-                            .callNumber(value.s[index]['number']);
+                            .callNumber(value.data[index]['number']);
                       },
                     );
                   },

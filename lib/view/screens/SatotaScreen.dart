@@ -30,7 +30,7 @@ class SatotaScreen extends StatelessWidget {
     return Consumer<Providers>(
       builder: (context, value, child) {
         return Scaffold(
-          body: value.s.isEmpty
+          body: value.data.isEmpty
               ? Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -45,14 +45,14 @@ class SatotaScreen extends StatelessWidget {
                   ),
                 )
               : ListView.builder(
-                  itemCount: value.s.length,
+                  itemCount: value.data.length,
                   itemBuilder: (BuildContext context, int index) {
                     return CardSatota(
-                      name: value.s[index]['name'],
-                      location: value.s[index]['location'],
+                      name: value.data[index]['name'],
+                      location: value.data[index]['location'],
                       onPressed: () {
                         value.callNumber(
-                          value.s[index]['number'],
+                          value.data[index]['number'],
                         );
                       },
                     );

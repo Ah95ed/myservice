@@ -33,7 +33,7 @@ class DoctorScreen extends StatelessWidget {
       builder: (context, value, child) {
         return Scaffold(
           drawer: Customdrawer(),
-          body: value.s.isEmpty
+          body: value.data.isEmpty
               ? Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -48,14 +48,14 @@ class DoctorScreen extends StatelessWidget {
                   ),
                 )
               : ListView.builder(
-                  itemCount: value.s.length,
+                  itemCount: value.data.length,
                   itemBuilder: (BuildContext context, int index) {
                     return CardViewList(
-                      name: value.s[index]['name'],
-                      presence: value.s[index]['presence'],
-                      specialization: value.s[index]['specialization'],
-                      number: value.s[index]['number'],
-                      title: value.s[index]['title'],
+                      name: value.data[index]['name'],
+                      presence: value.data[index]['presence'],
+                      specialization: value.data[index]['specialization'],
+                      number: value.data[index]['number'],
+                      title: value.data[index]['title'],
                     );
                   },
                 ),

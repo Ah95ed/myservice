@@ -28,39 +28,42 @@ class Customdrawer extends StatelessWidget {
           Container(
             height: getheight(20),
             color: ColorUsed.primary,
-            padding: EdgeInsets.all(12),
             child: shared!.getString('nameUser') == null
-                ? Text(
-                    S.of(context).more_options,
-                    style: TextStyle(
-                      fontSize: setFontSize(16),
-                      fontWeight: FontWeight.w500,
-                      color: AppTheme.nearlyWhite,
+                ? Center(
+                  child: Text(
+                      S.of(context).more_options,
+                      style: TextStyle(
+                        fontSize: setFontSize(16),
+                        fontWeight: FontWeight.w500,
+                        color: AppTheme.nearlyWhite,
+                      ),
                     ),
-                  )
-                : Column(
-                    children: [
-                      Text(
-                        shared!.getString('nameUser') ?? '',
-                        style: TextStyle(
-                          fontSize: setFontSize(15),
-                          fontWeight: FontWeight.bold,
-                          color: AppTheme.notWhite,
+                )
+                : Center(
+                  child: Column(
+                      children: [
+                        Text(
+                          shared!.getString('nameUser') ?? '',
+                          style: TextStyle(
+                            fontSize: setFontSize(15),
+                            fontWeight: FontWeight.bold,
+                            color: AppTheme.notWhite,
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        height: getheight(0.5),
-                      ),
-                      Text(
-                        shared!.getString('emailUser') ?? '',
-                        style: TextStyle(
-                          fontSize: setFontSize(15),
-                          fontWeight: FontWeight.bold,
-                          color: AppTheme.notWhite,
+                        SizedBox(
+                          height: getheight(0.5),
                         ),
-                      ),
-                    ],
-                  ),
+                        Text(
+                          shared!.getString('emailUser') ?? '',
+                          style: TextStyle(
+                            fontSize: setFontSize(15),
+                            fontWeight: FontWeight.bold,
+                            color: AppTheme.notWhite,
+                          ),
+                        ),
+                      ],
+                    ),
+                ),
           ),
           SizedBox(
             height: getheight(0.2),
@@ -93,7 +96,7 @@ class Customdrawer extends StatelessWidget {
                 shared!.remove('phoneUser');
                 shared!.remove('isRegister');
                 Scaffold.of(context).closeDrawer();
-                // context.read<Providers>().refresh();
+                // read.refresh();
               } else {
                 read.managerScreen(SignupScreen.Route, context);
               }
@@ -140,7 +143,6 @@ class Customdrawer extends StatelessWidget {
               await Share.share(
                 'https://play.google.com/store/apps/details?id=com.Blood.types',
                 subject: 'رابط التطبيق على كوكل بلي',
-                
               );
             },
           ),
@@ -188,7 +190,7 @@ class Customdrawer extends StatelessWidget {
               }
             },
           ),
-           Divider(
+          Divider(
             thickness: getWidth(0.5),
             color: ColorUsed.DarkGreen,
           ),
@@ -203,7 +205,7 @@ class Customdrawer extends StatelessWidget {
               ),
             ),
             onTap: () async {
-             final read = context.read<LanguageController>();
+              final read = context.read<LanguageController>();
               await showDialog(
                 context: context,
                 builder: (context) => AlertDialog(
@@ -241,6 +243,7 @@ class Customdrawer extends StatelessWidget {
             color: ColorUsed.DarkGreen,
           ),
           ListTile(
+            leading: Icon(Icons.privacy_tip),
             title: Text(
               Translation[Language.team_policy],
               style: TextStyle(
@@ -253,20 +256,22 @@ class Customdrawer extends StatelessWidget {
               read.launchInBrowser(Uri.parse(Constant.PrivacyPolicy));
             },
           ),
-           Divider(
-            thickness: getWidth(0.5),
+          Divider(
+            thickness: getWidth(0.1),
             color: ColorUsed.DarkGreen,
           ),
-Center(
-  child: Text(
-   Translation[Language.version]+ ':- (${packageInfo!.version}) ' +packageInfo!.buildNumber,
-   style: TextStyle(
-     fontSize: setFontSize(10),
-     fontWeight: FontWeight.w400,
-     color: ColorUsed.DarkGreen,
-   ),
-                ),
-),
+          Center(
+            child: Text(
+              Translation[Language.version] +
+                  ':- (${packageInfo!.version}) ' +
+                  packageInfo!.buildNumber,
+              style: TextStyle(
+                fontSize: setFontSize(10),
+                fontWeight: FontWeight.w400,
+                color: ColorUsed.DarkGreen,
+              ),
+            ),
+          ),
         ],
       ),
     );

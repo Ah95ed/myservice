@@ -40,14 +40,11 @@ class _MainScreenState extends State<MainScreen> {
         showTutorial,
       );
     }
+    Future.microtask(() async {
+     await checkUpdate(context);
+    });
   }
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-
-    checkUpdate(context);
-  }
 
   Future<void> checkUpdate(BuildContext context) async {
     if (await int.parse(re) > await int.parse(packageInfo!.buildNumber)) {
@@ -109,7 +106,7 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final read = context.read<MainController>();
+    // final read = context.read<MainController>();
     final readSerach = context.watch<Providers>();
 
     return Scaffold(
@@ -142,8 +139,7 @@ class _MainScreenState extends State<MainScreen> {
         toolbarHeight: getheight(10),
         actions: [
           Consumer<Providers>(
-            builder: (context, value, child) =>
-             IconButton(
+            builder: (context, value, child) => IconButton(
               icon: readSerach.actionsicon,
               onPressed: () {
                 readSerach.changewidget(TextStyle(
@@ -265,8 +261,6 @@ class _MainScreenState extends State<MainScreen> {
   GlobalKey taxi = GlobalKey();
 
   GlobalKey stota = GlobalKey();
-
-  GlobalKey lang = GlobalKey();
   GlobalKey menu = GlobalKey();
   addItem() {
     targets.add(
@@ -421,35 +415,7 @@ class _MainScreenState extends State<MainScreen> {
         ],
       ),
     );
-    targets.add(
-      TargetFocus(
-        identify: "keyBottomNavigation4",
-        keyTarget: lang,
-        alignSkip: Alignment.topRight,
-        enableOverlayTab: true,
-        contents: [
-          TargetContent(
-            align: ContentAlign.bottom,
-            builder: (context, controller) {
-              return Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    S.current.desc_lang,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: setFontSize(18),
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              );
-            },
-          ),
-        ],
-      ),
-    );
+   
     targets.add(
       TargetFocus(
         identify: "keyBottomNavigation2",
