@@ -17,8 +17,6 @@ import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
 import 'package:Al_Zab_township_guide/view/routing/routing.dart';
 import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/MyCustomSplashScreen.dart';
-import 'package:device_preview/device_preview.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
@@ -26,9 +24,11 @@ import 'package:provider/provider.dart';
 import 'generated/l10n.dart';
 
 void main() async {
+ 
   await runZonedGuarded<Future<void>>(() async {
     await WidgetsFlutterBinding.ensureInitialized();
     await init();
+
     runApp(
       MultiProvider(
         providers: [
@@ -92,7 +92,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Consumer<LanguageController>(
       builder: (context, v, child) {
         // S.load(
@@ -102,7 +101,7 @@ class MyApp extends StatelessWidget {
         // );
         return MaterialApp(
           navigatorKey: navigatorKey,
-          localizationsDelegates: [
+          localizationsDelegates:  [
             S.delegate,
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,

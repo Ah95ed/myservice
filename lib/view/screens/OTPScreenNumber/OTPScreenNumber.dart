@@ -30,8 +30,13 @@ class _OTPScreenNumberState extends State<OTPScreenNumber> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
     userId = shared!.getString('userId') ?? "a";
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final read = context.read<Updateprovider>();
 
     return Scaffold(
@@ -145,6 +150,21 @@ class _OTPScreenNumberState extends State<OTPScreenNumber> {
                 ),
               ),
               onPressed: () async {
+                if (_textController.text.isEmpty) {
+                  showSnakeBar(
+                    context,
+                    Translation[Language.fields],
+                  );
+                  return;
+                }
+                if (_textController.text.length < 4 ||
+                    _textController.text.length > 4) {
+                  showSnakeBar(
+                    context,
+                    Translation[Language.just4],
+                  );
+                  return;
+                }
                 Client client = await Client();
                 await client
                     .setEndpoint('https://cloud.appwrite.io/v1')
@@ -198,7 +218,7 @@ class _OTPScreenNumberState extends State<OTPScreenNumber> {
                                 ),
                               ),
                               SizedBox(
-                                width:getWidth(8),
+                                width: getWidth(8),
                               ),
                               ElevatedButton(
                                 autofocus: true,

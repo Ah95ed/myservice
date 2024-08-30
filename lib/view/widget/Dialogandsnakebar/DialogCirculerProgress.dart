@@ -28,7 +28,10 @@ showCirculerProgress(BuildContext context) {
   );
 }
 
-Future<void> showSnakeBar(BuildContext context, String message) async {
+Future<void> showSnakeBar(
+  BuildContext context,
+  String message,
+) async {
   await ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
       content: Text(

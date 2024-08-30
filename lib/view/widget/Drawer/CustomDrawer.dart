@@ -31,7 +31,7 @@ class Customdrawer extends StatelessWidget {
             child: shared!.getString('nameUser') == null
                 ? Center(
                   child: Text(
-                      S.of(context).more_options,
+                      Translation[Language.more_options],
                       style: TextStyle(
                         fontSize: setFontSize(16),
                         fontWeight: FontWeight.w500,

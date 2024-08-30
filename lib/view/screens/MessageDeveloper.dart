@@ -58,6 +58,10 @@ class _MessageDeveloperState extends State<MessageDeveloper>
   @override
   void dispose() {
     _controller.dispose();
+    name.dispose();
+    number.dispose();
+    type.dispose();
+    description.dispose();
     super.dispose();
   }
 
@@ -211,7 +215,7 @@ class _MessageDeveloperState extends State<MessageDeveloper>
                 ),
               ),
               Padding(
-                padding:  EdgeInsets.symmetric(horizontal: getWidth(2)),
+                padding: EdgeInsets.symmetric(horizontal: getWidth(2)),
                 child: Text(
                   S.current.if_you_need_send_me,
                   style: TextStyle(

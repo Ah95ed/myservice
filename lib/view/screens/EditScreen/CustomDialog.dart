@@ -26,7 +26,7 @@ class _CustomDialogState extends State<CustomDialog> {
     Translation[Language.cars],
     Translation[Language.internal_transfer],
   ];
-  
+
   TextEditingController _textController = TextEditingController();
   @override
   void dispose() {
@@ -35,7 +35,7 @@ class _CustomDialogState extends State<CustomDialog> {
     _textController.dispose();
   }
 
-   String? dropdownValue;
+  String? dropdownValue;
   @override
   Widget build(BuildContext context) {
     final read = context.read<Updateprovider>();
@@ -47,7 +47,6 @@ class _CustomDialogState extends State<CustomDialog> {
           Translation[Language.edit_Data_and_delete],
         ),
         content: Form(
-          
           key: _formKey,
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -96,7 +95,7 @@ class _CustomDialogState extends State<CustomDialog> {
                       ),
                     ),
                     onPressed: () {
-                      Navigator.of(context).pop();
+                      Navigator.pop(context);
                     },
                     child: Text(
                       S.current.cancel,
@@ -121,8 +120,16 @@ class _CustomDialogState extends State<CustomDialog> {
                       ),
                     ),
                     onPressed: () async {
+                      if (_textController.text.isEmpty) {
+                        showSnakeBar(
+                          context,
+                          Translation[Language.fields],
+                        );
+                        return;
+                      }
                       showCirculerProgress(context);
-                      if (dropdownValue!.contains(Translation[Language.doctor])) {
+                      if (dropdownValue!
+                          .contains(Translation[Language.doctor])) {
                         dropdownValue = 'Doctor';
                         read.searchService(
                           dropdownValue!,
@@ -133,7 +140,7 @@ class _CustomDialogState extends State<CustomDialog> {
                           Translation[Language.blood_type]) {
                         await read.searchTypes(context, _textController.text);
                         // Navigator.of(context).pop();
-      
+
                         // dropdownValue = ServiceCollectios.line.name;
                       } else if (dropdownValue == S.current.cars) {
                         dropdownValue = 'line';
@@ -199,10 +206,7 @@ class _CustomDialogState extends State<CustomDialog> {
       ),
     );
   }
-
-
 }
-
 
 class CustomDropdownMenu extends StatefulWidget {
   final List<String> items;

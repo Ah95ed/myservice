@@ -1,6 +1,7 @@
 import 'package:Al_Zab_township_guide/Helper/Service/Language/keyabstract.dart';
 
 class Language implements KeyAbstract {
+  static const String just4 = "just4";
   static const String version = "version";
   static const String location = "locaton";
   static const String locationWork = "locationWork";
@@ -125,6 +126,7 @@ class Language implements KeyAbstract {
   @override
   static Map<String, Map<String, String>> keyMap = {
     'ar': {
+      just4 : "يجب ان تكون اربعة ارقام",
       version : "الاصدار",
       share_app: "مشاركة التطبيق",
       addSatota: "أضافة ستوتة",
@@ -242,6 +244,7 @@ class Language implements KeyAbstract {
       error_password: "كلمة المرور غير صحيحة",
     },
     "en": {
+      just4 : 'It should be four digits.',
       version : "Version",
       share_app: "Share App",
       addSatota: 'Add Satota',
