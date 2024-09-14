@@ -24,65 +24,69 @@ import 'package:provider/provider.dart';
 import 'generated/l10n.dart';
 
 void main() async {
- 
-  await runZonedGuarded<Future<void>>(() async {
-    await WidgetsFlutterBinding.ensureInitialized();
-    await init();
-
-    runApp(
-      MultiProvider(
-        providers: [
-          ChangeNotifierProvider(
-            create: (_) => Providers(),
-            lazy: true,
-          ),
-          ChangeNotifierProvider(
-            create: (_) => LoginProvider(),
-            lazy: true,
-          ),
-          ChangeNotifierProvider(
-            create: (_) => SignupProvider(),
-            lazy: true,
-          ),
-          ChangeNotifierProvider(
-            create: (_) => DoctorProvider(),
-            lazy: true,
-          ),
-          ChangeNotifierProvider(
-            create: (_) => MainController(),
-            lazy: true,
-          ),
-          ChangeNotifierProvider(
-            create: (_) => LanguageController(),
-            lazy: true,
-          ),
-          ChangeNotifierProvider(
-            create: (_) => OTPEmailProvider(),
-            lazy: true,
-          ),
-          ChangeNotifierProvider(
-            create: (_) => DeveloperController(),
-            lazy: true,
-          ),
-          ChangeNotifierProvider(
-            create: (_) => ServiceController(),
-            lazy: true,
-          ),
-          ChangeNotifierProvider(
-            create: (_) => Updateprovider(),
-            lazy: true,
-          )
-        ],
-        child: const MyApp(),
-        // child: DevicePreview(
-        //   enabled: !kReleaseMode,
-        //   builder: (context) =>  MyApp(),
-        // ),
-      ),
-    );
-  }, (error, stackTrace) {
-    Logger.logger('error: $error || stackTrace: $stackTrace');
-  });
+  await runZonedGuarded<Future<void>>(
+    () async {
+      await WidgetsFlutterBinding.ensureInitialized();
+      await init();
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
+        initData();
+      });
+      runApp(
+        MultiProvider(
+          providers: [
+            ChangeNotifierProvider(
+              create: (_) => Providers(),
+              lazy: true,
+            ),
+            ChangeNotifierProvider(
+              create: (_) => LoginProvider(),
+              lazy: true,
+            ),
+            ChangeNotifierProvider(
+              create: (_) => SignupProvider(),
+              lazy: true,
+            ),
+            ChangeNotifierProvider(
+              create: (_) => DoctorProvider(),
+              lazy: true,
+            ),
+            ChangeNotifierProvider(
+              create: (_) => MainController(),
+              lazy: true,
+            ),
+            ChangeNotifierProvider(
+              create: (_) => LanguageController(),
+              lazy: true,
+            ),
+            ChangeNotifierProvider(
+              create: (_) => OTPEmailProvider(),
+              lazy: true,
+            ),
+            ChangeNotifierProvider(
+              create: (_) => DeveloperController(),
+              lazy: true,
+            ),
+            ChangeNotifierProvider(
+              create: (_) => ServiceController(),
+              lazy: true,
+            ),
+            ChangeNotifierProvider(
+              create: (_) => Updateprovider(),
+              lazy: true,
+            )
+          ],
+          child: const MyApp(),
+          // child: DevicePreview(
+          //   enabled: !kReleaseMode,
+          //   builder: (context) =>  MyApp(),
+          // ),
+        ),
+      );
+    },
+    (error, stackTrace) {
+      Logger.logger('error: $error || stackTrace: $stackTrace');
+    },
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -101,7 +105,7 @@ class MyApp extends StatelessWidget {
         // );
         return MaterialApp(
           navigatorKey: navigatorKey,
-          localizationsDelegates:  [
+          localizationsDelegates: [
             S.delegate,
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,

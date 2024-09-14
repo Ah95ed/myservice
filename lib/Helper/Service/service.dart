@@ -8,20 +8,21 @@ import 'package:shared_preferences/shared_preferences.dart';
 SharedPreferences? shared;
 PackageInfo? packageInfo;
 late FirebaseRemoteConfig remoteConfig;
-late String re;
-
+late String re = '0';
 
 Future<void> init() async {
+  shared = await SharedPreferences.getInstance();
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  
-  shared = await SharedPreferences.getInstance();
+
   await initLang(shared!.getString('lang') ?? "ar");
+  packageInfo = await PackageInfo.fromPlatform();
+}
+initData() async {
   remoteConfig = await FirebaseRemoteConfig.instance;
 
-  await remoteConfig.fetchAndActivate();
-  re = await remoteConfig.getString('update');
-
-  packageInfo = await PackageInfo.fromPlatform();
+    await remoteConfig.fetchAndActivate();
+    re = await remoteConfig.getString('update');
 }

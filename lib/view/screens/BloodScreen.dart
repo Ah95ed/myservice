@@ -17,11 +17,14 @@ class BloodScreen extends StatefulWidget {
   @override
   State<BloodScreen> createState() => _BloodScreenState();
 }
-class _BloodScreenState extends State<BloodScreen> {
 
+class _BloodScreenState extends State<BloodScreen> {
   @override
   Widget build(BuildContext context) {
     final read = context.watch<Providers>();
+    // Logger.logger('message1 ${MediaQuery.of(context).size.height}');
+    // Logger.logger('message2 ${MediaQuery.of(context).size.width}');
+
     read.title = Text(
       Translation[Language.selectType],
       style: TextStyle(
@@ -39,6 +42,8 @@ class _BloodScreenState extends State<BloodScreen> {
       backgroundColor: AppTheme.nearlyWhite,
       resizeToAvoidBottomInset: true,
       body: Container(
+        height: getheight(100),
+        width: getWidth(100),
         decoration: BoxDecoration(
           border: Border.all(
             width: 3.0,

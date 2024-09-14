@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:ui';
 
 import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
@@ -26,26 +27,19 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   late TutorialCoachMark tutorialCoachMark;
-
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    checkUpdate(context);
     if (shared!.getBool('tutorial') == null) {
       createTutorial();
       addItem();
-      Future.delayed(
-        Duration(milliseconds: 1000),
-        showTutorial,
-      );
+      showTutorial();
+
     }
-    Future.microtask(() async {
-     await checkUpdate(context);
-    });
   }
 
-
-  Future<void> checkUpdate(BuildContext context) async {
+  FutureOr<void> checkUpdate(BuildContext context) async {
     if (await int.parse(re) > await int.parse(packageInfo!.buildNumber)) {
       showDialog(
         context: context,
@@ -105,9 +99,7 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // final read = context.read<MainController>();
     final readSerach = context.watch<Providers>();
-
     return Scaffold(
       key: _scaffoldKey,
       drawer: const Customdrawer(),
@@ -414,7 +406,7 @@ class _MainScreenState extends State<MainScreen> {
         ],
       ),
     );
-   
+
     targets.add(
       TargetFocus(
         identify: "keyBottomNavigation2",

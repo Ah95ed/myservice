@@ -21,5 +21,5 @@ double getWidth(double width) {
 
 /// Calculates the sp (Scalable Pixel) depending on the device's screen size
 double setFontSize(double fontSize) {
-  return (MediaQuery.of(MyApp.getContext()!).size.width / 3) * fontSize / 100;
+  return (screenWidth / 3) * fontSize / 100;
 }
