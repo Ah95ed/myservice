@@ -21,7 +21,7 @@ class OTPScreenNumber extends StatefulWidget {
 class _OTPScreenNumberState extends State<OTPScreenNumber> {
   TextEditingController _textController = TextEditingController();
 
-  late String userId;
+   String? userId;
   @override
   void dispose() {
     // TODO: implement dispose
@@ -32,7 +32,7 @@ class _OTPScreenNumberState extends State<OTPScreenNumber> {
   @override
   void initState() {
     super.initState();
-    userId = shared!.getString('userId') ?? "a";
+    userId = shared!.getString('userId');
   }
 
   @override
@@ -157,14 +157,13 @@ class _OTPScreenNumberState extends State<OTPScreenNumber> {
                   );
                   return;
                 }
-                if (_textController.text.length < 4 ||
-                    _textController.text.length > 4) {
-                  showSnakeBar(
-                    context,
-                    Translation[Language.just4],
-                  );
-                  return;
-                }
+                // if (_textController.text.length < 6) {
+                //   showSnakeBar(
+                //     context,
+                //     Translation[Language.just4],
+                //   );
+                //   return;
+                // }
                 Client client = await Client();
                 await client
                     .setEndpoint('https://cloud.appwrite.io/v1')
@@ -174,7 +173,7 @@ class _OTPScreenNumberState extends State<OTPScreenNumber> {
 
                 await account
                     .createSession(
-                  userId: userId,
+                  userId: userId!,
                   secret: _textController.text,
                 )
                     .then(

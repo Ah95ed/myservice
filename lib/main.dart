@@ -15,6 +15,7 @@ import 'package:Al_Zab_township_guide/controller/provider/SignupProvider/SignupP
 import 'package:Al_Zab_township_guide/controller/provider/UpdateProvider/UpdateProvider.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
 import 'package:Al_Zab_township_guide/view/routing/routing.dart';
+import 'package:Al_Zab_township_guide/view/screens/ForgetPassword/ForgetPassword.dart';
 import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/MyCustomSplashScreen.dart';
 import 'package:flutter/material.dart';
@@ -125,7 +126,7 @@ class MyApp extends StatelessWidget {
           // home: ShowDonors(),
           home: shared!.getBool('spalsh') == null
               ? MyCustomSplashScreen()
-              : MainScreen(),
+              : ForgetPassword(),
         );
       },
     );
