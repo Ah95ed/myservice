@@ -4,6 +4,8 @@ import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
+import 'package:Al_Zab_township_guide/controller/ForgetPassword/ForgetPasswordProvider.dart';
+import 'package:Al_Zab_township_guide/controller/SignupProvider/SignupProvider.dart';
 import 'package:Al_Zab_township_guide/controller/provider/BloodController/MainController.dart';
 import 'package:Al_Zab_township_guide/controller/provider/DeveloperController/DeveloperController.dart';
 import 'package:Al_Zab_township_guide/controller/provider/DoctorProvider/DoctorProvider.dart';
@@ -11,13 +13,12 @@ import 'package:Al_Zab_township_guide/controller/provider/LoginProvider/Loginpro
 import 'package:Al_Zab_township_guide/controller/provider/OTPEmailProvider/OTPEmailProvider.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/controller/provider/ServiceController/ServiceController.dart';
-import 'package:Al_Zab_township_guide/controller/provider/SignupProvider/SignupProvider.dart';
 import 'package:Al_Zab_township_guide/controller/provider/UpdateProvider/UpdateProvider.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
 import 'package:Al_Zab_township_guide/view/routing/routing.dart';
-import 'package:Al_Zab_township_guide/view/screens/ForgetPassword/ForgetPassword.dart';
 import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/MyCustomSplashScreen.dart';
+import 'package:Al_Zab_township_guide/view/screens/showData/ShowDateTele.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
@@ -74,7 +75,11 @@ void main() async {
             ChangeNotifierProvider(
               create: (_) => Updateprovider(),
               lazy: true,
-            )
+            ),
+            ChangeNotifierProvider(
+              create: (_) => ForgetPasswordProvider(),
+              lazy: true,
+            ),
           ],
           child: const MyApp(),
           // child: DevicePreview(
@@ -99,11 +104,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<LanguageController>(
       builder: (context, v, child) {
-        // S.load(
-        //   Locale.fromSubtags(
-        //     languageCode: shared!.getString('lang') ?? 'ar',
-        //   ),
-        // );
         return MaterialApp(
           navigatorKey: navigatorKey,
           localizationsDelegates: [
@@ -123,10 +123,9 @@ class MyApp extends StatelessWidget {
             ),
             useMaterial3: true,
           ),
-          // home: ShowDonors(),
           home: shared!.getBool('spalsh') == null
               ? MyCustomSplashScreen()
-              : ForgetPassword(),
+              : ShowDataTele(),
         );
       },
     );

@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
@@ -66,14 +67,20 @@ class SignupModel {
   set token(String? value) => _token = value;
   SharedModel? sharesModel;
 
-  Future<void> sendCodeEmail() async {
+  Future<bool> sendCodeEmail(BuildContext context, String email) async {
     if (await EmailOTP.sendOTP(
-      email: email!,
+      email: email,
     )) {
+      Logger.logger('message sendCodeEmail -> ok');
       read!.managerScreen(OtpScreenEmail.Route, _ctx!);
-      Navigator.pop(_ctx!);
-      return;
+      Navigator.pop(context);
+      
+      return true;
     } else {
+      Logger.logger('message sendCodeEmail -> error');
+      Logger.logger('message sendCodeEmail -> Field');
+      Navigator.pop(context);
+      
       ScaffoldMessenger.of(_ctx!).showSnackBar(
         SnackBar(
           content: Text(
@@ -81,6 +88,7 @@ class SignupModel {
           ),
         ),
       );
+      return false;
     }
   }
 
@@ -116,11 +124,11 @@ class SignupModel {
       'password': _password,
       // 'token': _token,
     }).then((value) async {
-            Navigator.pop(ctx);
-    await  shared!.setString('nameUser', _name!);
-     await shared!.setString('emailUser', _email!);
-     await shared!.setString('phoneUser', _phone!);
-     await shared!.setBool('isRegister', true);
+      Navigator.pop(ctx);
+      await shared!.setString('nameUser', _name!);
+      await shared!.setString('emailUser', _email!);
+      await shared!.setString('phoneUser', _phone!);
+      await shared!.setBool('isRegister', true);
       sharesModel!.managerScreenSplash(
         MainScreen.ROUTE,
         ctx,

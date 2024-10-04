@@ -123,11 +123,13 @@ class Language implements KeyAbstract {
   static const String addSatota = "addSatota";
   static const String update = "update";
   static const String share_app = "share_app";
+  static const String not_sent_email = "not_sent_email";
   @override
   static Map<String, Map<String, String>> keyMap = {
     'ar': {
-      just4 : "يجب ان تكون اربعة ارقام",
-      version : "الاصدار",
+      not_sent_email: 'لم يتم ارسال البريد الالكتروني',
+      just4: "يجب ان تكون اربعة ارقام",
+      version: "الاصدار",
       share_app: "مشاركة التطبيق",
       addSatota: "أضافة ستوتة",
       update: "تحديث",
@@ -244,8 +246,9 @@ class Language implements KeyAbstract {
       error_password: "كلمة المرور غير صحيحة",
     },
     "en": {
-      just4 : 'It should be four digits.',
-      version : "Version",
+      not_sent_email: 'Not sent email',
+      just4: 'It should be four digits.',
+      version: "Version",
       share_app: "Share App",
       addSatota: 'Add Satota',
       update: "Update",

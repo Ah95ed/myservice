@@ -1,7 +1,6 @@
 import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
-import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
-import 'package:Al_Zab_township_guide/controller/provider/SignupProvider/SignupProvider.dart';
+import 'package:Al_Zab_township_guide/controller/SignupProvider/SignupProvider.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/widget/Dialogandsnakebar/DialogCirculerProgress.dart';
 import 'package:email_otp/email_otp.dart';
@@ -20,23 +19,21 @@ class OtpScreenEmail extends StatefulWidget {
 }
 
 class _OtpScreenEmailState extends State<OtpScreenEmail> {
- late TextEditingController otpNumber  = TextEditingController();
+  late TextEditingController otpNumber = TextEditingController();
 
-
-@override
+  // bool isForget = false;
+  @override
   void initState() {
 // otpNumber  = TextEditingController();
     // TODO: implement initState
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     final signup = context.read<SignupProvider>();
-    final providers = context.read<Providers>();
+    // isForget = ModalRoute.of(context)!.settings.arguments as bool;
     return Scaffold(
-      // resizeToAvoidBottomInset: true,
-      // extendBody: true,
-      // extendBodyBehindAppBar: true,
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         scrollDirection: Axis.vertical,
@@ -123,7 +120,11 @@ class _OtpScreenEmailState extends State<OtpScreenEmail> {
               ),
               onPressed: () async {
                 showCirculerProgress(context);
+                // if (isForget) {}
                 if (EmailOTP.verifyOTP(otp: otpNumber.text)) {
+                  // if (isForget) {
+                  //   Navigator.pop(context);
+                  // }
                   await signup.saveData(
                     context,
                   );
@@ -169,7 +170,6 @@ class TextFieldCustomEmailOTP extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // double _width = MediaQuery.of(context).size.width;
     return Container(
       height: getheight(10),
       width: getWidth(90),
@@ -181,7 +181,6 @@ class TextFieldCustomEmailOTP extends StatelessWidget {
       child: TextField(
         textAlign: TextAlign.center,
         textAlignVertical: TextAlignVertical.center,
-        
         controller: controller!,
         style: TextStyle(
           color: Colors.white,

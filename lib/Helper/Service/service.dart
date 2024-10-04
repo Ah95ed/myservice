@@ -1,4 +1,5 @@
 import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
+import 'package:Al_Zab_township_guide/Models/ConnectTelegram/ConnectTelegram.dart';
 import 'package:Al_Zab_township_guide/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
@@ -20,9 +21,11 @@ Future<void> init() async {
   await initLang(shared!.getString('lang') ?? "ar");
   packageInfo = await PackageInfo.fromPlatform();
 }
+
 initData() async {
   remoteConfig = await FirebaseRemoteConfig.instance;
 
-    await remoteConfig.fetchAndActivate();
-    re = await remoteConfig.getString('update');
+  await remoteConfig.fetchAndActivate();
+  re = await remoteConfig.getString('update');
+  
 }

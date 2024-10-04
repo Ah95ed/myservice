@@ -1,11 +1,14 @@
 import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
+import 'package:Al_Zab_township_guide/controller/ForgetPassword/ForgetPasswordProvider.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
 import 'package:Al_Zab_township_guide/view/screens/LoginScreen/login_screen.dart';
+import 'package:Al_Zab_township_guide/view/widget/Dialogandsnakebar/DialogCirculerProgress.dart';
 import 'package:Al_Zab_township_guide/view/widget/LoginWidget/Loginimageshow.dart';
 import 'package:Al_Zab_township_guide/view/widget/staticWidget/CustomMaterialButton.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ForgetPassword extends StatefulWidget {
   const ForgetPassword({super.key});
@@ -32,28 +35,39 @@ class _ForgetPasswordState extends State<ForgetPassword> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: ColorUsed.PrimaryBackground,
-      body: Column(
-        children: [
-          Login_Image(
-            height: getheight(20),
-          ),
-          SizedBox(
-            height: getheight(4),
-          ),
-          component1(
-            _emailController,
-            Icons.phone,
-            Translation[Language.enter_email],
-            false,
-            true,
-          ),
-          CustomMaterialButton(
-            title: Translation[Language.send],
-            onPressed: () {},
-          ),
-        ],
+    return Consumer<ForgetPasswordProvider>(
+      builder: (context, value, child) => Scaffold(
+        backgroundColor: ColorUsed.PrimaryBackground,
+        body: Column(
+          children: [
+            Login_Image(
+              height: getheight(28.0),
+            ),
+            SizedBox(
+              height: getheight(4),
+            ),
+            component1(
+              _emailController,
+              Icons.email,
+              Translation[Language.enter_email],
+              false,
+              true,
+            ),
+            SizedBox(
+              height: getheight(4),
+            ),
+            CustomMaterialButton(
+              title: Translation[Language.send],
+              onPressed: () async {
+                showCirculerProgress(context);
+                await value.sendCode(
+                  _emailController.text,
+                  context,
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

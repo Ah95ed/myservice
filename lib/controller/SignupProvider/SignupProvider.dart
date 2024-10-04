@@ -4,7 +4,11 @@ import 'package:flutter/material.dart';
 class SignupProvider extends ChangeNotifier {
   bool isSignup = false;
   late SignupModel model;
+    Map<String, String>? register;
 
+  SignupProvider() {
+    model = SignupModel();
+  }
   void startLoading() {
     isSignup = true;
     notifyListeners();
@@ -17,13 +21,12 @@ class SignupProvider extends ChangeNotifier {
 
   Future<void> saveData(
     BuildContext context,
-    // Map<String, String> data,
   ) async {
     if (register == null) return;
     await model.saveData(context, register!);
   }
 
-  Map<String, String>? register;
+
   Future<void> sendCode(
     SignupModel m,
     BuildContext context,
@@ -41,8 +44,9 @@ class SignupProvider extends ChangeNotifier {
       'phone': m.phone!,
       'password': m.password!
     };
-    await model.sendCodeEmail();
+    await model.sendCodeEmail(context, m.email!);
 
     notifyListeners();
   }
+
 }

@@ -1,18 +1,19 @@
 import 'package:Al_Zab_township_guide/Models/SignupModel/SignupModel.dart';
+import 'package:Al_Zab_township_guide/controller/SignupProvider/SignupProvider.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
-import 'package:Al_Zab_township_guide/controller/provider/SignupProvider/SignupProvider.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
+import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
+import 'package:Al_Zab_township_guide/view/ThemeApp/app_theme.dart';
 import 'package:Al_Zab_township_guide/view/screens/OTPScreenEmail.dart';
 import 'package:Al_Zab_township_guide/view/widget/Dialogandsnakebar/DialogCirculerProgress.dart';
 import 'package:Al_Zab_township_guide/view/widget/LoginWidget/Loginimageshow.dart';
-import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../LoginScreen/login_screen.dart';
 import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:Al_Zab_township_guide/view/ThemeApp/app_theme.dart';
+import 'package:provider/provider.dart';
+
+import '../LoginScreen/login_screen.dart';
 
 class SignupScreen extends StatefulWidget {
   static const Route = "/SignupScreen";
@@ -172,8 +173,6 @@ class _SignupScreenState extends State<SignupScreen>
                             margin: EdgeInsets.only(
                               bottom: getheight(5),
                             ),
-                            // height: getheight(100),
-                            // width: getWidth(100),
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               gradient: LinearGradient(
@@ -237,6 +236,7 @@ class _SignupScreenState extends State<SignupScreen>
                                   context.read<Providers>().managerScreen(
                                         OtpScreenEmail.Route,
                                         context,
+                                        object: false,
                                       );
                                   provider.stopLoading();
                                   return;
