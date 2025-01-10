@@ -41,95 +41,98 @@ class _AddDoctorState extends State<AddDoctor> {
   Widget build(BuildContext context) {
     final read = context.read<ServiceController>();
     return Scaffold(
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        scrollDirection: Axis.vertical,
-        child: Container(
-          height: getheight(100),
-          color: ColorUsed.PrimaryBackground,
-          width: getWidth(100),
-          child: Column(
-            children: [
-              LogoService(
-                height: getheight(30),
-                title: Translation[Language.AddDoctor],
-              ),
-              SizedBox(
-                height: getheight(4),
-              ),
-              component1(
-                name,
-                Icons.person,
-                Translation[Language.please_enter_name],
-                false,
-                false,
-              ),
-              SizedBox(
-                height: getheight(1.5),
-              ),
-              component1(
-                Specialization,
-                Icons.type_specimen,
-                Translation[Language.specialization],
-                false,
-                false,
-              ),
-              SizedBox(
-                height: getheight(1.5),
-              ),
-              component1(
-                time,
-                Icons.access_time_sharp,
-                Translation[Language.time],
-                false,
-                false,
-              ),
-              SizedBox(
-                height: getheight(1.5),
-              ),
-              component1(
-                title,
-                Icons.title,
-                Translation[Language.doctor_title],
-                false,
-                false,
-              ),
-              SizedBox(
-                height: getheight(2),
-              ),
-              CustomMaterialButton(
-                title: Translation[Language.send],
-                onPressed: () async {
-                  if (name.text.isEmpty ||
-                      Specialization.text.isEmpty ||
-                      time.text.isEmpty ||
-                      title.text.isEmpty) {
-                    showSnakeBar(context, Translation[Language.fields]);
-                    return;
-                  }
-                  // ! her to send data
-                  // * so u need service controller and modele to all service ;
-                  read.setDataInFirestore(
-                    context,
-                    ServiceCollectios.Doctor.name,
-                    {
-                      "name": name.text,
-                      'number': await shared!.getString('phoneUser'),
-                      'specialization': Specialization.text,
-                      "presence": time.text,
-                      "title": title.text,
-                      'bool': true,
-                    },
-                  );
-
-                  await showCirculerProgress(context);
-                  // name.dispose();
-                  // Specialization.dispose();
-                  // time.dispose();
-                  // title.dispose();
-                },
-              ),
-            ],
+      body: ScrollConfiguration(
+        behavior: MyBehavior(),
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          scrollDirection: Axis.vertical,
+          child: Container(
+            height: getheight(100),
+            color: ColorUsed.PrimaryBackground,
+            width: getWidth(100),
+            child: Column(
+              children: [
+                LogoService(
+                  height: getheight(30),
+                  title: Translation[Language.AddDoctor],
+                ),
+                SizedBox(
+                  height: getheight(4),
+                ),
+                component1(
+                  name,
+                  Icons.person,
+                  Translation[Language.please_enter_name],
+                  false,
+                  false,
+                ),
+                SizedBox(
+                  height: getheight(1.5),
+                ),
+                component1(
+                  Specialization,
+                  Icons.type_specimen,
+                  Translation[Language.specialization],
+                  false,
+                  false,
+                ),
+                SizedBox(
+                  height: getheight(1.5),
+                ),
+                component1(
+                  time,
+                  Icons.access_time_sharp,
+                  Translation[Language.time],
+                  false,
+                  false,
+                ),
+                SizedBox(
+                  height: getheight(1.5),
+                ),
+                component1(
+                  title,
+                  Icons.title,
+                  Translation[Language.doctor_title],
+                  false,
+                  false,
+                ),
+                SizedBox(
+                  height: getheight(2),
+                ),
+                CustomMaterialButton(
+                  title: Translation[Language.send],
+                  onPressed: () async {
+                    if (name.text.isEmpty ||
+                        Specialization.text.isEmpty ||
+                        time.text.isEmpty ||
+                        title.text.isEmpty) {
+                      showSnakeBar(context, Translation[Language.fields]);
+                      return;
+                    }
+                    // ! her to send data
+                    // * so u need service controller and modele to all service ;
+                    read.setDataInFirestore(
+                      context,
+                      ServiceCollectios.Doctor.name,
+                      {
+                        "name": name.text,
+                        'number': await shared!.getString('phoneUser'),
+                        'specialization': Specialization.text,
+                        "presence": time.text,
+                        "title": title.text,
+                        'bool': true,
+                      },
+                    );
+        
+                    await showCirculerProgress(context);
+                    // name.dispose();
+                    // Specialization.dispose();
+                    // time.dispose();
+                    // title.dispose();
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),

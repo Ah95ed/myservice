@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:Al_Zab_township_guide/view/Size/ScreenSize.dart';
 import 'package:Al_Zab_township_guide/view/widget/Dialogandsnakebar/DialogCirculerProgress.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -73,167 +74,170 @@ class _LoginScreenState extends State<LoginScreen>
       builder: (context, provider, child) {
         return Scaffold(
           backgroundColor: ColorUsed.PrimaryBackground,
-          body: SingleChildScrollView(
-            child: SizedBox(
-              height: getheight(100),
-              child: Column(
-                children: [
-                  // Expanded(child: SizedBox()),
-                  Expanded(
-                    flex: 2,
-                    child: Login_Image(
-                      height: getheight(1),
+          body: ScrollConfiguration(
+            behavior: MyBehavior(),
+            child: SingleChildScrollView(
+              child: SizedBox(
+                height: getheight(100),
+                child: Column(
+                  children: [
+                    // Expanded(child: SizedBox()),
+                    Expanded(
+                      flex: 2,
+                      child: Login_Image(
+                        height: getheight(1),
+                      ),
                     ),
-                  ),
-                  Expanded(
-                    flex: 3,
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: getheight(3),
-                        ),
-                        component1(
-                          phone,
-                          Icons.phone,
-                          S.current.number_phone,
-                          false,
-                          true,
-                        ),
-                        SizedBox(
-                          height: getheight(3),
-                        ),
-                        component1(
-                          password,
-                          Icons.lock_outline,
-                          S.current.enter_password,
-                          true,
-                          false,
-                        ),
-                        SizedBox(
-                          height: getheight(4),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            RichText(
-                              text: TextSpan(
-                                  text: S.current.forget_password,
+                    Expanded(
+                      flex: 3,
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: getheight(3),
+                          ),
+                          component1(
+                            phone,
+                            Icons.phone,
+                            S.current.number_phone,
+                            false,
+                            true,
+                          ),
+                          SizedBox(
+                            height: getheight(3),
+                          ),
+                          component1(
+                            password,
+                            Icons.lock_outline,
+                            S.current.enter_password,
+                            true,
+                            false,
+                          ),
+                          SizedBox(
+                            height: getheight(4),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              RichText(
+                                text: TextSpan(
+                                    text: S.current.forget_password,
+                                    style: TextStyle(
+                                      color: Colors.redAccent,
+                                      fontSize: setFontSize(12),
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () {
+                                        HapticFeedback.lightImpact();
+                                        //   Fluttertoast.showToast(
+                                        //       msg:
+                                        //           'Forgotten password! button pressed');
+                                        // },
+                                      }),
+                              ),
+                              SizedBox(width: getWidth(24)),
+                              RichText(
+                                text: TextSpan(
+                                  text: S.current.don_t_have_account,
                                   style: TextStyle(
-                                    color: Colors.redAccent,
+                                    color: ColorUsed.DarkGreen,
                                     fontSize: setFontSize(12),
                                     fontWeight: FontWeight.w600,
                                   ),
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () {
                                       HapticFeedback.lightImpact();
-                                      //   Fluttertoast.showToast(
-                                      //       msg:
-                                      //           'Forgotten password! button pressed');
-                                      // },
-                                    }),
-                            ),
-                            SizedBox(width: getWidth(24)),
-                            RichText(
-                              text: TextSpan(
-                                text: S.current.don_t_have_account,
-                                style: TextStyle(
-                                  color: ColorUsed.DarkGreen,
-                                  fontSize: setFontSize(12),
-                                  fontWeight: FontWeight.w600,
+                                      context.read<Providers>().managerScreen(
+                                          SignupScreen.Route, context);
+                                    },
                                 ),
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () {
-                                    HapticFeedback.lightImpact();
-                                    context.read<Providers>().managerScreen(
-                                        SignupScreen.Route, context);
-                                  },
                               ),
-                            ),
-                          ],
-                        ),
-                      ],
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  Expanded(
-                    flex: 3,
-                    child: Stack(
-                      children: [
-                        Center(
-                          child: Container(
-                            margin: EdgeInsets.only(
-                              bottom: getheight(12),
-                            ),
-                            height: getheight(40),
-                            width: getWidth(60),
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              gradient: LinearGradient(
-                                colors: [
-                                  ColorUsed.PrimaryBackground,
-                                  ColorUsed.second,
-                                  ColorUsed.DarkGreen,
-                                ],
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
+                    Expanded(
+                      flex: 3,
+                      child: Stack(
+                        children: [
+                          Center(
+                            child: Container(
+                              margin: EdgeInsets.only(
+                                bottom: getheight(12),
+                              ),
+                              height: getheight(40),
+                              width: getWidth(60),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                gradient: LinearGradient(
+                                  colors: [
+                                    ColorUsed.PrimaryBackground,
+                                    ColorUsed.second,
+                                    ColorUsed.DarkGreen,
+                                  ],
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        Center(
-                          child: Transform.scale(
-                            scale: _animation.value,
-                            child: InkWell(
-                              splashColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () async {
-                                HapticFeedback.lightImpact();
-
-                                showCirculerProgress(context);
-                                //! here to on click login
-                                // provider.startLoading();
-                                if (phone.text.isEmpty ||
-                                    password.text.isEmpty) {
-                                  Navigator.of(context).pop();
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(S.current.fields),
-                                      duration: Duration(seconds: 3),
-                                    ),
+                          Center(
+                            child: Transform.scale(
+                              scale: _animation.value,
+                              child: InkWell(
+                                splashColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  HapticFeedback.lightImpact();
+            
+                                  showCirculerProgress(context);
+                                  //! here to on click login
+                                  // provider.startLoading();
+                                  if (phone.text.isEmpty ||
+                                      password.text.isEmpty) {
+                                    Navigator.of(context).pop();
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(S.current.fields),
+                                        duration: Duration(seconds: 3),
+                                      ),
+                                    );
+                                    return;
+                                  }
+                                  await provider.login(
+                                    context,
+                                    phone.text,
+                                    password.text,
                                   );
-                                  return;
-                                }
-                                await provider.login(
-                                  context,
-                                  phone.text,
-                                  password.text,
-                                );
-                              },
-                              child: Container(
-                                margin: EdgeInsets.only(
-                                  bottom: getheight(12),
-                                ),
-                                height: getheight(18),
-                                width: getWidth(30),
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                  color: ColorUsed.DarkGreen,
-                                  shape: BoxShape.circle,
-                                ),
-                                child: Text(
-                                  S.current.login,
-                                  style: TextStyle(
-                                      color: AppTheme.nearlyWhite,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: setFontSize(12)),
+                                },
+                                child: Container(
+                                  margin: EdgeInsets.only(
+                                    bottom: getheight(12),
+                                  ),
+                                  height: getheight(18),
+                                  width: getWidth(30),
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                    color: ColorUsed.DarkGreen,
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Text(
+                                    S.current.login,
+                                    style: TextStyle(
+                                        color: AppTheme.nearlyWhite,
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: setFontSize(12)),
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

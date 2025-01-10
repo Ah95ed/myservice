@@ -49,112 +49,113 @@ class _AddDonorState extends State<AddDonor> {
   Widget build(BuildContext context) {
     final read = context.read<ServiceController>();
     return Scaffold(
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        scrollDirection: Axis.vertical,
-        child: Container(
-          height: getheight(100),
-          color: ColorUsed.PrimaryBackground,
-          width: getWidth(100),
-          child: Column(
-            children: [
-              LogoService(
-                height: getheight(30),
-                title: Translation[Language.addDonor],
-              ),
-              SizedBox(
-                height: getheight(4),
-              ),
-              component1(
-                name,
-                Icons.person,
-                Translation[Language.please_enter_name],
-                false,
-                false,
-              ),
-              SizedBox(
-                height: getheight(1.5),
-              ),
-              Container(
-                height: getheight(7),
-                width: getWidth(90),
-                padding: EdgeInsets.symmetric(
-                  horizontal: getWidth(2),
+      body: ScrollConfiguration(
+        behavior: ScrollBehavior(),
+        child: SingleChildScrollView(
+          child: Container(
+            height: getheight(100),
+            color: ColorUsed.PrimaryBackground,
+            width: getWidth(100),
+            child: Column(
+              children: [
+                LogoService(
+                  height: getheight(30),
+                  title: Translation[Language.addDonor],
                 ),
-                decoration: BoxDecoration(
-                  color: ColorUsed.second.withOpacity(0.8),
-                  borderRadius: BorderRadius.circular(12),
+                SizedBox(
+                  height: getheight(4),
                 ),
-                child: DropdownButton<String>(
-                  value: dropdownValue,
-                  hint: Text(
-                    Translation[Language.selectType],
-                    style: TextStyle(
-                      fontSize: setFontSize(14),
-                      fontWeight: FontWeight.bold,
-                      color: AppTheme.notWhite,
-                    ),
+                component1(
+                  name,
+                  Icons.person,
+                  Translation[Language.please_enter_name],
+                  false,
+                  false,
+                ),
+                SizedBox(
+                  height: getheight(1.5),
+                ),
+                Container(
+                  height: getheight(7),
+                  width: getWidth(90),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: getWidth(2),
                   ),
-                  onChanged: (String? value) {
-                    setState(() {
-                      dropdownValue = value;
-                    });
-                  },
-                  items: items.map<DropdownMenuItem<String>>((
-                    String value,
-                  ) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(
-                        value,
-                        style: TextStyle(
-                          fontSize: setFontSize(14),
-                          fontWeight: FontWeight.bold,
-                          color: AppTheme.darkerText,
-                        ),
+                  decoration: BoxDecoration(
+                    color: ColorUsed.second.withOpacity(0.8),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: DropdownButton<String>(
+                    value: dropdownValue,
+                    hint: Text(
+                      Translation[Language.selectType],
+                      style: TextStyle(
+                        fontSize: setFontSize(14),
+                        fontWeight: FontWeight.bold,
+                        color: AppTheme.notWhite,
                       ),
-                    );
-                  }).toList(),
-                ),
-              ),
-              SizedBox(
-                height: getheight(2),
-              ),
-              component1(
-                location,
-                Icons.title,
-                Translation[Language.location],
-                false,
-                false,
-              ),
-              SizedBox(
-                height: getheight(2),
-              ),
-              CustomMaterialButton(
-                title: Translation[Language.send],
-                onPressed: () async {
-                  if (name.text.isEmpty || 
-                  location.text.isEmpty||
-                  dropdownValue==null) {
-                    showSnakeBar(context, Translation[Language.fields]);
-                    return;
-                  }
-                  if (await shared!.getString('phoneUser') == null) return;
-                  read.setDataInFirestore(
-                    context,
-                    dropdownValue!,
-                    {
-                      "name": name.text,
-                      'number': await shared!.getString('phoneUser'),
-                      "location": location.text,
-                      'type': dropdownValue,
+                    ),
+                    onChanged: (String? value) {
+                      setState(() {
+                        dropdownValue = value;
+                      });
                     },
-                  );
-
-                  await showCirculerProgress(context);
-                },
-              ),
-            ],
+                    items: items.map<DropdownMenuItem<String>>((
+                      String value,
+                    ) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(
+                          value,
+                          style: TextStyle(
+                            fontSize: setFontSize(14),
+                            fontWeight: FontWeight.bold,
+                            color: AppTheme.darkerText,
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                ),
+                SizedBox(
+                  height: getheight(2),
+                ),
+                component1(
+                  location,
+                  Icons.title,
+                  Translation[Language.location],
+                  false,
+                  false,
+                ),
+                SizedBox(
+                  height: getheight(2),
+                ),
+                CustomMaterialButton(
+                  title: Translation[Language.send],
+                  onPressed: () async {
+                    if (name.text.isEmpty || 
+                    location.text.isEmpty||
+                    dropdownValue==null) {
+                      showSnakeBar(context, Translation[Language.fields]);
+                      return;
+                    }
+                    if (await shared!.getString('phoneUser') == null) return;
+                    read.setDataInFirestore(
+                      context,
+                      dropdownValue!,
+                      {
+                        "name": name.text,
+                        'number': await shared!.getString('phoneUser'),
+                        "location": location.text,
+                        'type': dropdownValue,
+                      },
+                    );
+        
+                    await showCirculerProgress(context);
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),

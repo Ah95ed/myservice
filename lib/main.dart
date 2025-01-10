@@ -14,6 +14,8 @@ import 'package:Al_Zab_township_guide/controller/provider/OTPEmailProvider/OTPEm
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/controller/provider/ServiceController/ServiceController.dart';
 import 'package:Al_Zab_township_guide/controller/provider/UpdateProvider/UpdateProvider.dart';
+import 'package:Al_Zab_township_guide/view/Size/ScreenSize.dart';
+import 'package:Al_Zab_township_guide/view/Size/SizeBuilder.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
 import 'package:Al_Zab_township_guide/view/routing/routing.dart';
 import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
@@ -102,32 +104,38 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<LanguageController>(
-      builder: (context, v, child) {
-        return MaterialApp(
-          navigatorKey: navigatorKey,
-          localizationsDelegates: [
-            S.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: v.supportLanguage,
-          debugShowCheckedModeBanner: false,
-          locale: v.language,
-          title: Translation[Language.title],
-          routes: routs,
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(
-              seedColor: ColorUsed.primary,
+    return SizeBuilder(
+      baseSize: const Size(375, 812),
+     height: context.screenHeight,
+      width: context.screenWidth,
+      child: Consumer<LanguageController>(
+        builder: (context, v, child) {
+          return MaterialApp(
+            navigatorKey: navigatorKey,
+            localizationsDelegates: [
+              S.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: v.supportLanguage,
+            debugShowCheckedModeBanner: false,
+            locale: v.language,
+            title: Translation[Language.title],
+            routes: routs,
+            theme: ThemeData(
+              colorScheme: ColorScheme.fromSeed(
+                seedColor: ColorUsed.primary,
+              ),
+              useMaterial3: true,
             ),
-            useMaterial3: true,
-          ),
-          home: shared!.getBool('spalsh') == null
-              ? MyCustomSplashScreen()
-              : ShowDataTele(),
-        );
-      },
+            // ! here to check is null or not 
+            home: shared!.getBool('spalsh') == null
+                ? MyCustomSplashScreen()
+                : MainScreen(),
+          );
+        },
+      ),
     );
   }
 

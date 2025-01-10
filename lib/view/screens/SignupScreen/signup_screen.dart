@@ -81,205 +81,216 @@ class _SignupScreenState extends State<SignupScreen>
       builder: (context, provider, child) {
         return Scaffold(
           backgroundColor: ColorUsed.PrimaryBackground,
-          body: SingleChildScrollView(
-            child: SizedBox(
-              height: getheight(100),
-              child: Column(
-                children: [
-                  Expanded(
-                    flex: 2,
-                    child: Login_Image(
-                        // height: getheight(0),
-                        ),
-                  ),
-                  Expanded(
-                    flex: 4,
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: getheight(2),
-                        ),
-                        component1(
-                          name,
-                          Icons.person,
-                          S.current.please_enter_name,
-                          false,
-                          false,
-                        ),
-                        SizedBox(
-                          height: getheight(2),
-                        ),
-                        component1(
-                          email,
-                          Icons.email,
-                          S.current.enter_email,
-                          false,
-                          false,
-                        ),
-                        SizedBox(
-                          height: getheight(2),
-                        ),
-                        component1(
-                          phone,
-                          Icons.phone,
-                          S.current.number_phone,
-                          false,
-                          true,
-                        ),
-                        SizedBox(
-                          height: getheight(2),
-                        ),
-                        component1(
-                          password,
-                          Icons.lock_outline,
-                          S.current.enter_password,
-                          true,
-                          false,
-                        ),
-                        SizedBox(
-                          height: getheight(4),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SizedBox(width: getWidth(30)),
-                            RichText(
-                              text: TextSpan(
-                                text: S.current.already_member,
-                                style: TextStyle(
-                                  color: ColorUsed.DarkGreen,
-                                  fontSize: setFontSize(12),
-                                  fontWeight: FontWeight.w600,
-                                ),
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () {
-                                    HapticFeedback.lightImpact();
-                                    context.read<Providers>().managerScreen(
-                                        LoginScreen.Route, context);
-                                  },
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
+          body: ScrollConfiguration(
+            behavior: MyBehavior(),
+            child: SingleChildScrollView(
+              child: SizedBox(
+                height: getheight(100),
+                child: Column(
+                  children: [
+                    Expanded(
+                      flex: 2,
+                      child: Login_Image(
+                          // height: getheight(0),
+                          ),
                     ),
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: Stack(
-                      children: [
-                        Center(
-                          child: Container(
-                            margin: EdgeInsets.only(
-                              bottom: getheight(5),
-                            ),
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              gradient: LinearGradient(
-                                colors: [
-                                  ColorUsed.PrimaryBackground,
-                                  ColorUsed.second,
-                                  ColorUsed.DarkGreen,
-                                ],
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
+                    Expanded(
+                      flex: 4,
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: getheight(2),
+                          ),
+                          component1(
+                            name,
+                            Icons.person,
+                            S.current.please_enter_name,
+                            false,
+                            false,
+                          ),
+                          SizedBox(
+                            height: getheight(2),
+                          ),
+                          component1(
+                            email,
+                            Icons.email,
+                            S.current.enter_email,
+                            false,
+                            false,
+                          ),
+                          SizedBox(
+                            height: getheight(2),
+                          ),
+                          component1(
+                            phone,
+                            Icons.phone,
+                            S.current.number_phone,
+                            false,
+                            true,
+                          ),
+                          SizedBox(
+                            height: getheight(2),
+                          ),
+                          component1(
+                            password,
+                            Icons.lock_outline,
+                            S.current.enter_password,
+                            true,
+                            false,
+                          ),
+                          SizedBox(
+                            height: getheight(4),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(width: getWidth(30)),
+                              RichText(
+                                text: TextSpan(
+                                  text: S.current.already_member,
+                                  style: TextStyle(
+                                    color: ColorUsed.DarkGreen,
+                                    fontSize: setFontSize(12),
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () {
+                                      HapticFeedback.lightImpact();
+                                      context.read<Providers>().managerScreen(
+                                          LoginScreen.Route, context);
+                                    },
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: Stack(
+                        children: [
+                          Center(
+                            child: Container(
+                              margin: EdgeInsets.only(
+                                bottom: getheight(5),
+                              ),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                gradient: LinearGradient(
+                                  colors: [
+                                    ColorUsed.PrimaryBackground,
+                                    ColorUsed.second,
+                                    ColorUsed.DarkGreen,
+                                  ],
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        Center(
-                          child: Transform.scale(
-                            scale: _animation.value,
-                            child: InkWell(
-                              splashColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () async {
-                                HapticFeedback.lightImpact();
-                                provider.startLoading();
-                                if (name.text.isEmpty ||
-                                    email.text.isEmpty ||
-                                    phone.text.isEmpty ||
-                                    password.text.isEmpty) {
-                                  provider.stopLoading();
+                          Center(
+                            child: Transform.scale(
+                              scale: _animation.value,
+                              child: InkWell(
+                                splashColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  HapticFeedback.lightImpact();
+                                  provider.startLoading();
+                                  if (name.text.isEmpty ||
+                                      email.text.isEmpty ||
+                                      phone.text.isEmpty ||
+                                      password.text.isEmpty) {
+                                    provider.stopLoading();
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(S.current.fields),
+                                        duration: Duration(seconds: 3),
+                                      ),
+                                    );
+            
+                                    return;
+                                  }
+                                  if (!email.text.contains('@')) {
+                                    provider.stopLoading();
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('ادخل أيميل حقيقي'),
+                                        duration: Duration(seconds: 3),
+                                      ),
+                                    );
+                                    return;
+                                  }
+                                  showCirculerProgress(context);
+            
+                                  await provider.sendCode(
+                                    SignupModel(
+                                      name: name.text,
+                                      email: email.text,
+                                      phone: phone.text,
+                                      password: password.text,
+                                    ),
+                                    context,
+                                  );
+            
+                                  if (await provider.isSignup) {
+                                    context.read<Providers>().managerScreen(
+                                          OtpScreenEmail.Route,
+                                          context,
+                                          object: false,
+                                        );
+                                    provider.stopLoading();
+                                    return;
+                                  }
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: Text(S.current.fields),
                                       duration: Duration(seconds: 3),
                                     ),
                                   );
-
-                                  return;
-                                }
-                                if (!email.text.contains('@')) {
-                                  provider.stopLoading();
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text('ادخل أيميل حقيقي'),
-                                      duration: Duration(seconds: 3),
-                                    ),
-                                  );
-                                  return;
-                                }
-                                showCirculerProgress(context);
-
-                                await provider.sendCode(
-                                  SignupModel(
-                                    name: name.text,
-                                    email: email.text,
-                                    phone: phone.text,
-                                    password: password.text,
+                                },
+                                child: Container(
+                                  margin: EdgeInsets.only(
+                                    bottom: getheight(5),
                                   ),
-                                  context,
-                                );
-
-                                if (await provider.isSignup) {
-                                  context.read<Providers>().managerScreen(
-                                        OtpScreenEmail.Route,
-                                        context,
-                                        object: false,
-                                      );
-                                  provider.stopLoading();
-                                  return;
-                                }
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(S.current.fields),
-                                    duration: Duration(seconds: 3),
+                                  height: getheight(14),
+                                  width: getWidth(30),
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                    color: ColorUsed.DarkGreen,
+                                    shape: BoxShape.circle,
                                   ),
-                                );
-                              },
-                              child: Container(
-                                margin: EdgeInsets.only(
-                                  bottom: getheight(5),
-                                ),
-                                height: getheight(14),
-                                width: getWidth(30),
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                  color: ColorUsed.DarkGreen,
-                                  shape: BoxShape.circle,
-                                ),
-                                child: Text(
-                                  S.current.register_now,
-                                  style: TextStyle(
-                                      color: AppTheme.nearlyWhite,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: setFontSize(12)),
+                                  child: Text(
+                                    S.current.register_now,
+                                    style: TextStyle(
+                                        color: AppTheme.nearlyWhite,
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: setFontSize(12)),
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
         );
       },
     );
+  }
+}
+
+class MyBehavior extends ScrollBehavior{
+  @override
+  Widget buildViewportChrome(
+      BuildContext context, Widget child, AxisDirection axisDirection) {
+    return child;
   }
 }
 
@@ -315,7 +326,8 @@ class component1 extends StatelessWidget {
           fontSize: setFontSize(16),
         ),
         obscureText: isPassword!,
-        keyboardType: isEmail! ? TextInputType.phone : TextInputType.text,
+        keyboardType: isEmail! ? TextInputType.phone
+         : TextInputType.text,
         decoration: InputDecoration(
           // icon: Icon(
           //   icon,

@@ -28,16 +28,19 @@ class _MainScreenState extends State<MainScreen> {
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   late TutorialCoachMark tutorialCoachMark;
   @override
-  void didChangeDependencies() {
+  void didChangeDependencies() async {
     super.didChangeDependencies();
-    checkUpdate(context);
-    Future.delayed(Duration(seconds: 1), () {
-      if (shared!.getBool('tutorial') == null) {
-        createTutorial();
-        addItem();
-        showTutorial();
-      }
-    });
+    await checkUpdate(context);
+    Future.delayed(
+      Duration(seconds: 3),
+      () {
+        if (shared!.getBool('tutorial') == null) {
+          createTutorial();
+          addItem();
+          showTutorial();
+        }
+      },
+    );
   }
 
   FutureOr<void> checkUpdate(BuildContext context) async {
@@ -131,7 +134,8 @@ class _MainScreenState extends State<MainScreen> {
         toolbarHeight: getheight(10),
         actions: [
           Consumer<Providers>(
-            builder: (context, value, child) => IconButton(
+            builder: (context, value, child) => 
+            IconButton(
               icon: readSerach.actionsicon,
               onPressed: () {
                 readSerach.changewidget(TextStyle(
@@ -268,7 +272,7 @@ class _MainScreenState extends State<MainScreen> {
               return Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
+                children: [
                   Text(
                     S.current.desc_doctor,
                     style: TextStyle(

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class TextFieldCustom extends StatefulWidget {
-  TextFieldCustom({
+  TextFieldCustom(TextEditingController nameProfession, {
     super.key,
     this.hint,
     this.icons,

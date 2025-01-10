@@ -41,6 +41,10 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+     kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
     signingConfigs {
    release {
        keyAlias keystoreProperties['keyAlias']
@@ -62,8 +66,8 @@ android {
         applicationId = "com.Blood.types"
         minSdk = 23
         targetSdk = 34
-        versionCode = 33
-        versionName = '6.5.4'
+        versionCode = 34
+        versionName = '6.5.5'
         ndkVersion '27.0.12077973'
         multiDexEnabled true
         ndk {

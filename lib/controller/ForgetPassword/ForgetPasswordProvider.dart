@@ -20,10 +20,7 @@ class ForgetPasswordProvider extends ChangeNotifier {
     String email,
     BuildContext context,
   ) async {
-
- 
     await _forgetPassword.sendCodeEmail(context,email);
-
     notifyListeners();
   }
 }
