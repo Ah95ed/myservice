@@ -20,7 +20,6 @@ import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
 import 'package:Al_Zab_township_guide/view/routing/routing.dart';
 import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/MyCustomSplashScreen.dart';
-import 'package:Al_Zab_township_guide/view/screens/showData/ShowDateTele.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
@@ -122,6 +121,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             locale: v.language,
             title: Translation[Language.title],
+            
             routes: routs,
             theme: ThemeData(
               colorScheme: ColorScheme.fromSeed(

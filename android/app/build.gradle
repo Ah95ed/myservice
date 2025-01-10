@@ -34,7 +34,6 @@ keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 android {
    namespace "com.Blood.types"
     compileSdkVersion 34
-
     ndkVersion '27.0.12077973'
 
     compileOptions {

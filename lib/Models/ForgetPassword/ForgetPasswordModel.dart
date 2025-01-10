@@ -1,6 +1,5 @@
 import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
-import 'package:Al_Zab_township_guide/main.dart';
 import 'package:Al_Zab_township_guide/view/screens/OTPScreenEmail.dart';
 import 'package:email_otp/email_otp.dart';
 import 'package:flutter/material.dart';

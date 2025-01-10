@@ -107,10 +107,10 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
       key: _scaffoldKey,
       drawer: const Customdrawer(),
-      extendBodyBehindAppBar: true,
+      // extendBodyBehindAppBar: true,
       extendBody: true,
       backgroundColor: ColorUsed.PrimaryBackground,
-      resizeToAvoidBottomInset: true,
+      // resizeToAvoidBottomInset: true,
       appBar: AppBar(
         title: readSerach.title,
         shape: RoundedRectangleBorder(
@@ -130,7 +130,7 @@ class _MainScreenState extends State<MainScreen> {
           },
         ),
         backgroundColor: ColorUsed.primary,
-        elevation: 5,
+        elevation: 4,
         toolbarHeight: getheight(10),
         actions: [
           Consumer<Providers>(
@@ -178,11 +178,13 @@ class _MainScreenState extends State<MainScreen> {
                 label: S.of(context).doctor,
               ),
               BottomNavigationBarItem(
+               
                 key: work,
                 icon: Icon(Icons.work_history),
                 label: S.of(context).professions,
               ),
               BottomNavigationBarItem(
+                
                 key: donors,
                 icon: Icon(Icons.bloodtype),
                 label: S.of(context).blood_type,

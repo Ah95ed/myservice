@@ -22,9 +22,7 @@ class _BloodScreenState extends State<BloodScreen> {
   @override
   Widget build(BuildContext context) {
     final read = context.watch<Providers>();
-    // Logger.logger('message1 ${MediaQuery.of(context).size.height}');
-    // Logger.logger('message2 ${MediaQuery.of(context).size.width}');
-
+    
     read.title = Text(
       Translation[Language.selectType],
       style: TextStyle(
@@ -37,12 +35,11 @@ class _BloodScreenState extends State<BloodScreen> {
       null,
     );
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      extendBody: true,
+
       backgroundColor: AppTheme.nearlyWhite,
-      resizeToAvoidBottomInset: true,
+
       body: Container(
-        height: getheight(100),
+        height: getheight(65),
         width: getWidth(100),
         decoration: BoxDecoration(
           border: Border.all(
@@ -55,8 +52,8 @@ class _BloodScreenState extends State<BloodScreen> {
         ),
         transformAlignment: Alignment.center,
         margin: EdgeInsets.only(
-          top: getheight(22.0),
-          bottom: getheight(22.0),
+          top: getheight(2),
+          bottom: getheight(28.0),
           left: getWidth(2.0),
           right: getWidth(2.0),
         ),
@@ -152,6 +149,7 @@ class _BloodScreenState extends State<BloodScreen> {
                 ),
               ],
             ),
+            
           ],
         ),
       ),

@@ -5,7 +5,6 @@ import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
 import 'package:Al_Zab_township_guide/controller/provider/ServiceController/ServiceController.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
-import 'package:Al_Zab_township_guide/view/screens/LoginScreen/login_screen.dart';
 import 'package:Al_Zab_township_guide/view/screens/SignupScreen/signup_screen.dart';
 import 'package:Al_Zab_township_guide/view/widget/Dialogandsnakebar/DialogCirculerProgress.dart';
 import 'package:Al_Zab_township_guide/view/widget/LoginWidget/Loginimageshow.dart';
@@ -37,7 +36,7 @@ class _AddSatotaState extends State<AddSatota> {
     final read = context.read<ServiceController>();
     return Scaffold(
       body: ScrollConfiguration(
-        behavior: MyBehavior(),
+        behavior: ScrollBehavior() ,
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           scrollDirection: Axis.vertical,

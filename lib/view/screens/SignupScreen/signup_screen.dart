@@ -82,7 +82,8 @@ class _SignupScreenState extends State<SignupScreen>
         return Scaffold(
           backgroundColor: ColorUsed.PrimaryBackground,
           body: ScrollConfiguration(
-            behavior: MyBehavior(),
+            behavior: ScrollBehavior(),
+            // behavior: MyBehavior(),
             child: SingleChildScrollView(
               child: SizedBox(
                 height: getheight(100),
@@ -286,13 +287,13 @@ class _SignupScreenState extends State<SignupScreen>
   }
 }
 
-class MyBehavior extends ScrollBehavior{
-  @override
-  Widget buildViewportChrome(
-      BuildContext context, Widget child, AxisDirection axisDirection) {
-    return child;
-  }
-}
+// class MyBehavior extends ScrollBehavior{
+//   @override
+//   Widget buildOverscrollIndicator(
+//       BuildContext context, Widget child, AxisDirection axisDirection) {
+//     return child;
+//   }
+// }
 
 class component1 extends StatelessWidget {
   component1(

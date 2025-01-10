@@ -42,7 +42,7 @@ class _OTPScreenNumberState extends State<OTPScreenNumber> {
 
     return Scaffold(
       body: ScrollConfiguration(
-        behavior: MyBehavior(),
+        behavior: ScrollBehavior(),
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Column(

@@ -1,5 +1,4 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:Al_Zab_township_guide/view/Size/ScreenSize.dart';
 import 'package:Al_Zab_township_guide/view/widget/Dialogandsnakebar/DialogCirculerProgress.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -75,10 +74,10 @@ class _LoginScreenState extends State<LoginScreen>
         return Scaffold(
           backgroundColor: ColorUsed.PrimaryBackground,
           body: ScrollConfiguration(
-            behavior: MyBehavior(),
+            behavior:ScrollBehavior(),
             child: SingleChildScrollView(
               child: SizedBox(
-                height: getheight(100),
+                height:getheight(100),
                 child: Column(
                   children: [
                     // Expanded(child: SizedBox()),

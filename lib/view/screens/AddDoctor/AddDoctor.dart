@@ -42,7 +42,7 @@ class _AddDoctorState extends State<AddDoctor> {
     final read = context.read<ServiceController>();
     return Scaffold(
       body: ScrollConfiguration(
-        behavior: MyBehavior(),
+        behavior:ScrollBehavior(),
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           scrollDirection: Axis.vertical,
