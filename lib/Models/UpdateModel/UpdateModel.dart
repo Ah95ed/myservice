@@ -1,7 +1,7 @@
+import 'package:Al_Zab_township_guide/Helper/Constant/Constant.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
-import 'package:Al_Zab_township_guide/Helper/Constant/Constant.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/view/screens/OTPScreenNumber/OTPScreenNumber.dart';
 import 'package:appwrite/appwrite.dart';
@@ -28,45 +28,39 @@ class UpdateModel {
     String n,
     BuildContext ctx,
   ) async {
-    CollectionReference querySnapshot =
-        await FirebaseFirestore.instance.collection(selectedValue!);
-    querySnapshot.where('number', isEqualTo: n).get().then(
-      (value) async {
-        value.docs.map((v) async {
-          if (v.exists) {
-            Navigator.of(ctx).pop();
+    CollectionReference querySnapshot = await FirebaseFirestore.instance
+        .collection(selectedValue!);
+    querySnapshot
+        .where('number', isEqualTo: n)
+        .get()
+        .then(
+          (value) async {
+            value.docs.map((v) async {
+              if (v.exists) {
+                Navigator.of(ctx).pop();
 
-            shared!.setString('collection', selectedValue);
-            await shared!.setString('DocumentID', v.id);
-            sendSMS(
+                shared!.setString('collection', selectedValue);
+                await shared!.setString('DocumentID', v.id);
+                sendSMS(ctx, n);
+                return;
+              } else {
+                Navigator.of(ctx).pop();
+                ScaffoldMessenger.of(ctx).showSnackBar(
+                  SnackBar(
+                    content: Text(Translation[Language.not_phond_found]),
+                  ),
+                );
+                return;
+              }
+            }).toList();
+            // return value;
+          },
+          onError: (e) {
+            ScaffoldMessenger.of(
               ctx,
-              n,
-            );
-            return;
-          } else {
-            Navigator.of(ctx).pop();
-            ScaffoldMessenger.of(ctx).showSnackBar(
-              SnackBar(
-                content: Text(
-                  Translation[Language.not_phond_found],
-                ),
-              ),
-            );
-            return;
-          }
-        }).toList();
-        // return value;
-      },
-      onError: (e) {
-        ScaffoldMessenger.of(ctx).showSnackBar(
-          SnackBar(
-            content: Text(
-              e.toString(),
-            ),
-          ),
+            ).showSnackBar(SnackBar(content: Text(e.toString())));
+          },
         );
-      },
-    );
   }
 
   List<String> types = [
@@ -77,34 +71,29 @@ class UpdateModel {
     Constant.O_Plus,
     Constant.O_Minus,
     Constant.AB_Plus,
-    Constant.AB_Minus
+    Constant.AB_Minus,
   ];
 
   Future<void> searchTypes(BuildContext ctx, String n) async {
     for (var e in types) {
-      CollectionReference querySnapshot =
-          await FirebaseFirestore.instance.collection(e);
-      querySnapshot.get().then(
-        (r) async {
-          for (var element in r.docs) {
-            if (n == element.get('number')) {
-              await shared!.setString('collection', e);
-              await shared!.setString('DocumentID', element.id);
+      CollectionReference querySnapshot = await FirebaseFirestore.instance
+          .collection(e);
+      querySnapshot.get().then((r) async {
+        for (var element in r.docs) {
+          if (n == element.get('number')) {
+            await shared!.setString('collection', e);
+            await shared!.setString('DocumentID', element.id);
 
-              await sendSMS(ctx, n);
+            await sendSMS(ctx, n);
 
-              break;
-            }
+            break;
           }
-        },
-      );
+        }
+      });
     }
   }
 
-  Future<void> sendSMS(
-    BuildContext c,
-    String number,
-  ) async {
+  Future<void> sendSMS(BuildContext c, String number) async {
     String num = number.substring(1);
     final account = Account(client!);
     final token = await account.createPhoneToken(
@@ -114,43 +103,42 @@ class UpdateModel {
     Navigator.pop(c);
     await shared!.setString('userId', token.userId);
     await shared!.setString('numberDelete', number);
-    Provider.of<Providers>(c, listen: false)
-        .managerScreen(OTPScreenNumber.Route, c);
+    Provider.of<Providers>(
+      c,
+      listen: false,
+    ).managerScreen(OTPScreenNumber.Route, c);
   }
 
   String? Collection, DocumentID;
   Future<void> deleteDataFromRealtimeAndFireStore(BuildContext c) async {
     Collection = await shared!.getString('collection');
     DocumentID = await shared!.getString('DocumentID');
-   await deleteFromFirStore(c);
-   await deletefromrealTime(c);
+    await deleteFromFirStore(c);
+    await deletefromrealTime(c);
     ScaffoldMessenger.of(c).showSnackBar(
       SnackBar(
-        content: Text(
-          Translation[Language.done],
-        ),
+        content: Text(Translation[Language.done]),
         duration: Duration(seconds: 2),
       ),
     );
   }
 
-  Future<void> deletefromrealTime(BuildContext c) async {
+  Future<void> deletefromrealTime(BuildContext c, {String? number}) async {
     await _databaseRef!
         .child('auth')
-        .child(shared!.getString('numberDelete')!)
+        .child(number ?? await shared!.getString('numberDelete')!)
         .remove()
-        .then(
-      (t) {
-        Navigator.of(c).pop();
-        ScaffoldMessenger.of(c).showSnackBar(
-          SnackBar(
-            content: Text(
-              Translation[Language.done],
-            ),
-          ),
-        );
-      },
-    );
+        .then((t) {
+          Navigator.of(c).pop();
+          shared!.remove('nameUser');
+                  shared!.remove('emailUser');
+                  shared!.remove('phoneUser');
+                  shared!.remove('isRegister');
+                  Scaffold.of(c).closeDrawer();
+          ScaffoldMessenger.of(
+            c,
+          ).showSnackBar(SnackBar(content: Text(Translation[Language.done])));
+        });
   }
 
   Future<void> deleteFromFirStore(BuildContext c) async {
@@ -159,14 +147,10 @@ class UpdateModel {
         .doc(DocumentID)
         .delete()
         .then((v) {
-      Navigator.of(c).pop();
-      ScaffoldMessenger.of(c).showSnackBar(
-        SnackBar(
-          content: Text(
-            Translation[Language.done],
-          ),
-        ),
-      );
-    });
+          Navigator.of(c).pop();
+          ScaffoldMessenger.of(
+            c,
+          ).showSnackBar(SnackBar(content: Text(Translation[Language.done])));
+        });
   }
 }

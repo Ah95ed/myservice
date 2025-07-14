@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
@@ -28,14 +30,17 @@ class _CustomDialogState extends State<CustomDialog> {
   ];
 
   TextEditingController _textController = TextEditingController();
+
+  TextEditingController _emailController = TextEditingController();
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
     _textController.dispose();
+    _emailController.dispose();
   }
 
-  String? dropdownValue;
+  String dropdownValue = "none";
   @override
   Widget build(BuildContext context) {
     final read = context.read<Updateprovider>();
@@ -43,9 +48,7 @@ class _CustomDialogState extends State<CustomDialog> {
     return SizedBox(
       height: getheight(80),
       child: AlertDialog(
-        title: Text(
-          Translation[Language.edit_Data_and_delete],
-        ),
+        title: Text(Translation[Language.edit_Data_and_delete]),
         content: Form(
           key: _formKey,
           child: Column(
@@ -64,9 +67,7 @@ class _CustomDialogState extends State<CustomDialog> {
               TextFormField(
                 controller: _textController,
                 keyboardType: TextInputType.phone,
-                decoration: InputDecoration(
-                  labelText: S.current.number_phone,
-                ),
+                decoration: InputDecoration(labelText: S.current.number_phone),
                 validator: (value) {
                   if (value == null || value.isEmpty || value == '') {
                     return Translation[Language.fields];
@@ -74,9 +75,7 @@ class _CustomDialogState extends State<CustomDialog> {
                   return null;
                 },
               ),
-              SizedBox(
-                height: getheight(2.5),
-              ),
+              SizedBox(height: getheight(2.5)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -90,9 +89,7 @@ class _CustomDialogState extends State<CustomDialog> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      side: const BorderSide(
-                        color: ColorUsed.second,
-                      ),
+                      side: const BorderSide(color: ColorUsed.second),
                     ),
                     onPressed: () {
                       Navigator.pop(context);
@@ -115,53 +112,60 @@ class _CustomDialogState extends State<CustomDialog> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      side: const BorderSide(
-                        color: ColorUsed.second,
-                      ),
+                      side: const BorderSide(color: ColorUsed.second),
                     ),
                     onPressed: () async {
+                   read.sendOtpNumber(context, _textController.text);
+
                       if (_textController.text.isEmpty) {
-                        showSnakeBar(
-                          context,
-                          Translation[Language.fields],
-                        );
+                        showSnakeBar(context, Translation[Language.fields]);
                         return;
                       }
-                      showCirculerProgress(context);
-                      if (dropdownValue!
-                          .contains(Translation[Language.doctor])) {
+                      // showCirculerProgress(context);
+                      if (dropdownValue.contains(
+                        Translation[Language.doctor],
+                      )) {
                         dropdownValue = 'Doctor';
                         read.searchService(
-                          dropdownValue!,
+                          dropdownValue,
                           _textController.text,
                           context,
                         );
                       } else if (dropdownValue ==
                           Translation[Language.blood_type]) {
                         await read.searchTypes(context, _textController.text);
-                        // Navigator.of(context).pop();
-
-                        // dropdownValue = ServiceCollectios.line.name;
+           
                       } else if (dropdownValue == S.current.cars) {
                         dropdownValue = 'line';
+                  //       shared!.remove('nameUser');
+                  // shared!.remove('emailUser');
+                  // shared!.remove('phoneUser');
+                  // shared!.remove('isRegister');
+                  Scaffold.of(context).closeDrawer();
                         await read.searchService(
-                          dropdownValue!,
+                          dropdownValue,
                           _textController.text,
                           context,
                         );
                       } else if (dropdownValue == S.current.professions) {
                         dropdownValue = 'professions';
                         read.searchService(
-                          dropdownValue!,
+                          dropdownValue,
                           _textController.text,
                           context,
                         );
                       } else if (dropdownValue == S.current.internal_transfer) {
                         dropdownValue = 'Satota';
                         read.searchService(
-                          dropdownValue!,
+                          dropdownValue,
                           _textController.text,
                           context,
+                        );
+                      } else if (dropdownValue == "none") {
+                      
+                        await read.deleteDataFromRealtime(
+                          context,
+                          _textController.text,
                         );
                       }
                     },
@@ -174,7 +178,7 @@ class _CustomDialogState extends State<CustomDialog> {
                     ),
                   ),
                 ],
-              )
+              ),
             ],
           ),
         ),
@@ -188,9 +192,7 @@ class _CustomDialogState extends State<CustomDialog> {
               ),
             ),
           ),
-          SizedBox(
-            height: getheight(2),
-          ),
+          SizedBox(height: getheight(2)),
           Center(
             child: CustomMaterialButton(
               title: S.current.send_developer,
@@ -200,7 +202,7 @@ class _CustomDialogState extends State<CustomDialog> {
                 // Navigator.of(context).pop();
               },
             ),
-          )
+          ),
         ],
         // actionsAlignment: MainAxisAlignment.center,
       ),
@@ -245,10 +247,7 @@ class _CustomDropdownMenuState extends State<CustomDropdownMenu> {
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(currentSelectedItem),
-            Icon(Icons.arrow_drop_down),
-          ],
+          children: [Text(currentSelectedItem), Icon(Icons.arrow_drop_down)],
         ),
       ),
     );

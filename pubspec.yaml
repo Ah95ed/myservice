@@ -4,35 +4,36 @@ description: A new Flutter project.
 publish_to: 'none'
 version: 1.0.0+1
 environment:
-  sdk: '>=3.6.0 <4.0.0'
+  sdk: '>=3.8.1 <4.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.8
+  cupertino_icons: 
   firebase_core:
-  email_otp: ^3.0.2
+  email_otp: 
   cloud_firestore:
-  recaptcha_enterprise_flutter: ^18.5.1
+  recaptcha_enterprise_flutter: 
   provider:
   url_launcher:
   shared_preferences:
   flutter_localizations:
     sdk: flutter
   firebase_database:
-  intl: ^0.19.0
-  tutorial_coach_mark: ^1.2.11
-  appwrite: ^13.1.1
-  firebase_remote_config: ^5.3.0
-  share_plus: ^10.0.2
-  package_info_plus: ^8.1.2
+  intl: 
+  tutorial_coach_mark: 
+  appwrite: 
+    git: https://github.com/appwrite/sdk-for-flutter.git
+  firebase_remote_config: 
+  share_plus: 
+  package_info_plus: 
   http:
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^5.0.0
+  flutter_lints: 
 flutter:
   generate: true
 

@@ -21,7 +21,7 @@ Future<void> init() async {
   packageInfo = await PackageInfo.fromPlatform();
 }
 
-initData() async {
+void initData() async {
   remoteConfig = await FirebaseRemoteConfig.instance;
 
   await remoteConfig.fetchAndActivate();

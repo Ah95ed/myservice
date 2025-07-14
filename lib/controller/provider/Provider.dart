@@ -20,7 +20,6 @@ class Providers with ChangeNotifier {
   String? name, email, phone, password;
   List s = [];
   List search = [];
-  // List save = [];
 
   Widget title = Text(
     Translation[Language.selectType],
@@ -50,10 +49,8 @@ class Providers with ChangeNotifier {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     number.dispose();
-    notifyListeners();
   }
 
   int index = 2;
@@ -119,9 +116,9 @@ class Providers with ChangeNotifier {
     notifyListeners();
   }
 
-  void refresh() {
-    notifyListeners();
-  }
+  // void refresh() {
+  //   notifyListeners();
+  // }
 
   Future registerWithEmailOTP(
     String email,
@@ -156,10 +153,7 @@ class Providers with ChangeNotifier {
   Future<void> searchName(String? name) async {
     if (name == null || name.length == 0 || name == "" || name.isEmpty) {
       search = [];
-      // s = save;
-      // save = [];
-      // search = [];
-
+      
       notifyListeners();
       return;
     }
@@ -167,13 +161,7 @@ class Providers with ChangeNotifier {
     search = s.where((e) {
       return e['name'].contains(name);
     }).toList();
-    // for (var element in s) {
-    //   if (element['name'].toString().contains(name!)) {
-    //     search.add(element);
-    //   }
-    // }
-    // s = search;
-    // search = [];
+  
     notifyListeners();
   }
 

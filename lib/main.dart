@@ -29,6 +29,7 @@ import 'generated/l10n.dart';
 void main() async {
   await runZonedGuarded<Future<void>>(
     () async {
+
       await WidgetsFlutterBinding.ensureInitialized();
       await init();
       WidgetsBinding.instance.addPostFrameCallback((_) async {
@@ -105,7 +106,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizeBuilder(
       baseSize: const Size(375, 812),
-     height: context.screenHeight,
+      height: context.screenHeight,
       width: context.screenWidth,
       child: Consumer<LanguageController>(
         builder: (context, v, child) {
@@ -121,7 +122,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             locale: v.language,
             title: Translation[Language.title],
-            
+
             routes: routs,
             theme: ThemeData(
               colorScheme: ColorScheme.fromSeed(
@@ -129,7 +130,7 @@ class MyApp extends StatelessWidget {
               ),
               useMaterial3: true,
             ),
-            // ! here to check is null or not 
+            // ! here to check is null or not
             home: shared!.getBool('spalsh') == null
                 ? MyCustomSplashScreen()
                 : MainScreen(),

@@ -8,9 +8,11 @@ import io.flutter.plugin.common.MethodChannel
 class MainActivity: FlutterActivity() {
     // private val CHANNEL = "com.blood.share"
 
-    // override fun onCreate(savedInstanceState: Bundle?) {
-    //     super.onCreate(savedInstanceState)
-
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            WindowCompat.setDecorFitsSystemWindows(window, false)
+          }
     //     MethodChannel(flutterEngine?.dartExecutor?
     //     .binaryMessenger?, CHANNEL).setMethodCallHandler { call, result ->
     //         if (call.method == "shareText") {
@@ -33,5 +35,5 @@ class MainActivity: FlutterActivity() {
     //         val shareIntent = Intent.createChooser(sendIntent, null)
     //         startActivity(shareIntent)
     //     }
-    // }
+    }
 }
