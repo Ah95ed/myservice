@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
@@ -115,7 +114,7 @@ class _CustomDialogState extends State<CustomDialog> {
                       side: const BorderSide(color: ColorUsed.second),
                     ),
                     onPressed: () async {
-                   read.sendOtpNumber(context, _textController.text);
+                      read.sendOtpNumber(context, _textController.text);
 
                       if (_textController.text.isEmpty) {
                         showSnakeBar(context, Translation[Language.fields]);
@@ -134,14 +133,13 @@ class _CustomDialogState extends State<CustomDialog> {
                       } else if (dropdownValue ==
                           Translation[Language.blood_type]) {
                         await read.searchTypes(context, _textController.text);
-           
                       } else if (dropdownValue == S.current.cars) {
                         dropdownValue = 'line';
-                  //       shared!.remove('nameUser');
-                  // shared!.remove('emailUser');
-                  // shared!.remove('phoneUser');
-                  // shared!.remove('isRegister');
-                  Scaffold.of(context).closeDrawer();
+                        //       shared!.remove('nameUser');
+                        // shared!.remove('emailUser');
+                        // shared!.remove('phoneUser');
+                        // shared!.remove('isRegister');
+                        Scaffold.of(context).closeDrawer();
                         await read.searchService(
                           dropdownValue,
                           _textController.text,
@@ -162,7 +160,6 @@ class _CustomDialogState extends State<CustomDialog> {
                           context,
                         );
                       } else if (dropdownValue == "none") {
-                      
                         await read.deleteDataFromRealtime(
                           context,
                           _textController.text,

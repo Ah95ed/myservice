@@ -2,7 +2,6 @@ import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
 import 'package:flutter/material.dart';
 
-
 class CustomMaterialButton extends StatelessWidget {
   String? title;
 
@@ -34,7 +33,10 @@ class CustomMaterialButton extends StatelessWidget {
         child: Text(
           title!,
           style: TextStyle(
-              fontSize: 18.0, fontWeight: FontWeight.bold, color: Colors.white),
+            fontSize: 18.0,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
         ),
       ),
     );

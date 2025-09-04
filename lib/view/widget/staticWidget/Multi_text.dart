@@ -12,7 +12,7 @@ class MultiText extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.symmetric(
           horizontal: getWidth(2),
-          vertical: getheight(0.1)
+          vertical: getheight(0.1),
         ),
         child: Row(
           children: [
@@ -20,24 +20,22 @@ class MultiText extends StatelessWidget {
               con,
               maxLines: 3,
               style: TextStyle(
-                  fontSize: setFontSize(14),
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold),
+                fontSize: setFontSize(14),
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-            SizedBox(
-              width: getWidth(2),
-            ),
+            SizedBox(width: getWidth(2)),
             Text(
               str,
               maxLines: 3,
               style: TextStyle(
-                  fontSize: setFontSize(14),
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold),
+                fontSize: setFontSize(14),
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-            SizedBox(
-              height: getheight(1),
-            ),
+            SizedBox(height: getheight(1)),
           ],
         ),
       ),

@@ -3,11 +3,4 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class OTPEmailProvider with ChangeNotifier {
-
-
-
-
-
-  
-}
+class OTPEmailProvider with ChangeNotifier {}

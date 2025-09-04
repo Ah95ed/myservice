@@ -31,16 +31,13 @@ class _MainScreenState extends State<MainScreen> {
   void didChangeDependencies() async {
     super.didChangeDependencies();
     await checkUpdate(context);
-    Future.delayed(
-      Duration(seconds: 3),
-      () {
-        if (shared!.getBool('tutorial') == null) {
-          createTutorial();
-          addItem();
-          showTutorial();
-        }
-      },
-    );
+    Future.delayed(Duration(seconds: 3), () {
+      if (shared!.getBool('tutorial') == null) {
+        createTutorial();
+        addItem();
+        showTutorial();
+      }
+    });
   }
 
   FutureOr<void> checkUpdate(BuildContext context) async {
@@ -78,7 +75,8 @@ class _MainScreenState extends State<MainScreen> {
                   onPressed: () async {
                     if (await launchUrl(
                       Uri.parse(
-                          'https://play.google.com/store/apps/details?id=com.Blood.types'),
+                        'https://play.google.com/store/apps/details?id=com.Blood.types',
+                      ),
                       mode: LaunchMode.platformDefault,
                     )) {
                       throw Exception('Could not launch googleplay');
@@ -120,11 +118,7 @@ class _MainScreenState extends State<MainScreen> {
           ),
         ),
         leading: IconButton(
-          icon: Icon(
-            key: menu,
-            Icons.menu,
-            color: Colors.white,
-          ),
+          icon: Icon(key: menu, Icons.menu, color: Colors.white),
           onPressed: () {
             _scaffoldKey.currentState?.openDrawer();
           },
@@ -134,15 +128,16 @@ class _MainScreenState extends State<MainScreen> {
         toolbarHeight: getheight(10),
         actions: [
           Consumer<Providers>(
-            builder: (context, value, child) => 
-            IconButton(
+            builder: (context, value, child) => IconButton(
               icon: readSerach.actionsicon,
               onPressed: () {
-                readSerach.changewidget(TextStyle(
-                  fontSize: setFontSize(14),
-                  fontWeight: FontWeight.bold,
-                  color: AppTheme.notWhite,
-                ));
+                readSerach.changewidget(
+                  TextStyle(
+                    fontSize: setFontSize(14),
+                    fontWeight: FontWeight.bold,
+                    color: AppTheme.notWhite,
+                  ),
+                );
               },
             ),
           ),
@@ -153,12 +148,15 @@ class _MainScreenState extends State<MainScreen> {
           horizontal: getWidth(2),
           vertical: getheight(5),
         ),
-        decoration: BoxDecoration(boxShadow: [
-          BoxShadow(
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
               color: Colors.black.withOpacity(0.5),
               blurRadius: 24,
-              offset: const Offset(0, 10))
-        ]),
+              offset: const Offset(0, 10),
+            ),
+          ],
+        ),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(15),
           child: BottomNavigationBar(
@@ -172,19 +170,15 @@ class _MainScreenState extends State<MainScreen> {
             items: [
               BottomNavigationBarItem(
                 key: navdoctor,
-                icon: Icon(
-                  Icons.medical_information,
-                ),
+                icon: Icon(Icons.medical_information),
                 label: S.of(context).doctor,
               ),
               BottomNavigationBarItem(
-               
                 key: work,
                 icon: Icon(Icons.work_history),
                 label: S.of(context).professions,
               ),
               BottomNavigationBarItem(
-                
                 key: donors,
                 icon: Icon(Icons.bloodtype),
                 label: S.of(context).blood_type,
@@ -204,11 +198,12 @@ class _MainScreenState extends State<MainScreen> {
         ),
       ),
       body: SingleChildScrollView(
-          child: SizedBox(
-        height: getheight(100),
-        width: getWidth(100),
-        child: context.watch<Providers>().bodys[readSerach.index],
-      )),
+        child: SizedBox(
+          height: getheight(100),
+          width: getWidth(100),
+          child: context.watch<Providers>().bodys[readSerach.index],
+        ),
+      ),
     );
   }
 
@@ -238,7 +233,8 @@ class _MainScreenState extends State<MainScreen> {
 
         print("target: $target");
         print(
-            "clicked at position local: ${tapDetails.localPosition} - global: ${tapDetails.globalPosition}");
+          "clicked at position local: ${tapDetails.localPosition} - global: ${tapDetails.globalPosition}",
+        );
       },
       onClickOverlay: (target) {
         print('onClickOverlay: $target');

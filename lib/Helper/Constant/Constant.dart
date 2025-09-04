@@ -12,11 +12,10 @@ abstract class Constant {
   static const Link = "https://www.blood.co.uk/who-can-give-blood/";
   static const PrivacyPolicy = 'https://Ah95ed.github.io/privatePolice/';
 }
+
 // https://github.com/Ah95ed/privatePolice
 class DataSend {
   String collection;
 
-
   DataSend(this.collection);
-
 }

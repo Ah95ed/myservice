@@ -57,9 +57,7 @@ class _LineScreenState extends State<LineScreen> {
                 height: getheight(25),
                 title: Translation[Language.Addtransmissionline],
               ),
-              SizedBox(
-                height: getheight(4),
-              ),
+              SizedBox(height: getheight(4)),
               component1(
                 name,
                 Icons.person,
@@ -67,9 +65,7 @@ class _LineScreenState extends State<LineScreen> {
                 false,
                 false,
               ),
-              SizedBox(
-                height: getheight(1.5),
-              ),
+              SizedBox(height: getheight(1.5)),
               component1(
                 phone,
                 Icons.phone,
@@ -77,9 +73,7 @@ class _LineScreenState extends State<LineScreen> {
                 false,
                 false,
               ),
-              SizedBox(
-                height: getheight(1.5),
-              ),
+              SizedBox(height: getheight(1.5)),
               component1(
                 typevehicle,
                 Icons.taxi_alert_rounded,
@@ -87,9 +81,7 @@ class _LineScreenState extends State<LineScreen> {
                 false,
                 false,
               ),
-              SizedBox(
-                height: getheight(1.5),
-              ),
+              SizedBox(height: getheight(1.5)),
               component1(
                 time,
                 Icons.time_to_leave,
@@ -97,9 +89,7 @@ class _LineScreenState extends State<LineScreen> {
                 false,
                 false,
               ),
-              SizedBox(
-                height: getheight(1.5),
-              ),
+              SizedBox(height: getheight(1.5)),
               component1(
                 direction,
                 Icons.where_to_vote_sharp,
@@ -107,9 +97,7 @@ class _LineScreenState extends State<LineScreen> {
                 false,
                 false,
               ),
-              SizedBox(
-                height: getheight(2),
-              ),
+              SizedBox(height: getheight(2)),
               CustomMaterialButton(
                 title: Translation[Language.send],
                 onPressed: () async {

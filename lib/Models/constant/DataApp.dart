@@ -1,6 +1,4 @@
-
-
-class DataApp{
+class DataApp {
   dynamic data;
 
   DataApp(this.data);

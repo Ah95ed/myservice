@@ -38,7 +38,7 @@ class _AddProfessionsState extends State<AddProfessions> {
     final read = context.read<ServiceController>();
     return Scaffold(
       body: ScrollConfiguration(
-        behavior:ScrollBehavior(),
+        behavior: ScrollBehavior(),
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           scrollDirection: Axis.vertical,
@@ -52,9 +52,7 @@ class _AddProfessionsState extends State<AddProfessions> {
                   height: getheight(30),
                   title: Translation[Language.professions],
                 ),
-                SizedBox(
-                  height: getheight(4),
-                ),
+                SizedBox(height: getheight(4)),
                 // component1(
                 //   name,
                 //   Icons.person,
@@ -62,13 +60,8 @@ class _AddProfessionsState extends State<AddProfessions> {
                 //   false,
                 //   false,
                 // ),
-                SizedBox(
-                  height: getheight(1.5),
-                ),
-                TextFieldCustom(
-                  nameProfession,
-                  icons: Icons.work_history,
-                ),
+                SizedBox(height: getheight(1.5)),
+                TextFieldCustom(nameProfession, icons: Icons.work_history),
                 // TextFieldCustom(
 
                 //   nameProfession,
@@ -77,9 +70,7 @@ class _AddProfessionsState extends State<AddProfessions> {
                 //   false,
                 //   false,
                 // ),
-                SizedBox(
-                  height: getheight(2),
-                ),
+                SizedBox(height: getheight(2)),
                 CustomMaterialButton(
                   title: Translation[Language.send],
                   onPressed: () async {

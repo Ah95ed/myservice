@@ -35,10 +35,8 @@ class ProfessionsScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       const CircularProgressIndicator(),
-                      SizedBox(
-                        height: getheight(2),
-                      ),
-                      Text(S.of(context).wait_service)
+                      SizedBox(height: getheight(2)),
+                      Text(S.of(context).wait_service),
                     ],
                   ),
                 )
@@ -49,9 +47,9 @@ class ProfessionsScreen extends StatelessWidget {
                       name: value.data[index]['name'],
                       nameProfession: value.data[index]['nameProfession'],
                       onPressed: () {
-                        context
-                            .read<Providers>()
-                            .callNumber(value.data[index]['number']);
+                        context.read<Providers>().callNumber(
+                          value.data[index]['number'],
+                        );
                       },
                     );
                   },

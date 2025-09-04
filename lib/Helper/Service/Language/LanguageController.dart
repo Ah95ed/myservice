@@ -10,9 +10,7 @@ class LanguageController with ChangeNotifier {
 
   Locale language = shared!.getString("lang") == null
       ? const Locale('ar')
-      : Locale(
-          shared!.getString("lang")!,
-        );
+      : Locale(shared!.getString("lang")!);
 
   void changeLanguage(String? lang) async {
     this.language = Locale(lang ?? "ar");
@@ -25,9 +23,7 @@ class LanguageController with ChangeNotifier {
 class Languages extends ChangeNotifier {
   Locale language = shared!.getString("lang") == null
       ? const Locale('ar')
-      : Locale(
-          shared!.getString("lang")!,
-        );
+      : Locale(shared!.getString("lang")!);
   // late String translation;
   // String lancode = shared!.getString('lang') ?? 'en';
 
@@ -54,11 +50,7 @@ late String language;
 initLang(String lang) async {
   if (lang == 'ar') {
     Translation = Language.keyMap['ar']!;
-
   } else {
     Translation = Language.keyMap['en']!;
-
   }
-
 }
-

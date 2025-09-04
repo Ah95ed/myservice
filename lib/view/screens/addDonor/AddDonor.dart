@@ -62,9 +62,7 @@ class _AddDonorState extends State<AddDonor> {
                   height: getheight(30),
                   title: Translation[Language.addDonor],
                 ),
-                SizedBox(
-                  height: getheight(4),
-                ),
+                SizedBox(height: getheight(4)),
                 component1(
                   name,
                   Icons.person,
@@ -72,15 +70,11 @@ class _AddDonorState extends State<AddDonor> {
                   false,
                   false,
                 ),
-                SizedBox(
-                  height: getheight(1.5),
-                ),
+                SizedBox(height: getheight(1.5)),
                 Container(
                   height: getheight(7),
                   width: getWidth(90),
-                  padding: EdgeInsets.symmetric(
-                    horizontal: getWidth(2),
-                  ),
+                  padding: EdgeInsets.symmetric(horizontal: getWidth(2)),
                   decoration: BoxDecoration(
                     color: ColorUsed.second.withOpacity(0.8),
                     borderRadius: BorderRadius.circular(12),
@@ -100,9 +94,7 @@ class _AddDonorState extends State<AddDonor> {
                         dropdownValue = value;
                       });
                     },
-                    items: items.map<DropdownMenuItem<String>>((
-                      String value,
-                    ) {
+                    items: items.map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
                         child: Text(
@@ -117,9 +109,7 @@ class _AddDonorState extends State<AddDonor> {
                     }).toList(),
                   ),
                 ),
-                SizedBox(
-                  height: getheight(2),
-                ),
+                SizedBox(height: getheight(2)),
                 component1(
                   location,
                   Icons.title,
@@ -127,30 +117,24 @@ class _AddDonorState extends State<AddDonor> {
                   false,
                   false,
                 ),
-                SizedBox(
-                  height: getheight(2),
-                ),
+                SizedBox(height: getheight(2)),
                 CustomMaterialButton(
                   title: Translation[Language.send],
                   onPressed: () async {
-                    if (name.text.isEmpty || 
-                    location.text.isEmpty||
-                    dropdownValue==null) {
+                    if (name.text.isEmpty ||
+                        location.text.isEmpty ||
+                        dropdownValue == null) {
                       showSnakeBar(context, Translation[Language.fields]);
                       return;
                     }
                     if (await shared!.getString('phoneUser') == null) return;
-                    read.setDataInFirestore(
-                      context,
-                      dropdownValue!,
-                      {
-                        "name": name.text,
-                        'number': await shared!.getString('phoneUser'),
-                        "location": location.text,
-                        'type': dropdownValue,
-                      },
-                    );
-        
+                    read.setDataInFirestore(context, dropdownValue!, {
+                      "name": name.text,
+                      'number': await shared!.getString('phoneUser'),
+                      "location": location.text,
+                      'type': dropdownValue,
+                    });
+
                     await showCirculerProgress(context);
                   },
                 ),

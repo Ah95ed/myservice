@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
@@ -23,13 +22,12 @@ import 'package:Al_Zab_township_guide/view/screens/MyCustomSplashScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
-
 import 'generated/l10n.dart';
 
-void main() async {
+Future<void> main() async {
+  //! runZonedGuarded is a function that allows you to run your app in a zone that catches errors
   await runZonedGuarded<Future<void>>(
     () async {
-
       await WidgetsFlutterBinding.ensureInitialized();
       await init();
       WidgetsBinding.instance.addPostFrameCallback((_) async {
@@ -38,26 +36,11 @@ void main() async {
       runApp(
         MultiProvider(
           providers: [
-            ChangeNotifierProvider(
-              create: (_) => Providers(),
-              lazy: true,
-            ),
-            ChangeNotifierProvider(
-              create: (_) => LoginProvider(),
-              lazy: true,
-            ),
-            ChangeNotifierProvider(
-              create: (_) => SignupProvider(),
-              lazy: true,
-            ),
-            ChangeNotifierProvider(
-              create: (_) => DoctorProvider(),
-              lazy: true,
-            ),
-            ChangeNotifierProvider(
-              create: (_) => MainController(),
-              lazy: true,
-            ),
+            ChangeNotifierProvider(create: (_) => Providers(), lazy: true),
+            ChangeNotifierProvider(create: (_) => LoginProvider(), lazy: true),
+            ChangeNotifierProvider(create: (_) => SignupProvider(), lazy: true),
+            ChangeNotifierProvider(create: (_) => DoctorProvider(), lazy: true),
+            ChangeNotifierProvider(create: (_) => MainController(), lazy: true),
             ChangeNotifierProvider(
               create: (_) => LanguageController(),
               lazy: true,
@@ -74,10 +57,7 @@ void main() async {
               create: (_) => ServiceController(),
               lazy: true,
             ),
-            ChangeNotifierProvider(
-              create: (_) => Updateprovider(),
-              lazy: true,
-            ),
+            ChangeNotifierProvider(create: (_) => Updateprovider(), lazy: true),
             ChangeNotifierProvider(
               create: (_) => ForgetPasswordProvider(),
               lazy: true,
@@ -125,9 +105,7 @@ class MyApp extends StatelessWidget {
 
             routes: routs,
             theme: ThemeData(
-              colorScheme: ColorScheme.fromSeed(
-                seedColor: ColorUsed.primary,
-              ),
+              colorScheme: ColorScheme.fromSeed(seedColor: ColorUsed.primary),
               useMaterial3: true,
             ),
             // ! here to check is null or not

@@ -1,8 +1,1 @@
-enum ServiceCollectios {
-  Doctor,
-  line,
-  Satota,
-  professions;
-  
-}
-
+enum ServiceCollectios { Doctor, line, Satota, professions }

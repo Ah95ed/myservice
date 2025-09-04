@@ -21,7 +21,7 @@ class OTPScreenNumber extends StatefulWidget {
 class _OTPScreenNumberState extends State<OTPScreenNumber> {
   TextEditingController _textController = TextEditingController();
 
-   String? userId;
+  String? userId;
   @override
   void dispose() {
     // TODO: implement dispose
@@ -70,21 +70,15 @@ class _OTPScreenNumberState extends State<OTPScreenNumber> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
-                        margin: EdgeInsets.symmetric(
-                          vertical: getheight(6),
-                        ),
+                        margin: EdgeInsets.symmetric(vertical: getheight(6)),
                         height: getheight(12),
-                        child: Image.asset(
-                          'assets/logo/asd.png',
-                        ),
+                        child: Image.asset('assets/logo/asd.png'),
                       ),
                     ],
                   ),
                 ),
               ),
-              SizedBox(
-                height: getheight(2),
-              ),
+              SizedBox(height: getheight(2)),
               Text(
                 Translation[Language.inter_otp_number],
                 style: TextStyle(
@@ -94,9 +88,7 @@ class _OTPScreenNumberState extends State<OTPScreenNumber> {
                 ),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(
-                height: getheight(6),
-              ),
+              SizedBox(height: getheight(6)),
               SizedBox(
                 height: getheight(10),
                 width: getWidth(70),
@@ -135,9 +127,7 @@ class _OTPScreenNumberState extends State<OTPScreenNumber> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: getheight(6),
-              ),
+              SizedBox(height: getheight(6)),
               OutlinedButton(
                 style: OutlinedButton.styleFrom(
                   backgroundColor: ColorUsed.primary,
@@ -147,16 +137,11 @@ class _OTPScreenNumberState extends State<OTPScreenNumber> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  side: const BorderSide(
-                    color: ColorUsed.second,
-                  ),
+                  side: const BorderSide(color: ColorUsed.second),
                 ),
                 onPressed: () async {
                   if (_textController.text.isEmpty) {
-                    showSnakeBar(
-                      context,
-                      Translation[Language.fields],
-                    );
+                    showSnakeBar(context, Translation[Language.fields]);
                     return;
                   }
                   // if (_textController.text.length < 6) {
@@ -172,97 +157,92 @@ class _OTPScreenNumberState extends State<OTPScreenNumber> {
                       .setProject('66b5930400399d8fd3ee')
                       .setSelfSigned(status: true);
                   final account = await Account(client);
-        
+
                   await account
                       .createSession(
-                    userId: userId!,
-                    secret: _textController.text,
-                  )
-                      .then(
-                    (value) {
-                      if (value.current) {
-                        showDialog(
-                          context: context,
-                          builder: (c) {
-                            return AlertDialog(
-                              title: Text(
-                                Translation[Language.sure_to_delete_account],
-                              ),
-                              actions: [
-                                ElevatedButton(
-                                  autofocus: true,
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: ColorUsed.primary,
-                                    foregroundColor: ColorUsed.primary,
-                                    shadowColor: ColorUsed.primary,
-                                    elevation: 5,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
+                        userId: userId!,
+                        secret: _textController.text,
+                      )
+                      .then((value) {
+                        if (value.current) {
+                          showDialog(
+                            context: context,
+                            builder: (c) {
+                              return AlertDialog(
+                                title: Text(
+                                  Translation[Language.sure_to_delete_account],
+                                ),
+                                actions: [
+                                  ElevatedButton(
+                                    autofocus: true,
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: ColorUsed.primary,
+                                      foregroundColor: ColorUsed.primary,
+                                      shadowColor: ColorUsed.primary,
+                                      elevation: 5,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      side: const BorderSide(
+                                        color: ColorUsed.primary,
+                                      ),
                                     ),
-                                    side: const BorderSide(
-                                      color: ColorUsed.primary,
-                                    ),
-                                  ),
-                                  onPressed: () async {
-                                    Navigator.pop(context);
-                                    showCirculerProgress(context);
-                                    shared!.remove('userId');
-                                    await read.deleteDataFromRealtimeAndFireStore(
-                                        context);
-                                    // showDi
-                                  },
-                                  child: Text(
-                                    Translation[Language.yes],
-                                    style: TextStyle(
+                                    onPressed: () async {
+                                      Navigator.pop(context);
+                                      showCirculerProgress(context);
+                                      shared!.remove('userId');
+                                      await read
+                                          .deleteDataFromRealtimeAndFireStore(
+                                            context,
+                                          );
+                                      // showDi
+                                    },
+                                    child: Text(
+                                      Translation[Language.yes],
+                                      style: TextStyle(
                                         color: AppTheme.notWhite,
-                                        fontSize: setFontSize(14)),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: getWidth(8),
-                                ),
-                                ElevatedButton(
-                                  autofocus: true,
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: ColorUsed.primary,
-                                    foregroundColor: ColorUsed.primary,
-                                    shadowColor: ColorUsed.primary,
-                                    elevation: 5,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    side: const BorderSide(
-                                      color: ColorUsed.primary,
+                                        fontSize: setFontSize(14),
+                                      ),
                                     ),
                                   ),
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                    shared!.remove('userId');
-                                  },
-                                  child: Text(
-                                    Translation[Language.no],
-                                    style: TextStyle(
+                                  SizedBox(width: getWidth(8)),
+                                  ElevatedButton(
+                                    autofocus: true,
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: ColorUsed.primary,
+                                      foregroundColor: ColorUsed.primary,
+                                      shadowColor: ColorUsed.primary,
+                                      elevation: 5,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      side: const BorderSide(
+                                        color: ColorUsed.primary,
+                                      ),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                      shared!.remove('userId');
+                                    },
+                                    child: Text(
+                                      Translation[Language.no],
+                                      style: TextStyle(
                                         color: AppTheme.notWhite,
-                                        fontSize: setFontSize(14)),
+                                        fontSize: setFontSize(14),
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      }
-                    },
-                  ).catchError(
-                    (e) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(
-                            e.toString(),
-                          ),
-                        ),
-                      );
-                    },
-                  );
+                                ],
+                              );
+                            },
+                          );
+                        }
+                      })
+                      .catchError((e) {
+                        ScaffoldMessenger.of(
+                          context,
+                        ).showSnackBar(SnackBar(content: Text(e.toString())));
+                      });
                 },
                 child: Text(
                   Translation[Language.confirm_otp],

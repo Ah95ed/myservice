@@ -35,26 +35,21 @@ class _SignupScreenState extends State<SignupScreen>
       duration: Duration(seconds: 2),
     );
 
-    _animation = Tween<double>(begin: .7, end: 1).animate(
-      CurvedAnimation(
-        parent: _controller,
-        curve: Curves.ease,
-      ),
-    )
-      ..addListener(
-        () {
-          setState(() {});
-        },
-      )
-      ..addStatusListener(
-        (status) {
-          if (status == AnimationStatus.completed) {
-            _controller.reverse();
-          } else if (status == AnimationStatus.dismissed) {
-            _controller.forward();
-          }
-        },
-      );
+    _animation =
+        Tween<double>(
+            begin: .7,
+            end: 1,
+          ).animate(CurvedAnimation(parent: _controller, curve: Curves.ease))
+          ..addListener(() {
+            setState(() {});
+          })
+          ..addStatusListener((status) {
+            if (status == AnimationStatus.completed) {
+              _controller.reverse();
+            } else if (status == AnimationStatus.dismissed) {
+              _controller.forward();
+            }
+          });
 
     _controller.forward();
   }
@@ -92,16 +87,14 @@ class _SignupScreenState extends State<SignupScreen>
                     Expanded(
                       flex: 2,
                       child: Login_Image(
-                          // height: getheight(0),
-                          ),
+                        // height: getheight(0),
+                      ),
                     ),
                     Expanded(
                       flex: 4,
                       child: Column(
                         children: [
-                          SizedBox(
-                            height: getheight(2),
-                          ),
+                          SizedBox(height: getheight(2)),
                           component1(
                             name,
                             Icons.person,
@@ -109,9 +102,7 @@ class _SignupScreenState extends State<SignupScreen>
                             false,
                             false,
                           ),
-                          SizedBox(
-                            height: getheight(2),
-                          ),
+                          SizedBox(height: getheight(2)),
                           component1(
                             email,
                             Icons.email,
@@ -119,9 +110,7 @@ class _SignupScreenState extends State<SignupScreen>
                             false,
                             false,
                           ),
-                          SizedBox(
-                            height: getheight(2),
-                          ),
+                          SizedBox(height: getheight(2)),
                           component1(
                             phone,
                             Icons.phone,
@@ -129,9 +118,7 @@ class _SignupScreenState extends State<SignupScreen>
                             false,
                             true,
                           ),
-                          SizedBox(
-                            height: getheight(2),
-                          ),
+                          SizedBox(height: getheight(2)),
                           component1(
                             password,
                             Icons.lock_outline,
@@ -139,9 +126,7 @@ class _SignupScreenState extends State<SignupScreen>
                             true,
                             false,
                           ),
-                          SizedBox(
-                            height: getheight(4),
-                          ),
+                          SizedBox(height: getheight(4)),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -158,7 +143,9 @@ class _SignupScreenState extends State<SignupScreen>
                                     ..onTap = () {
                                       HapticFeedback.lightImpact();
                                       context.read<Providers>().managerScreen(
-                                          LoginScreen.Route, context);
+                                        LoginScreen.Route,
+                                        context,
+                                      );
                                     },
                                 ),
                               ),
@@ -173,9 +160,7 @@ class _SignupScreenState extends State<SignupScreen>
                         children: [
                           Center(
                             child: Container(
-                              margin: EdgeInsets.only(
-                                bottom: getheight(5),
-                              ),
+                              margin: EdgeInsets.only(bottom: getheight(5)),
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 gradient: LinearGradient(
@@ -210,7 +195,7 @@ class _SignupScreenState extends State<SignupScreen>
                                         duration: Duration(seconds: 3),
                                       ),
                                     );
-            
+
                                     return;
                                   }
                                   if (!email.text.contains('@')) {
@@ -224,7 +209,7 @@ class _SignupScreenState extends State<SignupScreen>
                                     return;
                                   }
                                   showCirculerProgress(context);
-            
+
                                   await provider.sendCode(
                                     SignupModel(
                                       name: name.text,
@@ -234,13 +219,13 @@ class _SignupScreenState extends State<SignupScreen>
                                     ),
                                     context,
                                   );
-            
+
                                   if (await provider.isSignup) {
                                     context.read<Providers>().managerScreen(
-                                          OtpScreenEmail.Route,
-                                          context,
-                                          object: false,
-                                        );
+                                      OtpScreenEmail.Route,
+                                      context,
+                                      object: false,
+                                    );
                                     provider.stopLoading();
                                     return;
                                   }
@@ -252,9 +237,7 @@ class _SignupScreenState extends State<SignupScreen>
                                   );
                                 },
                                 child: Container(
-                                  margin: EdgeInsets.only(
-                                    bottom: getheight(5),
-                                  ),
+                                  margin: EdgeInsets.only(bottom: getheight(5)),
                                   height: getheight(14),
                                   width: getWidth(30),
                                   alignment: Alignment.center,
@@ -265,9 +248,10 @@ class _SignupScreenState extends State<SignupScreen>
                                   child: Text(
                                     S.current.register_now,
                                     style: TextStyle(
-                                        color: AppTheme.nearlyWhite,
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: setFontSize(12)),
+                                      color: AppTheme.nearlyWhite,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: setFontSize(12),
+                                    ),
                                   ),
                                 ),
                               ),
@@ -322,13 +306,9 @@ class component1 extends StatelessWidget {
       ),
       child: TextField(
         controller: controller,
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: setFontSize(16),
-        ),
+        style: TextStyle(color: Colors.white, fontSize: setFontSize(16)),
         obscureText: isPassword!,
-        keyboardType: isEmail! ? TextInputType.phone
-         : TextInputType.text,
+        keyboardType: isEmail! ? TextInputType.phone : TextInputType.text,
         decoration: InputDecoration(
           // icon: Icon(
           //   icon,
@@ -340,29 +320,20 @@ class component1 extends StatelessWidget {
           //     color: ColorUsed.primary,
           //   ),
           // ),
-          prefixIcon: Icon(
-            icon,
-            color: Colors.white.withOpacity(.7),
-          ),
+          prefixIcon: Icon(icon, color: Colors.white.withOpacity(.7)),
           border: InputBorder.none,
           hintMaxLines: 1,
           hintText: hintText,
-          hintStyle: TextStyle(
-            fontSize: setFontSize(15),
-            color: Colors.white,
-          ),
+          hintStyle: TextStyle(fontSize: setFontSize(15), color: Colors.white),
         ),
       ),
     );
   }
 }
 
-
 // class SignupScreen extends StatelessWidget {
 //   static const Route = "/SignupScreen";
 //   SignupScreen({super.key});
-
-  
 
 //   bool isSignup = false;
 
@@ -387,7 +358,7 @@ class component1 extends StatelessWidget {
 //               width: getWidth(100),
 //               color: ColorUsed.PrimaryBackground,
 //               child: Form(
-                
+
 //                 child: Column(
 //                   children: [
 //                     // Login_Image(
@@ -440,7 +411,7 @@ class component1 extends StatelessWidget {
 //                     SizedBox(
 //                       height: getheight(2),
 //                     ),
-                 
+
 //                     // enter password
 //                     TextFieldCustom(
 //                       text: password,
@@ -468,14 +439,14 @@ class component1 extends StatelessWidget {
 //                                     duration: Duration(seconds: 3),
 //                                   ),
 //                                 );
-                
+
 //                                 return;
 //                               }
 //                               if (!email.text.contains('@')) {
 //                                 provider.stopLoading();
 //                                 return;
 //                               }
-                
+
 //                               await provider.sendCode(
 //                                 SignupModel(
 //                                   name: name.text,
@@ -485,7 +456,7 @@ class component1 extends StatelessWidget {
 //                                 ),
 //                                 context,
 //                               );
-                
+
 //                               if (await provider.isSignup) {
 //                                 context.read<Providers>().managerScreen(
 //                                       OtpScreen.Route,

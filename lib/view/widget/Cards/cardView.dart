@@ -12,18 +12,19 @@ import '../../ThemeApp/ColorUsed.dart';
 class CardViewList extends StatelessWidget {
   String? name, presence, specialization, number, title;
 
-  CardViewList(
-      {super.key,
-      this.name,
-      this.presence,
-      this.specialization,
-      this.number,
-      this.title});
+  CardViewList({
+    super.key,
+    this.name,
+    this.presence,
+    this.specialization,
+    this.number,
+    this.title,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation:6,
+      elevation: 6,
       child: SingleChildScrollView(
         child: SizedBox(
           child: Row(
@@ -34,7 +35,7 @@ class CardViewList extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     MultiText(name!, Translation[Language.name]),
-                    MultiText(presence!,Translation[Language.time]),
+                    MultiText(presence!, Translation[Language.time]),
                     MultiText(specialization!, S.of(context).specialization),
                     MultiText(title!, S.of(context).title_service),
                   ],

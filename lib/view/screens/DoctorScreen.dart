@@ -20,9 +20,7 @@ class DoctorScreen extends StatelessWidget {
     context.read<Providers>().getData('Doctor');
     context.read<Providers>().title = Text(
       Translation[Language.doctors],
-      style: const TextStyle(
-        color: AppTheme.notWhite,
-      ),
+      style: const TextStyle(color: AppTheme.notWhite),
     );
     context.read<Providers>().actionsicon = const Icon(
       Icons.search,
@@ -40,10 +38,8 @@ class DoctorScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       const CircularProgressIndicator(),
-                      SizedBox(
-                        height: getheight(2),
-                      ),
-                      Text(S.of(context).wait_service)
+                      SizedBox(height: getheight(2)),
+                      Text(S.of(context).wait_service),
                     ],
                   ),
                 )

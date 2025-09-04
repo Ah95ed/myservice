@@ -17,9 +17,7 @@ class SatotaScreen extends StatelessWidget {
     context.read<Providers>().getData(ServiceCollectios.Satota.name);
     context.read<Providers>().title = Text(
       S.of(context).internal_transfer,
-      style: const TextStyle(
-        color: AppTheme.notWhite,
-      ),
+      style: const TextStyle(color: AppTheme.notWhite),
     );
     context.read<Providers>().actionsicon = const Icon(
       Icons.search,
@@ -37,9 +35,7 @@ class SatotaScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       const CircularProgressIndicator(),
-                      SizedBox(
-                        height: getheight(2),
-                      ),
+                      SizedBox(height: getheight(2)),
                       Text(S.of(context).wait_service),
                     ],
                   ),
@@ -51,9 +47,7 @@ class SatotaScreen extends StatelessWidget {
                       name: value.data[index]['name'],
                       location: value.data[index]['location'],
                       onPressed: () {
-                        value.callNumber(
-                          value.data[index]['number'],
-                        );
+                        value.callNumber(value.data[index]['number']);
                       },
                     );
                   },

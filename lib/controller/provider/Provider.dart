@@ -1,4 +1,3 @@
-
 import 'package:Al_Zab_township_guide/Helper/Constant/Constant.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
@@ -25,11 +24,7 @@ class Providers with ChangeNotifier {
     Translation[Language.selectType],
     style: TextStyle(color: AppTheme.notWhite),
   );
-  Icon actionsicon = const Icon(
-    null,
-    color: AppTheme.notWhite,
-    size: 22.0,
-  );
+  Icon actionsicon = const Icon(null, color: AppTheme.notWhite, size: 22.0);
 
   final TextEditingController number = TextEditingController();
   changewidgetSerach() {
@@ -38,11 +33,7 @@ class Providers with ChangeNotifier {
         Translation[Language.selectType],
         style: TextStyle(color: AppTheme.notWhite),
       );
-      actionsicon = const Icon(
-        null,
-        color: AppTheme.notWhite,
-        size: 22.0,
-      );
+      actionsicon = const Icon(null, color: AppTheme.notWhite, size: 22.0);
       notifyListeners();
     }
   }
@@ -72,7 +63,7 @@ class Providers with ChangeNotifier {
     ProfessionsScreen(),
     BloodScreen(),
     TheCars(),
-    SatotaScreen()
+    SatotaScreen(),
   ];
 
   List get data => search.isEmpty ? s : search;
@@ -89,13 +80,13 @@ class Providers with ChangeNotifier {
         controller: number,
         keyboardType: TextInputType.text,
         style: TextStyle(
-            fontSize: setFontSize(14),
-            fontWeight: FontWeight.bold,
-            color: AppTheme.notWhite),
+          fontSize: setFontSize(14),
+          fontWeight: FontWeight.bold,
+          color: AppTheme.notWhite,
+        ),
         textAlign: TextAlign.start,
-       
+
         onChanged: (value) {
-        
           searchName(value);
         },
       );
@@ -108,10 +99,7 @@ class Providers with ChangeNotifier {
         color: AppTheme.notWhite,
         size: 22.0,
       );
-      title = Text(
-        '',
-        style: style,
-      );
+      title = Text('', style: style);
     }
     notifyListeners();
   }
@@ -153,7 +141,7 @@ class Providers with ChangeNotifier {
   Future<void> searchName(String? name) async {
     if (name == null || name.length == 0 || name == "" || name.isEmpty) {
       search = [];
-      
+
       notifyListeners();
       return;
     }
@@ -161,7 +149,7 @@ class Providers with ChangeNotifier {
     search = s.where((e) {
       return e['name'].contains(name);
     }).toList();
-  
+
     notifyListeners();
   }
 
@@ -182,8 +170,12 @@ class Providers with ChangeNotifier {
     notifyListeners();
   }
 
-  void managerScreenSplash(String route, BuildContext context, bool f,
-      {Object? object}) {
+  void managerScreenSplash(
+    String route,
+    BuildContext context,
+    bool f, {
+    Object? object,
+  }) {
     Navigator.pushNamedAndRemoveUntil(context, route, (v) {
       return f;
     }, arguments: object);
@@ -191,10 +183,7 @@ class Providers with ChangeNotifier {
   }
 
   Future<void> callNumber(String number) async {
-    final Uri launchUri = Uri(
-      scheme: 'tel',
-      path: number,
-    );
+    final Uri launchUri = Uri(scheme: 'tel', path: number);
     if (await canLaunchUrl(launchUri)) {
       await launchUrl(launchUri);
     }
@@ -202,10 +191,7 @@ class Providers with ChangeNotifier {
   }
 
   Future<void> launchInBrowser(Uri url) async {
-    if (await launchUrl(
-      url,
-      mode: LaunchMode.platformDefault,
-    )) {
+    if (await launchUrl(url, mode: LaunchMode.platformDefault)) {
       throw Exception('Could not launch $url');
     }
     notifyListeners();

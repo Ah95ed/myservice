@@ -21,10 +21,7 @@ class SizeBuilder extends InheritedWidget {
   bool updateShouldNotify(covariant SizeBuilder oldWidget) {
     return baseSize != oldWidget.baseSize ||
         height != oldWidget.height ||
-        width != oldWidget.width  ||
-        child !=oldWidget.child;
+        width != oldWidget.width ||
+        child != oldWidget.child;
   }
 }
-
-
-

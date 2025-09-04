@@ -12,8 +12,9 @@ class LoginModel {
   late DatabaseReference databaseReference;
 
   LoginModel({this.name, this.email, this.phone, this.password}) {
-    databaseReference = FirebaseDatabase.instance
-        .refFromURL('https://blood-types-77ce2-default-rtdb.firebaseio.com/');
+    databaseReference = FirebaseDatabase.instance.refFromURL(
+      'https://blood-types-77ce2-default-rtdb.firebaseio.com/',
+    );
   }
 
   LoginModel.fromJson(Map<String, dynamic> json) {
@@ -34,59 +35,44 @@ class LoginModel {
 
   late DataSnapshot dataSnapshot;
 
-  Future<void> checkData(
-    String phone,
-    String pass,
-  ) async {
+  Future<void> checkData(String phone, String pass) async {
     dataSnapshot = await databaseReference.child('auth').child(phone).get();
     if (await dataSnapshot.exists) {
-      await loginFirebase(
-        phone,
-        pass,
-      );
+      await loginFirebase(phone, pass);
     } else {
       Navigator.of(MyApp.getContext()!).pop();
-      ScaffoldMessenger.of(MyApp.getContext()!).showSnackBar(
-        SnackBar(
-          content: Text(Translation['is_not_exist'])),
-     
-      );
+      ScaffoldMessenger.of(
+        MyApp.getContext()!,
+      ).showSnackBar(SnackBar(content: Text(Translation['is_not_exist'])));
       await shared!.setBool('isRegister', false);
       return;
     }
   }
 
-  Future<void> loginFirebase(
-    String phone,
-    String password,
-  ) async {
-    databaseReference.child('auth').child(phone).once().then(
-      (v) async {
-        final data = v.snapshot.value as Map;
-        if (data['password'] == password) {
-          // isLogin = true;
-          await shared!.setString('nameUser', data['name']);
-          await shared!.setString('emailUser', data['email']);
-          await shared!.setString('phoneUser', data['phone']);
-          await shared!.setBool('isRegister', true);
-          Navigator.of(MyApp.getContext()!).pop();
-          MyApp.getContext()!.read<Providers>().managerScreenSplash(
-                MainScreen.ROUTE,
-                MyApp.getContext()!,
-                false,
-              );
-          return;
-        }
+  Future<void> loginFirebase(String phone, String password) async {
+    databaseReference.child('auth').child(phone).once().then((v) async {
+      final data = v.snapshot.value as Map;
+      if (data['password'] == password) {
+        // isLogin = true;
+        await shared!.setString('nameUser', data['name']);
+        await shared!.setString('emailUser', data['email']);
+        await shared!.setString('phoneUser', data['phone']);
+        await shared!.setBool('isRegister', true);
         Navigator.of(MyApp.getContext()!).pop();
-        ScaffoldMessenger.of(MyApp.getContext()!).showSnackBar(
-        SnackBar(
-          content: Text(Translation['error_password'])),
-     
-      );
+        MyApp.getContext()!.read<Providers>().managerScreenSplash(
+          MainScreen.ROUTE,
+          MyApp.getContext()!,
+          false,
+        );
         return;
-        // return isLogin;
-      },
-    );
+      }
+      Navigator.of(MyApp.getContext()!).pop();
+      ScaffoldMessenger.of(
+        MyApp.getContext()!,
+      ).showSnackBar(SnackBar(content: Text(Translation['error_password'])));
+      return;
+      // return isLogin;
+    });
     // return isLogin;
   }
 }

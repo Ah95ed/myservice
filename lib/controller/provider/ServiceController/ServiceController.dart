@@ -4,9 +4,13 @@ import 'package:flutter/material.dart';
 class ServiceController with ChangeNotifier {
   ServiceModel? serviceModel;
 
-  setDataInFirestore(BuildContext context,String collection,Map<String,dynamic> data) async {
+  setDataInFirestore(
+    BuildContext context,
+    String collection,
+    Map<String, dynamic> data,
+  ) async {
     serviceModel = ServiceModel();
-   await serviceModel!.setDataInFirestore(context,collection,data);
+    await serviceModel!.setDataInFirestore(context, collection, data);
     notifyListeners();
   }
 }

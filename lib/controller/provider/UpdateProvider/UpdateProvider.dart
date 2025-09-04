@@ -28,7 +28,8 @@ class Updateprovider extends ChangeNotifier {
     await model.deleteDataFromRealtimeAndFireStore(c);
     notifyListeners();
   }
- Future deleteDataFromRealtime(BuildContext c, String number) async {
+
+  Future deleteDataFromRealtime(BuildContext c, String number) async {
     model = await UpdateModel();
     await model.deletefromrealTime(c, number: number);
     notifyListeners();

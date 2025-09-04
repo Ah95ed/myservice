@@ -5,10 +5,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class DoctorData {
   Future<List<DoctorModel>?> getData() async {
     FirebaseFirestore firestoreInstance = FirebaseFirestore.instance;
-    final collectionRef =
-        firestoreInstance.collection(ServiceCollectios.Doctor.name);
-    final querySnapshot =
-        await collectionRef.where('bool', isEqualTo: true).get();
+    final collectionRef = firestoreInstance.collection(
+      ServiceCollectios.Doctor.name,
+    );
+    final querySnapshot = await collectionRef
+        .where('bool', isEqualTo: true)
+        .get();
     return querySnapshot.docs.map((e) {
       return DoctorModel(
         name: e['name'],
@@ -21,12 +23,11 @@ class DoctorData {
   }
 }
 
-
-  // Future getData(String collection) async {
-  //   s.clear();
-  //   FirebaseFirestore firestoreInstance = FirebaseFirestore.instance;
-  //   final collectionRef = firestoreInstance.collection(collection);
-  //   final querySnapshot = await collectionRef.where('bool', isEqualTo: true).get();
-  //   s = querySnapshot.docs.map((e) => e).toList();
-  //   notifyListeners();
-  // }
+// Future getData(String collection) async {
+//   s.clear();
+//   FirebaseFirestore firestoreInstance = FirebaseFirestore.instance;
+//   final collectionRef = firestoreInstance.collection(collection);
+//   final querySnapshot = await collectionRef.where('bool', isEqualTo: true).get();
+//   s = querySnapshot.docs.map((e) => e).toList();
+//   notifyListeners();
+// }

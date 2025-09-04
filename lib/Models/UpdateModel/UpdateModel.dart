@@ -131,10 +131,10 @@ class UpdateModel {
         .then((t) {
           Navigator.of(c).pop();
           shared!.remove('nameUser');
-                  shared!.remove('emailUser');
-                  shared!.remove('phoneUser');
-                  shared!.remove('isRegister');
-                  Scaffold.of(c).closeDrawer();
+          shared!.remove('emailUser');
+          shared!.remove('phoneUser');
+          shared!.remove('isRegister');
+          Scaffold.of(c).closeDrawer();
           ScaffoldMessenger.of(
             c,
           ).showSnackBar(SnackBar(content: Text(Translation[Language.done])));

@@ -24,7 +24,7 @@ class _OtpScreenEmailState extends State<OtpScreenEmail> {
   // bool isForget = false;
   @override
   void initState() {
-// otpNumber  = TextEditingController();
+    // otpNumber  = TextEditingController();
     // TODO: implement initState
     super.initState();
   }
@@ -43,7 +43,6 @@ class _OtpScreenEmailState extends State<OtpScreenEmail> {
               height: getheight(30),
               decoration: const BoxDecoration(
                 // color: Color(0xFF501063),
-
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(90),
                 ),
@@ -64,21 +63,15 @@ class _OtpScreenEmailState extends State<OtpScreenEmail> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
-                      margin: EdgeInsets.symmetric(
-                        vertical: getheight(4),
-                      ),
+                      margin: EdgeInsets.symmetric(vertical: getheight(4)),
                       height: getheight(14),
-                      child: Image.asset(
-                        'assets/logo/asd.png',
-                      ),
+                      child: Image.asset('assets/logo/asd.png'),
                     ),
                   ],
                 ),
               ),
             ),
-            SizedBox(
-              height: getheight(3),
-            ),
+            SizedBox(height: getheight(3)),
             Text(
               Translation[Language.enter_otp_email],
               style: TextStyle(
@@ -88,9 +81,7 @@ class _OtpScreenEmailState extends State<OtpScreenEmail> {
               ),
               textAlign: TextAlign.center,
             ),
-            SizedBox(
-              height: getheight(3),
-            ),
+            SizedBox(height: getheight(3)),
             SizedBox(
               height: getheight(8),
               width: getWidth(80),
@@ -105,15 +96,11 @@ class _OtpScreenEmailState extends State<OtpScreenEmail> {
                 ),
               ),
             ),
-            SizedBox(
-              height: getheight(3),
-            ),
+            SizedBox(height: getheight(3)),
             OutlinedButton(
               style: OutlinedButton.styleFrom(
                 backgroundColor: ColorUsed.primary,
-                side: const BorderSide(
-                  color: ColorUsed.DarkGreen,
-                ),
+                side: const BorderSide(color: ColorUsed.DarkGreen),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
@@ -125,16 +112,10 @@ class _OtpScreenEmailState extends State<OtpScreenEmail> {
                   // if (isForget) {
                   //   Navigator.pop(context);
                   // }
-                  await signup.saveData(
-                    context,
-                  );
+                  await signup.saveData(context);
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(
-                        Translation[Language.otp_error],
-                      ),
-                    ),
+                    SnackBar(content: Text(Translation[Language.otp_error])),
                   );
                   Navigator.pop(context);
                 }
@@ -182,10 +163,7 @@ class TextFieldCustomEmailOTP extends StatelessWidget {
         textAlign: TextAlign.center,
         textAlignVertical: TextAlignVertical.center,
         controller: controller!,
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: setFontSize(15),
-        ),
+        style: TextStyle(color: Colors.white, fontSize: setFontSize(15)),
         obscureText: isPassword!,
         keyboardType: isEmail! ? TextInputType.phone : TextInputType.text,
         decoration: InputDecoration(
@@ -195,21 +173,13 @@ class TextFieldCustomEmailOTP extends StatelessWidget {
           // ),
           border: const OutlineInputBorder(),
           focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: ColorUsed.primary,
-            ),
+            borderSide: BorderSide(color: ColorUsed.primary),
           ),
-          prefixIcon: Icon(
-            icon,
-            color: Colors.white.withOpacity(.7),
-          ),
+          prefixIcon: Icon(icon, color: Colors.white.withOpacity(.7)),
 
           hintMaxLines: 1,
           hintText: hintText,
-          hintStyle: TextStyle(
-            fontSize: setFontSize(13),
-            color: Colors.white,
-          ),
+          hintStyle: TextStyle(fontSize: setFontSize(13), color: Colors.white),
         ),
       ),
     );

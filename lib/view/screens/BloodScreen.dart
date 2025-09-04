@@ -22,7 +22,7 @@ class _BloodScreenState extends State<BloodScreen> {
   @override
   Widget build(BuildContext context) {
     final read = context.watch<Providers>();
-    
+
     read.title = Text(
       Translation[Language.selectType],
       style: TextStyle(
@@ -31,24 +31,16 @@ class _BloodScreenState extends State<BloodScreen> {
         fontWeight: FontWeight.bold,
       ),
     );
-    read.actionsicon = const Icon(
-      null,
-    );
+    read.actionsicon = const Icon(null);
     return Scaffold(
-
       backgroundColor: AppTheme.nearlyWhite,
 
       body: Container(
         height: getheight(65),
         width: getWidth(100),
         decoration: BoxDecoration(
-          border: Border.all(
-            width: 3.0,
-            color: ColorUsed.primary,
-          ),
-          borderRadius: const BorderRadius.all(
-            Radius.circular(20),
-          ),
+          border: Border.all(width: 3.0, color: ColorUsed.primary),
+          borderRadius: const BorderRadius.all(Radius.circular(20)),
         ),
         transformAlignment: Alignment.center,
         margin: EdgeInsets.only(
@@ -70,18 +62,22 @@ class _BloodScreenState extends State<BloodScreen> {
                 ButtonSelect(
                   title: Constant.A_Plus,
                   onPressed: () {
-                    read.managerScreen(ShowDonors.ROUTE, context,
-                        object: DataSend(Constant.A_Plus));
+                    read.managerScreen(
+                      ShowDonors.ROUTE,
+                      context,
+                      object: DataSend(Constant.A_Plus),
+                    );
                   },
                 ),
-                SizedBox(
-                  width: getWidth(4),
-                ),
+                SizedBox(width: getWidth(4)),
                 ButtonSelect(
                   title: Constant.A_Minus,
                   onPressed: () {
-                    read.managerScreen(ShowDonors.ROUTE, context,
-                        object: DataSend(Constant.A_Minus));
+                    read.managerScreen(
+                      ShowDonors.ROUTE,
+                      context,
+                      object: DataSend(Constant.A_Minus),
+                    );
                   },
                 ),
               ],
@@ -91,18 +87,22 @@ class _BloodScreenState extends State<BloodScreen> {
                 ButtonSelect(
                   title: Constant.B_Plus,
                   onPressed: () {
-                    read.managerScreen(ShowDonors.ROUTE, context,
-                        object: DataSend(Constant.B_Plus));
+                    read.managerScreen(
+                      ShowDonors.ROUTE,
+                      context,
+                      object: DataSend(Constant.B_Plus),
+                    );
                   },
                 ),
-                SizedBox(
-                  width: getWidth(4),
-                ),
+                SizedBox(width: getWidth(4)),
                 ButtonSelect(
                   title: Constant.B_Minus,
                   onPressed: () {
-                    read.managerScreen(ShowDonors.ROUTE, context,
-                        object: DataSend(Constant.B_Minus));
+                    read.managerScreen(
+                      ShowDonors.ROUTE,
+                      context,
+                      object: DataSend(Constant.B_Minus),
+                    );
                   },
                 ),
               ],
@@ -112,18 +112,22 @@ class _BloodScreenState extends State<BloodScreen> {
                 ButtonSelect(
                   title: Constant.O_Plus,
                   onPressed: () {
-                    read.managerScreen(ShowDonors.ROUTE, context,
-                        object: DataSend(Constant.O_Plus));
+                    read.managerScreen(
+                      ShowDonors.ROUTE,
+                      context,
+                      object: DataSend(Constant.O_Plus),
+                    );
                   },
                 ),
-                SizedBox(
-                  width: getWidth(4),
-                ),
+                SizedBox(width: getWidth(4)),
                 ButtonSelect(
                   title: Constant.O_Minus,
                   onPressed: () {
-                    read.managerScreen(ShowDonors.ROUTE, context,
-                        object: DataSend(Constant.O_Minus));
+                    read.managerScreen(
+                      ShowDonors.ROUTE,
+                      context,
+                      object: DataSend(Constant.O_Minus),
+                    );
                   },
                 ),
               ],
@@ -133,23 +137,26 @@ class _BloodScreenState extends State<BloodScreen> {
                 ButtonSelect(
                   title: Constant.AB_Plus,
                   onPressed: () {
-                    read.managerScreen(ShowDonors.ROUTE, context,
-                        object: DataSend(Constant.AB_Plus));
+                    read.managerScreen(
+                      ShowDonors.ROUTE,
+                      context,
+                      object: DataSend(Constant.AB_Plus),
+                    );
                   },
                 ),
-                SizedBox(
-                  width: getWidth(4),
-                ),
+                SizedBox(width: getWidth(4)),
                 ButtonSelect(
                   title: Constant.AB_Minus,
                   onPressed: () {
-                    read.managerScreen(ShowDonors.ROUTE, context,
-                        object: DataSend(Constant.AB_Minus));
+                    read.managerScreen(
+                      ShowDonors.ROUTE,
+                      context,
+                      object: DataSend(Constant.AB_Minus),
+                    );
                   },
                 ),
               ],
             ),
-            
           ],
         ),
       ),

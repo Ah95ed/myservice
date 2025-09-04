@@ -16,11 +16,9 @@ class ForgetPasswordProvider extends ChangeNotifier {
     isLoading = false;
     notifyListeners();
   }
-   Future<void> sendCode(
-    String email,
-    BuildContext context,
-  ) async {
-    await _forgetPassword.sendCodeEmail(context,email);
+
+  Future<void> sendCode(String email, BuildContext context) async {
+    await _forgetPassword.sendCodeEmail(context, email);
     notifyListeners();
   }
 }

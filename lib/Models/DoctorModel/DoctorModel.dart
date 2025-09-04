@@ -2,7 +2,6 @@
 class DoctorModel {
   String? _name, _presence, _specialization, _number, _title;
 
-
   DoctorModel({
     String? name,
     String? presence,
@@ -17,7 +16,7 @@ class DoctorModel {
     _title = title;
   }
 
-//! getter and setter
+  //! getter and setter
   String? get name => _name;
   String? get presence => _presence;
   String? get specialization => _specialization;
@@ -34,14 +33,13 @@ class DoctorModel {
 
   set sepcialization(String? value) {
     _specialization = value;
-  }   
+  }
 
   set number(String? value) {
     _number = value;
   }
 
-  set title(String? value) {  
+  set title(String? value) {
     _title = value;
   }
-
 }

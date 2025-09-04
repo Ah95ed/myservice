@@ -3,7 +3,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Editmodel {
   Future<List<DocumentSnapshot>> searchAcrossCollections(
-      String collection, String searchTerm) async {
+    String collection,
+    String searchTerm,
+  ) async {
     List<DocumentSnapshot> results = [];
 
     QuerySnapshot querySnapshot = await FirebaseFirestore.instance

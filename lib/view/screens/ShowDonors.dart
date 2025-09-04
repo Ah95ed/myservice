@@ -36,26 +36,18 @@ class ShowDonors extends StatelessWidget {
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: const Icon(
-                Icons.arrow_back,
-                color: AppTheme.notWhite,
-              ),
+              icon: const Icon(Icons.arrow_back, color: AppTheme.notWhite),
             ),
             actions: [
               IconButton(
                 onPressed: () {
                   value.changewidget(
                     // S.of(context).donors,
-                    const TextStyle(
-                      color: AppTheme.notWhite,
-                    ),
+                    const TextStyle(color: AppTheme.notWhite),
                   );
                 },
-                icon: Icon(
-                  value.actionsicon.icon,
-                  color: AppTheme.notWhite,
-                ),
-              )
+                icon: Icon(value.actionsicon.icon, color: AppTheme.notWhite),
+              ),
             ],
             title: value.title,
             centerTitle: true,
@@ -74,23 +66,19 @@ class ShowDonors extends StatelessWidget {
             ),
             systemOverlayStyle: SystemUiOverlayStyle.light,
           ),
-          body: 
-          value.data.isEmpty
+          body: value.data.isEmpty
               ? Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       const CircularProgressIndicator(),
-                      SizedBox(
-                        height: getheight(2),
-                      ),
-                      Text(S.of(context).wait_service)
+                      SizedBox(height: getheight(2)),
+                      Text(S.of(context).wait_service),
                     ],
                   ),
                 )
-              : 
-             SizedBox(
+              : SizedBox(
                   height: getheight(100),
                   width: getWidth(100),
                   child: ListView.builder(
@@ -99,10 +87,10 @@ class ShowDonors extends StatelessWidget {
                     itemCount: value.data.length,
                     itemBuilder: (BuildContext context, int index) {
                       return CardDonors(
-                        name:  value.data[index]['name'],
-                        type:  dataSend.collection,
+                        name: value.data[index]['name'],
+                        type: dataSend.collection,
                         title: value.data[index]['location'],
-                        number:value.data[index]['number'],
+                        number: value.data[index]['number'],
                       );
                     },
                   ),

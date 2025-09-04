@@ -22,11 +22,7 @@ class LoginProvider with ChangeNotifier {
     String? phone,
     String? password,
   ) async {
-    await model.checkData(
-      phone!,
-      password!,
-    );
+    await model.checkData(phone!, password!);
     notifyListeners();
   }
-
 }

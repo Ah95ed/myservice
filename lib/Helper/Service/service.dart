@@ -13,9 +13,7 @@ late String re = '0';
 Future<void> init() async {
   shared = await SharedPreferences.getInstance();
 
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   await initLang(shared!.getString('lang') ?? "ar");
   packageInfo = await PackageInfo.fromPlatform();
@@ -26,5 +24,4 @@ void initData() async {
 
   await remoteConfig.fetchAndActivate();
   re = await remoteConfig.getString('update');
-  
 }

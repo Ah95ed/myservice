@@ -31,7 +31,7 @@ class Customdrawer extends StatelessWidget {
               color: ColorUsed.primary,
               child: shared!.getString('nameUser') == null
                   ? Center(
-                    child: Text(
+                      child: Text(
                         Translation[Language.more_options],
                         style: TextStyle(
                           fontSize: setFontSize(16),
@@ -39,9 +39,9 @@ class Customdrawer extends StatelessWidget {
                           color: AppTheme.nearlyWhite,
                         ),
                       ),
-                  )
+                    )
                   : Center(
-                    child: Column(
+                      child: Column(
                         children: [
                           Text(
                             shared!.getString('nameUser') ?? '',
@@ -51,9 +51,7 @@ class Customdrawer extends StatelessWidget {
                               color: AppTheme.notWhite,
                             ),
                           ),
-                          SizedBox(
-                            height: getheight(0.5),
-                          ),
+                          SizedBox(height: getheight(0.5)),
                           Text(
                             shared!.getString('emailUser') ?? '',
                             style: TextStyle(
@@ -64,11 +62,9 @@ class Customdrawer extends StatelessWidget {
                           ),
                         ],
                       ),
-                  ),
+                    ),
             ),
-            SizedBox(
-              height: getheight(0.2),
-            ),
+            SizedBox(height: getheight(0.2)),
             ListTile(
               leading: shared!.getBool('isRegister') == true
                   ? Icon(Icons.exit_to_app)
@@ -103,15 +99,9 @@ class Customdrawer extends StatelessWidget {
                 }
               },
             ),
-            Divider(
-              thickness: getWidth(0.5),
-              color: ColorUsed.DarkGreen,
-            ),
+            Divider(thickness: getWidth(0.5), color: ColorUsed.DarkGreen),
             ListTile(
-              leading: Icon(
-                Icons.delete,
-                color: Colors.red.shade700,
-              ),
+              leading: Icon(Icons.delete, color: Colors.red.shade700),
               title: Text(
                 Translation[Language.delete_account],
                 style: TextStyle(
@@ -122,7 +112,6 @@ class Customdrawer extends StatelessWidget {
               ),
               onTap: () {
                 Scaffold.of(context).closeDrawer();
-      
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {
@@ -131,35 +120,21 @@ class Customdrawer extends StatelessWidget {
                 );
               },
             ),
-            Divider(
-              thickness: getWidth(0.5),
-              color: ColorUsed.DarkGreen,
-            ),
+            Divider(thickness: getWidth(0.5), color: ColorUsed.DarkGreen),
             ListTile(
               leading: Icon(Icons.share),
               title: Text(Translation[Language.share_app]),
               onTap: () async {
                 Scaffold.of(context).closeDrawer();
-      
+
                 await Share.share(
                   'https://play.google.com/store/apps/details?id=com.Blood.types',
                   subject: 'رابط التطبيق على كوكل بلي',
                 );
               },
             ),
-            Divider(
-              thickness: getWidth(0.5),
-              color: ColorUsed.DarkGreen,
-            ),
-            // ListTile(
-            //   leading: Icon(Icons.settings),
-            //   title: Text(Translation['settings']),
-            //   onTap: () {},
-            // ),
-            // Divider(
-            //   thickness: getWidth(0.5),
-            //   color: ColorUsed.DarkGreen,
-            // ),
+            Divider(thickness: getWidth(0.5), color: ColorUsed.DarkGreen),
+
             ListTile(
               leading: Icon(Icons.edit),
               title: Text(
@@ -172,29 +147,25 @@ class Customdrawer extends StatelessWidget {
               ),
               onTap: () {
                 Scaffold.of(context).closeDrawer();
-      
+
                 if (shared!.getBool('isRegister') == true) {
                   showDialog(
-                      context: context,
-                      builder: (_) {
-                        return CustomDialogAddService();
-                      });
+                    context: context,
+                    builder: (_) {
+                      return CustomDialogAddService();
+                    },
+                  );
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text(
-                        Translation[Language.register_first],
-                      ),
+                      content: Text(Translation[Language.register_first]),
                     ),
                   );
                   //  Navigator.of(context).pop();
                 }
               },
             ),
-            Divider(
-              thickness: getWidth(0.5),
-              color: ColorUsed.DarkGreen,
-            ),
+            Divider(thickness: getWidth(0.5), color: ColorUsed.DarkGreen),
             ListTile(
               leading: Icon(Icons.language),
               title: Text(
@@ -239,10 +210,7 @@ class Customdrawer extends StatelessWidget {
                 );
               },
             ),
-            Divider(
-              thickness: getWidth(0.5),
-              color: ColorUsed.DarkGreen,
-            ),
+            Divider(thickness: getWidth(0.5), color: ColorUsed.DarkGreen),
             ListTile(
               leading: Icon(Icons.privacy_tip),
               title: Text(
@@ -257,10 +225,7 @@ class Customdrawer extends StatelessWidget {
                 read.launchInBrowser(Uri.parse(Constant.PrivacyPolicy));
               },
             ),
-            Divider(
-              thickness: getWidth(0.1),
-              color: ColorUsed.DarkGreen,
-            ),
+            Divider(thickness: getWidth(0.1), color: ColorUsed.DarkGreen),
             Center(
               child: Text(
                 Translation[Language.version] +

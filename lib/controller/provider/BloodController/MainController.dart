@@ -24,6 +24,6 @@ class MainController extends ChangeNotifier {
     ProfessionsScreen(),
     BloodScreen(),
     TheCars(),
-    SatotaScreen()
+    SatotaScreen(),
   ];
 }

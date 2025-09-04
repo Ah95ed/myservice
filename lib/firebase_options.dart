@@ -65,8 +65,8 @@ class DefaultFirebaseOptions {
     projectId: 'blood-types-77ce2',
     databaseURL: 'https://blood-types-77ce2-default-rtdb.firebaseio.com',
     storageBucket: 'blood-types-77ce2.appspot.com',
-    androidClientId: '470738266549-5j9iu6iv71bu1dm9jjfsi8f2k0kum2s6.apps.googleusercontent.com',
+    androidClientId:
+        '470738266549-5j9iu6iv71bu1dm9jjfsi8f2k0kum2s6.apps.googleusercontent.com',
     iosBundleId: 'com.Blood.types',
   );
-
 }

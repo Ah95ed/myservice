@@ -22,10 +22,7 @@ class ServiceModel {
 
     await Future.delayed(Duration(seconds: 2), () async {
       Navigator.pop(context);
-      await showSnakeBar(
-        context,
-        Translation[Language.done],
-      );
+      await showSnakeBar(context, Translation[Language.done]);
     });
   }
 }

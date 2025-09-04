@@ -8,9 +8,9 @@ class ConnectTelegram {
 
   // ConnectTelegram._();
 
-// ضع هنا التوكن الخاص بالبوت الذي حصلت عليه من BotFather
+  // ضع هنا التوكن الخاص بالبوت الذي حصلت عليه من BotFather
   final String botToken = '7858685883:AAFSUbPIUt38GItU3Wl1JPOvZrDWaCvG_RA';
-// معرف المستخدم الذي تريد إرسال الرسالة له (Chat ID)
+  // معرف المستخدم الذي تريد إرسال الرسالة له (Chat ID)
 
   final String chatId = '505765472';
 

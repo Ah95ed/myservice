@@ -26,28 +26,24 @@ class CardProfessions extends StatelessWidget {
           Expanded(
             flex: 1,
             child: Column(
-               crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 MultiText(name, S.of(context).name),
-                SizedBox(
-                  height: getheight(2),
-                ),
-                MultiText(
-                  nameProfession,
-                  S.of(context).profession,
-                ),
+                SizedBox(height: getheight(2)),
+                MultiText(nameProfession, S.of(context).profession),
               ],
             ),
           ),
           Expanded(
             flex: 0,
             child: IconButton(
-                icon: Icon(
-                  Icons.call,
-                  color: ColorUsed.primary,
-                  size: getheight(4),
-                ),
-                onPressed: onPressed),
+              icon: Icon(
+                Icons.call,
+                color: ColorUsed.primary,
+                size: getheight(4),
+              ),
+              onPressed: onPressed,
+            ),
           ),
         ],
       ),

@@ -34,26 +34,21 @@ class _LoginScreenState extends State<LoginScreen>
       duration: Duration(seconds: 2),
     );
 
-    _animation = Tween<double>(begin: .7, end: 1).animate(
-      CurvedAnimation(
-        parent: _controller,
-        curve: Curves.ease,
-      ),
-    )
-      ..addListener(
-        () {
-          setState(() {});
-        },
-      )
-      ..addStatusListener(
-        (status) {
-          if (status == AnimationStatus.completed) {
-            _controller.reverse();
-          } else if (status == AnimationStatus.dismissed) {
-            _controller.forward();
-          }
-        },
-      );
+    _animation =
+        Tween<double>(
+            begin: .7,
+            end: 1,
+          ).animate(CurvedAnimation(parent: _controller, curve: Curves.ease))
+          ..addListener(() {
+            setState(() {});
+          })
+          ..addStatusListener((status) {
+            if (status == AnimationStatus.completed) {
+              _controller.reverse();
+            } else if (status == AnimationStatus.dismissed) {
+              _controller.forward();
+            }
+          });
 
     _controller.forward();
   }
@@ -74,26 +69,19 @@ class _LoginScreenState extends State<LoginScreen>
         return Scaffold(
           backgroundColor: ColorUsed.PrimaryBackground,
           body: ScrollConfiguration(
-            behavior:ScrollBehavior(),
+            behavior: ScrollBehavior(),
             child: SingleChildScrollView(
               child: SizedBox(
-                height:getheight(100),
+                height: getheight(100),
                 child: Column(
                   children: [
                     // Expanded(child: SizedBox()),
-                    Expanded(
-                      flex: 2,
-                      child: Login_Image(
-                        height: getheight(1),
-                      ),
-                    ),
+                    Expanded(flex: 2, child: Login_Image(height: getheight(1))),
                     Expanded(
                       flex: 3,
                       child: Column(
                         children: [
-                          SizedBox(
-                            height: getheight(3),
-                          ),
+                          SizedBox(height: getheight(3)),
                           component1(
                             phone,
                             Icons.phone,
@@ -101,9 +89,7 @@ class _LoginScreenState extends State<LoginScreen>
                             false,
                             true,
                           ),
-                          SizedBox(
-                            height: getheight(3),
-                          ),
+                          SizedBox(height: getheight(3)),
                           component1(
                             password,
                             Icons.lock_outline,
@@ -111,28 +97,27 @@ class _LoginScreenState extends State<LoginScreen>
                             true,
                             false,
                           ),
-                          SizedBox(
-                            height: getheight(4),
-                          ),
+                          SizedBox(height: getheight(4)),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               RichText(
                                 text: TextSpan(
-                                    text: S.current.forget_password,
-                                    style: TextStyle(
-                                      color: Colors.redAccent,
-                                      fontSize: setFontSize(12),
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () {
-                                        HapticFeedback.lightImpact();
-                                        //   Fluttertoast.showToast(
-                                        //       msg:
-                                        //           'Forgotten password! button pressed');
-                                        // },
-                                      }),
+                                  text: S.current.forget_password,
+                                  style: TextStyle(
+                                    color: Colors.redAccent,
+                                    fontSize: setFontSize(12),
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () {
+                                      HapticFeedback.lightImpact();
+                                      //   Fluttertoast.showToast(
+                                      //       msg:
+                                      //           'Forgotten password! button pressed');
+                                      // },
+                                    },
+                                ),
                               ),
                               SizedBox(width: getWidth(24)),
                               RichText(
@@ -147,7 +132,9 @@ class _LoginScreenState extends State<LoginScreen>
                                     ..onTap = () {
                                       HapticFeedback.lightImpact();
                                       context.read<Providers>().managerScreen(
-                                          SignupScreen.Route, context);
+                                        SignupScreen.Route,
+                                        context,
+                                      );
                                     },
                                 ),
                               ),
@@ -162,9 +149,7 @@ class _LoginScreenState extends State<LoginScreen>
                         children: [
                           Center(
                             child: Container(
-                              margin: EdgeInsets.only(
-                                bottom: getheight(12),
-                              ),
+                              margin: EdgeInsets.only(bottom: getheight(12)),
                               height: getheight(40),
                               width: getWidth(60),
                               decoration: BoxDecoration(
@@ -189,7 +174,7 @@ class _LoginScreenState extends State<LoginScreen>
                                 highlightColor: Colors.transparent,
                                 onTap: () async {
                                   HapticFeedback.lightImpact();
-            
+
                                   showCirculerProgress(context);
                                   //! here to on click login
                                   // provider.startLoading();
@@ -224,9 +209,10 @@ class _LoginScreenState extends State<LoginScreen>
                                   child: Text(
                                     S.current.login,
                                     style: TextStyle(
-                                        color: AppTheme.nearlyWhite,
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: setFontSize(12)),
+                                      color: AppTheme.nearlyWhite,
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: setFontSize(12),
+                                    ),
                                   ),
                                 ),
                               ),
@@ -272,32 +258,21 @@ class component1 extends StatelessWidget {
       ),
       child: TextField(
         controller: controller,
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: setFontSize(16),
-        ),
+        style: TextStyle(color: Colors.white, fontSize: setFontSize(16)),
         obscureText: isPassword!,
-        keyboardType: isEmail! ? TextInputType.emailAddress
-         : TextInputType.text,
+        keyboardType: isEmail!
+            ? TextInputType.emailAddress
+            : TextInputType.text,
         decoration: InputDecoration(
-         
           border: const OutlineInputBorder(),
           focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: ColorUsed.primary,
-            ),
+            borderSide: BorderSide(color: ColorUsed.primary),
           ),
-          prefixIcon: Icon(
-            icon,
-            color: Colors.white.withOpacity(.7),
-          ),
+          prefixIcon: Icon(icon, color: Colors.white.withOpacity(.7)),
           // border: InputBorder.none,
           hintMaxLines: 1,
           hintText: hintText,
-          hintStyle: TextStyle(
-            fontSize: setFontSize(15),
-            color: Colors.white,
-          ),
+          hintStyle: TextStyle(fontSize: setFontSize(15), color: Colors.white),
         ),
       ),
     );

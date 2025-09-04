@@ -18,9 +18,7 @@ class TheCars extends StatelessWidget {
     context.read<Providers>().getData(ServiceCollectios.line.name);
     context.read<Providers>().title = Text(
       S.of(context).cars,
-      style: const TextStyle(
-        color: AppTheme.notWhite,
-      ),
+      style: const TextStyle(color: AppTheme.notWhite),
     );
     context.read<Providers>().actionsicon = const Icon(
       Icons.search,
@@ -37,9 +35,7 @@ class TheCars extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       const CircularProgressIndicator(),
-                      SizedBox(
-                        height: getWidth(2),
-                      ),
+                      SizedBox(height: getWidth(2)),
                       Text(S.of(context).wait_service),
                     ],
                   ),

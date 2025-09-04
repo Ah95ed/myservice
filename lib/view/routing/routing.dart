@@ -19,8 +19,8 @@ import 'package:Al_Zab_township_guide/view/screens/addDonor/AddDonor.dart';
 import 'package:flutter/material.dart';
 
 Map<String, WidgetBuilder> routs = {
-  MainScreen.ROUTE: (context) =>  MainScreen(),
-  DoctorScreen.ROUTE: (context) =>  DoctorScreen(),
+  MainScreen.ROUTE: (context) => MainScreen(),
+  DoctorScreen.ROUTE: (context) => DoctorScreen(),
   BloodScreen.ROUTE: (context) => BloodScreen(),
   ShowDonors.ROUTE: (context) => const ShowDonors(),
   TheCars.ROUTE: (context) => const TheCars(),
@@ -28,13 +28,13 @@ Map<String, WidgetBuilder> routs = {
   SatotaScreen.ROUTE: (context) => const SatotaScreen(),
   SignupScreen.Route: (context) => SignupScreen(),
   LoginScreen.Route: (context) => LoginScreen(),
-  MyCustomSplashScreen.Route: (context) =>  MyCustomSplashScreen(),
+  MyCustomSplashScreen.Route: (context) => MyCustomSplashScreen(),
   OtpScreenEmail.Route: (context) => OtpScreenEmail(),
-  MessageDeveloper.Route: (context) =>  MessageDeveloper(),
-  OTPScreenNumber.Route: (context) =>  OTPScreenNumber(),
-  LineScreen.Route: (context) =>  LineScreen(),
-  AddProfessions.Route: (context) =>  AddProfessions(),
-  AddDoctor.Route : (context) =>  AddDoctor(),
-  AddSatota.Route : (context) =>  AddSatota(),
-  AddDonor.Route : (context) =>  AddDonor(),
+  MessageDeveloper.Route: (context) => MessageDeveloper(),
+  OTPScreenNumber.Route: (context) => OTPScreenNumber(),
+  LineScreen.Route: (context) => LineScreen(),
+  AddProfessions.Route: (context) => AddProfessions(),
+  AddDoctor.Route: (context) => AddDoctor(),
+  AddSatota.Route: (context) => AddSatota(),
+  AddDonor.Route: (context) => AddDonor(),
 };

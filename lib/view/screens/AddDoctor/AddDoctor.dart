@@ -34,7 +34,7 @@ class _AddDoctorState extends State<AddDoctor> {
     name.dispose();
     Specialization.dispose();
     time.dispose();
-    title.dispose();  
+    title.dispose();
   }
 
   @override
@@ -42,7 +42,7 @@ class _AddDoctorState extends State<AddDoctor> {
     final read = context.read<ServiceController>();
     return Scaffold(
       body: ScrollConfiguration(
-        behavior:ScrollBehavior(),
+        behavior: ScrollBehavior(),
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           scrollDirection: Axis.vertical,
@@ -56,9 +56,7 @@ class _AddDoctorState extends State<AddDoctor> {
                   height: getheight(30),
                   title: Translation[Language.AddDoctor],
                 ),
-                SizedBox(
-                  height: getheight(4),
-                ),
+                SizedBox(height: getheight(4)),
                 component1(
                   name,
                   Icons.person,
@@ -66,9 +64,7 @@ class _AddDoctorState extends State<AddDoctor> {
                   false,
                   false,
                 ),
-                SizedBox(
-                  height: getheight(1.5),
-                ),
+                SizedBox(height: getheight(1.5)),
                 component1(
                   Specialization,
                   Icons.type_specimen,
@@ -76,9 +72,7 @@ class _AddDoctorState extends State<AddDoctor> {
                   false,
                   false,
                 ),
-                SizedBox(
-                  height: getheight(1.5),
-                ),
+                SizedBox(height: getheight(1.5)),
                 component1(
                   time,
                   Icons.access_time_sharp,
@@ -86,9 +80,7 @@ class _AddDoctorState extends State<AddDoctor> {
                   false,
                   false,
                 ),
-                SizedBox(
-                  height: getheight(1.5),
-                ),
+                SizedBox(height: getheight(1.5)),
                 component1(
                   title,
                   Icons.title,
@@ -96,9 +88,7 @@ class _AddDoctorState extends State<AddDoctor> {
                   false,
                   false,
                 ),
-                SizedBox(
-                  height: getheight(2),
-                ),
+                SizedBox(height: getheight(2)),
                 CustomMaterialButton(
                   title: Translation[Language.send],
                   onPressed: () async {
@@ -123,7 +113,7 @@ class _AddDoctorState extends State<AddDoctor> {
                         'bool': true,
                       },
                     );
-        
+
                     await showCirculerProgress(context);
                     // name.dispose();
                     // Specialization.dispose();

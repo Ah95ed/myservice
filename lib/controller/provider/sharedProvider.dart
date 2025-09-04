@@ -1,5 +1,3 @@
 import 'package:flutter/material.dart';
 
-class Sharedprovider with ChangeNotifier {
-  
-}
+class Sharedprovider with ChangeNotifier {}

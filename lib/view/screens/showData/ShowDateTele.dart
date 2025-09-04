@@ -28,9 +28,7 @@ class _ShowDataTeleState extends State<ShowDataTele> {
         },
         child: const Icon(Icons.add),
       ),
-      body: const Center(
-        child: Text('Ahmed show data'),
-      ),
+      body: const Center(child: Text('Ahmed show data')),
     );
   }
 }

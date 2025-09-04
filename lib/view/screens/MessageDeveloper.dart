@@ -31,26 +31,21 @@ class _MessageDeveloperState extends State<MessageDeveloper>
       duration: Duration(seconds: 2),
     );
 
-    _animation = Tween<double>(begin: .7, end: 1).animate(
-      CurvedAnimation(
-        parent: _controller,
-        curve: Curves.ease,
-      ),
-    )
-      ..addListener(
-        () {
-          setState(() {});
-        },
-      )
-      ..addStatusListener(
-        (status) {
-          if (status == AnimationStatus.completed) {
-            _controller.reverse();
-          } else if (status == AnimationStatus.dismissed) {
-            _controller.forward();
-          }
-        },
-      );
+    _animation =
+        Tween<double>(
+            begin: .7,
+            end: 1,
+          ).animate(CurvedAnimation(parent: _controller, curve: Curves.ease))
+          ..addListener(() {
+            setState(() {});
+          })
+          ..addStatusListener((status) {
+            if (status == AnimationStatus.completed) {
+              _controller.reverse();
+            } else if (status == AnimationStatus.dismissed) {
+              _controller.forward();
+            }
+          });
 
     _controller.forward();
   }
@@ -84,16 +79,12 @@ class _MessageDeveloperState extends State<MessageDeveloper>
           height: getheight(100),
           child: Column(
             children: [
-              Login_Image(
-                height: getheight(20),
-              ),
+              Login_Image(height: getheight(20)),
               Expanded(
                 flex: 3,
                 child: Column(
                   children: [
-                    SizedBox(
-                      height: getheight(2),
-                    ),
+                    SizedBox(height: getheight(2)),
                     component1(
                       name,
                       Icons.person,
@@ -101,9 +92,7 @@ class _MessageDeveloperState extends State<MessageDeveloper>
                       false,
                       false,
                     ),
-                    SizedBox(
-                      height: getheight(2),
-                    ),
+                    SizedBox(height: getheight(2)),
                     component1(
                       number,
                       Icons.phone,
@@ -111,9 +100,7 @@ class _MessageDeveloperState extends State<MessageDeveloper>
                       false,
                       false,
                     ),
-                    SizedBox(
-                      height: getheight(2),
-                    ),
+                    SizedBox(height: getheight(2)),
                     component1(
                       type,
                       Icons.type_specimen,
@@ -121,9 +108,7 @@ class _MessageDeveloperState extends State<MessageDeveloper>
                       false,
                       false,
                     ),
-                    SizedBox(
-                      height: getheight(2),
-                    ),
+                    SizedBox(height: getheight(2)),
                     component1(
                       description,
                       Icons.description,
@@ -140,9 +125,7 @@ class _MessageDeveloperState extends State<MessageDeveloper>
                   children: [
                     Center(
                       child: Container(
-                        margin: EdgeInsets.only(
-                          bottom: getheight(5),
-                        ),
+                        margin: EdgeInsets.only(bottom: getheight(5)),
                         height: getheight(100),
                         width: getWidth(100),
                         decoration: BoxDecoration(
@@ -179,20 +162,15 @@ class _MessageDeveloperState extends State<MessageDeveloper>
                               );
                               return;
                             }
-                            read.sendDataToDeveloper(
-                              {
-                                'name': name.text,
-                                'number': number.text,
-                                "type": type.text,
-                                'description': description.text,
-                              },
-                              number.text,
-                            );
+                            read.sendDataToDeveloper({
+                              'name': name.text,
+                              'number': number.text,
+                              "type": type.text,
+                              'description': description.text,
+                            }, number.text);
                           },
                           child: Container(
-                            margin: EdgeInsets.only(
-                              bottom: getheight(5),
-                            ),
+                            margin: EdgeInsets.only(bottom: getheight(5)),
                             height: getheight(14),
                             width: getWidth(30),
                             alignment: Alignment.center,
@@ -203,9 +181,10 @@ class _MessageDeveloperState extends State<MessageDeveloper>
                             child: Text(
                               S.current.send_request,
                               style: TextStyle(
-                                  color: AppTheme.nearlyWhite,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: setFontSize(12)),
+                                color: AppTheme.nearlyWhite,
+                                fontWeight: FontWeight.w600,
+                                fontSize: setFontSize(12),
+                              ),
                             ),
                           ),
                         ),
@@ -228,12 +207,8 @@ class _MessageDeveloperState extends State<MessageDeveloper>
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-              SizedBox(
-                height: getheight(1),
-              ),
-              Expanded(
-                child: DeveloperSocial(),
-              )
+              SizedBox(height: getheight(1)),
+              Expanded(child: DeveloperSocial()),
             ],
           ),
         ),
@@ -269,10 +244,7 @@ class component1 extends StatelessWidget {
       ),
       child: TextField(
         controller: controller,
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: setFontSize(16),
-        ),
+        style: TextStyle(color: Colors.white, fontSize: setFontSize(16)),
         obscureText: isPassword!,
         keyboardType: isEmail! ? TextInputType.phone : TextInputType.text,
         decoration: InputDecoration(
@@ -286,17 +258,11 @@ class component1 extends StatelessWidget {
           //     color: ColorUsed.primary,
           //   ),
           // ),
-          prefixIcon: Icon(
-            icon,
-            color: Colors.white.withOpacity(.7),
-          ),
+          prefixIcon: Icon(icon, color: Colors.white.withOpacity(.7)),
           border: InputBorder.none,
           hintMaxLines: 1,
           hintText: hintText,
-          hintStyle: TextStyle(
-            fontSize: setFontSize(15),
-            color: Colors.white,
-          ),
+          hintStyle: TextStyle(fontSize: setFontSize(15), color: Colors.white),
         ),
       ),
     );
@@ -304,9 +270,7 @@ class component1 extends StatelessWidget {
 }
 
 class DeveloperSocial extends StatelessWidget {
-  const DeveloperSocial({
-    super.key,
-  });
+  const DeveloperSocial({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -327,47 +291,31 @@ class DeveloperSocial extends StatelessWidget {
           ),
         ],
         gradient: LinearGradient(
-          colors: [
-            ColorUsed.primary,
-            ColorUsed.second,
-          ],
+          colors: [ColorUsed.primary, ColorUsed.second],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
         ),
       ),
       child: Row(
         children: [
-          ImagesSocial(
-            'assets/logo/telegram.png',
-            () {
-              read.launchInBrowser(Uri.parse('https://t.me/Ah9_5D'));
-            },
-          ),
+          ImagesSocial('assets/logo/telegram.png', () {
+            read.launchInBrowser(Uri.parse('https://t.me/Ah9_5D'));
+          }),
           Spacer(),
-          ImagesSocial(
-            'assets/logo/messenger.png',
-            () {
-              read.launchInBrowser(Uri.parse('https://m.me/AH95ED'));
-              // "https://m.me/AH95ED"
-            },
-          ),
+          ImagesSocial('assets/logo/messenger.png', () {
+            read.launchInBrowser(Uri.parse('https://m.me/AH95ED'));
+            // "https://m.me/AH95ED"
+          }),
           Spacer(),
-          ImagesSocial(
-            'assets/logo/instagram.png',
-            () {
-              read.launchInBrowser(
-                  Uri.parse('http://instagram.com/_u/ah_0.sh'));
-            },
-          ),
+          ImagesSocial('assets/logo/instagram.png', () {
+            read.launchInBrowser(Uri.parse('http://instagram.com/_u/ah_0.sh'));
+          }),
           Spacer(),
-          ImagesSocial(
-            'assets/logo/whatsapp.png',
-            () {
-              read.launchInBrowser(
-                Uri.parse('https://api.whatsapp.com/send?phone=+9647824854526'),
-              );
-            },
-          ),
+          ImagesSocial('assets/logo/whatsapp.png', () {
+            read.launchInBrowser(
+              Uri.parse('https://api.whatsapp.com/send?phone=+9647824854526'),
+            );
+          }),
         ],
       ),
     );
@@ -383,9 +331,7 @@ class ImagesSocial extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: getWidth(4),
-      ),
+      padding: EdgeInsets.symmetric(horizontal: getWidth(4)),
       child: GestureDetector(
         onTap: onPressed,
         child: Image.asset(

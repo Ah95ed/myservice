@@ -1,5 +1,3 @@
-
-
 class BloodModel {
   String? name;
   String? image;

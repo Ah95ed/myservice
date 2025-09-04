@@ -20,18 +20,13 @@ showCirculerProgress(BuildContext context) {
     context: context,
     builder: (context) {
       return Center(
-        child: CircularProgressIndicator(
-          backgroundColor: AppTheme.notWhite,
-        ),
+        child: CircularProgressIndicator(backgroundColor: AppTheme.notWhite),
       );
     },
   );
 }
 
-Future<void> showSnakeBar(
-  BuildContext context,
-  String message,
-) async {
+Future<void> showSnakeBar(BuildContext context, String message) async {
   await ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
       content: Text(
@@ -66,17 +61,11 @@ class CustomDialogAddService extends StatelessWidget {
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Divider(
-            thickness: getheight(0.2),
-            color: ColorUsed.DarkGreen,
-          ),
+          Divider(thickness: getheight(0.2), color: ColorUsed.DarkGreen),
           CustomMaterialButton(
             title: Translation[Language.line],
             onPressed: () {
-              read.managerScreen(
-                LineScreen.Route,
-                context,
-              );
+              read.managerScreen(LineScreen.Route, context);
             },
           ),
           Divider(),

@@ -40,12 +40,8 @@ class _ForgetPasswordState extends State<ForgetPassword> {
         backgroundColor: ColorUsed.PrimaryBackground,
         body: Column(
           children: [
-            Login_Image(
-              height: getheight(28.0),
-            ),
-            SizedBox(
-              height: getheight(4),
-            ),
+            Login_Image(height: getheight(28.0)),
+            SizedBox(height: getheight(4)),
             component1(
               _emailController,
               Icons.email,
@@ -53,17 +49,12 @@ class _ForgetPasswordState extends State<ForgetPassword> {
               false,
               true,
             ),
-            SizedBox(
-              height: getheight(4),
-            ),
+            SizedBox(height: getheight(4)),
             CustomMaterialButton(
               title: Translation[Language.send],
               onPressed: () async {
                 showCirculerProgress(context);
-                await value.sendCode(
-                  _emailController.text,
-                  context,
-                );
+                await value.sendCode(_emailController.text, context);
               },
             ),
           ],

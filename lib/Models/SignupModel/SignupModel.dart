@@ -68,34 +68,25 @@ class SignupModel {
   SharedModel? sharesModel;
 
   Future<bool> sendCodeEmail(BuildContext context, String email) async {
-    if (await EmailOTP.sendOTP(
-      email: email,
-    )) {
+    if (await EmailOTP.sendOTP(email: email)) {
       Logger.logger('message sendCodeEmail -> ok');
       read!.managerScreen(OtpScreenEmail.Route, _ctx!);
       Navigator.pop(context);
-      
+
       return true;
     } else {
       Logger.logger('message sendCodeEmail -> error');
       Logger.logger('message sendCodeEmail -> Field');
       Navigator.pop(context);
-      
+
       ScaffoldMessenger.of(_ctx!).showSnackBar(
-        SnackBar(
-          content: Text(
-            Translation[Language.error_email],
-          ),
-        ),
+        SnackBar(content: Text(Translation[Language.error_email])),
       );
       return false;
     }
   }
 
-  Future<void> saveData(
-    BuildContext context,
-    Map<String, String> data,
-  ) async {
+  Future<void> saveData(BuildContext context, Map<String, String> data) async {
     _name = data['name'];
     _email = data['email'];
     _password = data['password'];
@@ -104,45 +95,42 @@ class SignupModel {
   }
 
   Future<void> registerInRealTime(BuildContext ctx) async {
-    DataSnapshot dataSnapshot =
-        await database!.child('auth').child(_phone!).get();
+    DataSnapshot dataSnapshot = await database!
+        .child('auth')
+        .child(_phone!)
+        .get();
     if (dataSnapshot.exists) {
       ScaffoldMessenger.of(ctx).showSnackBar(
-        SnackBar(
-          content: Text(
-            Translation[Language.is_number_exist],
-          ),
-        ),
+        SnackBar(content: Text(Translation[Language.is_number_exist])),
       );
       sharesModel!.managerScreenSplash(LoginScreen.Route, ctx, false);
       return;
     }
-    await database!.child('auth').child(_phone!).set({
-      'name': _name,
-      'email': _email,
-      'phone': _phone,
-      'password': _password,
-      // 'token': _token,
-    }).then((value) async {
-      Navigator.pop(ctx);
-      await shared!.setString('nameUser', _name!);
-      await shared!.setString('emailUser', _email!);
-      await shared!.setString('phoneUser', _phone!);
-      await shared!.setBool('isRegister', true);
-      sharesModel!.managerScreenSplash(
-        MainScreen.ROUTE,
-        ctx,
-        false,
-      );
+    await database!
+        .child('auth')
+        .child(_phone!)
+        .set({
+          'name': _name,
+          'email': _email,
+          'phone': _phone,
+          'password': _password,
+          // 'token': _token,
+        })
+        .then((value) async {
+          Navigator.pop(ctx);
+          await shared!.setString('nameUser', _name!);
+          await shared!.setString('emailUser', _email!);
+          await shared!.setString('phoneUser', _phone!);
+          await shared!.setBool('isRegister', true);
+          sharesModel!.managerScreenSplash(MainScreen.ROUTE, ctx, false);
 
-      // log('message registerInRealTime ->  ');
-    }).onError((bool, error) {
-      log('message registerInRealTime -> $error');
-      ScaffoldMessenger.of(_ctx!).showSnackBar(
-        SnackBar(
-          content: Text('Error Register'),
-        ),
-      );
-    });
+          // log('message registerInRealTime ->  ');
+        })
+        .onError((bool, error) {
+          log('message registerInRealTime -> $error');
+          ScaffoldMessenger.of(
+            _ctx!,
+          ).showSnackBar(SnackBar(content: Text('Error Register')));
+        });
   }
 }

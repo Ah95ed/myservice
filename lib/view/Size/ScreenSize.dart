@@ -14,11 +14,9 @@ extension ScreenSize on BuildContext {
       ? MediaQuery.sizeOf(this).height
       : MediaQuery.sizeOf(this).width;
 
-      
   SizeBuilder get sizeBuilder => SizeBuilder.of(this);
   double get scaleWidth => sizeBuilder.width / sizeBuilder.baseSize.width;
   double get scaleHeight => sizeBuilder.height / sizeBuilder.baseSize.height;
-
 
   // ! this to calculate height screen part from 100;
   double getHeight(num h) {
@@ -30,14 +28,13 @@ extension ScreenSize on BuildContext {
     return w * scaleWidth;
   }
 
-// ! here to return font size in all screen
+  // ! here to return font size in all screen
 
   double getFontSize(num f) {
     return f * scaleWidth;
   }
+
   double getMinSize(num f) {
     return f * min(scaleWidth, scaleHeight);
   }
-  
-
 }

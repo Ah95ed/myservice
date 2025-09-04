@@ -5,39 +5,23 @@ import 'package:email_otp/email_otp.dart';
 import 'package:flutter/material.dart';
 
 class ForgetPasswordModel {
-  Future<void> sendCodeEmail(
-    BuildContext context,
-    String _email,
-  ) async {
+  Future<void> sendCodeEmail(BuildContext context, String _email) async {
     if (_email.isEmpty || !_email.contains('@')) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            Translation[Language.error_email],
-          ),
-        ),
+        SnackBar(content: Text(Translation[Language.error_email])),
       );
       Navigator.pop(context);
       return;
     }
     if (await EmailOTP.sendOTP(email: _email)) {
       // Navigator.pop(context);
-      Navigator.popAndPushNamed(
-        context,
-        OtpScreenEmail.Route,
-        arguments: true,
-        
-      );
+      Navigator.popAndPushNamed(context, OtpScreenEmail.Route, arguments: true);
     } else {
-         ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            Translation[Language.not_sent_email],
-          ),
-        ),
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(Translation[Language.not_sent_email])),
       );
       Navigator.pop(context);
-      
+
       return;
     }
   }
