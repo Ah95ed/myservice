@@ -30,14 +30,14 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void didChangeDependencies() async {
     super.didChangeDependencies();
-    await checkUpdate(context);
-    Future.delayed(Duration(seconds: 3), () {
-      if (shared!.getBool('tutorial') == null) {
-        createTutorial();
-        addItem();
-        showTutorial();
-      }
-    });
+    //await checkUpdate(context);
+  //  Future.delayed(Duration(seconds: 3), () {
+   //   if (shared!.getBool('tutorial') == null) {
+       // createTutorial();
+    //    addItem();
+       // showTutorial();
+  //    }
+   // });
   }
 
   FutureOr<void> checkUpdate(BuildContext context) async {
