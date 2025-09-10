@@ -31,13 +31,13 @@ class _MainScreenState extends State<MainScreen> {
   void didChangeDependencies() async {
     super.didChangeDependencies();
     //await checkUpdate(context);
-  //  Future.delayed(Duration(seconds: 3), () {
-   //   if (shared!.getBool('tutorial') == null) {
-       // createTutorial();
+    //  Future.delayed(Duration(seconds: 3), () {
+    //   if (shared!.getBool('tutorial') == null) {
+    // createTutorial();
     //    addItem();
-       // showTutorial();
-  //    }
-   // });
+    // showTutorial();
+    //    }
+    // });
   }
 
   FutureOr<void> checkUpdate(BuildContext context) async {
