@@ -3,14 +3,14 @@ import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
 import 'package:flutter/material.dart';
 
 class CustomMaterialButton extends StatelessWidget {
-  String? title;
-
-  CustomMaterialButton({
+  const CustomMaterialButton({
     super.key,
     required this.title,
     required this.onPressed,
   });
-  void Function()? onPressed;
+  
+  final String? title;
+  final void Function()? onPressed;
   @override
   Widget build(BuildContext context) {
     return Padding(

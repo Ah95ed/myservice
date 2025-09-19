@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
@@ -12,6 +13,7 @@ import 'package:Al_Zab_township_guide/controller/provider/LoginProvider/Loginpro
 import 'package:Al_Zab_township_guide/controller/provider/OTPEmailProvider/OTPEmailProvider.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/controller/provider/ServiceController/ServiceController.dart';
+import 'package:Al_Zab_township_guide/controller/provider/TelegramClassProvider.dart';
 import 'package:Al_Zab_township_guide/controller/provider/UpdateProvider/UpdateProvider.dart';
 import 'package:Al_Zab_township_guide/view/Size/ScreenSize.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizeBuilder.dart';
@@ -22,6 +24,7 @@ import 'package:Al_Zab_township_guide/view/screens/MyCustomSplashScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
+
 import 'generated/l10n.dart';
 
 Future<void> main() async {
@@ -62,6 +65,11 @@ Future<void> main() async {
               create: (_) => ForgetPasswordProvider(),
               lazy: true,
             ),
+            ChangeNotifierProvider(
+              create: (_) => TelegramClassProvider(),
+              lazy: true,
+            ),
+           
           ],
           child: const MyApp(),
           // child: DevicePreview(
@@ -112,6 +120,7 @@ class MyApp extends StatelessWidget {
             home: shared!.getBool('spalsh') == null
                 ? MyCustomSplashScreen()
                 : MainScreen(),
+            // home : MyCustomSplashScreen(),
           );
         },
       ),

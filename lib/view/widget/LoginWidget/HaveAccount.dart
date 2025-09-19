@@ -5,8 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class HaveAccount extends StatelessWidget {
-  HaveAccount({this.s1, this.s2, super.key, this.route});
-  String? s1, s2, route;
+  const HaveAccount({this.s1, this.s2, super.key, this.route});
+
+  final String? s1, s2, route;
   @override
   Widget build(BuildContext context) {
     final read = context.read<Providers>();

@@ -16,7 +16,6 @@ class ConnectTelegram {
 
   final String message = 'احمد شاكر';
   Future<void> sendMessage() async {
-    final String apiUrl1 = 'https://api.telegram.org/bot$botToken/getUpdates';
     final String apiUrl =
         'https://api.telegram.org/bot$botToken/sendMessage?chat_id=$chatId&text=$message';
 

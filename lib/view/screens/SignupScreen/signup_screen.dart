@@ -280,18 +280,20 @@ class _SignupScreenState extends State<SignupScreen>
 // }
 
 class component1 extends StatelessWidget {
-  component1(
+  const component1(
     this.controller,
     this.icon,
     this.hintText,
     this.isPassword,
-    this.isEmail,
-  );
-  TextEditingController controller;
-  IconData? icon;
-  String? hintText;
-  bool? isPassword;
-  bool? isEmail;
+    this.isEmail, {
+    Key? key,
+  }) : super(key: key);
+
+  final TextEditingController controller;
+  final IconData? icon;
+  final String? hintText;
+  final bool? isPassword;
+  final bool? isEmail;
 
   @override
   Widget build(BuildContext context) {

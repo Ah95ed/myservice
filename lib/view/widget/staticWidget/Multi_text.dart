@@ -2,8 +2,9 @@ import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:flutter/material.dart';
 
 class MultiText extends StatelessWidget {
-  String str, con;
-  MultiText(this.str, this.con, {super.key});
+  const MultiText(this.str, this.con, {super.key});
+  
+  final String str, con;
 
   @override
   Widget build(BuildContext context) {

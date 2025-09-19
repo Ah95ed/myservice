@@ -61,8 +61,8 @@ class _BloodScreenState extends State<BloodScreen> {
               children: [
                 ButtonSelect(
                   title: Constant.A_Plus,
-                  onPressed: () {
-                    read.managerScreen(
+                  onPressed: () async {
+                  await  read.managerScreen(
                       ShowDonors.ROUTE,
                       context,
                       object: DataSend(Constant.A_Plus),

@@ -1,19 +1,20 @@
-import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
+import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:flutter/material.dart';
-import '../staticWidget/Multi_text.dart';
+
 import '../../ThemeApp/ColorUsed.dart';
+import '../staticWidget/Multi_text.dart';
 
 class CardSatota extends StatelessWidget {
-  // const Professions({super.key});
-  late String name, location;
-  VoidCallback onPressed;
-  CardSatota({
+  const CardSatota({
     super.key,
     required this.name,
     required this.location,
     required this.onPressed,
   });
+  
+  final String name, location;
+  final VoidCallback onPressed;
   @override
   Widget build(BuildContext context) {
     return Card(

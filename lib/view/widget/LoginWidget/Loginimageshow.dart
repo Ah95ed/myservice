@@ -4,8 +4,9 @@ import 'package:Al_Zab_township_guide/view/ThemeApp/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class Login_Image extends StatelessWidget {
-  Login_Image({this.height, super.key});
-  double? height;
+  const Login_Image({this.height, super.key});
+
+  final double? height;
 
   @override
   Widget build(BuildContext context) {
@@ -40,9 +41,10 @@ class Login_Image extends StatelessWidget {
 }
 
 class LogoService extends StatelessWidget {
-  LogoService({this.height, this.title, super.key});
-  double? height;
-  String? title;
+  const LogoService({this.height, this.title, super.key});
+
+  final double? height;
+  final String? title;
 
   @override
   Widget build(BuildContext context) {

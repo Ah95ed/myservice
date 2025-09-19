@@ -10,6 +10,7 @@ PackageInfo? packageInfo;
 late FirebaseRemoteConfig remoteConfig;
 late String re = '0';
 
+
 Future<void> init() async {
   shared = await SharedPreferences.getInstance();
 

@@ -1,45 +1,77 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class DoctorModel {
-  String? _name, _presence, _specialization, _number, _title;
+  const DoctorModel({
+    required this.name,
+    required this.presence,
+    required this.specialization,
+    required this.number,
+    required this.title,
+  });
 
-  DoctorModel({
+  final String name;
+  final String presence;
+  final String specialization;
+  final String number;
+  final String title;
+
+  DoctorModel copyWith({
     String? name,
     String? presence,
     String? specialization,
     String? number,
     String? title,
   }) {
-    _name = name;
-    _presence = presence;
-    _specialization = specialization;
-    _number = number;
-    _title = title;
+    return DoctorModel(
+      name: name ?? this.name,
+      presence: presence ?? this.presence,
+      specialization: specialization ?? this.specialization,
+      number: number ?? this.number,
+      title: title ?? this.title,
+    );
   }
 
-  //! getter and setter
-  String? get name => _name;
-  String? get presence => _presence;
-  String? get specialization => _specialization;
-  String? get number => _number;
-  String? get title => _title;
-
-  set name(String? value) {
-    _name = value;
+  Map<String, dynamic> toMap() {
+    return {
+      'name': name,
+      'presence': presence,
+      'specialization': specialization,
+      'number': number,
+      'title': title,
+    };
   }
 
-  set time(String? value) {
-    _presence = value;
+  factory DoctorModel.fromMap(Map<String, dynamic> map) {
+    return DoctorModel(
+      name: map['name'] ?? '',
+      presence: map['presence'] ?? '',
+      specialization: map['specialization'] ?? '',
+      number: map['number'] ?? '',
+      title: map['title'] ?? '',
+    );
   }
 
-  set sepcialization(String? value) {
-    _specialization = value;
+  @override
+  String toString() {
+    return 'DoctorModel(name: $name, presence: $presence, specialization: $specialization, number: $number, title: $title)';
   }
 
-  set number(String? value) {
-    _number = value;
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    return other is DoctorModel &&
+        other.name == name &&
+        other.presence == presence &&
+        other.specialization == specialization &&
+        other.number == number &&
+        other.title == title;
   }
 
-  set title(String? value) {
-    _title = value;
+  @override
+  int get hashCode {
+    return name.hashCode ^
+        presence.hashCode ^
+        specialization.hashCode ^
+        number.hashCode ^
+        title.hashCode;
   }
 }

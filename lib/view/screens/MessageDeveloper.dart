@@ -1,10 +1,10 @@
-import 'package:Al_Zab_township_guide/view/ThemeApp/app_theme.dart';
 import 'package:Al_Zab_township_guide/controller/provider/DeveloperController/DeveloperController.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
-import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
-import 'package:Al_Zab_township_guide/view/widget/LoginWidget/Loginimageshow.dart';
+import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
+import 'package:Al_Zab_township_guide/view/ThemeApp/app_theme.dart';
+import 'package:Al_Zab_township_guide/view/widget/LoginWidget/Loginimageshow.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -218,18 +218,20 @@ class _MessageDeveloperState extends State<MessageDeveloper>
 }
 
 class component1 extends StatelessWidget {
-  component1(
+  const component1(
     this.controller,
     this.icon,
     this.hintText,
     this.isPassword,
-    this.isEmail,
-  );
-  TextEditingController controller;
-  IconData? icon;
-  String? hintText;
-  bool? isPassword;
-  bool? isEmail;
+    this.isEmail, {
+    Key? key,
+  }) : super(key: key);
+
+  final TextEditingController controller;
+  final IconData? icon;
+  final String? hintText;
+  final bool? isPassword;
+  final bool? isEmail;
 
   @override
   Widget build(BuildContext context) {
@@ -323,10 +325,10 @@ class DeveloperSocial extends StatelessWidget {
 }
 
 class ImagesSocial extends StatelessWidget {
-  ImagesSocial(this.path, this.onPressed, {super.key});
+  const ImagesSocial(this.path, this.onPressed, {super.key});
 
-  String? path;
-  VoidCallback onPressed;
+  final String? path;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {

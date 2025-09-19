@@ -165,8 +165,8 @@ class Providers with ChangeNotifier {
     notifyListeners();
   }
 
-  managerScreen(String route, BuildContext context, {Object? object}) {
-    Navigator.pushNamed(context, route, arguments: object);
+  Future<void> managerScreen(String route, BuildContext context, {Object? object}) async {
+  await  Navigator.pushNamed(context, route, arguments: object);
     notifyListeners();
   }
 

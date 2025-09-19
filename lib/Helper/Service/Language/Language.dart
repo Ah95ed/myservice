@@ -124,7 +124,7 @@ class Language implements KeyAbstract {
   static const String update = "update";
   static const String share_app = "share_app";
   static const String not_sent_email = "not_sent_email";
-  @override
+
   static Map<String, Map<String, String>> keyMap = {
     'ar': {
       not_sent_email: 'لم يتم ارسال البريد الالكتروني',
