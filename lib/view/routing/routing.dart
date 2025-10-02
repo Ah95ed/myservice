@@ -1,6 +1,7 @@
 import 'package:Al_Zab_township_guide/view/screens/AddDoctor/AddDoctor.dart';
 import 'package:Al_Zab_township_guide/view/screens/AddSatota/AddSatota.dart';
 import 'package:Al_Zab_township_guide/view/screens/BloodScreen.dart';
+import 'package:Al_Zab_township_guide/view/screens/BooksScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/DoctorScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/LineScreen/LineScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
@@ -37,4 +38,5 @@ Map<String, WidgetBuilder> routs = {
   AddDoctor.Route: (context) => AddDoctor(),
   AddSatota.Route: (context) => AddSatota(),
   AddDonor.Route: (context) => AddDonor(),
+  BooksScreen.route: (context) => BooksScreen(),
 };

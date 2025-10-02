@@ -1,0 +1,5 @@
+dependencies:
+  url_launcher:
+  dio: ^5.4.0
+  open_file: ^3.3.2
+  path_provider: ^2.1.2

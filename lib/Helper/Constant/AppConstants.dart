@@ -4,18 +4,29 @@ class AppConstants {
   static const String appName = 'دليل ناحية الزاب';
   static const String appVersion = '1.0.0';
 
-  // روابط API
-  static const String telegramBotToken = 'YOUR_BOT_TOKEN_HERE';
-  static const String telegramApiUrl = 'https://api.telegram.org/bot';
+  // روابط Cloudflare
+  static const String cloudflareWorkerUrl =
+      'https://your-worker.your-subdomain.workers.dev';
+  static const String cloudflareDomain =
+      'https://api.yourdomain.com'; // إذا كان لديك دومين مخصص
+
+  // نقاط النهاية للـ APIs
+  static const String bloodDonorsEndpoint = 'blood-donors';
+  static const String doctorsEndpoint = 'doctors';
+  static const String professionalsEndpoint = 'professionals';
+  static const String authLoginEndpoint = 'auth/login';
+  static const String authSignupEndpoint = 'auth/signup';
+  static const String developerMessageEndpoint = 'developer/message';
+  static const String appInfoEndpoint = 'app/info';
+  static const String imagesUploadEndpoint = 'images/upload';
+  static const String searchEndpoint = 'search';
 
   // مسارات الصور
   static const String logoPath = 'assets/logo/asd.png';
   static const String instagramPath = 'assets/logo/instagram.png';
   static const String whatsappPath = 'assets/logo/whatsapp.png';
-  static const String telegramPath = 'assets/logo/telegram.png';
-  static const String messengerPath = 'assets/logo/messenger.png';
-
-  // أحجام الشاشة الافتراضية
+  static const String messengerPath =
+      'assets/logo/messenger.png'; // أحجام الشاشة الافتراضية
   static const double defaultScreenWidth = 375.0;
   static const double defaultScreenHeight = 812.0;
 
@@ -57,7 +68,12 @@ class AppConstants {
   static const String bloodService = 'blood';
   static const String doctorService = 'doctor';
   static const String professionService = 'profession';
-  static const String telegramService = 'telegram';
+
+  // أنواع البحث
+  static const String searchTypeAll = 'all';
+  static const String searchTypeBlood = 'blood';
+  static const String searchTypeDoctor = 'doctor';
+  static const String searchTypeProfession = 'profession';
 }
 
 // ملف للتحقق من صحة البيانات

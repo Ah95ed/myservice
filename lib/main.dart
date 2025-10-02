@@ -13,7 +13,6 @@ import 'package:Al_Zab_township_guide/controller/provider/LoginProvider/Loginpro
 import 'package:Al_Zab_township_guide/controller/provider/OTPEmailProvider/OTPEmailProvider.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/controller/provider/ServiceController/ServiceController.dart';
-import 'package:Al_Zab_township_guide/controller/provider/TelegramClassProvider.dart';
 import 'package:Al_Zab_township_guide/controller/provider/UpdateProvider/UpdateProvider.dart';
 import 'package:Al_Zab_township_guide/view/Size/ScreenSize.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizeBuilder.dart';
@@ -65,11 +64,6 @@ Future<void> main() async {
               create: (_) => ForgetPasswordProvider(),
               lazy: true,
             ),
-            ChangeNotifierProvider(
-              create: (_) => TelegramClassProvider(),
-              lazy: true,
-            ),
-           
           ],
           child: const MyApp(),
           // child: DevicePreview(

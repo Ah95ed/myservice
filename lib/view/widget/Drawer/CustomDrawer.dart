@@ -7,6 +7,7 @@ import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/app_theme.dart';
+import 'package:Al_Zab_township_guide/view/screens/BooksScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/EditScreen/CustomDialog.dart';
 import 'package:Al_Zab_township_guide/view/screens/SignupScreen/signup_screen.dart';
 import 'package:Al_Zab_township_guide/view/widget/Dialogandsnakebar/DialogCirculerProgress.dart';
@@ -238,6 +239,35 @@ class Customdrawer extends StatelessWidget {
                 ),
               ),
             ),
+            Divider(thickness: getWidth(0.5), color: ColorUsed.DarkGreen),
+            ListTile(
+              leading: Icon(Icons.book),
+              title: Text(
+                Translation[Language.team_policy],
+                style: TextStyle(
+                  fontSize: setFontSize(10),
+                  fontWeight: FontWeight.w400,
+                  color: ColorUsed.DarkGreen,
+                ),
+              ),
+              onTap: () {
+
+                read.managerScreen(BooksScreen.route, context);
+              },
+            ),
+            //  Divider(thickness: getWidth(0.1), color: ColorUsed.DarkGreen,),
+            // Center(
+            //   child: Text(
+            //     Translation[Language.version] +
+            //         ':- (${packageInfo!.version}) ' +
+            //         packageInfo!.buildNumber,
+            //     style: TextStyle(
+            //       fontSize: setFontSize(10),
+            //       fontWeight: FontWeight.w400,
+            //       color: ColorUsed.DarkGreen,
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),

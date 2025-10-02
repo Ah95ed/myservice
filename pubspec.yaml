@@ -29,6 +29,10 @@ dependencies:
   package_info_plus: 
   http:
 
+  open_file: 
+  path_provider: 
+  file_picker: ^10.3.3
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
