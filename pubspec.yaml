@@ -10,6 +10,7 @@ dependencies:
   flutter: 
     sdk: flutter
   cupertino_icons: 
+
   firebase_core:
   email_otp: 
   cloud_firestore:
@@ -31,7 +32,8 @@ dependencies:
 
   open_file: 
   path_provider: 
-  file_picker: ^10.3.3
+  file_picker: 
+  permission_handler:
 
 dev_dependencies:
   flutter_test:

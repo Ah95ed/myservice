@@ -1,9 +1,11 @@
 import 'dart:io';
 
+import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:open_file/open_file.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class Book {
   final String title;
@@ -86,14 +88,21 @@ class BooksScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          book.title,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
+                        GestureDetector(
+                          onTap: () async {
+                            await downloadAndOpenBook(context, book);
+                          },
+                          child: Text(
+                            book.title,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                              decoration: TextDecoration.underline,
+                              color: Colors.blue,
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                           ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
                         ),
                         Text(
                           book.author,
@@ -137,40 +146,63 @@ class BooksScreen extends StatelessWidget {
 
 Future<void> downloadAndOpenBook(BuildContext context, Book book) async {
   final scaffoldMessenger = ScaffoldMessenger.of(context);
-  try {
-    // 1. يختار المستخدم مكان الحفظ
-    String? savePath = await FilePicker.platform.saveFile(
-      dialogTitle: 'اختر مكان حفظ الكتاب',
-      fileName: book.title,
-      type: FileType.any,
-      allowedExtensions: ['pdf', 'docx', 'doc'],
-    );
-    if (savePath == null) {
-      // المستخدم ألغى
-      return;
-    }
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (context) => const Center(child: CircularProgressIndicator()),
-    );
-    final response = await http.get(Uri.parse(book.urlBook));
-    if (response.statusCode == 200) {
-      final file = File(savePath);
-      await file.writeAsBytes(response.bodyBytes);
-      Navigator.pop(context);
-      scaffoldMessenger.showSnackBar(
-        SnackBar(content: Text('تم تنزيل الكتاب!')),
-      );
-      await OpenFile.open(savePath);
-    } else {
-      Navigator.pop(context);
-      throw Exception('فشل في تنزيل الملف');
-    }
-  } catch (e) {
-    Navigator.pop(context);
-    scaffoldMessenger.showSnackBar(
-      SnackBar(content: Text('حدث خطأ أثناء التنزيل أو الفتح: $e')),
-    );
+  // try {
+  await Permission.storage.request();
+  await Permission.manageExternalStorage.request();
+  final p = await Permission.accessMediaLocation.request();
+  Logger.logger('message======1');
+  if (p.isGranted) {
+    Logger.logger('message======2');
+    String? outputFile = await FilePicker.platform.getDirectoryPath();
+    final File file = File(outputFile!);
+    // await file.writeAsString(csvString);
+    // final result = await FilePicker.platform.saveFile(
+    //   type: FileType.any,
+    //   allowedExtensions: ['pdf', 'docx', 'doc'],
+
+    // );
   }
+  // String? outputFile = await FilePicker.platform.saveFile(
+  //     dialogTitle: 'اختر مكان حفظ الملف',
+  //     fileName: 'c1_primary.pdf',
+  //     type: FileType.custom,
+  //     allowedExtensions: ['pdf'],
+  //   );
+  //   final File file = File(outputFile!);
+  // await file.writeAsString(file.path);
+  // // 1. يختار المستخدم مكان الحفظ
+  // String? savePath = await FilePicker.platform.saveFile(
+  //   dialogTitle: 'اختر مكان حفظ الكتاب',
+  //   fileName: book.title,
+  //   type: FileType.any,
+  //   allowedExtensions: ['pdf', 'docx', 'doc'],
+  // // );
+  // if (savePath == null) {
+  //   // المستخدم ألغى
+  //   return;
+  // }
+  //   showDialog(
+  //     context: context,
+  //     barrierDismissible: false,
+  //     builder: (context) => const Center(child: CircularProgressIndicator()),
+  //   );
+  //   final response = await http.get(Uri.parse('https://pub-3fc8cfe1b1a84a7987f583891bf0e2c5.r2.dev/Books/c1_Primary/book.pdf'));
+  //   if (response.statusCode == 200) {
+  //     final file = File(savePath);
+  //     await file.writeAsBytes(response.bodyBytes);
+  //     Navigator.pop(context);
+  //     scaffoldMessenger.showSnackBar(
+  //       SnackBar(content: Text('تم تنزيل الكتاب!')),
+  //     );
+  //     await OpenFile.open(savePath);
+  //   } else {
+  //     Navigator.pop(context);
+  //     throw Exception('فشل في تنزيل الملف');
+  //   }
+  // } catch (e) {
+  //   Navigator.pop(context);
+  //   scaffoldMessenger.showSnackBar(
+  //     SnackBar(content: Text('حدث خطأ أثناء التنزيل أو الفتح: $e')),
+  //   );
+  // }
 }
