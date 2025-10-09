@@ -18,7 +18,7 @@ import 'package:Al_Zab_township_guide/view/Size/ScreenSize.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizeBuilder.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
 import 'package:Al_Zab_township_guide/view/routing/routing.dart';
-import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
+import 'package:Al_Zab_township_guide/view/screens/BooksScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/MyCustomSplashScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -113,7 +113,8 @@ class MyApp extends StatelessWidget {
             // ! here to check is null or not
             home: shared!.getBool('spalsh') == null
                 ? MyCustomSplashScreen()
-                : MainScreen(),
+                : BooksScreen(),
+            // : MainScreen(),
             // home : MyCustomSplashScreen(),
           );
         },
