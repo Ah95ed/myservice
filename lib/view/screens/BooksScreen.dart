@@ -6,10 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:open_file/open_file.dart';
 import 'package:path/path.dart' as p;
-import 'package:permission_handler/permission_handler.dart';
+
+// permission_handler no longer used here; directory picker handles access
 
 import '../../Models/BookModel.dart';
 import '../../Service/CloudflareService.dart';
+import 'PdfViewerScreen.dart';
 
 class BooksScreen extends StatefulWidget {
   const BooksScreen({Key? key}) : super(key: key);
@@ -216,7 +218,17 @@ Future<void> downloadAndOpenByUrl(
     scaffoldMessenger.showSnackBar(
       SnackBar(content: Text('تم تنزيل الكتاب: $savedPath')),
     );
-    await OpenFile.open(savedPath);
+    // Open in-app PDF viewer if PDF, otherwise fallback to external
+    if (_extensionFromUrl(savedPath).toLowerCase().contains('pdf')) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => PdfViewerScreen(filePath: savedPath, title: title),
+        ),
+      );
+    } else {
+      await OpenFile.open(savedPath);
+    }
   } catch (e, st) {
     try {
       Navigator.pop(context);

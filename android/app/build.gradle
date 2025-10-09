@@ -35,7 +35,14 @@ android {
    namespace "com.Blood.types"
     compileSdkVersion 36
     ndkVersion '27.0.12077973'
-
+ splits {
+        abi {
+            enable true
+            reset()
+            include 'armeabi-v7a', 'arm64-v8a'
+            universalApk false
+        }
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -70,9 +77,9 @@ android {
         versionName = '6.6.3'
         ndkVersion '27.0.12077973'
         multiDexEnabled true
-       ndk {
-     abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
-   }
+//        ndk {
+//      abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
+//    }
     }
      configurations {
     compile.exclude group: 'com.google.zxing'
