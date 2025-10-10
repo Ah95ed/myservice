@@ -225,7 +225,7 @@ class Customdrawer extends StatelessWidget {
               ),
               onTap: () {
 
-                read.managerScreen(GradesScreen.route, context);
+                read.managerScreen(BooksScreen.route, context);
               },
             ),
             Divider(thickness: getWidth(0.5), color: ColorUsed.DarkGreen),

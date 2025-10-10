@@ -149,18 +149,19 @@ class _BooksScreenState extends State<BooksScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            mainAxisSpacing: 16,
-            crossAxisSpacing: 16,
-            childAspectRatio: 0.7,
-          ),
-          itemCount: books.length,
+        child: ListView.builder(
+          // gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          //   crossAxisCount: 2,
+          //   mainAxisSpacing: 12,
+          //   crossAxisSpacing: 12,
+          //   childAspectRatio: 0.9,
+          // ),
+          itemCount: c1_primary.length,
           itemBuilder: (context, index) {
-            final book = books[index];
+            final book = c1_primary[index];
             return InkWell(
               onTap: () {
+                Logger.logger('message == ${book.title}');
                 Navigator.pushNamed(
                   context,
                   PdfViewerScreen.route,
@@ -178,19 +179,19 @@ class _BooksScreenState extends State<BooksScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Expanded(
-                      child: ClipRRect(
-                        borderRadius: const BorderRadius.vertical(
-                          top: Radius.circular(16),
-                        ),
-                        child: Image.network(
-                          book.imageUrl,
-                          fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) =>
-                              const Icon(Icons.book, size: 60),
-                        ),
-                      ),
-                    ),
+                    // Expanded(
+                    //   child: ClipRRect(
+                    //     borderRadius: const BorderRadius.vertical(
+                    //       top: Radius.circular(16),
+                    //     ),
+                    //     child: Image.network(
+                    //       book.imageUrl,
+                    //       fit: BoxFit.cover,
+                    //       errorBuilder: (context, error, stackTrace) =>
+                    //           const Icon(Icons.book, size: 60),
+                    //     ),
+                    //   ),
+                    // ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
@@ -205,34 +206,36 @@ class _BooksScreenState extends State<BooksScreen> {
                                 book.title,
                               );
                             },
-                            child: Text(
-                              book.title,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                                decoration: TextDecoration.underline,
-                                color: Colors.blue,
+                            child: Center(
+                              child: Text(
+                                book.title,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                  decoration: TextDecoration.underline,
+                                  color: Colors.blue,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                               ),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
                             ),
                           ),
-                          Text(
-                            book.author,
-                            style: const TextStyle(
-                              color: Colors.grey,
-                              fontSize: 13,
-                            ),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
+                          // Text(
+                          //   book.author,
+                          //   style: const TextStyle(
+                          //     color: Colors.grey,
+                          //     fontSize: 13,
+                          //   ),
+                          //   maxLines: 1,
+                          //   overflow: TextOverflow.ellipsis,
+                          // ),
                           const SizedBox(height: 4),
-                          Text(
-                            book.description,
-                            style: const TextStyle(fontSize: 12),
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                          ),
+                          // Text(
+                          //   book.description,
+                          //   style: const TextStyle(fontSize: 12),
+                          //   maxLines: 2,
+                          //   overflow: TextOverflow.ellipsis,
+                          // ),
                           const SizedBox(height: 8),
                           SizedBox(
                             width: double.infinity,
