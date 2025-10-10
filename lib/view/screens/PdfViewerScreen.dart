@@ -1,76 +1,93 @@
+import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
+import 'package:Al_Zab_township_guide/Service/r2_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
+import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
+import 'package:xml/xml.dart' as xml;
+import '../../provider/PdfViewerProvider.dart';
 
 class PdfViewerScreen extends StatefulWidget {
-  final String filePath;
-  final String title;
+  static final route = 'PdfViewerScreen';
 
-  const PdfViewerScreen({Key? key, required this.filePath, required this.title})
-    : super(key: key);
+  const PdfViewerScreen({Key? key}) : super(key: key);
 
   @override
   State<PdfViewerScreen> createState() => _PdfViewerScreenState();
 }
 
 class _PdfViewerScreenState extends State<PdfViewerScreen> {
-  int pages = 0;
-  int currentPage = 0;
-  bool isReady = false;
-  String errorMessage = '';
+  bool started = false;
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!started) {
+      final provider = Provider.of<PdfViewerProvider>(context, listen: false);
+      final args = ModalRoute.of(context)?.settings.arguments;
+      if (args is PdfViewerData) {
+        // set provider data; provider will download remote if needed
+        provider.setData(args);
+      }
+      started = true;
+    }
+  }
+
+ 
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-        actions: [
-          if (isReady)
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.only(right: 12.0),
-                child: Text('${currentPage + 1}/$pages'),
-              ),
-            ),
-        ],
-      ),
-      body: Stack(
-        children: [
-          PDFView(
-            filePath: widget.filePath,
-            enableSwipe: true,
-            swipeHorizontal: false,
-            autoSpacing: true,
-            pageFling: true,
-            onRender: (_pages) {
-              setState(() {
-                pages = _pages!;
-                isReady = true;
-              });
-            },
-            onError: (error) {
-              setState(() {
-                errorMessage = error.toString();
-              });
-            },
-            onPageError: (page, error) {
-              setState(() {
-                errorMessage = '$page: ${error.toString()}';
-              });
-            },
-            onViewCreated: (controller) {
-              // optional: store controller if you want programmatic jumps
-            },
-            onPageChanged: (int? page, int? total) {
-              setState(() {
-                currentPage = page ?? 0;
-              });
-            },
+    return Consumer<PdfViewerProvider>(
+      builder: (context, provider, child) {
+        final data = provider.data;
+        final loading = provider.loading;
+        final error = provider.error;
+        final pages = provider.pages;
+        final current = provider.currentPage;
+
+        return Scaffold(
+          appBar: AppBar(
+            title: Text(data?.title ?? 'PDF'),
+            actions: [
+              if (!loading && error == null)
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 12.0),
+                    child: Text('${current + 1}/$pages'),
+                  ),
+                ),
+            ],
           ),
-          if (!isReady) const Center(child: CircularProgressIndicator()),
-          if (errorMessage.isNotEmpty)
-            Center(child: Text('Error: $errorMessage')),
-        ],
-      ),
+          body: Stack(
+            children: [
+              if (error == null &&
+                  data?.filePath != null &&
+                  data!.filePath!.isNotEmpty)
+                PDFView(
+                  filePath: data.filePath,
+                  enableSwipe: true,
+                  swipeHorizontal: false,
+                  autoSpacing: true,
+                  pageFling: true,
+                  onRender: (_pages) {
+                    provider.updatePages(_pages ?? 0);
+                  },
+                  onError: (error) {
+                    provider.reportError(error.toString());
+                  },
+                  onPageError: (page, error) {
+                    provider.reportError('$page: ${error.toString()}');
+                  },
+                  onViewCreated: (controller) {},
+                  onPageChanged: (int? page, int? total) {
+                    provider.setCurrentPage(page ?? 0);
+                  },
+                ),
+              if (loading) const Center(child: CircularProgressIndicator()),
+              if (error != null) Center(child: Text('Error: $error')),
+            ],
+          ),
+        );
+      },
     );
   }
 }

@@ -14,11 +14,14 @@ import 'package:Al_Zab_township_guide/controller/provider/OTPEmailProvider/OTPEm
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/controller/provider/ServiceController/ServiceController.dart';
 import 'package:Al_Zab_township_guide/controller/provider/UpdateProvider/UpdateProvider.dart';
+import 'package:Al_Zab_township_guide/provider/PdfViewerProvider.dart';
 import 'package:Al_Zab_township_guide/view/Size/ScreenSize.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizeBuilder.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
 import 'package:Al_Zab_township_guide/view/routing/routing.dart';
 import 'package:Al_Zab_township_guide/view/screens/BooksScreen.dart';
+import 'package:Al_Zab_township_guide/view/screens/GradesScreen.dart';
+import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/MyCustomSplashScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -57,6 +60,11 @@ Future<void> main() async {
             ),
             ChangeNotifierProvider(
               create: (_) => ServiceController(),
+              lazy: true,
+            ),
+            // Provider for PDF viewer state
+            ChangeNotifierProvider(
+              create: (_) => PdfViewerProvider(),
               lazy: true,
             ),
             ChangeNotifierProvider(create: (_) => Updateprovider(), lazy: true),
@@ -113,8 +121,8 @@ class MyApp extends StatelessWidget {
             // ! here to check is null or not
             home: shared!.getBool('spalsh') == null
                 ? MyCustomSplashScreen()
-                : BooksScreen(),
-            // : MainScreen(),
+                // : GradesScreen(),
+            : MainScreen(),
             // home : MyCustomSplashScreen(),
           );
         },

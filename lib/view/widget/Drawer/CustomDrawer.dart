@@ -9,6 +9,7 @@ import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/app_theme.dart';
 import 'package:Al_Zab_township_guide/view/screens/BooksScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/EditScreen/CustomDialog.dart';
+import 'package:Al_Zab_township_guide/view/screens/GradesScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/SignupScreen/signup_screen.dart';
 import 'package:Al_Zab_township_guide/view/widget/Dialogandsnakebar/DialogCirculerProgress.dart';
 import 'package:flutter/material.dart';
@@ -211,6 +212,22 @@ class Customdrawer extends StatelessWidget {
                 );
               },
             ),
+              Divider(thickness: getWidth(0.5), color: ColorUsed.DarkGreen),
+            ListTile(
+              leading: Icon(Icons.book),
+              title: Text(
+                Translation[Language.bookSchool],
+                style: TextStyle(
+                  fontSize: setFontSize(12),
+                  fontWeight: FontWeight.bold,
+                  color: ColorUsed.DarkGreen,
+                ),
+              ),
+              onTap: () {
+
+                read.managerScreen(GradesScreen.route, context);
+              },
+            ),
             Divider(thickness: getWidth(0.5), color: ColorUsed.DarkGreen),
             ListTile(
               leading: Icon(Icons.privacy_tip),
@@ -239,22 +256,7 @@ class Customdrawer extends StatelessWidget {
                 ),
               ),
             ),
-            Divider(thickness: getWidth(0.5), color: ColorUsed.DarkGreen),
-            ListTile(
-              leading: Icon(Icons.book),
-              title: Text(
-                Translation[Language.team_policy],
-                style: TextStyle(
-                  fontSize: setFontSize(10),
-                  fontWeight: FontWeight.w400,
-                  color: ColorUsed.DarkGreen,
-                ),
-              ),
-              onTap: () {
-
-                read.managerScreen(BooksScreen.route, context);
-              },
-            ),
+          
             //  Divider(thickness: getWidth(0.1), color: ColorUsed.DarkGreen,),
             // Center(
             //   child: Text(
