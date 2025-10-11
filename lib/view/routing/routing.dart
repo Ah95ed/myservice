@@ -45,3 +45,9 @@ Map<String, WidgetBuilder> routs = {
   PdfViewerScreen.route: (context) => PdfViewerScreen(),
 
 };
+
+
+ Future<void> managerScreen(String route, BuildContext context, {Object? object}) async {
+  await  Navigator.pushNamed(context, route, arguments: object);
+  
+  }

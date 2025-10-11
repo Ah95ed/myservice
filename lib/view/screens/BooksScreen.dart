@@ -1,8 +1,11 @@
 import 'dart:developer';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
+import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
 import 'package:Al_Zab_township_guide/Service/r2_config.dart';
+import 'package:Al_Zab_township_guide/view/routing/routing.dart';
 import 'package:aws_signature_v4/aws_signature_v4.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -12,9 +15,6 @@ import 'package:open_file/open_file.dart';
 import 'package:path/path.dart' as p;
 import 'package:xml/xml.dart' as xml;
 
-// permission_handler no longer used here; directory picker handles access
-
-import '../../Models/BookModel.dart';
 import '../../Service/CloudflareService.dart';
 import '../../provider/PdfViewerProvider.dart';
 import 'PdfViewerScreen.dart';
@@ -28,15 +28,12 @@ class BooksScreen extends StatefulWidget {
 }
 
 class _BooksScreenState extends State<BooksScreen> {
-  List<Book> books = [];
   bool loading = true;
   String? error;
-
+  List args = [];
   @override
   void initState() {
     super.initState();
-    _loadBooks();
-    listFolders();
   }
 
   Future<List<String>> listFolders() async {
@@ -111,7 +108,7 @@ class _BooksScreenState extends State<BooksScreen> {
     try {
       final list = await CloudflareService.fetchBooks();
       setState(() {
-        books = list;
+        // books = list;
         loading = false;
       });
     } catch (e) {
@@ -123,15 +120,17 @@ class _BooksScreenState extends State<BooksScreen> {
   }
 
   @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    args = ModalRoute.of(context)?.settings.arguments as List;
+    // Logger.logger('message == ${args[0]}');
+  }
+
+  @override
   Widget build(BuildContext context) {
-    if (loading)
+    if (args.isEmpty)
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
-    if (error != null) {
-      return Scaffold(
-        appBar: AppBar(title: const Text('الكتب')),
-        body: Center(child: Text('خطأ: $error')),
-      );
-    }
 
     return Scaffold(
       appBar: AppBar(
@@ -149,27 +148,36 @@ class _BooksScreenState extends State<BooksScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: ListView.builder(
-          // gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          //   crossAxisCount: 2,
-          //   mainAxisSpacing: 12,
-          //   crossAxisSpacing: 12,
-          //   childAspectRatio: 0.9,
-          // ),
-          itemCount: c1_primary.length,
+        child: GridView.builder(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 1,
+            mainAxisSpacing: 12,
+            crossAxisSpacing: 12,
+            childAspectRatio: 0.99,
+          ),
+          itemCount: args.length,
           itemBuilder: (context, index) {
-            final book = c1_primary[index];
+            final book = args;
             return InkWell(
               onTap: () {
-                Logger.logger('message == ${book.title}');
-                Navigator.pushNamed(
-                  context,
+                // Logger.logger('message === ${book[index]['name']}');
+                // Logger.logger('message == ${book.title}');
+                managerScreen(
                   PdfViewerScreen.route,
-                  arguments: PdfViewerData(
-                    remoteUrl: book.urlBook,
-                    title: book.title,
+                  context,
+                  object: PdfViewerData(
+                    title: book[index]['name'],
+                    remoteUrl: book[index]['url'],
                   ),
                 );
+                // Navigator.pushNamed(
+                //   context,
+                //   PdfViewerScreen.route,
+                //   arguments: PdfViewerData(
+                //     remoteUrl: book.urlBook,
+                //     title: book.first.toString(),
+                //   ),
+                // );
               },
               child: Card(
                 elevation: 4,
@@ -179,19 +187,6 @@ class _BooksScreenState extends State<BooksScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    // Expanded(
-                    //   child: ClipRRect(
-                    //     borderRadius: const BorderRadius.vertical(
-                    //       top: Radius.circular(16),
-                    //     ),
-                    //     child: Image.network(
-                    //       book.imageUrl,
-                    //       fit: BoxFit.cover,
-                    //       errorBuilder: (context, error, stackTrace) =>
-                    //           const Icon(Icons.book, size: 60),
-                    //     ),
-                    //   ),
-                    // ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
@@ -199,16 +194,16 @@ class _BooksScreenState extends State<BooksScreen> {
                         children: [
                           GestureDetector(
                             onTap: () async {
-                              log('open ${book.urlBook}');
-                              await downloadAndOpenByUrl(
-                                context,
-                                book.urlBook,
-                                book.title,
-                              );
+                              // log('open ${book[index]['url']}');
+                              // await downloadAndOpenByUrl(
+                              //   context,
+                              //   book[index]['url']!,
+                              //   book[index]['name']!,
+                              // );
                             },
                             child: Center(
                               child: Text(
-                                book.title,
+                                book[index]['name']!,
                                 style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16,
@@ -220,32 +215,17 @@ class _BooksScreenState extends State<BooksScreen> {
                               ),
                             ),
                           ),
-                          // Text(
-                          //   book.author,
-                          //   style: const TextStyle(
-                          //     color: Colors.grey,
-                          //     fontSize: 13,
-                          //   ),
-                          //   maxLines: 1,
-                          //   overflow: TextOverflow.ellipsis,
-                          // ),
-                          const SizedBox(height: 4),
-                          // Text(
-                          //   book.description,
-                          //   style: const TextStyle(fontSize: 12),
-                          //   maxLines: 2,
-                          //   overflow: TextOverflow.ellipsis,
-                          // ),
+
                           const SizedBox(height: 8),
                           SizedBox(
                             width: double.infinity,
                             child: ElevatedButton.icon(
                               onPressed: () async {
-                                log('download ${book.urlBook}');
+                                // log('download ${book.urlBook}');
                                 await downloadAndOpenByUrl(
                                   context,
-                                  book.urlBook,
-                                  book.title,
+                                  book[index]['url']!,
+                                  book[index]['name']!,
                                 );
                               },
                               icon: const Icon(Icons.download),
@@ -272,20 +252,23 @@ Future<void> downloadAndOpenByUrl(
   String title,
 ) async {
   final scaffoldMessenger = ScaffoldMessenger.of(context);
+  String? dir = '';
   try {
-    // if (Platform.isAndroid) {
-    //   await Permission.storage.request();
-    //   await Permission.manageExternalStorage.request();
-    //   await Permission.accessMediaLocation.request();
-    // }
-
     final suggestedName = title.replaceAll(' ', '_') + _extensionFromUrl(url);
-
+    if (shared!.getString('path')!.isEmpty ||
+        shared!.getString('path') == null) {
+      dir = await FilePicker.platform.getDirectoryPath(
+        dialogTitle: 'اختر مجلد لحفظ الملف',
+      );
+    }else{
+      dir = shared!.getString('path')! + '/books';
+    }
+    
     // Ask for directory first (works on Android & desktop). If null, fallback to temp.
-    final dir = await FilePicker.platform.getDirectoryPath(
-      dialogTitle: 'اختر مجلد لحفظ الملف',
-    );
 
+    if (dir == null) {
+      return;
+    }
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -300,18 +283,10 @@ Future<void> downloadAndOpenByUrl(
     final bytes = response.bodyBytes;
 
     String savedPath;
-    if (dir != null) {
-      final path = p.join(dir, suggestedName);
-      final file = File(path);
-      await file.writeAsBytes(bytes);
-      savedPath = path;
-    } else {
-      final tmp = await Directory.systemTemp.createTemp('myservice_');
-      final path = p.join(tmp.path, suggestedName);
-      final file = File(path);
-      await file.writeAsBytes(bytes);
-      savedPath = path;
-    }
+    final path = p.join(dir, suggestedName);
+    final file = File(path);
+    await file.writeAsBytes(bytes);
+    savedPath = path;
 
     try {
       Navigator.pop(context);
@@ -334,7 +309,7 @@ Future<void> downloadAndOpenByUrl(
     try {
       Navigator.pop(context);
     } catch (_) {}
-    log('download error', error: e, stackTrace: st);
+    // log('download error', error: e, stackTrace: st);
     scaffoldMessenger.showSnackBar(
       SnackBar(content: Text('حدث خطأ أثناء التنزيل أو الفتح: $e')),
     );

@@ -7,6 +7,7 @@ import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/app_theme.dart';
+import 'package:Al_Zab_township_guide/view/routing/routing.dart';
 import 'package:Al_Zab_township_guide/view/screens/BooksScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/EditScreen/CustomDialog.dart';
 import 'package:Al_Zab_township_guide/view/screens/GradesScreen.dart';
@@ -225,7 +226,7 @@ class Customdrawer extends StatelessWidget {
               ),
               onTap: () {
 
-                read.managerScreen(BooksScreen.route, context);
+                managerScreen(GradesScreen.route, context);
               },
             ),
             Divider(thickness: getWidth(0.5), color: ColorUsed.DarkGreen),
