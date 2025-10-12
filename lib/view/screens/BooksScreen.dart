@@ -255,14 +255,14 @@ Future<void> downloadAndOpenByUrl(
   String? dir = '';
   try {
     final suggestedName = title.replaceAll(' ', '_') + _extensionFromUrl(url);
-    if (shared!.getString('path')!.isEmpty ||
-        shared!.getString('path') == null) {
+//    if (shared!.getString('path')!.isEmpty ||
+ //       shared!.getString('path') == null) {
       dir = await FilePicker.platform.getDirectoryPath(
         dialogTitle: 'اختر مجلد لحفظ الملف',
       );
-    }else{
-      dir = shared!.getString('path')! + '/books';
-    }
+//    }else{
+ //     dir = shared!.getString('path')! + '/books';
+//    }
     
     // Ask for directory first (works on Android & desktop). If null, fallback to temp.
 
