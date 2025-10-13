@@ -1,10 +1,9 @@
-import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
-import 'package:Al_Zab_township_guide/Service/r2_config.dart';
+import 'package:Al_Zab_township_guide/view/Size/ScreenSize.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
-import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
-import 'package:xml/xml.dart' as xml;
+import 'package:share_plus/share_plus.dart';
+
 import '../../provider/PdfViewerProvider.dart';
 
 class PdfViewerScreen extends StatefulWidget {
@@ -33,7 +32,6 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
     }
   }
 
- 
   @override
   Widget build(BuildContext context) {
     return Consumer<PdfViewerProvider>(
@@ -55,6 +53,15 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
                     child: Text('${current + 1}/$pages'),
                   ),
                 ),
+                SizedBox(width: context.getWidth(10),),
+              IconButton(onPressed: ()async {
+               
+  await Share.shareXFiles(
+    [XFile(data?.filePath ??'')],
+    text: '📚 هذا الكتاب: ${data?.title}',
+  );
+
+              }, icon: Icon(Icons.share)),
             ],
           ),
           body: Stack(

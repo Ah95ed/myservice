@@ -22,22 +22,15 @@ dependencies:
     sdk: flutter
   firebase_database:
   intl: 
-  tutorial_coach_mark: 
+  # tutorial_coach_mark: 
   appwrite: 
     git: https://github.com/appwrite/sdk-for-flutter.git
   firebase_remote_config: 
   share_plus: 
   package_info_plus: 
   http:
-
-  open_file: 
-  path_provider: 
-  file_picker: 
-  permission_handler:
   flutter_pdfview: 
-  aws_signature_v4: 
-  crypto: 
-  xml:
+  open_filex:
 
 dev_dependencies:
   flutter_test:

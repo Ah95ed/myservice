@@ -1,11 +1,7 @@
-import 'dart:io';
 
-import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
-import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
 import 'package:Al_Zab_township_guide/Models/BookModel.dart';
 import 'package:Al_Zab_township_guide/view/routing/routing.dart';
 import 'package:Al_Zab_township_guide/view/screens/BooksScreen.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
 class GradesScreen extends StatefulWidget {
@@ -90,28 +86,21 @@ class _GradesScreenState extends State<GradesScreen> {
   }
 
   String result = '';
-  Directory? newFolder;
-  Future<void> createFolderInExternal() async {
-    result = await FilePicker.platform.getDirectoryPath() ?? '';
-shared!.setString('path', result);
-     newFolder = Directory('$result/books');
-    if (!await newFolder!.exists()) {
-      await newFolder!.create();
-      print('✅ تم إنشاء الفولدر داخل: $result');
-    } else {
-      print('📁 الفولدر موجود مسبقاً');
-    }
-  }
+  // Directory? newFolder;
+  // Future<void> createFolderInExternal() async {
+  //   result = await FilePicker.platform.getDirectoryPath() ?? '';
 
-  @override
-  void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
-    super.didChangeDependencies();
-    if(shared!.getString('path') == null){
-      createFolderInExternal();
-    }
-    
-  }
+  //    newFolder = Directory(result +'/books');
+  //    shared!.setString('path', newFolder!.path);
+  //   if (!await newFolder!.exists()) {
+  //     await newFolder!.create();
+  //     print('✅ تم إنشاء الفولدر داخل: $result');
+  //   } else {
+  //     print('📁 الفولدر موجود مسبقاً');
+  //   }
+  // }
+
+ 
 
   @override
   Widget build(BuildContext context) {

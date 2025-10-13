@@ -4,7 +4,6 @@
 
 <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
 <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
-<uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION"/> 
     <uses-feature
         android:name="android.hardware.telephony"
         android:required="false" />
@@ -28,8 +27,7 @@
         android:usesCleartextTraffic="true"
         android:enableOnBackInvokedCallback="true"
         android:allowBackup="true"
-        android:supportsRtl="true"
-        tools:targetApi="tiramisu">
+        android:supportsRtl="true">
         
         <activity
             android:name=".MainActivity"

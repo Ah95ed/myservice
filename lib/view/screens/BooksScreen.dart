@@ -1,21 +1,12 @@
-import 'dart:developer';
 import 'dart:io';
-import 'dart:math';
 
-import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
-import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
-import 'package:Al_Zab_township_guide/Service/r2_config.dart';
 import 'package:Al_Zab_township_guide/view/routing/routing.dart';
-import 'package:aws_signature_v4/aws_signature_v4.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as AWSHttpRequest;
 import 'package:http/http.dart' as http;
-import 'package:open_file/open_file.dart';
+import 'package:open_filex/open_filex.dart' show OpenFilex, ResultType;
 import 'package:path/path.dart' as p;
-import 'package:xml/xml.dart' as xml;
+import 'package:path_provider/path_provider.dart';
 
-import '../../Service/CloudflareService.dart';
 import '../../provider/PdfViewerProvider.dart';
 import 'PdfViewerScreen.dart';
 
@@ -36,88 +27,20 @@ class _BooksScreenState extends State<BooksScreen> {
     super.initState();
   }
 
-  Future<List<String>> listFolders() async {
-    const region = 'auto'; // Cloudflare ما يحتاج region فعلي
-    const service = 's3';
-
-    final host = '${R2_ACCOUNT_ID}.r2.cloudflarestorage.com';
-    final url = Uri.https(host, '/${R2_BUCKET}', {'delimiter': '/'});
-
-    Logger.logger('Request URL: ${url.toString()}');
-
-    final signer = AWSSigV4Signer(
-      credentialsProvider: AWSCredentialsProvider(
-        AWSCredentials(R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY),
-      ),
-    );
-
-    final request = AWSHttpRequest.get(url, headers: {'host': host});
-
-    // final signedRequest = await signer.sign(
-    //   request as AWSBaseHttpRequest,
-    //   credentialScope: AWSCredentialScope(
-    //     region: region,
-    //     // service:AWSServic,
-    //   ),
-    // );
-
-    final response = await http.get(
-      url,
-
-      // headers: signedRequest.headers,
-    );
-
-    if (response.statusCode == 200) {
-      final document = xml.XmlDocument.parse(response.body);
-      final prefixes = document.findAllElements('Prefix');
-      final folders = prefixes.map((e) => e.text.replaceAll('/', '')).toList();
-      Logger.logger('Folders found: ${folders.toString()}');
-      return folders;
-    } else {
-      Logger.logger('Error: ${response.statusCode}');
-      print('Error: ${response.statusCode}');
-      print(response.body);
-      return [];
-    }
-  }
-  // Future<List<String>> listFolders() async {
-  //   final url = Uri.parse(
-  //     'https://${R2_ACCOUNT_ID}.r2.cloudflarestorage.com/${R2_BUCKET}?delimiter=/',
-  //   );
-  //   Logger.logger(url.toString());
-  //   final response = await http.get(
-  //     url,
-  //     headers: {'Authorization': 'AWS $R2_ACCESS_KEY_ID:$R2_SECRET_ACCESS_KEY',},
-  //   );
-
-  //   if (response.statusCode == 200) {
-  //     final document = xml.XmlDocument.parse(response.body);
-  //     final prefixes = document.findAllElements('Prefix');
-  //     final folders = prefixes.map((e) => e.text.replaceAll('/', '')).toList();
-  //     Logger.logger('message ==== ${folders.toString()}');
-  //     return folders;
-  //   } else {
-  //     Logger.logger('message ==== ${response.statusCode}');
-  //     print('Error: ${response.statusCode}');
-  //     print(response.body);
-  //     return [];
+  // Future<void> _loadBooks() async {
+  //   try {
+  //     final list = await CloudflareService.fetchBooks();
+  //     setState(() {
+  //       // books = list;
+  //       loading = false;
+  //     });
+  //   } catch (e) {
+  //     setState(() {
+  //       error = e.toString();
+  //       loading = false;
+  //     });
   //   }
   // }
-
-  Future<void> _loadBooks() async {
-    try {
-      final list = await CloudflareService.fetchBooks();
-      setState(() {
-        // books = list;
-        loading = false;
-      });
-    } catch (e) {
-      setState(() {
-        error = e.toString();
-        loading = false;
-      });
-    }
-  }
 
   @override
   void didChangeDependencies() {
@@ -245,79 +168,96 @@ class _BooksScreenState extends State<BooksScreen> {
     );
   }
 }
+void _openFile(
+  BuildContext context,
+  String filePath,
+  String title,
+  ScaffoldMessengerState scaffoldMessenger,
+) async {
+  if (_extensionFromUrl(filePath).toLowerCase().contains('pdf')) {
+    Navigator.pushNamed(
+      context,
+      PdfViewerScreen.route,
+      arguments: PdfViewerData(filePath: filePath, title: title),
+    );
+  } else {
+    final result = await OpenFilex.open(filePath);
+    if (result.type != ResultType.done) {
+      scaffoldMessenger.showSnackBar(
+        SnackBar(content: Text('تعذر فتح الملف: ${result.message}')),
+      );
+    }
+  }
+}
 
+// 🔧 استخراج الامتداد من الرابط
+String _extensionFromUrl(String url) {
+  final uri = Uri.parse(url);
+  final path = uri.path;
+  return p.extension(path);
+}
 Future<void> downloadAndOpenByUrl(
   BuildContext context,
   String url,
   String title,
 ) async {
   final scaffoldMessenger = ScaffoldMessenger.of(context);
-  String? dir = '';
-  try {
-    final suggestedName = title.replaceAll(' ', '_') + _extensionFromUrl(url);
-//    if (shared!.getString('path')!.isEmpty ||
- //       shared!.getString('path') == null) {
-      dir = await FilePicker.platform.getDirectoryPath(
-        dialogTitle: 'اختر مجلد لحفظ الملف',
-      );
-//    }else{
- //     dir = shared!.getString('path')! + '/books';
-//    }
-    
-    // Ask for directory first (works on Android & desktop). If null, fallback to temp.
 
-    if (dir == null) {
+  try {
+    // 🧩 تجهيز اسم الملف المقترح
+    final suggestedName = title.replaceAll(' ', '_') + _extensionFromUrl(url);
+
+    // 📂 تحديد مجلد التطبيق
+    final dir = await getApplicationDocumentsDirectory();
+    final path = p.join(dir.path, suggestedName);
+    final file = File(path);
+
+    // ✅ تحقق إذا الملف موجود أصلاً
+    if (await file.exists()) {
+      debugPrint('📂 الملف موجود مسبقاً في: $path');
+      _openFile(context, file.path, title, scaffoldMessenger);
       return;
     }
+
+    // 🌀 عرض مؤشر التحميل
     showDialog(
       context: context,
       barrierDismissible: false,
       builder: (_) => const Center(child: CircularProgressIndicator()),
     );
 
+    // ⬇️ تنزيل الملف
     final response = await http.get(Uri.parse(url));
     if (response.statusCode != 200) {
       Navigator.pop(context);
       throw Exception('فشل في تنزيل الملف: ${response.statusCode}');
     }
-    final bytes = response.bodyBytes;
 
-    String savedPath;
-    final path = p.join(dir, suggestedName);
-    final file = File(path);
-    await file.writeAsBytes(bytes);
-    savedPath = path;
+    // 💾 حفظ الملف داخل مجلد التطبيق
+    await file.writeAsBytes(response.bodyBytes);
 
-    try {
-      Navigator.pop(context);
-    } catch (_) {}
+    // ✅ إغلاق المؤشر
+    Navigator.pop(context);
 
     scaffoldMessenger.showSnackBar(
-      SnackBar(content: Text('تم تنزيل الكتاب: $savedPath')),
+      SnackBar(content: Text('تم تنزيل الملف: ${file.path}')),
     );
-    // Open in-app PDF viewer if PDF, otherwise fallback to external
-    if (_extensionFromUrl(savedPath).toLowerCase().contains('pdf')) {
-      Navigator.pushNamed(
-        context,
-        PdfViewerScreen.route,
-        arguments: PdfViewerData(filePath: savedPath, title: title),
-      );
-    } else {
-      await OpenFile.open(savedPath);
-    }
+
+    // 📖 فتح الملف بعد التنزيل
+    _openFile(context, file.path, title, scaffoldMessenger);
   } catch (e, st) {
+    debugPrint('❌ Error downloading file: $e\n$st');
     try {
       Navigator.pop(context);
     } catch (_) {}
-    // log('download error', error: e, stackTrace: st);
     scaffoldMessenger.showSnackBar(
       SnackBar(content: Text('حدث خطأ أثناء التنزيل أو الفتح: $e')),
     );
   }
 }
 
-String _extensionFromUrl(String url) {
-  final idx = url.lastIndexOf('.');
-  if (idx == -1) return '.pdf';
-  return url.substring(idx);
-}
+// String _extensionFromUrl(String url) {
+//   final idx = url.lastIndexOf('.');
+//   if (idx == -1) return '.pdf';
+//   return url.substring(idx);
+// }
