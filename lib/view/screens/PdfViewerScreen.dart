@@ -90,9 +90,10 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
                 PDFView(
                   filePath: args.filePath,
                   enableSwipe: true,
-                  swipeHorizontal: false,
+                  swipeHorizontal: true,
                   autoSpacing: true,
                   pageFling: true,
+                  
                   onRender: (_pages) {
                     provider.updatePages(_pages ?? 0);
                   },
