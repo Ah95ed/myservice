@@ -27,21 +27,6 @@ class _BooksScreenState extends State<BooksScreen> {
     super.initState();
   }
 
-  // Future<void> _loadBooks() async {
-  //   try {
-  //     final list = await CloudflareService.fetchBooks();
-  //     setState(() {
-  //       // books = list;
-  //       loading = false;
-  //     });
-  //   } catch (e) {
-  //     setState(() {
-  //       error = e.toString();
-  //       loading = false;
-  //     });
-  //   }
-  // }
-
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
@@ -59,21 +44,13 @@ class _BooksScreenState extends State<BooksScreen> {
       appBar: AppBar(
         title: const Text('الكتب'),
         centerTitle: true,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.category),
-            tooltip: 'التصنيفات',
-            onPressed: () {
-              Navigator.pushNamed(context, '/GradesScreen');
-            },
-          ),
-        ],
+       
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: GridView.builder(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 1,
+            crossAxisCount: 2,
             mainAxisSpacing: 12,
             crossAxisSpacing: 12,
             childAspectRatio: 0.99,
@@ -82,25 +59,45 @@ class _BooksScreenState extends State<BooksScreen> {
           itemBuilder: (context, index) {
             final book = args;
             return InkWell(
-              onTap: () {
-                // Logger.logger('message === ${book[index]['name']}');
-                // Logger.logger('message == ${book.title}');
-                managerScreen(
-                  PdfViewerScreen.route,
+              onTap: () async {
+                final suggestedName =
+                    book[index]['name'].replaceAll(' ', '_') +
+                    _extensionFromUrl(book[index]['url']);
+
+                // 📂 تحديد مجلد التطبيق
+                final dir = await getApplicationDocumentsDirectory();
+                final path = p.join(dir.path, suggestedName);
+                final file = File(path);
+
+                // ✅ تحقق إذا الملف موجود أصلاً
+                if (await file.exists()) {
+                  debugPrint('📂 الملف موجود مسبقاً في: $path');
+                  managerScreen(
+                    PdfViewerScreen.route,
+                    context,
+                    object: PdfViewerData(
+                      filePath: path,
+                      title: book[index]['name'],
+                      remoteUrl: book[index]['url'],
+                    ),
+                  );
+                  return;
+                }
+                downloadByUrl(
                   context,
-                  object: PdfViewerData(
-                    title: book[index]['name'],
-                    remoteUrl: book[index]['url'],
-                  ),
-                );
-                // Navigator.pushNamed(
-                //   context,
-                //   PdfViewerScreen.route,
-                //   arguments: PdfViewerData(
-                //     remoteUrl: book.urlBook,
-                //     title: book.first.toString(),
-                //   ),
-                // );
+                  book[index]['url'],
+                  book[index]['name'],
+                ).then((s) {
+                  managerScreen(
+                    PdfViewerScreen.route,
+                    context,
+                    object: PdfViewerData(
+                      filePath: path,
+                      title: book[index]['name'],
+                      remoteUrl: book[index]['url'],
+                    ),
+                  );
+                });
               },
               child: Card(
                 elevation: 4,
@@ -115,27 +112,17 @@ class _BooksScreenState extends State<BooksScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          GestureDetector(
-                            onTap: () async {
-                              // log('open ${book[index]['url']}');
-                              // await downloadAndOpenByUrl(
-                              //   context,
-                              //   book[index]['url']!,
-                              //   book[index]['name']!,
-                              // );
-                            },
-                            child: Center(
-                              child: Text(
-                                book[index]['name']!,
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                  decoration: TextDecoration.underline,
-                                  color: Colors.blue,
-                                ),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
+                          Center(
+                            child: Text(
+                              book[index]['name']!,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                decoration: TextDecoration.underline,
+                                color: Colors.blue,
                               ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                             ),
                           ),
 
@@ -168,6 +155,7 @@ class _BooksScreenState extends State<BooksScreen> {
     );
   }
 }
+
 void _openFile(
   BuildContext context,
   String filePath,
@@ -196,6 +184,7 @@ String _extensionFromUrl(String url) {
   final path = uri.path;
   return p.extension(path);
 }
+
 Future<void> downloadAndOpenByUrl(
   BuildContext context,
   String url,
@@ -245,6 +234,66 @@ Future<void> downloadAndOpenByUrl(
 
     // 📖 فتح الملف بعد التنزيل
     _openFile(context, file.path, title, scaffoldMessenger);
+  } catch (e, st) {
+    debugPrint('❌ Error downloading file: $e\n$st');
+    try {
+      Navigator.pop(context);
+    } catch (_) {}
+    scaffoldMessenger.showSnackBar(
+      SnackBar(content: Text('حدث خطأ أثناء التنزيل أو الفتح: $e')),
+    );
+  }
+}
+
+Future<void> downloadByUrl(
+  BuildContext context,
+  String url,
+  String title,
+) async {
+  final scaffoldMessenger = ScaffoldMessenger.of(context);
+
+  try {
+    // 🧩 تجهيز اسم الملف المقترح
+    final suggestedName = title.replaceAll(' ', '_') + _extensionFromUrl(url);
+
+    // 📂 تحديد مجلد التطبيق
+    final dir = await getApplicationDocumentsDirectory();
+    final path = p.join(dir.path, suggestedName);
+    final file = File(path);
+
+    // ✅ تحقق إذا الملف موجود أصلاً
+    if (await file.exists()) {
+      debugPrint('📂 الملف موجود مسبقاً في: $path');
+      _openFile(context, file.path, title, scaffoldMessenger);
+      return;
+    }
+
+    // 🌀 عرض مؤشر التحميل
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) => const Center(child: CircularProgressIndicator()),
+    );
+
+    // ⬇️ تنزيل الملف
+    final response = await http.get(Uri.parse(url));
+    if (response.statusCode != 200) {
+      Navigator.pop(context);
+      throw Exception('فشل في تنزيل الملف: ${response.statusCode}');
+    }
+
+    // 💾 حفظ الملف داخل مجلد التطبيق
+    await file.writeAsBytes(response.bodyBytes);
+
+    // ✅ إغلاق المؤشر
+    Navigator.pop(context);
+
+    scaffoldMessenger.showSnackBar(
+      SnackBar(content: Text('تم تنزيل الملف: ${file.path}')),
+    );
+
+    // 📖 فتح الملف بعد التنزيل
+    // _openFile(context, file.path, title, scaffoldMessenger);
   } catch (e, st) {
     debugPrint('❌ Error downloading file: $e\n$st');
     try {

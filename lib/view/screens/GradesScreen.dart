@@ -49,9 +49,7 @@ class _GradesScreenState extends State<GradesScreen> {
               ListTile(
                 title: const Text('علمي'),
                 onTap: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('تم اختيار: $grade - علمي')),
-                  );
+                
                 },
               ),
               ListTile(
