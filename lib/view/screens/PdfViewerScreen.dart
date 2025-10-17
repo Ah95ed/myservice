@@ -1,7 +1,6 @@
-import 'dart:developer';
 
+import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
 import 'package:Al_Zab_township_guide/view/Size/ScreenSize.dart';
-import 'package:Al_Zab_township_guide/view/screens/BooksScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:provider/provider.dart';
@@ -45,12 +44,12 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    
   }
 
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as PdfViewerData;
+    Logger.logger('message === ${args.filePath}');
 
     return Consumer<PdfViewerProvider>(
       builder: (context, provider, child) {
@@ -60,7 +59,7 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
         final pages = provider.pages;
         final current = provider.currentPage;
 
-        return  Scaffold(
+        return Scaffold(
           appBar: AppBar(
             title: Text(args.title),
             actions: [

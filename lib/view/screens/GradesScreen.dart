@@ -1,4 +1,3 @@
-
 import 'package:Al_Zab_township_guide/Models/BookModel.dart';
 import 'package:Al_Zab_township_guide/view/routing/routing.dart';
 import 'package:Al_Zab_township_guide/view/screens/BooksScreen.dart';
@@ -32,6 +31,10 @@ class _GradesScreenState extends State<GradesScreen> {
                 BooksScreen.route,
                 context,
                 object: books['primary']!['grade${grades.indexOf(g) + 1}']!,
+                // object: BooksArgs(
+                //   name: 'grade${grades.indexOf(g) + 1}',
+                //   data: books['primary']!['grade${grades.indexOf(g) + 1}']!,
+                // ),
               );
             },
           ),
@@ -46,12 +49,7 @@ class _GradesScreenState extends State<GradesScreen> {
           (grade) => ExpansionTile(
             title: Text(grade),
             children: [
-              ListTile(
-                title: const Text('علمي'),
-                onTap: () {
-                
-                },
-              ),
+              ListTile(title: const Text('علمي'), onTap: () {}),
               ListTile(
                 title: const Text('ادبي'),
                 onTap: () {
@@ -84,21 +82,6 @@ class _GradesScreenState extends State<GradesScreen> {
   }
 
   String result = '';
-  // Directory? newFolder;
-  // Future<void> createFolderInExternal() async {
-  //   result = await FilePicker.platform.getDirectoryPath() ?? '';
-
-  //    newFolder = Directory(result +'/books');
-  //    shared!.setString('path', newFolder!.path);
-  //   if (!await newFolder!.exists()) {
-  //     await newFolder!.create();
-  //     print('✅ تم إنشاء الفولدر داخل: $result');
-  //   } else {
-  //     print('📁 الفولدر موجود مسبقاً');
-  //   }
-  // }
-
- 
 
   @override
   Widget build(BuildContext context) {

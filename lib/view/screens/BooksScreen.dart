@@ -1,5 +1,7 @@
+import 'dart:developer';
 import 'dart:io';
 
+import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
 import 'package:Al_Zab_township_guide/view/routing/routing.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -21,18 +23,15 @@ class BooksScreen extends StatefulWidget {
 class _BooksScreenState extends State<BooksScreen> {
   bool loading = true;
   String? error;
+
   List args = [];
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
     args = ModalRoute.of(context)?.settings.arguments as List;
-    // Logger.logger('message == ${args[0]}');
+  
   }
 
   @override
@@ -41,11 +40,7 @@ class _BooksScreenState extends State<BooksScreen> {
       return const Scaffold(body: Center(child: CircularProgressIndicator()));
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('الكتب'),
-        centerTitle: true,
-       
-      ),
+      appBar: AppBar(title: const Text('الكتب'), centerTitle: true),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: GridView.builder(
@@ -58,12 +53,16 @@ class _BooksScreenState extends State<BooksScreen> {
           itemCount: args.length,
           itemBuilder: (context, index) {
             final book = args;
+            // log('message == ${book}');
+
             return InkWell(
               onTap: () async {
+              
+
                 final suggestedName =
                     book[index]['name'].replaceAll(' ', '_') +
                     _extensionFromUrl(book[index]['url']);
-
+                log('message===$suggestedName');
                 // 📂 تحديد مجلد التطبيق
                 final dir = await getApplicationDocumentsDirectory();
                 final path = p.join(dir.path, suggestedName);
@@ -71,7 +70,6 @@ class _BooksScreenState extends State<BooksScreen> {
 
                 // ✅ تحقق إذا الملف موجود أصلاً
                 if (await file.exists()) {
-                  debugPrint('📂 الملف موجود مسبقاً في: $path');
                   managerScreen(
                     PdfViewerScreen.route,
                     context,
