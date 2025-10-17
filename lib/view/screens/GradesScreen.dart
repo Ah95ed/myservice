@@ -81,7 +81,6 @@ class _GradesScreenState extends State<GradesScreen> {
         .toList();
   }
 
-  String result = '';
 
   @override
   Widget build(BuildContext context) {
