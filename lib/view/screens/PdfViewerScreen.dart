@@ -91,7 +91,8 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
                   enableSwipe: true,
                   swipeHorizontal: false,
                   autoSpacing: true,
-                  pageFling: true,
+                  pageFling: true,            }
+                  
                   onRender: (_pages) {
                     provider.updatePages(_pages ?? 0);
                   },
