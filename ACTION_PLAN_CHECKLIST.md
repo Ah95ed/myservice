@@ -13,16 +13,15 @@
   - [ ] تغيير جميع مفاتيح Cloudflare R2 الحالية
   - [ ] إضافة `lib/Service/r2_config.dart` إلى `.gitignore`
   - [ ] إنشاء `r2_config.example.dart` بدون مفاتيح حقيقية
-  - [ ] تطبيق Firebase Remote Config للمفاتيح
+  - [ ] تطبيق Cloudflare Config/KV للمفاتيح
   - [ ] إنشاء ملف `secure_config.dart`
   - [ ] تحديث `CloudflareR2Service` لاستخدام المفاتيح الآمنة
 
 - [ ] **تأمين نظام المصادقة**
-  - [ ] تفعيل Firebase Authentication في Console
-  - [ ] إنشاء `auth_service.dart`
-  - [ ] تحديث `LoginProvider` لاستخدام Firebase Auth
-  - [ ] تحديث `SignupProvider` لاستخدام Firebase Auth
-  - [ ] حذف نظام كلمات المرور القديم من Realtime DB
+  - [ ] تفعيل Cloudflare Auth في backend
+  - [ ] تحديث `LoginProvider` لاستخدام CloudflareApi
+  - [ ] تحديث `SignupProvider` لاستخدام CloudflareApi
+  - [ ] حذف نظام كلمات المرور القديم
   - [ ] نقل بيانات المستخدمين الحالية (Migration)
 
 - [ ] **تشفير البيانات المحلية**
@@ -31,10 +30,9 @@
   - [ ] استبدال SharedPreferences بـ SecureStorage للبيانات الحساسة
   - [ ] نقل بيانات المستخدمين الموجودة
 
-- [ ] **قواعد أمان Firebase**
-  - [ ] كتابة Firebase Rules للـ Realtime Database
-  - [ ] كتابة Firestore Security Rules
-  - [ ] اختبار القواعد في Firebase Console
+- [ ] **قواعد أمان backend**
+  - [ ] كتابة قواعد الصلاحيات للـ API
+  - [ ] اختبار الصلاحيات
   - [ ] نشر القواعد (Deploy)
 
 **المدة المتوقعة:** 2-3 أيام  

@@ -1,28 +1,19 @@
-/// خدمة تأمين المفاتيح السرية
-/// يتم جلب المفاتيح من Firebase Remote Config
-import 'package:firebase_remote_config/firebase_remote_config.dart';
+/// خدمة تأمين المفاتيح السرية عبر Cloudflare Config
+import 'dart:convert';
+
+import 'package:Al_Zab_township_guide/Services/cloudflare_config.dart';
+import 'package:http/http.dart' as http;
 
 class SecureConfig {
-  static FirebaseRemoteConfig? _remoteConfig;
   static bool _initialized = false;
+  static Map<String, dynamic> _values = {};
 
   /// تهيئة الخدمة - يجب استدعاؤها في main()
   static Future<void> init() async {
     if (_initialized) return;
 
     try {
-      _remoteConfig = FirebaseRemoteConfig.instance;
-
-      // إعدادات المدة الزمنية
-      await _remoteConfig!.setConfigSettings(
-        RemoteConfigSettings(
-          fetchTimeout: const Duration(minutes: 1),
-          minimumFetchInterval: const Duration(hours: 1),
-        ),
-      );
-
-      // جلب وتفعيل القيم الأخيرة
-      await _remoteConfig!.fetchAndActivate();
+      await refresh();
       _initialized = true;
     } catch (e) {
       print('❌ Error initializing SecureConfig: $e');
@@ -31,34 +22,22 @@ class SecureConfig {
   }
 
   /// الحصول على Cloudflare Account ID
-  static String get r2AccountId {
-    _checkInitialized();
-    return _remoteConfig?.getString('r2_account_id') ?? '';
-  }
+  static String get r2AccountId => _getString('r2_account_id');
 
   /// الحصول على Cloudflare Endpoint
-  static String get r2Endpoint {
-    _checkInitialized();
-    return _remoteConfig?.getString('r2_endpoint') ?? '';
-  }
+  static String get r2Endpoint => _getString('r2_endpoint');
 
   /// الحصول على Cloudflare Access Key ID
-  static String get r2AccessKeyId {
-    _checkInitialized();
-    return _remoteConfig?.getString('r2_access_key_id') ?? '';
-  }
+  static String get r2AccessKeyId => _getString('r2_access_key_id');
 
   /// الحصول على Cloudflare Secret Access Key
-  static String get r2SecretAccessKey {
-    _checkInitialized();
-    return _remoteConfig?.getString('r2_secret_access_key') ?? '';
-  }
+  static String get r2SecretAccessKey => _getString('r2_secret_access_key');
 
   /// الحصول على Cloudflare Bucket Name
-  static String get r2Bucket {
-    _checkInitialized();
-    return _remoteConfig?.getString('r2_bucket') ?? '';
-  }
+  static String get r2Bucket => _getString('r2_bucket');
+
+  /// رقم التحديث القادم للتطبيق
+  static String get updateBuildNumber => _getString('update');
 
   /// التحقق من التهيئة
   static void _checkInitialized() {
@@ -69,12 +48,43 @@ class SecureConfig {
     }
   }
 
-  /// إعادة تحميل البيانات من Firebase Remote Config
+  static String _getString(String key) {
+    _checkInitialized();
+    final value = _values[key];
+    if (value == null) return '';
+    return value.toString();
+  }
+
+  /// إعادة تحميل البيانات من Cloudflare Config
   static Future<void> refresh() async {
+    final endpoint = CloudflareConfig.configEndpoint;
+    if (endpoint.isEmpty) {
+      throw Exception('Missing Cloudflare config endpoint');
+    }
+
+    final headers = <String, String>{'content-type': 'application/json'};
+    final token = CloudflareConfig.configToken;
+    if (token.isNotEmpty) {
+      headers['authorization'] = 'Bearer $token';
+    }
+
     try {
-      await _remoteConfig?.fetchAndActivate();
+      final response = await http.get(Uri.parse(endpoint), headers: headers);
+      if (response.statusCode >= 400) {
+        throw Exception('Config request failed: ${response.statusCode}');
+      }
+
+      final decoded = jsonDecode(response.body);
+      if (decoded is Map<String, dynamic>) {
+        _values = decoded;
+      } else if (decoded is Map) {
+        _values = Map<String, dynamic>.from(decoded);
+      } else {
+        throw Exception('Invalid config payload');
+      }
     } catch (e) {
       print('⚠️ Error refreshing SecureConfig: $e');
+      rethrow;
     }
   }
 }

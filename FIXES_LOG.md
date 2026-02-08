@@ -48,11 +48,11 @@ final data = provider.data; // متغير غير مستخدم
 **الحالة:** ⏳ بانتظار التنفيذ
 
 **المشكلة:**
-مفاتيح Cloudflare R2 و Firebase مكشوفة في الكود المصدري.
+مفاتيح Cloudflare R2 مكشوفة في الكود المصدري.
 
 **الإجراء المطلوب:**
 1. نقل `r2_config.dart` إلى `.gitignore`
-2. استخدام Environment Variables أو Firebase Remote Config
+2. استخدام Environment Variables أو Cloudflare Config/KV
 3. إنشاء ملف `r2_config.example.dart` بدون المفاتيح الفعلية
 4. تغيير جميع المفاتيح السرية الحالية فوراً
 
@@ -62,14 +62,12 @@ final data = provider.data; // متغير غير مستخدم
 const String R2_ACCESS_KEY_ID = String.fromEnvironment('R2_ACCESS_KEY');
 const String R2_SECRET_ACCESS_KEY = String.fromEnvironment('R2_SECRET');
 
-// أو باستخدام Firebase Remote Config
+// أو باستخدام Cloudflare Config/KV
 class SecureConfig {
   static String? _r2AccessKey;
-  
+
   static Future<void> init() async {
-    final remoteConfig = FirebaseRemoteConfig.instance;
-    await remoteConfig.fetchAndActivate();
-    _r2AccessKey = remoteConfig.getString('r2_access_key');
+    await refreshFromCloudflare();
   }
 }
 ```
@@ -82,10 +80,10 @@ class SecureConfig {
 **الحالة:** ⏳ بانتظار التنفيذ
 
 **المشكلة:**
-كلمات المرور مخزنة بنص صريح في Firebase Realtime Database.
+كلمات المرور مخزنة بنص صريح في قاعدة بيانات قديمة.
 
 **الحل المقترح:**
-التحول إلى Firebase Authentication أو تطبيق تشفير bcrypt.
+التحول إلى Cloudflare Auth أو تطبيق تشفير bcrypt.
 
 ---
 
@@ -184,9 +182,8 @@ class _MyCustomSplashScreenState extends State<MyCustomSplashScreen> {
 
 1. ✅ **ANALYSIS_REPORT.md** - التقرير الشامل لتحليل التطبيق
 2. ✅ **FIXES_LOG.md** - سجل الإصلاحات والتغييرات (هذا الملف)
-3. ✅ **SECURITY_FIXES_GUIDE.md** - دليل الإصلاحات الأمنية الحرجة
-4. ✅ **PERFORMANCE_FIXES_GUIDE.md** - دليل تحسين الأداء وإصلاح تسريبات الذاكرة
-5. ✅ **CODE_ORGANIZATION_GUIDE.md** - دليل إعادة تنظيم الكود
+3. ✅ **PERFORMANCE_FIXES_GUIDE.md** - دليل تحسين الأداء وإصلاح تسريبات الذاكرة
+4. ✅ **CODE_ORGANIZATION_GUIDE.md** - دليل إعادة تنظيم الكود
 
 ---
 
@@ -207,7 +204,7 @@ class _MyCustomSplashScreenState extends State<MyCustomSplashScreen> {
 ### ملاحظات أمنية هامة
 - ⚠️ **تنبيه:** يجب تغيير جميع المفاتيح السرية المكشوفة في الكود الحالي فوراً
 - ⚠️ **تنبيه:** يجب إضافة `.gitignore` لملف `r2_config.dart`
-- ⚠️ **تنبيه:** يجب مراجعة قواعد أمان Firebase
+- ⚠️ **تنبيه:** تأكد من تطبيق قواعد أمان backend الحالية
 
 ### ملاحظات تقنية
 - التطبيق يستخدم Provider بشكل جيد، لكن يحتاج تحسين في dispose

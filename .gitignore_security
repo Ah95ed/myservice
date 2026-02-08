@@ -4,8 +4,7 @@
 lib/Service/r2_config.dart
 lib/Services/secure_config.dart
 
-# Never commit Firebase config with real credentials
-# firebase_options.dart is safe to commit (needs to be regenerated per environment)
+#+#+#+#+ Firebase config removed
 
 # Local dependencies
 .dart_tool/

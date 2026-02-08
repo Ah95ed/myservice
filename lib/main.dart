@@ -4,7 +4,6 @@ import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
-import 'package:Al_Zab_township_guide/Services/secure_config.dart';
 import 'package:Al_Zab_township_guide/controller/ForgetPassword/ForgetPasswordProvider.dart';
 import 'package:Al_Zab_township_guide/controller/SignupProvider/SignupProvider.dart';
 import 'package:Al_Zab_township_guide/controller/provider/BloodController/MainController.dart';
@@ -34,9 +33,6 @@ Future<void> main() async {
     () async {
       await WidgetsFlutterBinding.ensureInitialized();
       await init();
-
-      // ✅ Secure services initialization
-      await SecureConfig.init();
 
       WidgetsBinding.instance.addPostFrameCallback((_) async {
         initData();

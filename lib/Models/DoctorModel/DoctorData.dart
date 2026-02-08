@@ -21,7 +21,6 @@ class DoctorData {
 
 // Future getData(String collection) async {
 //   s.clear();
-//   FirebaseFirestore firestoreInstance = FirebaseFirestore.instance;
 //   final collectionRef = firestoreInstance.collection(collection);
 //   final querySnapshot = await collectionRef.where('bool', isEqualTo: true).get();
 //   s = querySnapshot.docs.map((e) => e).toList();

@@ -14,7 +14,7 @@
 
 **تحليل الكود:**
 - الكود مكتوب بلغة Dart باستخدام Flutter.
-- يستخدم Firebase لحفظ البيانات.
+- يستخدم خدمات Cloudflare لتخزين البيانات وإدارتها.
 - كل شاشة لها كلاس خاص بها، مثل شاشة إضافة متبرع أو طبيب.
 - يوجد Provider لإدارة الحالة.
 - يدعم تعدد اللغات من خلال ملفات الترجمة.
@@ -34,7 +34,7 @@ Our app "Al_Zab Township Guide" is a Flutter application designed to help local 
 
 **Code Analysis:**
 - Written in Dart using Flutter.
-- Uses Firebase for data storage.
+- Uses Cloudflare services for data storage.
 - Each screen has its own class, e.g., Add Donor or Add Doctor.
 - Uses Provider for state management.
 - Supports multiple languages via translation files.
@@ -54,7 +54,7 @@ Our app "Al_Zab Township Guide" is a Flutter application designed to help local 
 
 - Flutter
 - Dart
-- Firebase
+- Cloudflare
 - Provider
 - Localization (AR/EN)
 
@@ -80,7 +80,6 @@ Our app "Al_Zab Township Guide" is a Flutter application designed to help local 
 - تطبيق متكامل مع ميزات قوية
 - استخدام Provider لإدارة الحالة
 - دعم تعدد اللغات (العربية والإنجليزية)
-- تكامل جيد مع Firebase
 - واجهة مستخدم responsive
 
 ### 🔴 مشاكل حرجة تحتاج إصلاح فوري
@@ -92,7 +91,7 @@ Our app "Al_Zab Township Guide" is a Flutter application designed to help local 
 
 ### 📚 الوثائق المتاحة
 
-لقد تم إنشاء **5 وثائق تفصيلية كاملة** لمساعدتك:
+لقد تم إنشاء **4 وثائق تفصيلية كاملة** لمساعدتك:
 
 1. **[ANALYSIS_REPORT.md](ANALYSIS_REPORT.md)** - التقرير الكامل لتحليل التطبيق (40+ صفحة)
    - تحليل الأمان والحماية
@@ -108,15 +107,7 @@ Our app "Al_Zab Township Guide" is a Flutter application designed to help local 
    - ما مخطط له
    - إحصائيات التقدم
 
-3. **[SECURITY_FIXES_GUIDE.md](SECURITY_FIXES_GUIDE.md)** - دليل الإصلاحات الأمنية الحرجة
-   - كيفية تأمين مفاتيح Cloudflare R2
-   - كيفية تأمين مفاتيح Firebase
-   - تطبيق Firebase Authentication الصحيح
-   - تشفير البيانات المحلية باستخدام flutter_secure_storage
-   - قواعد أمان Firebase (Rules)
-   - أمثلة أكواد جاهزة للتطبيق
-
-4. **[PERFORMANCE_FIXES_GUIDE.md](PERFORMANCE_FIXES_GUIDE.md)** - دليل تحسين الأداء
+3. **[PERFORMANCE_FIXES_GUIDE.md](PERFORMANCE_FIXES_GUIDE.md)** - دليل تحسين الأداء
    - إصلاح Timer leaks في SplashScreen
    - إضافة Debouncing للبحث
    - تحسين استخدام الذاكرة
@@ -126,7 +117,7 @@ Our app "Al_Zab Township Guide" is a Flutter application designed to help local 
    - إلغاء Stream subscriptions بشكل صحيح
    - أمثلة أكواد جاهزة
 
-5. **[CODE_ORGANIZATION_GUIDE.md](CODE_ORGANIZATION_GUIDE.md)** - دليل تنظيم الكود
+4. **[CODE_ORGANIZATION_GUIDE.md](CODE_ORGANIZATION_GUIDE.md)** - دليل تنظيم الكود
    - البنية المعمارية المقترحة (Clean Architecture)
    - قواعد التسمية الصحيحة
    - إنشاء ملفات Constants منظمة
@@ -138,9 +129,9 @@ Our app "Al_Zab Township Guide" is a Flutter application designed to help local 
 ### 🎯 الخطوات القادمة (مرتبة حسب الأولوية)
 
 #### 🔴 حرجة (يجب تنفيذها فوراً)
-1. ⚠️ تأمين مفاتيح Cloudflare R2 و Firebase (نقلها خارج الكود)
-2. ⚠️ تطبيق تشفير كلمات المرور (استخدام Firebase Auth)
-3. ⚠️ إضافة قواعد أمان Firebase Rules
+1. ⚠️ تأمين مفاتيح Cloudflare R2 (نقلها خارج الكود)
+2. ⚠️ تطبيق تشفير كلمات المرور
+3. ⚠️ تدقيق قواعد أمان الـ backend
 4. ⚠️ استخدام flutter_secure_storage للبيانات الحساسة
 
 #### 🟠 عالية الأولوية
@@ -173,7 +164,7 @@ Our app "Al_Zab Township Guide" is a Flutter application designed to help local 
 
 المفاتيح السرية التالية مكشوفة في الكود:
 - مفاتيح Cloudflare R2 (Access Key & Secret)
-- مفاتيح Firebase API
+- مفاتيح backend الحساسة
 - كلمات المرور مخزنة بنص صريح
 
 **يجب إصلاح هذه المشاكل فوراً قبل أي استخدام إضافي للتطبيق!**

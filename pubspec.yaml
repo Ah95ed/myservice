@@ -11,23 +11,18 @@ dependencies:
     sdk: flutter
   cupertino_icons: 
 
-  firebase_core:
-  firebase_auth:
   email_otp: 
-  cloud_firestore:
   recaptcha_enterprise_flutter: 
   provider:
   url_launcher:
   shared_preferences:
-  flutter_secure_storage: ^9.0.0
+  flutter_secure_storage:
   flutter_localizations:
     sdk: flutter
-  firebase_database:
   intl: 
   # tutorial_coach_mark: 
   appwrite: 
     git: https://github.com/appwrite/sdk-for-flutter.git
-  firebase_remote_config: 
   share_plus: 
   package_info_plus: 
   http:

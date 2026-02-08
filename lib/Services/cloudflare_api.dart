@@ -174,6 +174,22 @@ class CloudflareApi {
     }
   }
 
+  Future<void> submitEditRequest(
+    Map<String, dynamic> payload,
+    String phone,
+  ) async {
+    final headers = await _authHeaders();
+    final response = await http.post(
+      Uri.parse('$_baseUrl/developer/requests'),
+      headers: headers,
+      body: jsonEncode({'phone': phone, 'data': payload}),
+    );
+
+    if (response.statusCode >= 400) {
+      throw Exception(_parseError(response));
+    }
+  }
+
   Future<Map<String, String>> _authHeaders() async {
     final token = await SecureStorageService.getToken();
     if (token == null || token.isEmpty) {

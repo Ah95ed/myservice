@@ -39,15 +39,15 @@ Bucket Name: al-zab-township-guide
 
 ---
 
-### المهمة 2: إعداد Firebase Remote Config 🔥
+### المهمة 2: إعداد Cloudflare Config/KV 🔥
 
 **الهدف:** تخزين المفاتيح بأمان
 
 **الخطوات:**
-1. اذهب إلى [Firebase Console](https://console.firebase.google.com/)
-2. Project: Al-Zab-Township
-3. Remote Config → Create config
-4. أضف المعاملات التالية:
+1. اذهب إلى Cloudflare Dashboard
+2. Workers → KV (أو Config Store)
+3. أنشئ قيمة `remote_config`
+4. أضف المعاملات التالية داخل JSON:
 
 | Parameter | Value |
 |-----------|-------|
@@ -57,7 +57,7 @@ Bucket Name: al-zab-township-guide
 | `r2_secret_access_key` | (من الخطوة 1) |
 | `r2_bucket` | `al-zab-township-guide` |
 
-5. انقر Publish
+5. احفظ القيمة وانشر التغييرات
 
 **الوقت المتوقع:** 15 دقيقة
 **التحقق:** SecureConfig.r2AccessKeyId يجب أن يرجع القيمة
@@ -106,9 +106,9 @@ try {
 **الملف:** `lib/controller/provider/LoginProvider/LoginProvider.dart`
 
 **الخطوات:**
-1. استبدل استيراد LoginModel بـ AuthService
+1. استبدل استيراد LoginModel بـ CloudflareApi
 2. غير الدالة `checkData()` إلى `login()`
-3. استخدم `AuthService.signIn()` بدلاً من البحث اليدوي
+3. استخدم `CloudflareApi.login()` بدلاً من البحث اليدوي
 4. احفظ البيانات باستخدام SecureStorageService
 
 **مثال:**
@@ -119,9 +119,9 @@ Future<void> checkData(String phone, String pass) async {
 }
 
 // جديد:
-Future<void> login(String email, String password) async {
-  UserCredential? credential = await authService.signIn(
-    email: email,
+Future<void> login(String phone, String password) async {
+  await CloudflareApi.instance.login(
+    phone: phone,
     password: password,
   );
 }
@@ -140,14 +140,14 @@ Future<void> login(String email, String password) async {
 **الملف:** `lib/controller/SignupProvider/SignupProvider.dart`
 
 **التغييرات:**
-1. استخدم `AuthService.signUp()` بدلاً من إضافة يدوية
+1. استخدم `CloudflareApi.register()` بدلاً من إضافة يدوية
 2. احذف الكود الذي يخزن كلمات المرور
-3. أضف معالجة أخطاء Firebase
+3. أضف معالجة أخطاء المصادقة
 
 **الوقت المتوقع:** 4 ساعات
 **الاختبار:**
 - [ ] إنشاء حساب جديد
-- [ ] التحقق من وجود المستخدم في Firestore
+- [ ] التحقق من وجود المستخدم في backend
 - [ ] محاولة إنشاء حساب مكرر (يجب أن يفشل)
 
 ---
@@ -188,8 +188,8 @@ void testSecurityServices() {
   // 2. اختبر تشفير البيانات المحلية
   'password' in SecureStorageService
   
-  // 3. اختبر استخدام Firebase Auth
-  FirebaseAuth.instance.currentUser != null
+  // 3. اختبر وجود توكن محفوظ
+  await SecureStorageService.getToken() != null
 }
 ```
 
@@ -197,7 +197,7 @@ void testSecurityServices() {
 ```dart
 // يجب أن تكون فترات الانتظار < 2 ثانية
 await SecureConfig.init();        // < 500ms
-await authService.signIn(...);    // < 2s
+await CloudflareApi.instance.login(...);    // < 2s
 await SecureStorageService.saveUserData(...); // < 100ms
 ```
 
@@ -209,8 +209,8 @@ await SecureStorageService.saveUserData(...); // < 100ms
 Phase 1: Security Services (70% ✅)
 ├─ SecureConfig created ✅
 ├─ SecureStorageService created ✅
-├─ AuthService created ✅
-├─ Firebase Remote Config setup ⏳ (أسبوع 1)
+├─ Cloudflare API auth ✅
+├─ Cloudflare Config/KV setup ⏳ (أسبوع 1)
 ├─ CloudflareR2 key rotation ⏳ (أسبوع 1)
 ├─ LoginProvider update ⏳ (أسبوع 1)
 ├─ SignupProvider update ⏳ (أسبوع 1)
@@ -240,12 +240,12 @@ Phase 5: Code Organization (0%)
 ## ⚠️ المشاكل المعروفة وحلولها
 
 ### المشكلة: "Cannot read properties of undefined (reading 'r2_access_key_id')"
-**السبب:** Firebase Remote Config لم يتم إعدادها بعد
-**الحل:** أكمل المهمة 2 (Firebase Remote Config setup)
+**السبب:** Cloudflare Config/KV لم يتم إعدادها بعد
+**الحل:** أكمل المهمة 2 (Cloudflare Config/KV setup)
 
-### المشكلة: "FirebaseException: An error occurred when trying to update user profile"
-**السبب:** بيانات غير صحيحة
-**الحل:** تحقق من البيانات المرسلة إلى AuthService
+### المشكلة: "Unauthorized" عند تسجيل الدخول
+**السبب:** بيانات غير صحيحة أو توكن مفقود
+**الحل:** تحقق من البيانات المرسلة إلى CloudflareApi
 
 ### المشكلة: "Unsecured connection to shared preferences"
 **السبب:** لا تزال تستخدم SharedPreferences للبيانات الحساسة
@@ -271,10 +271,10 @@ Phase 5: Code Organization (0%)
 ## ✅ قائمة التحقق النهائية
 
 - [ ] Cloudflare مفاتيح جديدة منشأة
-- [ ] Firebase Remote Config معدة بـ 5 معاملات
+- [ ] Cloudflare Config/KV معدة بـ 5 معاملات
 - [ ] اختبار SecureConfig.init() ناجح
-- [ ] LoginProvider محدثة وتستخدم AuthService
-- [ ] SignupProvider محدثة وتستخدم AuthService
+- [ ] LoginProvider محدثة وتستخدم CloudflareApi
+- [ ] SignupProvider محدثة وتستخدم CloudflareApi
 - [ ] CloudflareR2Service تستخدم SecureConfig
 - [ ] لا توجد مفاتيح في الكود
 - [ ] flutter analyze نظيف
@@ -289,6 +289,6 @@ Phase 5: Code Organization (0%)
 ---
 
 📌 **الملاحظات:**
-- استخدم نافذة Private/Incognito عند الوصول إلى Cloudflare/Firebase
-- احفظ رموز Cloudflare الجديدة في ملف آمن (ستحتاج لها فقط في Firebase)
-- لا تشارك مفاتيح Cloudflare/Firebase مع أي أحد
+- استخدم نافذة Private/Incognito عند الوصول إلى Cloudflare
+- احفظ رموز Cloudflare الجديدة في ملف آمن
+- لا تشارك مفاتيح Cloudflare مع أي أحد

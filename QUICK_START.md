@@ -11,7 +11,6 @@
 ```
 ✅ lib/Services/secure_config.dart
 ✅ lib/Services/secure_storage_service.dart  
-✅ lib/Services/auth_service.dart
 ```
 
 ### ✅ 17 ملف توثيق شامل
@@ -41,13 +40,13 @@
 ### 2️⃣ افعل 3 خطوات (40 دقيقة)
 ```
 A) تدوير مفاتيح Cloudflare      (15 دقيقة)
-B) إعداد Firebase Remote Config  (20 دقيقة)
+B) إعداد Cloudflare Config/KV   (20 دقيقة)
 C) اختبار التكامل               (5 دقائق)
 ```
 
 ### 3️⃣ اقرأ دليل الاستخدام (10 دقائق)
 ```
-👉 SECURITY_SERVICES_USAGE_GUIDE.md
+👉 DOCUMENTATION_INDEX.md
 ```
 
 ---
@@ -63,14 +62,14 @@ C) اختبار التكامل               (5 دقائق)
 
 ### 🟠 الأولوية الثانية
 ```
-4. SECURITY_SERVICES_USAGE_GUIDE.md
+4. PROJECT_STATUS_CHECKPOINT.md
 5. PROJECT_STATUS_CHECKPOINT.md
 6. COMPLETION_SUMMARY.md
 ```
 
 ### 🟡 المراجع الإضافية
 ```
-• SECURITY_FIXES_GUIDE.md         ← تفاصيل الأمان
+• PERFORMANCE_FIXES_GUIDE.md      ← تحسينات الأداء
 • PERFORMANCE_FIXES_GUIDE.md      ← تحسينات الأداء
 • ANALYSIS_REPORT.md              ← التحليل الكامل
 ```
@@ -96,26 +95,11 @@ Map<String, dynamic>? data =
     await SecureStorageService.getUserData();
 ```
 
-### مثال 2: تسجيل حساب
-```dart
-import 'package:Al_Zab_township_guide/Services/auth_service.dart';
-
-final authService = AuthService();
-
-// إنشاء حساب
-await authService.signUp(
-  email: 'ahmed@example.com',
-  password: 'SecurePass123!',
-  name: 'أحمد',
-  phone: '9647XXXXXXXX',
-);
-```
-
-### مثال 3: الوصول إلى المفاتيح الآمنة
+### مثال 2: الوصول إلى المفاتيح الآمنة
 ```dart
 import 'package:Al_Zab_township_guide/Services/secure_config.dart';
 
-// المفاتيح تُحمل من Firebase Remote Config
+// المفاتيح تُحمل من Cloudflare Config/KV
 String key = SecureConfig.r2AccessKeyId;
 String secret = SecureConfig.r2SecretAccessKey;
 ```
@@ -126,7 +110,7 @@ String secret = SecureConfig.r2SecretAccessKey;
 
 ### ✅ افعل هذا
 ```
-✅ استخدم AuthService للمصادقة
+✅ استخدم CloudflareApi للمصادقة
 ✅ استخدم SecureStorageService للبيانات الحساسة
 ✅ استخدم SecureConfig للمفاتيح
 ✅ احفظ البيانات قبل الإغلاق
@@ -179,7 +163,6 @@ String secret = SecureConfig.r2SecretAccessKey;
   - 2 حزم جديدة
   
 مثبت:
-  - firebase_auth: ^6.1.0
   - flutter_secure_storage: ^9.2.4
   
 اختبار:
@@ -194,7 +177,7 @@ String secret = SecureConfig.r2SecretAccessKey;
 
 ### للمطورين
 ```
-💡 اقرأ SECURITY_SERVICES_USAGE_GUIDE.md أولاً
+💡 اقرأ DOCUMENTATION_INDEX.md أولاً
 💡 انسخ الأمثلة وعدّلها
 💡 اختبر في محاكي قبل الجهاز الحقيقي
 ```
@@ -208,7 +191,7 @@ String secret = SecureConfig.r2SecretAccessKey;
 
 ### لـ QA
 ```
-💡 اقرأ SECURITY_FIXES_GUIDE.md
+💡 اقرأ PERFORMANCE_FIXES_GUIDE.md
 💡 اختبر كل الحالات في قائمة التحقق
 💡 أبلغ عن أي مشاكل
 ```
@@ -222,7 +205,7 @@ String secret = SecureConfig.r2SecretAccessKey;
    اتبع نفس الخطوات في CRITICAL_ACTION_NOW.md
 
 ### س: كم من الوقت تستغرق التطبيق؟
-ج: startup time: ~4.5 ثانية (تأخير بسيط بسبب Firebase)
+ج: startup time: ~4.5 ثانية (تأخير بسيط بسبب تهيئة الشبكة)
 
 ### س: هل ستؤثر على المستخدمين؟
 ج: لا - تحسينات شفافة خلف الكواليس
@@ -238,7 +221,7 @@ String secret = SecureConfig.r2SecretAccessKey;
 اليوم:
   [ ] اقرأ CRITICAL_ACTION_NOW.md
   [ ] دوّر مفاتيح Cloudflare
-  [ ] أعد Firebase Remote Config
+  [ ] أعد Cloudflare Config/KV
   [ ] اختبر التكامل
 
 غداً:
@@ -257,7 +240,7 @@ String secret = SecureConfig.r2SecretAccessKey;
 
 | المشكلة | الحل |
 |--------|------|
-| كيف أستخدم الخدمات؟ | اقرأ `SECURITY_SERVICES_USAGE_GUIDE.md` |
+| كيف أستخدم الخدمات؟ | اقرأ `DOCUMENTATION_INDEX.md` |
 | ماذا أفعل الآن؟ | اقرأ `CRITICAL_ACTION_NOW.md` |
 | ما هي الخطوات التالية؟ | اقرأ `NEXT_STEPS_ROADMAP.md` |
 | أخطاء في البناء؟ | تحقق من `DOCUMENTATION_INDEX.md` |

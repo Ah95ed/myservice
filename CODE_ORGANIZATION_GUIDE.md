@@ -202,12 +202,12 @@ class AppConstants {
 class ApiConstants {
   ApiConstants._();
   
-  static const String firebaseRealtimeDbUrl = 
-      'https://blood-types-77ce2-default-rtdb.firebaseio.com/';
+    static const String cloudflareApiBaseUrl =
+      'https://your-worker.workers.dev';
   
-  // مسارات Firebase Collections
-  static const String usersCollection = 'users';
-  static const String authCollection = 'auth';
+    // مسارات Collections
+    static const String usersCollection = 'users';
+    static const String authCollection = 'auth';
   static const String bloodDonorsCollection = 'blood_donors';
   static const String doctorsCollection = 'doctors';
   static const String professionalsCollection = 'professionals';
@@ -400,8 +400,8 @@ class ErrorHandler {
   static String getErrorMessage(dynamic error) {
     if (error is Failure) {
       return error.message;
-    } else if (error is FirebaseException) {
-      return _handleFirebaseError(error);
+    } else if (error is Exception) {
+      return 'خطأ في الخدمة';
     } else if (error is SocketException) {
       return 'لا يوجد اتصال بالإنترنت';
     } else {
@@ -409,15 +409,6 @@ class ErrorHandler {
     }
   }
   
-  static String _handleFirebaseError(FirebaseException e) {
-    switch (e.code) {
-      case 'permission-denied':
-        return 'ليس لديك صلاحية للوصول';
-      case 'unavailable':
-        return 'الخدمة غير متاحة حالياً';
-      default:
-        return e.message ?? 'خطأ في Firebase';
-    }
   }
 }
 ```

@@ -242,7 +242,6 @@ Future<void> init() async {
   // استخدام الخدمة الجديدة
   await PreferencesService.init();
   
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await initLang(PreferencesService.language);
   packageInfo = await PackageInfo.fromPlatform();
 }
@@ -298,42 +297,10 @@ CachedNetworkImage(
 )
 ```
 
-#### إضافة Caching للـ Firestore
+#### إضافة Caching للبيانات
 
-```dart
-// lib/Services/firestore_cache_service.dart
-import 'package:cloud_firestore/cloud_firestore.dart';
-
-class FirestoreCacheService {
-  // تفعيل persistence
-  static Future<void> enablePersistence() async {
-    await FirebaseFirestore.instance.settings = Settings(
-      persistenceEnabled: true,
-      cacheSizeBytes: Settings.CACHE_SIZE_UNLIMITED,
-    );
-  }
-  
-  // جلب البيانات مع cache
-  static Future<List<Map<String, dynamic>>> getCachedCollection(
-    String collection, {
-    Source source = Source.cache, // جرب Cache أولاً
-  }) async {
-    try {
-      final snapshot = await FirebaseFirestore.instance
-          .collection(collection)
-          .get(GetOptions(source: source));
-      
-      return snapshot.docs.map((doc) => doc.data()).toList();
-    } catch (e) {
-      // إذا فشل Cache، حاول من Server
-      if (source == Source.cache) {
-        return getCachedCollection(collection, source: Source.server);
-      }
-      rethrow;
-    }
-  }
-}
-```
+احفظ النتائج المتكررة محليا (مثلا باستخدام SharedPreferences أو قاعدة محلية)
+لتقليل طلبات الشبكة وتحسين سرعة الواجهة.
 
 ---
 
@@ -367,17 +334,14 @@ ListView.separated(
 
 ### إصلاح #8: معالجة Streams بشكل صحيح
 
-**إذا كنت تستخدم Firebase Streams:**
+**إذا كنت تستخدم Streams:**
 
 ```dart
 class SomeProvider with ChangeNotifier {
-  StreamSubscription<QuerySnapshot>? _subscription;
+  StreamSubscription<dynamic>? _subscription;
   
   void listenToData() {
-    _subscription = FirebaseFirestore.instance
-        .collection('some_collection')
-        .snapshots()
-        .listen((snapshot) {
+    _subscription = someStream.listen((snapshot) {
       // معالجة البيانات
     });
   }

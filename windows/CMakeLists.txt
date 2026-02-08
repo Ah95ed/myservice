@@ -10,7 +10,7 @@ set(BINARY_NAME "al_zab_township_guide")
 # versions of CMake.
 cmake_policy(VERSION 3.14...3.25)
 
-# Allow legacy plugin CMakeLists (e.g., Firebase C++ SDK) to configure on CMake 4.x.
+# Allow legacy plugin CMakeLists to configure on CMake 4.x.
 set(CMAKE_POLICY_VERSION_MINIMUM 3.5 CACHE STRING
   "Minimum policy version for legacy plugin projects" FORCE)
 

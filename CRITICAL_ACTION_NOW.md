@@ -63,15 +63,15 @@ R2 → API Tokens → Create API Token
 
 ---
 
-### الخطوة 2️⃣: إعداد Firebase Remote Config (20 دقيقة)
+### الخطوة 2️⃣: إعداد Cloudflare Config/KV (20 دقيقة)
 
-#### أ) اذهب إلى Firebase Console
-1. افتح [https://console.firebase.google.com/](https://console.firebase.google.com/)
-2. اختر Project: **Al-Zab-Township**
+#### أ) اذهب إلى Cloudflare Dashboard
+1. افتح https://dash.cloudflare.com/
+2. اختر حسابك ومشروع Workers
 
-#### ب) اذهب إلى Remote Config
+#### ب) اذهب إلى KV أو Config Store
 ```
-Project → Remote Config → Create Config
+Workers → KV (أو Config Store)
 ```
 
 #### ج) أضف المعاملات (5 معاملات)
@@ -106,9 +106,9 @@ Parameter: r2_bucket
 Value: al-zab-township-guide
 ```
 
-#### د) انقر "Publish"
+#### د) انقر "Save" ثم Deploy
 ```
-✅ Publish changes
+✅ Save changes
 ```
 
 ---
@@ -139,7 +139,7 @@ flutter run
 
 ### قبل البدء:
 - [ ] لديك إمكانية الوصول إلى حساب Cloudflare
-- [ ] لديك إمكانية الوصول إلى Firebase Console
+- [ ] لديك إمكانية الوصول إلى Cloudflare Dashboard
 - [ ] لديك ملف نصي لحفظ المفاتيح
 
 ### أثناء الخطوة 1:
@@ -148,7 +148,7 @@ flutter run
 - [ ] نسخت جميع المعلومات الخمسة
 
 ### أثناء الخطوة 2:
-- [ ] فتحت Firebase Remote Config
+- [ ] فتحت Cloudflare Config/KV
 - [ ] أضفت 5 معاملات
 - [ ] نقرت Publish
 
@@ -180,15 +180,15 @@ flutter run
 ### المشكلة: "SecureConfig not initialized"
 **الحل:**
 ```
-1. تحقق من Firebase Remote Config
-2. تأكد من Publish تم بنجاح
+1. تحقق من Cloudflare Config/KV
+2. تأكد من Save/Deploy تم بنجاح
 3. أعد بدء التطبيق
 ```
 
 ### المشكلة: "Images won't load"
 **الحل:**
 ```
-1. تحقق من المفاتيح في Remote Config
+1. تحقق من المفاتيح في Cloudflare Config/KV
 2. تأكد من أن Bucket name صحيح
 3. تحقق من أن الملفات موجودة في R2
 ```
@@ -200,7 +200,7 @@ flutter run
 ```
 الآن (اليوم)          ← أنت هنا
 ├── 15 دقيقة: Cloudflare
-├── 20 دقيقة: Firebase
+├── 20 دقيقة: Config/KV
 ├── 5 دقائق: الاختبار
 └── ✅ الانتهاء من الخطوات الحرجة
 
@@ -219,9 +219,9 @@ flutter run
 | العنصر | الرابط/المعلومة |
 |------|---------------|
 | Cloudflare Dashboard | https://dash.cloudflare.com/ |
-| Firebase Console | https://console.firebase.google.com/ |
+| Cloudflare Dashboard | https://dash.cloudflare.com/ |
 | Al-Zab Project | Search for "Al-Zab-Township" |
-| Remote Config | Project → Remote Config |
+| Config/KV | Workers → KV (أو Config Store) |
 
 ---
 
@@ -229,7 +229,7 @@ flutter run
 
 ### ✅ بعد إكمال هذه الخطوات:
 - ✅ المفاتيح القديمة لا تعمل
-- ✅ المفاتيح الجديدة آمنة في Firebase
+- ✅ المفاتيح الجديدة آمنة في Cloudflare Config/KV
 - ✅ الكود لا يحتوي على مفاتيح
 - ✅ لا يمكن لأي شخص استخدام البيانات القديمة
 
