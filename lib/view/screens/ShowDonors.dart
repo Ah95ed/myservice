@@ -11,20 +11,44 @@ import 'package:provider/provider.dart';
 import '../ThemeApp/ColorUsed.dart';
 
 // ignore: must_be_immutable
-class ShowDonors extends StatelessWidget {
+class ShowDonors extends StatefulWidget {
   static const ROUTE = 'ShowDonors';
 
   const ShowDonors({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    DataSend? dataSend = ModalRoute.of(context)!.settings.arguments as DataSend;
-    context.read<Providers>().title = Text(
+  State<ShowDonors> createState() => _ShowDonorsState();
+}
+
+class _ShowDonorsState extends State<ShowDonors> {
+  DataSend? _dataSend;
+  bool _initialized = false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (_initialized) {
+      return;
+    }
+    _dataSend = ModalRoute.of(context)!.settings.arguments as DataSend;
+    final provider = context.read<Providers>();
+    provider.title = Text(
       S.of(context).donors,
       style: const TextStyle(color: AppTheme.notWhite),
     );
-    context.read<Providers>().getData(dataSend.collection);
-    context.read<Providers>().actionsicon = const Icon(Icons.search);
+    provider.actionsicon = const Icon(Icons.search);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      provider.getData(_dataSend!.collection);
+    });
+    _initialized = true;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final dataSend = _dataSend;
+    if (dataSend == null) {
+      return const SizedBox.shrink();
+    }
     return Consumer<Providers>(
       builder: (context, value, child) {
         return Scaffold(
@@ -81,18 +105,33 @@ class ShowDonors extends StatelessWidget {
               : SizedBox(
                   height: getheight(100),
                   width: getWidth(100),
-                  child: ListView.builder(
-                    physics: const BouncingScrollPhysics(),
-                    scrollDirection: Axis.vertical,
-                    itemCount: value.data.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return CardDonors(
-                        name: value.data[index]['name'],
-                        type: dataSend.collection,
-                        title: value.data[index]['location'],
-                        number: value.data[index]['number'],
-                      );
+                  child: NotificationListener<ScrollNotification>(
+                    onNotification: (notification) {
+                      if (notification.metrics.pixels >=
+                          notification.metrics.maxScrollExtent - 200) {
+                        value.loadMore(dataSend.collection);
+                      }
+                      return false;
                     },
+                    child: ListView.builder(
+                      physics: const BouncingScrollPhysics(),
+                      scrollDirection: Axis.vertical,
+                      itemCount: value.data.length + (value.hasMore ? 1 : 0),
+                      itemBuilder: (BuildContext context, int index) {
+                        if (index >= value.data.length) {
+                          return const Padding(
+                            padding: EdgeInsets.symmetric(vertical: 16),
+                            child: Center(child: CircularProgressIndicator()),
+                          );
+                        }
+                        return CardDonors(
+                          name: value.data[index]['name'],
+                          type: dataSend.collection,
+                          title: value.data[index]['location'],
+                          number: value.data[index]['number'],
+                        );
+                      },
+                    ),
                   ),
                 ),
         );

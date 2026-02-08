@@ -1,4 +1,3 @@
-
 import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
 import 'package:Al_Zab_township_guide/view/Size/ScreenSize.dart';
 import 'package:flutter/material.dart';
@@ -53,7 +52,6 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
 
     return Consumer<PdfViewerProvider>(
       builder: (context, provider, child) {
-        final data = provider.data;
         final loading = provider.loading;
         final error = provider.error;
         final pages = provider.pages;
@@ -73,8 +71,16 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
               SizedBox(width: context.getWidth(10)),
               IconButton(
                 onPressed: () async {
+                  final filePath = args.filePath;
+                  if (filePath == null || filePath.isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('No file to share.')),
+                    );
+                    return;
+                  }
+
                   await Share.shareXFiles([
-                    XFile(args.filePath ?? ''),
+                    XFile(filePath),
                   ], text: '📚 هذا الكتاب: ${args.title}');
                 },
                 icon: Icon(Icons.share),
@@ -91,8 +97,8 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
                   enableSwipe: true,
                   swipeHorizontal: false,
                   autoSpacing: true,
-                  pageFling: true,          
-                  
+                  pageFling: true,
+
                   onRender: (_pages) {
                     provider.updatePages(_pages ?? 0);
                   },

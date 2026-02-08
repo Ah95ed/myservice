@@ -1,0 +1,88 @@
+# Gitignore Entry for Security
+
+# ⚠️ Security: Never commit sensitive credentials
+lib/Service/r2_config.dart
+lib/Services/secure_config.dart
+
+# Never commit Firebase config with real credentials
+# firebase_options.dart is safe to commit (needs to be regenerated per environment)
+
+# Local dependencies
+.dart_tool/
+.flutter-plugins
+.packages
+.pub-cache/
+
+# Environment files
+.env
+.env.local
+*.key
+*.properties
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*.swn
+*~
+.DS_Store
+*.sublime-workspace
+
+# Build output
+build/
+dist/
+*.apk
+*.aab
+*.ipa
+.dart_tool/
+.flutter-plugins
+.packages
+
+# Temporary files
+*.iml
+*.lock
+*.patch
+.gradle/
+gradlew.bat
+gradlew
+
+# Android
+android/.gradle
+android/local.properties
+android/app/debug
+android/app/profile
+android/app/release
+
+# iOS
+ios/Pods/
+ios/Podfile.lock
+ios/.symlinks/
+ios/.generated/
+ios/Flutter/Flutter.podspec
+ios/Flutter/Flutter.framework
+ios/Flutter/Generated.xcconfig
+ios/Flutter/ephemeral/
+
+# Coverage
+coverage/
+.coverage
+lcov.info
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependencies
+node_modules/
+vendor/
+
+# Test results
+test_results/
+test-results.xml

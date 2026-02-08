@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
 import 'package:Al_Zab_township_guide/view/screens/PdfViewerScreen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:http/http.dart' as http;
 import 'package:open_filex/open_filex.dart';
 import 'package:path/path.dart' as p;
@@ -13,7 +12,6 @@ class PdfViewerData {
   final String? filePath; // local path if available
   final String? remoteUrl; // remote URL (http/https) if provided
   final String title;
-
 
   PdfViewerData({this.filePath, this.remoteUrl, required this.title});
 }

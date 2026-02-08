@@ -1,17 +1,13 @@
-import 'package:Al_Zab_township_guide/Models/DoctorModel/DoctorModel.dart';
 import 'package:Al_Zab_township_guide/Helper/Constant/ServiceCollectios.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:Al_Zab_township_guide/Models/DoctorModel/DoctorModel.dart';
+import 'package:Al_Zab_township_guide/Services/cloudflare_api.dart';
 
 class DoctorData {
   Future<List<DoctorModel>?> getData() async {
-    FirebaseFirestore firestoreInstance = FirebaseFirestore.instance;
-    final collectionRef = firestoreInstance.collection(
+    final data = await CloudflareApi.instance.getCollection(
       ServiceCollectios.Doctor.name,
     );
-    final querySnapshot = await collectionRef
-        .where('bool', isEqualTo: true)
-        .get();
-    return querySnapshot.docs.map((e) {
+    return data.map((e) {
       return DoctorModel(
         name: e['name'],
         presence: e['presence'],

@@ -5,6 +5,7 @@ import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/app_theme.dart';
+import 'package:Al_Zab_township_guide/view/screens/ForgetPassword/ForgetPassword.dart';
 import 'package:Al_Zab_township_guide/view/screens/SignupScreen/signup_screen.dart';
 import 'package:Al_Zab_township_guide/view/widget/Dialogandsnakebar/DialogCirculerProgress.dart';
 import 'package:Al_Zab_township_guide/view/widget/LoginWidget/Loginimageshow.dart';
@@ -111,10 +112,10 @@ class _LoginScreenState extends State<LoginScreen>
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () {
                                       HapticFeedback.lightImpact();
-                                      //   Fluttertoast.showToast(
-                                      //       msg:
-                                      //           'Forgotten password! button pressed');
-                                      // },
+                                      context.read<Providers>().managerScreen(
+                                        ForgetPassword.Route,
+                                        context,
+                                      );
                                     },
                                 ),
                               ),

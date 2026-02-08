@@ -32,7 +32,12 @@ class _OtpScreenEmailState extends State<OtpScreenEmail> {
   @override
   Widget build(BuildContext context) {
     final signup = context.read<SignupProvider>();
-    // isForget = ModalRoute.of(context)!.settings.arguments as bool;
+    final Object? routeArgs = ModalRoute.of(context)?.settings.arguments;
+    final Map<dynamic, dynamic>? argsMap =
+      routeArgs is Map ? routeArgs : null;
+    final isForget =
+      (routeArgs is bool ? routeArgs : argsMap?['isForget']) == true;
+    final email = argsMap?['email']?.toString();
     return Scaffold(
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
@@ -109,9 +114,15 @@ class _OtpScreenEmailState extends State<OtpScreenEmail> {
                 showCirculerProgress(context);
                 // if (isForget) {}
                 if (EmailOTP.verifyOTP(otp: otpNumber.text)) {
-                  // if (isForget) {
-                  //   Navigator.pop(context);
-                  // }
+                  if (isForget && email != null && email.isNotEmpty) {
+                    Navigator.pop(context);
+                    Navigator.pushNamed(
+                      context,
+                      '/ResetPassword',
+                      arguments: {'email': email},
+                    );
+                    return;
+                  }
                   await signup.saveData(context);
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(

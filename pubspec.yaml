@@ -1,10 +1,10 @@
 name: Al_Zab_township_guide
 description: A new Flutter project.
 publish_to: none
-version: 1.0.0+1
+version: 1.0.1+2
 environment:
-  sdk: '3.9.2'
-  flutter: '3.35.3'
+  sdk: '3.10.8'
+  flutter: '3.38.9'
 
 dependencies:
   flutter: 
@@ -12,12 +12,14 @@ dependencies:
   cupertino_icons: 
 
   firebase_core:
+  firebase_auth:
   email_otp: 
   cloud_firestore:
   recaptcha_enterprise_flutter: 
   provider:
   url_launcher:
   shared_preferences:
+  flutter_secure_storage: ^9.0.0
   flutter_localizations:
     sdk: flutter
   firebase_database:

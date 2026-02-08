@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:Al_Zab_township_guide/Helper/Constant/Constant.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
+import 'package:Al_Zab_township_guide/Services/cloudflare_api.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/app_theme.dart';
 import 'package:Al_Zab_township_guide/view/screens/BloodScreen.dart';
@@ -10,7 +13,6 @@ import 'package:Al_Zab_township_guide/view/screens/OTPScreenEmail.dart';
 import 'package:Al_Zab_township_guide/view/screens/ProfessionsScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/SatotaScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/TheCars.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_otp/email_otp.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -19,6 +21,14 @@ class Providers with ChangeNotifier {
   String? name, email, phone, password;
   List s = [];
   List search = [];
+  static const int _pageSize = 50;
+  int _page = 1;
+  bool _isLoading = false;
+  bool _hasMore = true;
+  String? _currentCollection;
+
+  bool get isLoading => _isLoading;
+  bool get hasMore => _hasMore;
 
   Widget title = Text(
     Translation[Language.selectType],
@@ -153,20 +163,80 @@ class Providers with ChangeNotifier {
     notifyListeners();
   }
 
-  Future getData(String collection) async {
-    s.clear();
-    FirebaseFirestore firestoreInstance = await FirebaseFirestore.instance;
-    final collectionRef = firestoreInstance.collection(collection);
-    final querySnapshot = await collectionRef.get();
-    s = await querySnapshot.docs.map((e) {
-      return e;
-    }).toList();
+  Future getData(String collection, {bool refresh = false}) async {
+    if (_isLoading) {
+      return;
+    }
 
-    notifyListeners();
+    if (_currentCollection != collection || refresh) {
+      _currentCollection = collection;
+      _page = 1;
+      _hasMore = true;
+      s.clear();
+      search = [];
+    }
+
+    if (_currentCollection == collection && s.isNotEmpty && !refresh) {
+      return;
+    }
+
+    await _fetchPage(collection);
   }
 
-  Future<void> managerScreen(String route, BuildContext context, {Object? object}) async {
-  await  Navigator.pushNamed(context, route, arguments: object);
+  Future<void> loadMore(String collection) async {
+    if (_isLoading || !_hasMore || search.isNotEmpty) {
+      return;
+    }
+    if (_currentCollection != collection) {
+      await getData(collection);
+      return;
+    }
+    await _fetchPage(collection);
+  }
+
+  Future<void> _fetchPage(String collection) async {
+    _isLoading = true;
+    notifyListeners();
+
+    final cacheKey = 'cache_collection_$collection';
+    try {
+      final result = await CloudflareApi.instance.getCollection(
+        collection,
+        page: _page,
+        limit: _pageSize,
+      );
+      if (_page == 1) {
+        s = result;
+      } else {
+        s.addAll(result);
+      }
+      if (result.length < _pageSize) {
+        _hasMore = false;
+      } else {
+        _page += 1;
+      }
+      await shared?.setString(cacheKey, jsonEncode(s));
+    } catch (_) {
+      if (s.isEmpty) {
+        final cached = shared?.getString(cacheKey);
+        if (cached != null && cached.isNotEmpty) {
+          final decoded = jsonDecode(cached) as List<dynamic>;
+          s = decoded.map((e) => e as Map<String, dynamic>).toList();
+        }
+      }
+      _hasMore = false;
+    } finally {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  Future<void> managerScreen(
+    String route,
+    BuildContext context, {
+    Object? object,
+  }) async {
+    await Navigator.pushNamed(context, route, arguments: object);
     notifyListeners();
   }
 

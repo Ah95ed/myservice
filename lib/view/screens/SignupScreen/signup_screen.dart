@@ -211,6 +211,8 @@ class _SignupScreenState extends State<SignupScreen>
                                   showCirculerProgress(context);
 
                                   await provider.sendCode(
+                                   
+                                   
                                     SignupModel(
                                       name: name.text,
                                       email: email.text,

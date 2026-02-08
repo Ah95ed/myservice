@@ -6,7 +6,7 @@ class AppConstants {
 
   // روابط Cloudflare
   static const String cloudflareWorkerUrl =
-      'https://your-worker.your-subdomain.workers.dev';
+      'https://blood.amhmeed31.workers.dev';
   static const String cloudflareDomain =
       'https://api.yourdomain.com'; // إذا كان لديك دومين مخصص
 

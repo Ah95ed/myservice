@@ -8,23 +8,41 @@ import 'package:provider/provider.dart';
 
 import '../ThemeApp/app_theme.dart';
 
-class SatotaScreen extends StatelessWidget {
+class SatotaScreen extends StatefulWidget {
   static const ROUTE = '/SatotaScreen';
   const SatotaScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    context.read<Providers>().getData(ServiceCollectios.Satota.name);
-    context.read<Providers>().title = Text(
+  State<SatotaScreen> createState() => _SatotaScreenState();
+}
+
+class _SatotaScreenState extends State<SatotaScreen> {
+  bool _initialized = false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (_initialized) {
+      return;
+    }
+    final provider = context.read<Providers>();
+    provider.title = Text(
       S.of(context).internal_transfer,
       style: const TextStyle(color: AppTheme.notWhite),
     );
-    context.read<Providers>().actionsicon = const Icon(
+    provider.actionsicon = const Icon(
       Icons.search,
       color: AppTheme.notWhite,
       size: 22.0,
     );
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      provider.getData(ServiceCollectios.Satota.name);
+    });
+    _initialized = true;
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Consumer<Providers>(
       builder: (context, value, child) {
         return Scaffold(
@@ -40,17 +58,32 @@ class SatotaScreen extends StatelessWidget {
                     ],
                   ),
                 )
-              : ListView.builder(
-                  itemCount: value.data.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return CardSatota(
-                      name: value.data[index]['name'],
-                      location: value.data[index]['location'],
-                      onPressed: () {
-                        value.callNumber(value.data[index]['number']);
-                      },
-                    );
+              : NotificationListener<ScrollNotification>(
+                  onNotification: (notification) {
+                    if (notification.metrics.pixels >=
+                        notification.metrics.maxScrollExtent - 200) {
+                      value.loadMore(ServiceCollectios.Satota.name);
+                    }
+                    return false;
                   },
+                  child: ListView.builder(
+                    itemCount: value.data.length + (value.hasMore ? 1 : 0),
+                    itemBuilder: (BuildContext context, int index) {
+                      if (index >= value.data.length) {
+                        return const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 16),
+                          child: Center(child: CircularProgressIndicator()),
+                        );
+                      }
+                      return CardSatota(
+                        name: value.data[index]['name'],
+                        location: value.data[index]!['location']??"",
+                        onPressed: () {
+                          value.callNumber(value.data[index]['number']);
+                        },
+                      );
+                    },
+                  ),
                 ),
         );
       },

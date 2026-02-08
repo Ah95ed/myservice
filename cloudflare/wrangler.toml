@@ -1,0 +1,12 @@
+name = "blood"
+main = "src/index.js"
+compatibility_date = "2025-12-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "alzab_db"
+database_id = "172378b5-6068-4dca-8a99-1a706d29566d"
+
+[vars]
+APP_NAME = "AL-Zab Township Guide"
+

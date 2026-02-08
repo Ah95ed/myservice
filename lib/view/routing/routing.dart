@@ -4,6 +4,8 @@ import 'package:Al_Zab_township_guide/view/screens/AddSatota/AddSatota.dart';
 import 'package:Al_Zab_township_guide/view/screens/BloodScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/BooksScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/DoctorScreen.dart';
+import 'package:Al_Zab_township_guide/view/screens/ForgetPassword/ForgetPassword.dart';
+import 'package:Al_Zab_township_guide/view/screens/ForgetPassword/ResetPassword.dart';
 import 'package:Al_Zab_township_guide/view/screens/GradesScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/LineScreen/LineScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/LoginScreen/login_screen.dart';
@@ -14,6 +16,7 @@ import 'package:Al_Zab_township_guide/view/screens/OTPScreenEmail.dart';
 import 'package:Al_Zab_township_guide/view/screens/OTPScreenNumber/OTPScreenNumber.dart';
 import 'package:Al_Zab_township_guide/view/screens/PdfViewerScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/ProfessionsScreen.dart';
+import 'package:Al_Zab_township_guide/view/screens/ProfileScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/SatotaScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/ShowDonors.dart';
 import 'package:Al_Zab_township_guide/view/screens/SignupScreen/signup_screen.dart';
@@ -33,6 +36,8 @@ Map<String, WidgetBuilder> routs = {
   LoginScreen.Route: (context) => LoginScreen(),
   MyCustomSplashScreen.Route: (context) => MyCustomSplashScreen(),
   OtpScreenEmail.Route: (context) => OtpScreenEmail(),
+  ForgetPassword.Route: (context) => const ForgetPassword(),
+  ResetPasswordScreen.Route: (context) => const ResetPasswordScreen(),
   MessageDeveloper.Route: (context) => MessageDeveloper(),
   OTPScreenNumber.Route: (context) => OTPScreenNumber(),
   LineScreen.Route: (context) => LineScreen(),
@@ -43,11 +48,13 @@ Map<String, WidgetBuilder> routs = {
   BooksScreen.route: (context) => BooksScreen(),
   GradesScreen.route: (context) => const GradesScreen(),
   PdfViewerScreen.route: (context) => PdfViewerScreen(),
-
+  ProfileScreen.Route: (context) => const ProfileScreen(),
 };
 
-
- Future<void> managerScreen(String route, BuildContext context, {Object? object}) async {
-  await  Navigator.pushNamed(context, route, arguments: object);
-  
-  }
+Future<void> managerScreen(
+  String route,
+  BuildContext context, {
+  Object? object,
+}) async {
+  await Navigator.pushNamed(context, route, arguments: object);
+}

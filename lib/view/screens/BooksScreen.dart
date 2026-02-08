@@ -1,7 +1,6 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
 import 'package:Al_Zab_township_guide/view/routing/routing.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -31,7 +30,6 @@ class _BooksScreenState extends State<BooksScreen> {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
     args = ModalRoute.of(context)?.settings.arguments as List;
-  
   }
 
   @override
@@ -57,8 +55,6 @@ class _BooksScreenState extends State<BooksScreen> {
 
             return InkWell(
               onTap: () async {
-              
-
                 final suggestedName =
                     book[index]['name'].replaceAll(' ', '_') +
                     _extensionFromUrl(book[index]['url']);

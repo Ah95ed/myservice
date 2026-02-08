@@ -1,5 +1,6 @@
 import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
+import 'package:Al_Zab_township_guide/Services/cloudflare_api.dart';
 import 'package:Al_Zab_township_guide/view/screens/OTPScreenEmail.dart';
 import 'package:email_otp/email_otp.dart';
 import 'package:flutter/material.dart';
@@ -13,9 +14,20 @@ class ForgetPasswordModel {
       Navigator.pop(context);
       return;
     }
+    final exists = await CloudflareApi.instance.checkEmailExists(_email);
+    if (!exists) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(Translation[Language.email_not_exist])),
+      );
+      Navigator.pop(context);
+      return;
+    }
     if (await EmailOTP.sendOTP(email: _email)) {
-      // Navigator.pop(context);
-      Navigator.popAndPushNamed(context, OtpScreenEmail.Route, arguments: true);
+      Navigator.popAndPushNamed(
+        context,
+        OtpScreenEmail.Route,
+        arguments: {'isForget': true, 'email': _email},
+      );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(Translation[Language.not_sent_email])),

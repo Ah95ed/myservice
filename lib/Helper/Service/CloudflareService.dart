@@ -3,8 +3,7 @@ import 'NetworkService.dart';
 // فئة لإدارة طلبات Cloudflare
 class CloudflareService {
   // رابط Workers الخاص بك على Cloudflare
-  static const String _baseUrl =
-      'https://your-worker.your-subdomain.workers.dev';
+  static const String _baseUrl = 'https://blood.amhmeed31.workers.dev';
 
   // يمكنك أيضاً استخدام Custom Domain
   // static const String _baseUrl = 'https://api.yourdomain.com';

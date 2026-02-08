@@ -8,23 +8,42 @@ import 'package:provider/provider.dart';
 
 import '../ThemeApp/app_theme.dart';
 
-class TheCars extends StatelessWidget {
+class TheCars extends StatefulWidget {
   static const ROUTE = 'TheCars';
 
   const TheCars({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    context.read<Providers>().getData(ServiceCollectios.line.name);
-    context.read<Providers>().title = Text(
+  State<TheCars> createState() => _TheCarsState();
+}
+
+class _TheCarsState extends State<TheCars> {
+  bool _initialized = false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (_initialized) {
+      return;
+    }
+    final provider = context.read<Providers>();
+    provider.title = Text(
       S.of(context).cars,
       style: const TextStyle(color: AppTheme.notWhite),
     );
-    context.read<Providers>().actionsicon = const Icon(
+    provider.actionsicon = const Icon(
       Icons.search,
       color: AppTheme.notWhite,
       size: 22.0,
     );
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      provider.getData(ServiceCollectios.line.name);
+    });
+    _initialized = true;
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Consumer<Providers>(
       builder: (context, value, child) {
         return Scaffold(
@@ -40,20 +59,36 @@ class TheCars extends StatelessWidget {
                     ],
                   ),
                 )
-              : ListView.builder(
-                  physics: const BouncingScrollPhysics(),
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  itemCount: value.data.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return CardCars(
-                      name: value.data[index]['name'],
-                      type: value.data[index]['type'] ?? 'غيرمعرف',
-                      time: value.data[index]['time'],
-                      number: value.data[index]['number'],
-                      from: value.data[index]['from'],
-                    );
+              : NotificationListener<ScrollNotification>(
+                  onNotification: (notification) {
+                    if (notification.metrics.pixels >=
+                        notification.metrics.maxScrollExtent - 200) {
+                      value.loadMore(ServiceCollectios.line.name);
+                    }
+                    return false;
                   },
+                  child: ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemCount: value.data.length + (value.hasMore ? 1 : 0),
+                    itemBuilder: (BuildContext context, int index) {
+                      if (index >= value.data.length) {
+                        return const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 16),
+                          child: Center(child: CircularProgressIndicator()),
+                        );
+                      }
+                      return CardCars(
+                        name: (value.data[index]['name'] ?? '').toString(),
+                        type: (value.data[index]['type'] ?? 'غيرمعرف')
+                            .toString(),
+                        time: (value.data[index]['time'] ?? '').toString(),
+                        number: (value.data[index]['number'] ?? '').toString(),
+                        from: (value.data[index]['from'] ?? '').toString(),
+                      );
+                    },
+                  ),
                 ),
         );
       },

@@ -16,6 +16,7 @@ class Language implements KeyAbstract {
   static const String error_password = "error_password";
   static const String is_not_exist = "is_not_exist";
   static const String title = "title";
+  static const String email_not_exist = "email_not_exist";
   static const String professions = "professions";
   static const String line = "line";
   static const String internal_transfer = "internal_transfer";
@@ -146,6 +147,7 @@ class Language implements KeyAbstract {
       typeProfession: "نوع المهنة",
       no: "لا",
       yes: "نعم",
+      email_not_exist:"البريد الالكتروني غير موجود",
       sure_to_delete_account: "هل انت متأكد من حذف الحساب؟",
       otp_error: "خطأ في رمز التأكيد",
       enter_otp_email: "أدخل رمز التأكيد",
@@ -259,6 +261,7 @@ class Language implements KeyAbstract {
       location: "Location",
       selectType: "Select Type",
       addDonor: "Add a Donor",
+      email_not_exist:"Email Not Exist",
       locationWork: "Location Work",
       doctor_title: "Clinic Address",
       Addtransmissionline: "Add a Transmission Line",

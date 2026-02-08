@@ -8,17 +8,20 @@ import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/app_theme.dart';
 import 'package:Al_Zab_township_guide/view/routing/routing.dart';
-import 'package:Al_Zab_township_guide/view/screens/BooksScreen.dart';
-import 'package:Al_Zab_township_guide/view/screens/EditScreen/CustomDialog.dart';
 import 'package:Al_Zab_township_guide/view/screens/GradesScreen.dart';
+import 'package:Al_Zab_township_guide/view/screens/ProfileScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/SignupScreen/signup_screen.dart';
 import 'package:Al_Zab_township_guide/view/widget/Dialogandsnakebar/DialogCirculerProgress.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 
 class Customdrawer extends StatelessWidget {
   const Customdrawer({super.key});
+
+  static const MethodChannel _shareChannel = MethodChannel('com.blood.share');
 
   //! need controller Drawer Page
 
@@ -104,36 +107,123 @@ class Customdrawer extends StatelessWidget {
             ),
             Divider(thickness: getWidth(0.5), color: ColorUsed.DarkGreen),
             ListTile(
-              leading: Icon(Icons.delete, color: Colors.red.shade700),
+              leading: const Icon(Icons.settings),
               title: Text(
-                Translation[Language.delete_account],
+                Translation[Language.settings],
                 style: TextStyle(
                   fontSize: setFontSize(12),
                   fontWeight: FontWeight.w500,
-                  color: Colors.red.shade700,
+                  color: ColorUsed.DarkGreen,
                 ),
               ),
               onTap: () {
-                Scaffold.of(context).closeDrawer();
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return CustomDialog();
-                  },
-                );
+                read.managerScreen(ProfileScreen.Route, context);
               },
             ),
             Divider(thickness: getWidth(0.5), color: ColorUsed.DarkGreen),
+            // ListTile(
+            //   leading: Icon(Icons.delete, color: Colors.red.shade700),
+            //   title: Text(
+            //     Translation[Language.delete_account],
+            //     style: TextStyle(
+            //       fontSize: setFontSize(12),
+            //       fontWeight: FontWeight.w500,
+            //       color: Colors.red.shade700,
+            //     ),
+            //   ),
+            //   onTap: () {
+            //     Scaffold.of(context).closeDrawer();
+            //     if (shared!.getBool('isRegister') != true) {
+            //       ScaffoldMessenger.of(context).showSnackBar(
+            //         SnackBar(
+            //           content: Text(Translation[Language.register_first]),
+            //         ),
+            //       );
+            //       return;
+            //     }
+            //     showDialog(
+            //       context: context,
+            //       builder: (dialogContext) {
+            //         return AlertDialog(
+            //           title: Text(Translation[Language.delete_account]),
+            //           content: Text(
+            //             Translation[Language.sure_to_delete_account],
+            //           ),
+            //           actions: [
+            //             TextButton(
+            //               onPressed: () => Navigator.pop(dialogContext),
+            //               child: Text(Translation[Language.no]),
+            //             ),
+            //             TextButton(
+            //               onPressed: () async {
+            //                 Navigator.pop(dialogContext);
+            //                 showCirculerProgress(context);
+            //                 final phone = shared!.getString('phoneUser') ?? '';
+            //                 await context
+            //                     .read<Updateprovider>()
+            //                     .deleteDataFromRealtime(context, phone);
+            //                 await SecureStorageService.clearAll();
+            //               },
+            //               child: Text(Translation[Language.yes]),
+            //             ),
+            //           ],
+            //         );
+            //       },
+            //     );
+            //   },
+            // ),
+            // Divider(thickness: getWidth(0.5), color: ColorUsed.DarkGreen),
             ListTile(
               leading: Icon(Icons.share),
               title: Text(Translation[Language.share_app]),
               onTap: () async {
-                Scaffold.of(context).closeDrawer();
+                if (Navigator.of(context).canPop()) {
+                  Navigator.of(context).pop();
+                }
 
-                await Share.share(
-                  'https://play.google.com/store/apps/details?id=com.Blood.types',
-                  subject: 'رابط التطبيق على كوكل بلي',
-                );
+                const shareText =
+                    'https://play.google.com/store/apps/details?id=com.Blood.types';
+                const shareSubject = 'رابط التطبيق على كوكل بلي';
+
+                final box = context.findRenderObject() as RenderBox?;
+                final origin = box != null
+                    ? box.localToGlobal(Offset.zero) & box.size
+                    : null;
+
+                try {
+                  if (!kIsWeb &&
+                      defaultTargetPlatform == TargetPlatform.android) {
+                    await _shareChannel.invokeMethod('shareText', {
+                      'text': shareText,
+                      'subject': shareSubject,
+                    });
+                    return;
+                  }
+
+                  if (origin != null) {
+                    await Share.share(
+                      shareText,
+                      subject: shareSubject,
+                      sharePositionOrigin: origin,
+                    );
+                  } else {
+                    await Share.share(shareText, subject: shareSubject);
+                  }
+                } on MissingPluginException {
+                  if (origin != null) {
+                    await Share.share(
+                      shareText,
+                      subject: shareSubject,
+                      sharePositionOrigin: origin,
+                    );
+                  } else {
+                    await Share.share(shareText, subject: shareSubject);
+                  }
+                } catch (e) {
+                  ScaffoldMessenger.of(
+                    context,
+                  ).showSnackBar(SnackBar(content: Text(e.toString())));
+                }
               },
             ),
             Divider(thickness: getWidth(0.5), color: ColorUsed.DarkGreen),
@@ -213,7 +303,7 @@ class Customdrawer extends StatelessWidget {
                 );
               },
             ),
-              Divider(thickness: getWidth(0.5), color: ColorUsed.DarkGreen),
+            Divider(thickness: getWidth(0.5), color: ColorUsed.DarkGreen),
             ListTile(
               leading: Icon(Icons.book),
               title: Text(
@@ -225,7 +315,6 @@ class Customdrawer extends StatelessWidget {
                 ),
               ),
               onTap: () {
-
                 managerScreen(GradesScreen.route, context);
               },
             ),
@@ -257,7 +346,7 @@ class Customdrawer extends StatelessWidget {
                 ),
               ),
             ),
-          
+
             //  Divider(thickness: getWidth(0.1), color: ColorUsed.DarkGreen,),
             // Center(
             //   child: Text(

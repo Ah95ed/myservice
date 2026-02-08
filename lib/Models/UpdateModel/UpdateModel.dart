@@ -2,11 +2,11 @@ import 'package:Al_Zab_township_guide/Helper/Constant/Constant.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
+import 'package:Al_Zab_township_guide/Services/cloudflare_api.dart';
+import 'package:Al_Zab_township_guide/Services/secure_storage_service.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/view/screens/OTPScreenNumber/OTPScreenNumber.dart';
 import 'package:appwrite/appwrite.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,9 +14,7 @@ class UpdateModel {
   String? name, number;
   String? typeService;
   Client? client;
-  DatabaseReference? _databaseRef;
   UpdateModel() {
-    _databaseRef = FirebaseDatabase.instance.ref();
     client = Client();
     client!
         .setEndpoint('https://cloud.appwrite.io/v1')
@@ -28,39 +26,27 @@ class UpdateModel {
     String n,
     BuildContext ctx,
   ) async {
-    CollectionReference querySnapshot = await FirebaseFirestore.instance
-        .collection(selectedValue!);
-    querySnapshot
-        .where('number', isEqualTo: n)
-        .get()
-        .then(
-          (value) async {
-            value.docs.map((v) async {
-              if (v.exists) {
-                Navigator.of(ctx).pop();
-
-                shared!.setString('collection', selectedValue);
-                await shared!.setString('DocumentID', v.id);
-                sendSMS(ctx, n);
-                return;
-              } else {
-                Navigator.of(ctx).pop();
-                ScaffoldMessenger.of(ctx).showSnackBar(
-                  SnackBar(
-                    content: Text(Translation[Language.not_phond_found]),
-                  ),
-                );
-                return;
-              }
-            }).toList();
-            // return value;
-          },
-          onError: (e) {
-            ScaffoldMessenger.of(
-              ctx,
-            ).showSnackBar(SnackBar(content: Text(e.toString())));
-          },
+    try {
+      final found = await CloudflareApi.instance.lookupByNumber(
+        selectedValue ?? '',
+        n,
+      );
+      if (found == null) {
+        Navigator.of(ctx).pop();
+        ScaffoldMessenger.of(ctx).showSnackBar(
+          SnackBar(content: Text(Translation[Language.not_phond_found])),
         );
+        return;
+      }
+      Navigator.of(ctx).pop();
+      shared!.setString('collection', found['type']);
+      await shared!.setString('DocumentID', found['id']);
+      sendSMS(ctx, n);
+    } catch (e) {
+      ScaffoldMessenger.of(
+        ctx,
+      ).showSnackBar(SnackBar(content: Text(e.toString())));
+    }
   }
 
   List<String> types = [
@@ -75,21 +61,22 @@ class UpdateModel {
   ];
 
   Future<void> searchTypes(BuildContext ctx, String n) async {
-    for (var e in types) {
-      CollectionReference querySnapshot = await FirebaseFirestore.instance
-          .collection(e);
-      querySnapshot.get().then((r) async {
-        for (var element in r.docs) {
-          if (n == element.get('number')) {
-            await shared!.setString('collection', e);
-            await shared!.setString('DocumentID', element.id);
-
-            await sendSMS(ctx, n);
-
-            break;
-          }
-        }
-      });
+    try {
+      final response = await CloudflareApi.instance.getDonorsByNumber(n);
+      if (response.isEmpty) {
+        ScaffoldMessenger.of(ctx).showSnackBar(
+          SnackBar(content: Text(Translation[Language.not_phond_found])),
+        );
+        return;
+      }
+      final item = response.first;
+      await shared!.setString('collection', 'donor');
+      await shared!.setString('DocumentID', item['id']);
+      await sendSMS(ctx, n);
+    } catch (e) {
+      ScaffoldMessenger.of(
+        ctx,
+      ).showSnackBar(SnackBar(content: Text(e.toString())));
     }
   }
 
@@ -124,33 +111,38 @@ class UpdateModel {
   }
 
   Future<void> deletefromrealTime(BuildContext c, {String? number}) async {
-    await _databaseRef!
-        .child('auth')
-        .child(number ?? await shared!.getString('numberDelete')!)
-        .remove()
-        .then((t) {
-          Navigator.of(c).pop();
-          shared!.remove('nameUser');
-          shared!.remove('emailUser');
-          shared!.remove('phoneUser');
-          shared!.remove('isRegister');
-          Scaffold.of(c).closeDrawer();
-          ScaffoldMessenger.of(
-            c,
-          ).showSnackBar(SnackBar(content: Text(Translation[Language.done])));
-        });
+    try {
+      await CloudflareApi.instance.deleteUserByPhone(
+        number ?? await shared!.getString('numberDelete')!,
+      );
+      await SecureStorageService.clearAll();
+      Navigator.of(c).pop();
+      shared!.remove('nameUser');
+      shared!.remove('emailUser');
+      shared!.remove('phoneUser');
+      shared!.remove('isRegister');
+      Scaffold.maybeOf(c)?.closeDrawer();
+      ScaffoldMessenger.of(
+        c,
+      ).showSnackBar(SnackBar(content: Text(Translation[Language.done])));
+    } catch (e) {
+      ScaffoldMessenger.of(
+        c,
+      ).showSnackBar(SnackBar(content: Text(e.toString())));
+    }
   }
 
   Future<void> deleteFromFirStore(BuildContext c) async {
-    await FirebaseFirestore.instance
-        .collection(Collection!)
-        .doc(DocumentID)
-        .delete()
-        .then((v) {
-          Navigator.of(c).pop();
-          ScaffoldMessenger.of(
-            c,
-          ).showSnackBar(SnackBar(content: Text(Translation[Language.done])));
-        });
+    try {
+      await CloudflareApi.instance.deleteItem(Collection!, DocumentID!);
+      Navigator.of(c).pop();
+      ScaffoldMessenger.of(
+        c,
+      ).showSnackBar(SnackBar(content: Text(Translation[Language.done])));
+    } catch (e) {
+      ScaffoldMessenger.of(
+        c,
+      ).showSnackBar(SnackBar(content: Text(e.toString())));
+    }
   }
 }

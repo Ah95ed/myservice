@@ -5,13 +5,14 @@ import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
 import 'package:Al_Zab_township_guide/Models/SharedModel/SharedModel.dart';
+import 'package:Al_Zab_township_guide/Services/cloudflare_api.dart';
+import 'package:Al_Zab_township_guide/Services/secure_storage_service.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/main.dart';
 import 'package:Al_Zab_township_guide/view/screens/LoginScreen/login_screen.dart';
 import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/OTPScreenEmail.dart';
 import 'package:email_otp/email_otp.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -23,7 +24,6 @@ class SignupModel {
   String? _token;
   Providers? read;
 
-  DatabaseReference? database;
   BuildContext? _ctx;
   SignupModel({
     String? name,
@@ -39,18 +39,8 @@ class SignupModel {
     _phone = phone;
     _token = token;
     this._ctx = context;
-    database = FirebaseDatabase.instance.refFromURL(
-      'https://blood-types-77ce2-default-rtdb.firebaseio.com/',
-    );
     sharesModel = SharedModel();
-    EmailOTP.config(
-      appName: Translation[Language.title],
-      otpType: OTPType.numeric,
-      expiry: 60000,
-      emailTheme: EmailTheme.v6,
-      appEmail: 'amhmeed31@gmail.com',
-      otpLength: 4,
-    );
+
     read = MyApp.getContext()!.read<Providers>();
   }
   String? get name => _name;
@@ -69,6 +59,7 @@ class SignupModel {
 
   Future<bool> sendCodeEmail(BuildContext context, String email) async {
     if (await EmailOTP.sendOTP(email: email)) {
+      Logger.logger("message otp ${EmailOTP.getOTP()}");
       Logger.logger('message sendCodeEmail -> ok');
       read!.managerScreen(OtpScreenEmail.Route, _ctx!);
       Navigator.pop(context);
@@ -95,42 +86,34 @@ class SignupModel {
   }
 
   Future<void> registerInRealTime(BuildContext ctx) async {
-    DataSnapshot dataSnapshot = await database!
-        .child('auth')
-        .child(_phone!)
-        .get();
-    if (dataSnapshot.exists) {
-      ScaffoldMessenger.of(ctx).showSnackBar(
-        SnackBar(content: Text(Translation[Language.is_number_exist])),
+    try {
+      final response = await CloudflareApi.instance.register(
+        name: _name ?? '',
+        email: _email ?? '',
+        phone: _phone ?? '',
+        password: _password ?? '',
       );
+      final user = response['user'] as Map<String, dynamic>;
+      final token = response['token'] as String;
+      await SecureStorageService.saveToken(token);
+      await SecureStorageService.saveUserData(
+        name: user['name'] ?? '',
+        email: user['email'] ?? '',
+        phone: user['phone'] ?? '',
+        uid: user['id'] ?? '',
+      );
+      Navigator.pop(ctx);
+      await shared!.setString('nameUser', user['name'] ?? '');
+      await shared!.setString('emailUser', user['email'] ?? '');
+      await shared!.setString('phoneUser', user['phone'] ?? '');
+      await shared!.setBool('isRegister', true);
+      sharesModel!.managerScreenSplash(MainScreen.ROUTE, ctx, false);
+    } catch (error) {
+      log('message registerInRealTime -> $error');
+      ScaffoldMessenger.of(
+        _ctx!,
+      ).showSnackBar(SnackBar(content: Text('Error Register')));
       sharesModel!.managerScreenSplash(LoginScreen.Route, ctx, false);
-      return;
     }
-    await database!
-        .child('auth')
-        .child(_phone!)
-        .set({
-          'name': _name,
-          'email': _email,
-          'phone': _phone,
-          'password': _password,
-          // 'token': _token,
-        })
-        .then((value) async {
-          Navigator.pop(ctx);
-          await shared!.setString('nameUser', _name!);
-          await shared!.setString('emailUser', _email!);
-          await shared!.setString('phoneUser', _phone!);
-          await shared!.setBool('isRegister', true);
-          sharesModel!.managerScreenSplash(MainScreen.ROUTE, ctx, false);
-
-          // log('message registerInRealTime ->  ');
-        })
-        .onError((bool, error) {
-          log('message registerInRealTime -> $error');
-          ScaffoldMessenger.of(
-            _ctx!,
-          ).showSnackBar(SnackBar(content: Text('Error Register')));
-        });
   }
 }
