@@ -109,7 +109,7 @@ class Customdrawer extends StatelessWidget {
             ListTile(
               leading: const Icon(Icons.settings),
               title: Text(
-                Translation[Language.settings],
+                'البروفايل',
                 style: TextStyle(
                   fontSize: setFontSize(12),
                   fontWeight: FontWeight.w500,

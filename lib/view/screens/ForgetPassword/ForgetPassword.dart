@@ -39,26 +39,28 @@ class _ForgetPasswordState extends State<ForgetPassword> {
     return Consumer<ForgetPasswordProvider>(
       builder: (context, value, child) => Scaffold(
         backgroundColor: ColorUsed.PrimaryBackground,
-        body: Column(
-          children: [
-            Login_Image(height: getheight(28.0)),
-            SizedBox(height: getheight(4)),
-            component1(
-              _emailController,
-              Icons.email,
-              Translation[Language.enter_email],
-              false,
-              true,
-            ),
-            SizedBox(height: getheight(4)),
-            CustomMaterialButton(
-              title: Translation[Language.send],
-              onPressed: () async {
-                showCirculerProgress(context);
-                await value.sendCode(_emailController.text, context);
-              },
-            ),
-          ],
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Login_Image(height: getheight(28.0)),
+              SizedBox(height: getheight(4)),
+              component1(
+                _emailController,
+                Icons.email,
+                Translation[Language.enter_email],
+                false,
+                true,
+              ),
+              SizedBox(height: getheight(4)),
+              CustomMaterialButton(
+                title: Translation[Language.send],
+                onPressed: () async {
+                  showCirculerProgress(context);
+                  await value.sendCode(_emailController.text, context);
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

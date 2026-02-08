@@ -29,7 +29,7 @@ class ProfileScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(Translation[Language.settings]),
+        title: const Text('البروفايل'),
         backgroundColor: ColorUsed.primary,
         foregroundColor: AppTheme.notWhite,
       ),
