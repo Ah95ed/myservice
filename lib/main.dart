@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
@@ -137,9 +136,7 @@ class MyApp extends StatelessWidget {
               // ! here to check is null or not
               home: shared!.getBool('spalsh') == null
                   ? MyCustomSplashScreen()
-                  // : GradesScreen(),
                   : MainScreen(),
-              // home : MyCustomSplashScreen(),
             );
           },
         );

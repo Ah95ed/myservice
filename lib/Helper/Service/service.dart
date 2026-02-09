@@ -32,12 +32,10 @@ Future<void> init() async {
   // معلومات الحزمة
   packageInfo = await PackageInfo.fromPlatform();
 }
-
 Future<void> initData() async {
   await SecureConfig.refresh();
   re = _safeBuildNumber(SecureConfig.updateBuildNumber);
 }
-
 String _safeBuildNumber(String? value) {
   if (value == null || value.isEmpty) return '0';
   return value;
