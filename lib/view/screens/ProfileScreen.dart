@@ -1,8 +1,10 @@
+import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
+import 'package:Al_Zab_township_guide/Services/cloudflare_api.dart';
+import 'package:Al_Zab_township_guide/Services/secure_storage_service.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
-import 'package:Al_Zab_township_guide/controller/provider/UpdateProvider/UpdateProvider.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/app_theme.dart';
@@ -11,6 +13,7 @@ import 'package:Al_Zab_township_guide/view/screens/SignupScreen/signup_screen.da
 import 'package:Al_Zab_township_guide/view/widget/Dialogandsnakebar/DialogCirculerProgress.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProfileScreen extends StatelessWidget {
   static const Route = '/ProfileScreen';
@@ -20,7 +23,6 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final read = context.read<Providers>();
-    final updater = context.read<Updateprovider>();
 
     final name = shared?.getString('nameUser') ?? '';
     final email = shared?.getString('emailUser') ?? '';
@@ -53,11 +55,7 @@ class ProfileScreen extends StatelessWidget {
               title: Translation[Language.logout],
               onTap: () {
                 if (!isRegister) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(Translation[Language.register_first]),
-                    ),
-                  );
+                  Logger.logger(Translation[Language.register_first]);
                   return;
                 }
                 shared?.remove('nameUser');
@@ -83,11 +81,7 @@ class ProfileScreen extends StatelessWidget {
               title: Translation[Language.delete_account],
               onTap: () {
                 if (!isRegister) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(Translation[Language.register_first]),
-                    ),
-                  );
+                  Logger.logger(Translation[Language.register_first]);
                   return;
                 }
 
@@ -97,7 +91,8 @@ class ProfileScreen extends StatelessWidget {
                     return AlertDialog(
                       title: Text(Translation[Language.delete_account]),
                       content: Text(
-                        Translation[Language.sure_to_delete_account],
+                        '${Translation[Language.sure_to_delete_account]}\n\n'
+                        '${Translation[Language.delete_account_browser_notice]}',
                       ),
                       actions: [
                         TextButton(
@@ -107,22 +102,43 @@ class ProfileScreen extends StatelessWidget {
                         TextButton(
                           onPressed: () async {
                             Navigator.pop(dialogContext);
-                            if (phone.isEmpty) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text(
-                                    Translation[Language.please_enter_phone],
-                                  ),
-                                ),
-                              );
-                              return;
-                            }
-
                             showCirculerProgress(context);
-                            await updater.deleteDataFromRealtime(
-                              context,
-                              phone,
-                            );
+                            try {
+                              final deleteUrl = await CloudflareApi.instance
+                                  .requestAccountDeletionUrl();
+                              if (!context.mounted) {
+                                return;
+                              }
+                              Navigator.pop(context);
+                              final launched = await launchUrl(
+                                deleteUrl,
+                                mode: LaunchMode.externalApplication,
+                              );
+                              if (!launched && context.mounted) {
+                                Logger.logger(
+                                  Translation[Language.could_not_open_browser],
+                                );
+                                return;
+                              }
+
+                              await SecureStorageService.clearAll();
+                              shared?.remove('nameUser');
+                              shared?.remove('emailUser');
+                              shared?.remove('phoneUser');
+                              shared?.remove('isRegister');
+                              if (context.mounted) {
+                                read.managerScreenSplash(
+                                  LoginScreen.Route,
+                                  context,
+                                  false,
+                                );
+                              }
+                            } catch (error) {
+                              if (context.mounted) {
+                                Navigator.pop(context);
+                                Logger.logger(error.toString());
+                              }
+                            }
                           },
                           child: Text(Translation[Language.yes]),
                         ),

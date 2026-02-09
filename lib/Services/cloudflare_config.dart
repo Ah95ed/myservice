@@ -11,6 +11,6 @@ class CloudflareConfig {
 
   static const String configToken = String.fromEnvironment(
     'CLOUDFLARE_CONFIG_TOKEN',
-    defaultValue: '',
+    defaultValue: 'b8be1d1c491a41c39223130e31ddd260',
   );
 }

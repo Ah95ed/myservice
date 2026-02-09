@@ -9,10 +9,9 @@ database_id = "172378b5-6068-4dca-8a99-1a706d29566d"
 
 [[kv_namespaces]]
 binding = "CONFIG_KV"
-id = "REPLACE_WITH_KV_ID"
-preview_id = "REPLACE_WITH_PREVIEW_KV_ID"
+id = "d58bb4674d8a4bb184c38b28f22788d2"
+preview_id = "16d65f3150c04e849efab14643cbe34e"
 
 [vars]
 APP_NAME = "AL-Zab Township Guide"
-CONFIG_TOKEN = "REPLACE_WITH_CONFIG_TOKEN"
 

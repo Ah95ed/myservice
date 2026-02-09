@@ -1,6 +1,7 @@
 /// خدمة تأمين المفاتيح السرية عبر Cloudflare Config
 import 'dart:convert';
 
+import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
 import 'package:Al_Zab_township_guide/Services/cloudflare_config.dart';
 import 'package:http/http.dart' as http;
 
@@ -64,6 +65,7 @@ class SecureConfig {
 
     final headers = <String, String>{'content-type': 'application/json'};
     final token = CloudflareConfig.configToken;
+    Logger.logger("Using token: $token");
     if (token.isNotEmpty) {
       headers['authorization'] = 'Bearer $token';
     }

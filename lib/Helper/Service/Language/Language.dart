@@ -51,6 +51,9 @@ class Language implements KeyAbstract {
   static const String more_options = "more_options";
   static const String change_password = "change_password";
   static const String delete_account = "delete_account";
+  static const String delete_account_browser_notice =
+      "delete_account_browser_notice";
+  static const String could_not_open_browser = "could_not_open_browser";
   static const String edit_Data_and_delete = "edit_Data_and_delete";
   static const String settings = "settings";
   static const String change_language = "change_language";
@@ -129,7 +132,7 @@ class Language implements KeyAbstract {
 
   static Map<String, Map<String, String>> keyMap = {
     'ar': {
-      bookSchool : 'الكتب المدرسية',
+      bookSchool: 'الكتب المدرسية',
       not_sent_email: 'لم يتم ارسال البريد الالكتروني',
       just4: "يجب ان تكون اربعة ارقام",
       version: "الاصدار",
@@ -147,7 +150,7 @@ class Language implements KeyAbstract {
       typeProfession: "نوع المهنة",
       no: "لا",
       yes: "نعم",
-      email_not_exist:"البريد الالكتروني غير موجود",
+      email_not_exist: "البريد الالكتروني غير موجود",
       sure_to_delete_account: "هل انت متأكد من حذف الحساب؟",
       otp_error: "خطأ في رمز التأكيد",
       enter_otp_email: "أدخل رمز التأكيد",
@@ -188,6 +191,9 @@ class Language implements KeyAbstract {
       more_options: "المزيد من الخيارات",
       change_password: "تغيير الباسورد",
       delete_account: "حذف الحساب",
+      delete_account_browser_notice:
+          "سيتم فتح صفحة ويب آمنة لتأكيد الحذف. الرابط صالح لفترة قصيرة ويُستخدم مرة واحدة فقط.",
+      could_not_open_browser: "تعذر فتح المتصفح الخارجي.",
       edit_Data_and_delete: "تعديل البيانات و حذفها",
       settings: "الاعدادات",
       change_language: "تغيير اللغة",
@@ -250,7 +256,7 @@ class Language implements KeyAbstract {
       error_password: "كلمة المرور غير صحيحة",
     },
     "en": {
-      bookSchool : 'School Books',
+      bookSchool: 'School Books',
       not_sent_email: 'Not sent email',
       just4: 'It should be four digits.',
       version: "Version",
@@ -261,7 +267,7 @@ class Language implements KeyAbstract {
       location: "Location",
       selectType: "Select Type",
       addDonor: "Add a Donor",
-      email_not_exist:"Email Not Exist",
+      email_not_exist: "Email Not Exist",
       locationWork: "Location Work",
       doctor_title: "Clinic Address",
       Addtransmissionline: "Add a Transmission Line",
@@ -311,6 +317,9 @@ class Language implements KeyAbstract {
       more_options: "More Options",
       change_password: "Change Password",
       delete_account: "Delete Account",
+      delete_account_browser_notice:
+          "A secure web page will open to confirm deletion. The link expires soon and can be used once.",
+      could_not_open_browser: "Could not open browser.",
       edit_Data_and_delete: "Edit Data and Delete",
       settings: "Settings",
       change_language: "Change Language",

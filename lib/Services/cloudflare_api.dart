@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:Al_Zab_township_guide/Helper/Constant/Constant.dart';
+import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
 import 'package:Al_Zab_township_guide/Services/cloudflare_config.dart';
 import 'package:Al_Zab_township_guide/Services/secure_storage_service.dart';
 import 'package:http/http.dart' as http;
@@ -174,6 +175,26 @@ class CloudflareApi {
     }
   }
 
+  Future<Uri> requestAccountDeletionUrl() async {
+    final headers = await _authHeaders();
+    final response = await http.post(
+      Uri.parse('$_baseUrl/account/delete-request'),
+      headers: headers,
+    );
+
+    if (response.statusCode >= 400) {
+      _logHttpError('POST', '$_baseUrl/account/delete-request', response);
+      throw Exception(_parseError(response));
+    }
+
+    final data = jsonDecode(response.body) as Map<String, dynamic>;
+    final url = data['url'] as String?;
+    if (url == null || url.isEmpty) {
+      throw Exception('Missing delete URL');
+    }
+    return Uri.parse(url);
+  }
+
   Future<void> submitEditRequest(
     Map<String, dynamic> payload,
     String phone,
@@ -321,9 +342,24 @@ class CloudflareApi {
   String _parseError(http.Response response) {
     try {
       final data = jsonDecode(response.body) as Map<String, dynamic>;
-      return data['error']?.toString() ?? 'Request failed';
+      final error = data['error']?.toString();
+      if (error != null && error.isNotEmpty) {
+        return 'Request failed (${response.statusCode}): $error';
+      }
+      return 'Request failed (${response.statusCode})';
     } catch (_) {
-      return 'Request failed';
+      final body = response.body.trim();
+      if (body.isNotEmpty) {
+        return 'Request failed (${response.statusCode}): $body';
+      }
+      return 'Request failed (${response.statusCode})';
     }
+  }
+
+  void _logHttpError(String method, String url, http.Response response) {
+    final body = response.body.trim();
+    Logger.logger(
+      'HTTP $method $url failed: ${response.statusCode} ${response.reasonPhrase ?? ''} ${body.isEmpty ? '' : '| $body'}',
+    );
   }
 }

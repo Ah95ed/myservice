@@ -34,6 +34,8 @@
     "more_options": "المزيد من الخيارات",
     "change_password": "تغيير الباسورد",
     "delete_account": "حذف الحساب",
+    "delete_account_browser_notice": "سيتم فتح صفحة ويب آمنة لتأكيد الحذف. الرابط صالح لفترة قصيرة ويُستخدم مرة واحدة فقط.",
+    "could_not_open_browser": "تعذر فتح المتصفح الخارجي.",
     "edit_Data_and_delete": "تعديل البيانات و حذفها",
     "settings": "الاعدادات",
     "change_language": "تغيير اللغة",

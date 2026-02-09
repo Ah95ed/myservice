@@ -34,10 +34,10 @@ class CardViewList extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    MultiText(name!, Translation[Language.name]),
+                    MultiText(name??"", Translation[Language.name]),
                     MultiText(presence??"", Translation[Language.time]),
                     MultiText(specialization??"", S.of(context).specialization),
-                    MultiText(title!, S.of(context).title_service),
+                    MultiText(title??"", S.of(context).title_service),
                   ],
                 ),
               ),

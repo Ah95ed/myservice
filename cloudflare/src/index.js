@@ -12,6 +12,16 @@ const jsonResponse = (data, status = 200) => {
     });
 };
 
+const htmlResponse = (html, status = 200) => {
+    return new Response(html, {
+        status,
+        headers: {
+            "content-type": "text/html; charset=utf-8",
+            "cache-control": "no-store",
+        },
+    });
+};
+
 const badRequest = (message) => jsonResponse({ error: message }, 400);
 const unauthorized = (message) => jsonResponse({ error: message }, 401);
 
@@ -45,6 +55,20 @@ const hmacSign = async (secret, data) => {
     );
     const signature = await crypto.subtle.sign("HMAC", key, encoder.encode(data));
     return new Uint8Array(signature);
+};
+
+const sha256Hex = async (input) => {
+    const bytes = typeof input === "string" ? encoder.encode(input) : input;
+    const hashBuffer = await crypto.subtle.digest("SHA-256", bytes);
+    const hash = new Uint8Array(hashBuffer);
+    return Array.from(hash)
+        .map((b) => b.toString(16).padStart(2, "0"))
+        .join("");
+};
+
+const generateOneTimeToken = () => {
+    const bytes = crypto.getRandomValues(new Uint8Array(32));
+    return base64UrlEncode(bytes);
 };
 
 const signJwt = async (payload, secret) => {
@@ -184,6 +208,117 @@ const parsePagination = (url) => {
     const page = Number.isFinite(pageParam) && pageParam > 0 ? pageParam : 1;
     const offset = (page - 1) * limit;
     return { limit, offset };
+};
+
+const parseFormBody = async (request) => {
+    const bodyText = await request.text();
+    return new URLSearchParams(bodyText);
+};
+
+const getPreferredLocale = (request) => {
+    const header = request.headers.get("accept-language") || "";
+    return header.toLowerCase().includes("ar") ? "ar" : "en";
+};
+
+const WEB_COPY = {
+    en: {
+        confirmTitle: "Confirm Account Deletion",
+        confirmHeading: "Confirm account deletion",
+        confirmBody:
+            "This action permanently deletes your account and data. You will not be able to recover it.",
+        confirmWarning: "This link can be used only once and expires soon.",
+        confirmButton: "Confirm delete account",
+        invalidTitle: "Invalid link",
+        missingToken: "Missing deletion token.",
+        invalidOrExpired: "This deletion link is invalid or expired.",
+        usedTitle: "Link already used",
+        usedMessage: "This deletion link has already been used.",
+        expiredTitle: "Link expired",
+        expiredMessage: "This deletion link has expired. Please request a new one from the app.",
+        successTitle: "Account deleted",
+        successMessage: "Your account and data have been deleted successfully.",
+    },
+    ar: {
+        confirmTitle: "\u062a\u0623\u0643\u064a\u062f \u062d\u0630\u0641 \u0627\u0644\u062d\u0633\u0627\u0628",
+        confirmHeading: "\u062a\u0623\u0643\u064a\u062f \u062d\u0630\u0641 \u0627\u0644\u062d\u0633\u0627\u0628",
+        confirmBody:
+            "\u0633\u064a\u062a\u0645 \u062d\u0630\u0641 \u0627\u0644\u062d\u0633\u0627\u0628 \u0648\u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0646\u0647\u0627\u0626\u064a\u0627\u064b. \u0644\u0646 \u062a\u062a\u0645\u0643\u0646 \u0645\u0646 \u0627\u0633\u062a\u0631\u062c\u0627\u0639\u0647\u0627.",
+        confirmWarning:
+            "\u0647\u0630\u0627 \u0627\u0644\u0631\u0627\u0628\u0637 \u064a\u0633\u062a\u062e\u062f\u0645 \u0645\u0631\u0629 \u0648\u0627\u062d\u062f\u0629 \u0641\u0642\u0637 \u0648\u064a\u0646\u062a\u0647\u064a \u0642\u0631\u064a\u0628\u0627\u064b.",
+        confirmButton: "\u062a\u0623\u0643\u064a\u062f \u062d\u0630\u0641 \u0627\u0644\u062d\u0633\u0627\u0628",
+        invalidTitle: "\u0631\u0627\u0628\u0637 \u063a\u064a\u0631 \u0635\u062d\u064a\u062d",
+        missingToken: "\u0631\u0627\u0645\u0632 \u0627\u0644\u062d\u0630\u0641 \u0645\u0641\u0642\u0648\u062f.",
+        invalidOrExpired:
+            "\u0631\u0627\u0628\u0637 \u0627\u0644\u062d\u0630\u0641 \u063a\u064a\u0631 \u0635\u062d\u064a\u062d \u0623\u0648 \u0645\u0646\u062a\u0647\u064a \u0627\u0644\u0635\u0644\u0627\u062d\u064a\u0629.",
+        usedTitle: "\u062a\u0645 \u0627\u0633\u062a\u062e\u062f\u0627\u0645 \u0627\u0644\u0631\u0627\u0628\u0637",
+        usedMessage: "\u062a\u0645 \u0627\u0633\u062a\u062e\u062f\u0627\u0645 \u0631\u0627\u0628\u0637 \u0627\u0644\u062d\u0630\u0641 \u0645\u0646 \u0642\u0628\u0644.",
+        expiredTitle: "\u0627\u0646\u062a\u0647\u062a \u0635\u0644\u0627\u062d\u064a\u0629 \u0627\u0644\u0631\u0627\u0628\u0637",
+        expiredMessage:
+            "\u0627\u0646\u062a\u0647\u062a \u0635\u0644\u0627\u062d\u064a\u0629 \u0631\u0627\u0628\u0637 \u0627\u0644\u062d\u0630\u0641. \u064a\u0631\u062c\u0649 \u0637\u0644\u0628 \u0631\u0627\u0628\u0637 \u062c\u062f\u064a\u062f \u0645\u0646 \u0627\u0644\u062a\u0637\u0628\u064a\u0642.",
+        successTitle: "\u062a\u0645 \u062d\u0630\u0641 \u0627\u0644\u062d\u0633\u0627\u0628",
+        successMessage: "\u062a\u0645 \u062d\u0630\u0641 \u062d\u0633\u0627\u0628\u0643 \u0648\u0628\u064a\u0627\u0646\u0627\u062a\u0643 \u0628\u0646\u062c\u0627\u062d.",
+    },
+};
+
+const t = (locale, key) => {
+    const copy = WEB_COPY[locale] || WEB_COPY.en;
+    return copy[key] || WEB_COPY.en[key] || "";
+};
+
+const renderDeletePage = (token, locale) => {
+    const dir = locale === "ar" ? "rtl" : "ltr";
+    return `<!doctype html>
+<html lang="${locale}" dir="${dir}">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>${t(locale, "confirmTitle")}</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f6f7fb; color: #1b1f24; margin: 0; padding: 32px; }
+        .card { max-width: 520px; margin: 0 auto; background: #ffffff; border-radius: 12px; padding: 24px; box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08); }
+        h1 { font-size: 22px; margin: 0 0 12px; }
+        p { line-height: 1.5; }
+        .warn { background: #fff1f2; color: #9f1239; padding: 12px 14px; border-radius: 8px; margin: 16px 0; }
+        button { width: 100%; padding: 12px 16px; border: 0; border-radius: 10px; background: #dc2626; color: #ffffff; font-size: 16px; cursor: pointer; }
+        button:hover { background: #b91c1c; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>${t(locale, "confirmHeading")}</h1>
+        <p>${t(locale, "confirmBody")}</p>
+        <div class="warn">${t(locale, "confirmWarning")}</div>
+        <form method="post" action="/account/delete/confirm">
+            <input type="hidden" name="token" value="${token}" />
+            <button type="submit">${t(locale, "confirmButton")}</button>
+        </form>
+    </div>
+</body>
+</html>`;
+};
+
+const renderStatusPage = (locale, title, message) => {
+    const dir = locale === "ar" ? "rtl" : "ltr";
+    return `<!doctype html>
+<html lang="${locale}" dir="${dir}">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>${title}</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f6f7fb; color: #1b1f24; margin: 0; padding: 32px; }
+        .card { max-width: 520px; margin: 0 auto; background: #ffffff; border-radius: 12px; padding: 24px; box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08); }
+        h1 { font-size: 22px; margin: 0 0 12px; }
+        p { line-height: 1.5; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>${title}</h1>
+        <p>${message}</p>
+    </div>
+</body>
+</html>`;
 };
 
 const getConfigToken = (request) => {
@@ -407,6 +542,188 @@ export default {
                 .first();
 
             return jsonResponse({ exists: !!user });
+        }
+
+        if (path === "/account/delete-request" && request.method === "POST") {
+            const user = await getAuthUser(request, env);
+            if (!user) {
+                return unauthorized("Unauthorized");
+            }
+
+            const now = Date.now();
+            const token = generateOneTimeToken();
+            const tokenHash = await sha256Hex(token);
+            const expiresAt = now + 30 * 60 * 1000;
+
+            await env.DB.prepare(
+                "DELETE FROM account_deletion_tokens WHERE user_id = ?",
+            )
+                .bind(user.sub)
+                .run();
+
+            await env.DB.prepare(
+                "INSERT INTO account_deletion_tokens (token_hash, user_id, created_at, expires_at, used_at) VALUES (?, ?, ?, ?, NULL)",
+            )
+                .bind(tokenHash, user.sub, now, expiresAt)
+                .run();
+
+            const origin = new URL(request.url).origin;
+            const deleteUrl = new URL("/account/delete", origin);
+            deleteUrl.searchParams.set("token", token);
+
+            return jsonResponse({ url: deleteUrl.toString(), expiresAt });
+        }
+
+        if (path === "/account/delete" && request.method === "GET") {
+            const locale = getPreferredLocale(request);
+            const token = url.searchParams.get("token");
+            if (!token) {
+                return htmlResponse(
+                    renderStatusPage(
+                        locale,
+                        t(locale, "invalidTitle"),
+                        t(locale, "missingToken"),
+                    ),
+                    400,
+                );
+            }
+
+            const tokenHash = await sha256Hex(token);
+            const record = await env.DB.prepare(
+                "SELECT user_id, expires_at, used_at FROM account_deletion_tokens WHERE token_hash = ? LIMIT 1",
+            )
+                .bind(tokenHash)
+                .first();
+
+            if (!record) {
+                return htmlResponse(
+                    renderStatusPage(
+                        locale,
+                        t(locale, "invalidTitle"),
+                        t(locale, "invalidOrExpired"),
+                    ),
+                    410,
+                );
+            }
+
+            const expiresAt = Number(record.expires_at) || 0;
+            if (record.used_at) {
+                return htmlResponse(
+                    renderStatusPage(
+                        locale,
+                        t(locale, "usedTitle"),
+                        t(locale, "usedMessage"),
+                    ),
+                    410,
+                );
+            }
+
+            if (expiresAt < Date.now()) {
+                return htmlResponse(
+                    renderStatusPage(
+                        locale,
+                        t(locale, "expiredTitle"),
+                        t(locale, "expiredMessage"),
+                    ),
+                    410,
+                );
+            }
+
+            return htmlResponse(renderDeletePage(token, locale));
+        }
+
+        if (path === "/account/delete/confirm" && request.method === "POST") {
+            const locale = getPreferredLocale(request);
+            const form = await parseFormBody(request);
+            const token = form.get("token");
+            if (!token) {
+                return htmlResponse(
+                    renderStatusPage(
+                        locale,
+                        t(locale, "invalidTitle"),
+                        t(locale, "missingToken"),
+                    ),
+                    400,
+                );
+            }
+
+            const tokenHash = await sha256Hex(token);
+            const record = await env.DB.prepare(
+                "SELECT user_id, expires_at, used_at FROM account_deletion_tokens WHERE token_hash = ? LIMIT 1",
+            )
+                .bind(tokenHash)
+                .first();
+
+            if (!record) {
+                return htmlResponse(
+                    renderStatusPage(
+                        locale,
+                        t(locale, "invalidTitle"),
+                        t(locale, "invalidOrExpired"),
+                    ),
+                    410,
+                );
+            }
+
+            const expiresAt = Number(record.expires_at) || 0;
+            if (record.used_at) {
+                return htmlResponse(
+                    renderStatusPage(
+                        locale,
+                        t(locale, "usedTitle"),
+                        t(locale, "usedMessage"),
+                    ),
+                    410,
+                );
+            }
+
+            if (expiresAt < Date.now()) {
+                return htmlResponse(
+                    renderStatusPage(
+                        locale,
+                        t(locale, "expiredTitle"),
+                        t(locale, "expiredMessage"),
+                    ),
+                    410,
+                );
+            }
+
+            const userId = record.user_id;
+            await env.DB.prepare("DELETE FROM donors WHERE created_by = ?")
+                .bind(userId)
+                .run();
+            await env.DB.prepare("DELETE FROM doctors WHERE created_by = ?")
+                .bind(userId)
+                .run();
+            await env.DB.prepare("DELETE FROM professions WHERE created_by = ?")
+                .bind(userId)
+                .run();
+            await env.DB.prepare("DELETE FROM cars WHERE created_by = ?")
+                .bind(userId)
+                .run();
+            await env.DB.prepare("DELETE FROM satota WHERE created_by = ?")
+                .bind(userId)
+                .run();
+            await env.DB.prepare("DELETE FROM edit_requests WHERE created_by = ?")
+                .bind(userId)
+                .run();
+            await env.DB.prepare("DELETE FROM users WHERE id = ?")
+                .bind(userId)
+                .run();
+
+            await env.DB.prepare(
+                "UPDATE account_deletion_tokens SET used_at = ? WHERE token_hash = ?",
+            )
+                .bind(Date.now(), tokenHash)
+                .run();
+
+            return htmlResponse(
+                renderStatusPage(
+                    locale,
+                    t(locale, "successTitle"),
+                    t(locale, "successMessage"),
+                ),
+            );
         }
 
         if (path === "/donors" && request.method === "GET") {

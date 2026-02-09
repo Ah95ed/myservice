@@ -34,6 +34,8 @@
     "more_options": "More Options",
     "change_password": "Change Password",
     "delete_account": "Delete Account",
+    "delete_account_browser_notice": "A secure web page will open to confirm deletion. The link expires soon and can be used once.",
+    "could_not_open_browser": "Could not open browser.",
     "edit_Data_and_delete": "Edit Data and Delete",
     "settings": "Settings",
     "change_language": "Change Language",

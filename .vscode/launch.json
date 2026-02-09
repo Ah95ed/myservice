@@ -11,6 +11,15 @@
             "program": "lib/main.dart"
         },
         {
+            "name": "Al_Zab_township_guide (with config token)",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main.dart",
+            "args": [
+                "--dart-define=CLOUDFLARE_CONFIG_TOKEN=${input:cloudflareConfigToken}"
+            ]
+        },
+        {
             "name": "Al_Zab_township_guide (profile mode)",
             "request": "launch",
             "type": "dart",
@@ -35,6 +44,14 @@
             "request": "launch",
             "type": "dart",
             "program": "lib/main.dart"
+        }
+    ],
+    "inputs": [
+        {
+            "id": "cloudflareConfigToken",
+            "type": "promptString",
+            "description": "Enter CLOUDFLARE_CONFIG_TOKEN",
+            "password": true
         }
     ]
 }

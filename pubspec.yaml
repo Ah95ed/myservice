@@ -10,6 +10,8 @@ dependencies:
   flutter: 
     sdk: flutter
   cupertino_icons: 
+  google_fonts:
+  flutter_screenutil:
 
   email_otp: 
   recaptcha_enterprise_flutter: 

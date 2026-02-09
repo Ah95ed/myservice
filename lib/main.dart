@@ -15,14 +15,15 @@ import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/controller/provider/ServiceController/ServiceController.dart';
 import 'package:Al_Zab_township_guide/controller/provider/UpdateProvider/UpdateProvider.dart';
 import 'package:Al_Zab_township_guide/provider/PdfViewerProvider.dart';
-import 'package:Al_Zab_township_guide/view/Size/ScreenSize.dart';
-import 'package:Al_Zab_township_guide/view/Size/SizeBuilder.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
+import 'package:Al_Zab_township_guide/view/ThemeApp/app_theme.dart';
 import 'package:Al_Zab_township_guide/view/routing/routing.dart';
 import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/MyCustomSplashScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import 'generated/l10n.dart';
@@ -93,39 +94,56 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizeBuilder(
-      baseSize: const Size(375, 812),
-      height: context.screenHeight,
-      width: context.screenWidth,
-      child: Consumer<LanguageController>(
-        builder: (context, v, child) {
-          return MaterialApp(
-            navigatorKey: navigatorKey,
-            localizationsDelegates: [
-              S.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            supportedLocales: v.supportLanguage,
-            debugShowCheckedModeBanner: false,
-            locale: v.language,
-            title: Translation[Language.title],
-
-            routes: routs,
-            theme: ThemeData(
-              colorScheme: ColorScheme.fromSeed(seedColor: ColorUsed.primary),
-              useMaterial3: true,
-            ),
-            // ! here to check is null or not
-            home: shared!.getBool('spalsh') == null
-                ? MyCustomSplashScreen()
-                // : GradesScreen(),
-                : MainScreen(),
-            // home : MyCustomSplashScreen(),
-          );
-        },
-      ),
+    return ScreenUtilInit(
+      designSize: const Size(375, 812),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) {
+        return Consumer<LanguageController>(
+          builder: (context, v, child) {
+            return MaterialApp(
+              navigatorKey: navigatorKey,
+              localizationsDelegates: [
+                S.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              supportedLocales: v.supportLanguage,
+              debugShowCheckedModeBanner: false,
+              locale: v.language,
+              title: Translation[Language.title],
+              routes: routs,
+              theme: ThemeData(
+                colorScheme: ColorScheme.fromSeed(
+                  seedColor: ColorUsed.primary,
+                  brightness: Brightness.light,
+                ),
+                textTheme: GoogleFonts.cairoTextTheme(),
+                appBarTheme: AppBarTheme(
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                  centerTitle: true,
+                  titleTextStyle: GoogleFonts.cairo(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w700,
+                    color: AppTheme.notWhite,
+                  ),
+                  iconTheme: const IconThemeData(color: AppTheme.notWhite),
+                ),
+                scaffoldBackgroundColor: ColorUsed.PrimaryBackground,
+                useMaterial3: true,
+              ),
+              // ! here to check is null or not
+              home: shared!.getBool('spalsh') == null
+                  ? MyCustomSplashScreen()
+                  // : GradesScreen(),
+                  : MainScreen(),
+              // home : MyCustomSplashScreen(),
+            );
+          },
+        );
+      },
     );
   }
 
