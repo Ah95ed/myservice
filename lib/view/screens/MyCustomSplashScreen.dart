@@ -61,7 +61,7 @@ class _MyCustomSplashScreenState extends State<MyCustomSplashScreen>
       });
     });
 
-    Timer(const Duration(milliseconds: 300), () {
+    Timer(const Duration(milliseconds: 3000), () {
       shared!.setBool('spalsh', true);
       if (!mounted) return;
       Navigator.pushReplacement(context, PageTransition(MainScreen()));
