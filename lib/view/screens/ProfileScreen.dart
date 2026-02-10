@@ -3,6 +3,7 @@ import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
 import 'package:Al_Zab_township_guide/Services/cloudflare_api.dart';
+import 'package:Al_Zab_township_guide/Services/cloudflare_config.dart';
 import 'package:Al_Zab_township_guide/Services/secure_storage_service.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
@@ -72,6 +73,24 @@ class ProfileScreen extends StatelessWidget {
               title: Translation[Language.register_now],
               onTap: () {
                 read.managerScreen(SignupScreen.Route, context);
+              },
+            ),
+            SizedBox(height: getheight(2)),
+            _ActionTile(
+              icon: Icons.info_outline,
+              color: ColorUsed.DarkGreen,
+              title: Translation[Language.delete_account_info],
+              onTap: () async {
+                final uri = Uri.parse(
+                  '${CloudflareConfig.apiBaseUrl}/account/delete-info',
+                );
+                final launched = await launchUrl(
+                  uri,
+                  mode: LaunchMode.externalApplication,
+                );
+                if (!launched && context.mounted) {
+                  Logger.logger(Translation[Language.could_not_open_browser]);
+                }
               },
             ),
             SizedBox(height: getheight(2)),

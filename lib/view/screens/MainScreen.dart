@@ -28,14 +28,16 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      if (_updateChecked || !mounted) return;
-      _updateChecked = true;
-      await initData();
-      if (mounted) {
-        await checkUpdate(context);
-      }
-    });
+  }
+
+  Future<void> _handleOpenDrawer() async {
+    _scaffoldKey.currentState?.openDrawer();
+    if (_updateChecked) return;
+    _updateChecked = true;
+    await ensureConfigReady();
+    if (mounted) {
+      await checkUpdate(context);
+    }
   }
 
   Future<void> checkUpdate(BuildContext context) async {
@@ -120,8 +122,8 @@ class _MainScreenState extends State<MainScreen> {
         ),
         leading: IconButton(
           icon: Icon(Icons.menu, color: Colors.white),
-          onPressed: () {
-            _scaffoldKey.currentState?.openDrawer();
+          onPressed: () async {
+            await _handleOpenDrawer();
           },
         ),
         backgroundColor: Colors.transparent,

@@ -10,6 +10,7 @@ import 'package:open_filex/open_filex.dart' show OpenFilex, ResultType;
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 
+import '../../Services/book_links.dart';
 import '../../provider/PdfViewerProvider.dart';
 import 'PdfViewerScreen.dart';
 
@@ -21,24 +22,50 @@ class BooksScreen extends StatefulWidget {
   State<BooksScreen> createState() => _BooksScreenState();
 }
 
-class _BooksScreenState extends State<BooksScreen> {
+class _BooksScreenState extends State<BooksScreen>
+    with SingleTickerProviderStateMixin {
   bool loading = true;
   String? error;
 
-  List args = [];
+  List<Map<String, String>> items = [];
+
+  late final AnimationController _introController;
+
+  @override
+  void initState() {
+    super.initState();
+    _introController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 700),
+    )..forward();
+  }
+
+  @override
+  void dispose() {
+    _introController.dispose();
+    super.dispose();
+  }
 
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
-    args = ModalRoute.of(context)?.settings.arguments as List;
+    final args = ModalRoute.of(context)?.settings.arguments;
+    items = _normalizeBookArgs(args);
   }
 
   @override
   Widget build(BuildContext context) {
-    if (args.isEmpty) {
-      return const Scaffold(body: Center(child: CircularProgressIndicator()));
+    if (items.isEmpty) {
+      return const Scaffold(
+        body: Center(child: Text('لا توجد كتب متاحة حالياً')),
+      );
     }
+
+    final titleAnimation = CurvedAnimation(
+      parent: _introController,
+      curve: Curves.easeOutCubic,
+    );
 
     return Scaffold(
       backgroundColor: Colors.transparent,
@@ -68,93 +95,132 @@ class _BooksScreenState extends State<BooksScreen> {
                     bottom: false,
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(20, 16, 20, 20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: const [
-                          Text(
-                            'الكتب المدرسية',
-                            style: TextStyle(
-                              color: AppTheme.notWhite,
-                              fontSize: 24,
-                              fontWeight: FontWeight.w700,
-                            ),
+                      child: FadeTransition(
+                        opacity: titleAnimation,
+                        child: SlideTransition(
+                          position: Tween<Offset>(
+                            begin: const Offset(0, 0.15),
+                            end: Offset.zero,
+                          ).animate(titleAnimation),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              const Text(
+                                'الكتب المدرسية',
+                                style: TextStyle(
+                                  color: AppTheme.notWhite,
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                              const SizedBox(height: 6),
+                              const Text(
+                                'اختر كتابك، ثم افتحه مباشرة او نزله على جهازك.',
+                                style: TextStyle(
+                                  color: AppTheme.notWhite,
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                              const SizedBox(height: 10),
+                              Wrap(
+                                spacing: 8,
+                                runSpacing: 8,
+                                children: [
+                                  _InfoPill(
+                                    label: 'عدد الكتب',
+                                    value: items.length.toString(),
+                                  ),
+                                  const _InfoPill(
+                                    label: 'تنظيم',
+                                    value: 'مرتب',
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
-                          SizedBox(height: 6),
-                          Text(
-                            'اختر كتابك، ثم افتحه مباشرة او نزله على جهازك.',
-                            style: TextStyle(
-                              color: AppTheme.notWhite,
-                              fontSize: 13,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
               SliverPadding(
-                padding: const EdgeInsets.fromLTRB(16, 16, 16, 32),
+                padding: const EdgeInsets.fromLTRB(16, 12, 16, 32),
                 sliver: SliverGrid(
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
-                    mainAxisSpacing: 14,
-                    crossAxisSpacing: 14,
-                    childAspectRatio: 0.82,
+                    mainAxisSpacing: 12,
+                    crossAxisSpacing: 12,
+                    childAspectRatio: 0.78,
                   ),
                   delegate: SliverChildBuilderDelegate((context, index) {
-                    final book = args;
-                    return _BookCard(
-                      title: book[index]['name'] ?? '',
-                      url: book[index]['url'] ?? '',
-                      onOpen: () async {
-                        final suggestedName =
-                            book[index]['name'].replaceAll(' ', '_') +
-                            _extensionFromUrl(book[index]['url']);
-                        log('message===$suggestedName');
-                        final dir = await getApplicationDocumentsDirectory();
-                        final path = p.join(dir.path, suggestedName);
-                        final file = File(path);
-
-                        if (await file.exists()) {
-                          managerScreen(
-                            PdfViewerScreen.route,
-                            context,
-                            object: PdfViewerData(
-                              filePath: path,
-                              title: book[index]['name'],
-                              remoteUrl: book[index]['url'],
-                            ),
-                          );
-                          return;
-                        }
-                        downloadByUrl(
-                          context,
-                          book[index]['url'],
-                          book[index]['name'],
-                        ).then((s) {
-                          managerScreen(
-                            PdfViewerScreen.route,
-                            context,
-                            object: PdfViewerData(
-                              filePath: path,
-                              title: book[index]['name'],
-                              remoteUrl: book[index]['url'],
-                            ),
-                          );
-                        });
-                      },
-                      onDownload: () async {
-                        await downloadAndOpenByUrl(
-                          context,
-                          book[index]['url']!,
-                          book[index]['name']!,
-                        );
-                      },
+                    final book = items;
+                    final name = (book[index]['name'] ?? '').toString();
+                    final resolvedUrl = _resolveBookUrl(
+                      (book[index]['url'] ?? '').toString(),
                     );
-                  }, childCount: args.length),
+                    final start = (index * 0.06).clamp(0.0, 0.6);
+                    final itemAnimation = CurvedAnimation(
+                      parent: _introController,
+                      curve: Interval(start, 1.0, curve: Curves.easeOutCubic),
+                    );
+                    return FadeTransition(
+                      opacity: itemAnimation,
+                      child: SlideTransition(
+                        position: Tween<Offset>(
+                          begin: const Offset(0, 0.08),
+                          end: Offset.zero,
+                        ).animate(itemAnimation),
+                        child: _BookCard(
+                          title: name,
+                          url: resolvedUrl,
+                          onOpen: () async {
+                            final suggestedName =
+                                name.replaceAll(' ', '_') +
+                                _extensionFromUrl(resolvedUrl);
+                            log('message===$resolvedUrl');
+                            final dir =
+                                await getApplicationDocumentsDirectory();
+                            final path = p.join(dir.path, suggestedName);
+                            final file = File(path);
+
+                            if (await file.exists()) {
+                              managerScreen(
+                                PdfViewerScreen.route,
+                                context,
+                                object: PdfViewerData(
+                                  filePath: path,
+                                  title: name,
+                                  remoteUrl: resolvedUrl,
+                                ),
+                              );
+                              return;
+                            }
+                            downloadByUrl(context, resolvedUrl, name).then((s) {
+                              managerScreen(
+                                PdfViewerScreen.route,
+                                context,
+                                object: PdfViewerData(
+                                  filePath: path,
+                                  title: name,
+                                  remoteUrl: resolvedUrl,
+                                ),
+                              );
+                            });
+                          },
+                          onDownload: () async {
+                            await downloadAndOpenByUrl(
+                              context,
+                              resolvedUrl,
+                              name,
+                            );
+                          },
+                        ),
+                      ),
+                    );
+                  }, childCount: items.length),
                 ),
               ),
             ],
@@ -220,23 +286,16 @@ class _BookCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TweenAnimationBuilder<double>(
-      duration: const Duration(milliseconds: 500),
-      tween: Tween(begin: 0, end: 1),
-      builder: (context, value, child) {
-        return Opacity(
-          opacity: value,
-          child: Transform.translate(
-            offset: Offset(0, 12 * (1 - value)),
-            child: child,
-          ),
-        );
-      },
+    final extension = _extensionFromUrl(url).replaceAll('.', '').toUpperCase();
+    final badgeText = extension.isEmpty ? 'FILE' : extension;
+
+    return Material(
+      color: Colors.transparent,
       child: InkWell(
         onTap: onOpen,
         borderRadius: BorderRadius.circular(18),
         child: Container(
-          padding: const EdgeInsets.all(10),
+          padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
             color: AppTheme.nearlyWhite.withOpacity(0.95),
             borderRadius: BorderRadius.circular(18),
@@ -254,7 +313,7 @@ class _BookCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                height: 80,
+                height: 86,
                 width: double.infinity,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(14),
@@ -267,10 +326,41 @@ class _BookCard extends StatelessWidget {
                     end: Alignment.bottomRight,
                   ),
                 ),
-                child: const Icon(
-                  Icons.menu_book_rounded,
-                  color: AppTheme.notWhite,
-                  size: 48,
+                child: Stack(
+                  children: [
+                    const Center(
+                      child: Icon(
+                        Icons.menu_book_rounded,
+                        color: AppTheme.notWhite,
+                        size: 48,
+                      ),
+                    ),
+                    Positioned(
+                      top: 8,
+                      right: 8,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 4,
+                        ),
+                        decoration: BoxDecoration(
+                          color: AppTheme.notWhite.withOpacity(0.2),
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(
+                            color: AppTheme.notWhite.withOpacity(0.4),
+                          ),
+                        ),
+                        child: Text(
+                          badgeText,
+                          style: const TextStyle(
+                            color: AppTheme.notWhite,
+                            fontSize: 10,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               const SizedBox(height: 8),
@@ -336,6 +426,47 @@ class _BookCard extends StatelessWidget {
   }
 }
 
+class _InfoPill extends StatelessWidget {
+  final String label;
+  final String value;
+
+  const _InfoPill({required this.label, required this.value});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      decoration: BoxDecoration(
+        color: AppTheme.notWhite.withOpacity(0.2),
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: AppTheme.notWhite.withOpacity(0.35)),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            label,
+            style: const TextStyle(
+              color: AppTheme.notWhite,
+              fontSize: 11,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          const SizedBox(width: 6),
+          Text(
+            value,
+            style: const TextStyle(
+              color: AppTheme.notWhite,
+              fontSize: 11,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class _GlowOrb extends StatelessWidget {
   final double size;
   final Color color;
@@ -382,6 +513,48 @@ String _extensionFromUrl(String url) {
   final uri = Uri.parse(url);
   final path = uri.path;
   return p.extension(path);
+}
+
+const _r2BaseUrl = 'https://pub-3fc8cfe1b1a84a7987f583891bf0e2c5.r2.dev';
+const _r2BooksPrefix = 'Books/';
+
+String _resolveBookUrl(String rawUrl) {
+  final value = rawUrl.trim();
+  if (value.isEmpty) {
+    return value;
+  }
+  final lower = value.toLowerCase();
+  if (lower.startsWith('http://') || lower.startsWith('https://')) {
+    return value;
+  }
+  final cleaned = value.startsWith('/') ? value.substring(1) : value;
+  final prefix = _r2BooksPrefix;
+  final normalized = cleaned.toLowerCase().startsWith(prefix.toLowerCase())
+      ? cleaned
+      : '$prefix$cleaned';
+  return '$_r2BaseUrl/$normalized';
+}
+
+List<Map<String, String>> _normalizeBookArgs(Object? args) {
+  if (args is String && args.isNotEmpty) {
+    return bookLinksFor(args);
+  }
+
+  final List<Map<String, String>> result = [];
+  if (args is List) {
+    for (final item in args) {
+      if (item is Map) {
+        final name = (item['name'] ?? item['title'] ?? '').toString();
+        final url = (item['url'] ?? item['fileUrl'] ?? item['urlBook'] ?? '')
+            .toString();
+        if (name.isEmpty && url.isEmpty) {
+          continue;
+        }
+        result.add({'name': name, 'url': url});
+      }
+    }
+  }
+  return result;
 }
 
 Future<void> downloadAndOpenByUrl(

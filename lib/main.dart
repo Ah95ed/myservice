@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
@@ -31,11 +32,21 @@ Future<void> main() async {
   //! runZonedGuarded is a function that allows you to run your app in a zone that catches errors
   await runZonedGuarded<Future<void>>(
     () async {
+      final startupWatch = Stopwatch()..start();
       await WidgetsFlutterBinding.ensureInitialized();
-      await init();
+      await initQuick();
 
       WidgetsBinding.instance.addPostFrameCallback((_) async {
-        initData();
+        Logger.logger(
+          'startup first frame: ${startupWatch.elapsedMilliseconds}ms',
+        );
+        final slowInit = initSlow();
+        unawaited(slowInit);
+        slowInit.whenComplete(() {
+          Logger.logger(
+            'startup initSlow: ${startupWatch.elapsedMilliseconds}ms',
+          );
+        });
       });
       runApp(
         MultiProvider(

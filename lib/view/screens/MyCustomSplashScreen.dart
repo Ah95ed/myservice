@@ -1,11 +1,12 @@
 import 'dart:async';
+
 import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
-import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
-import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
+import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/app_theme.dart';
+import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
 import 'package:flutter/material.dart';
 
 class MyCustomSplashScreen extends StatefulWidget {
@@ -30,7 +31,7 @@ class _MyCustomSplashScreenState extends State<MyCustomSplashScreen>
 
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 3),
+      duration: const Duration(milliseconds: 600),
     );
 
     animation1 =
@@ -47,24 +48,23 @@ class _MyCustomSplashScreenState extends State<MyCustomSplashScreen>
 
     _controller.forward();
 
-    Timer(Duration(seconds: 2), () {
+    Timer(const Duration(milliseconds: 150), () {
       setState(() {
         _fontSize = 1.06;
       });
     });
 
-    Timer(Duration(seconds: 2), () {
+    Timer(const Duration(milliseconds: 200), () {
       setState(() {
         _containerSize = 2;
         _containerOpacity = 1;
       });
     });
 
-    Timer(Duration(seconds: 4), () {
+    Timer(const Duration(milliseconds: 450), () {
       shared!.setBool('spalsh', true);
-      setState(() {
-        Navigator.pushReplacement(context, PageTransition(MainScreen()));
-      });
+      if (!mounted) return;
+      Navigator.pushReplacement(context, PageTransition(MainScreen()));
     });
   }
 
@@ -87,12 +87,12 @@ class _MyCustomSplashScreenState extends State<MyCustomSplashScreen>
           Column(
             children: [
               AnimatedContainer(
-                duration: Duration(milliseconds: 2000),
+                duration: const Duration(milliseconds: 300),
                 curve: Curves.fastLinearToSlowEaseIn,
                 height: _height / _fontSize,
               ),
               AnimatedOpacity(
-                duration: Duration(milliseconds: 1000),
+                duration: const Duration(milliseconds: 250),
                 opacity: _textOpacity,
                 child: Text(
                   Translation[Language.title],
@@ -107,11 +107,11 @@ class _MyCustomSplashScreenState extends State<MyCustomSplashScreen>
           ),
           Center(
             child: AnimatedOpacity(
-              duration: Duration(milliseconds: 2000),
+              duration: const Duration(milliseconds: 300),
               curve: Curves.fastLinearToSlowEaseIn,
               opacity: _containerOpacity,
               child: AnimatedContainer(
-                duration: Duration(milliseconds: 2000),
+                duration: const Duration(milliseconds: 300),
                 curve: Curves.fastLinearToSlowEaseIn,
                 height: _width / _containerSize,
                 width: _width / _containerSize,
@@ -136,7 +136,7 @@ class PageTransition extends PageRouteBuilder {
   PageTransition(this.page)
     : super(
         pageBuilder: (context, animation, anotherAnimation) => page,
-        transitionDuration: Duration(milliseconds: 2000),
+        transitionDuration: const Duration(milliseconds: 600),
         transitionsBuilder: (context, animation, anotherAnimation, child) {
           animation = CurvedAnimation(
             curve: Curves.fastLinearToSlowEaseIn,

@@ -11,11 +11,49 @@ import 'package:shared_preferences/shared_preferences.dart';
 SharedPreferences? shared;
 PackageInfo? packageInfo;
 late String re = '0';
+bool _configReady = false;
+Future<void>? _configInitFuture;
 
 Future<void> init() async {
+  await initQuick();
+  await initSlow();
+}
+
+Future<void> initQuick() async {
   // تهيئة Shared Preferences (للبيانات غير الحساسة)
   shared = await SharedPreferences.getInstance();
 
+  // تهيئة اللغة
+  await initLang(shared!.getString('lang') ?? "ar");
+
+  // معلومات الحزمة
+  packageInfo = await PackageInfo.fromPlatform();
+}
+
+Future<void> initSlow() async {
+  if (_configReady) return;
+  if (_configInitFuture != null) return _configInitFuture!;
+
+  _configInitFuture = _initSlowInternal();
+  try {
+    await _configInitFuture;
+  } finally {
+    _configInitFuture = null;
+  }
+}
+
+Future<void> initData() async {
+  await SecureConfig.refresh();
+  re = _safeBuildNumber(SecureConfig.updateBuildNumber);
+  _configReady = true;
+}
+
+Future<void> ensureConfigReady() async {
+  if (_configReady) return;
+  await initSlow();
+}
+
+Future<void> _initSlowInternal() async {
   // تهيئة الخدمات الأمنية
   final hasNetwork = await _hasNetwork();
   if (hasNetwork) {
@@ -25,17 +63,9 @@ Future<void> init() async {
     Logger.logger('Skipping SecureConfig.init() - no internet');
     re = _safeBuildNumber(null);
   }
-
-  // تهيئة اللغة
-  await initLang(shared!.getString('lang') ?? "ar");
-
-  // معلومات الحزمة
-  packageInfo = await PackageInfo.fromPlatform();
+  _configReady = true;
 }
-Future<void> initData() async {
-  await SecureConfig.refresh();
-  re = _safeBuildNumber(SecureConfig.updateBuildNumber);
-}
+
 String _safeBuildNumber(String? value) {
   if (value == null || value.isEmpty) return '0';
   return value;

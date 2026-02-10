@@ -1,5 +1,6 @@
 import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
 import 'package:Al_Zab_township_guide/view/Size/ScreenSize.dart';
+import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:provider/provider.dart';
@@ -83,7 +84,7 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
                     XFile(filePath),
                   ], text: '📚 هذا الكتاب: ${args.title}');
                 },
-                icon: Icon(Icons.share),
+                icon: Icon(Icons.share, color: ColorUsed.DarkGreen),
               ),
             ],
           ),

@@ -1,4 +1,3 @@
-import 'package:Al_Zab_township_guide/Models/BookModel.dart';
 import 'package:Al_Zab_township_guide/view/routing/routing.dart';
 import 'package:Al_Zab_township_guide/view/screens/BooksScreen.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +29,7 @@ class _GradesScreenState extends State<GradesScreen> {
               managerScreen(
                 BooksScreen.route,
                 context,
-                object: books['primary']!['grade${grades.indexOf(g) + 1}']!,
+                object: 'c${grades.indexOf(g) + 1}_Primary',
                 // object: BooksArgs(
                 //   name: 'grade${grades.indexOf(g) + 1}',
                 //   data: books['primary']!['grade${grades.indexOf(g) + 1}']!,
@@ -72,15 +71,16 @@ class _GradesScreenState extends State<GradesScreen> {
             title: Text(g),
             trailing: const Icon(Icons.chevron_right),
             onTap: () {
-              ScaffoldMessenger.of(
+              managerScreen(
+                BooksScreen.route,
                 context,
-              ).showSnackBar(SnackBar(content: Text('تم اختيار: $g')));
+                object: 'c${grades.indexOf(g) + 1}_Middle',
+              );
             },
           ),
         )
         .toList();
   }
-
 
   @override
   Widget build(BuildContext context) {

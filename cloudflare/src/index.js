@@ -1,13 +1,17 @@
 const encoder = new TextEncoder();
 
+const corsHeaders = {
+    "access-control-allow-origin": "*",
+    "access-control-allow-methods": "GET,POST,PUT,DELETE,OPTIONS",
+    "access-control-allow-headers": "content-type,authorization,x-migration-token",
+};
+
 const jsonResponse = (data, status = 200) => {
     return new Response(JSON.stringify(data), {
         status,
         headers: {
             "content-type": "application/json",
-            "access-control-allow-origin": "*",
-            "access-control-allow-methods": "GET,POST,DELETE,OPTIONS",
-            "access-control-allow-headers": "content-type,authorization,x-migration-token",
+            ...corsHeaders,
         },
     });
 };
@@ -18,6 +22,7 @@ const htmlResponse = (html, status = 200) => {
         headers: {
             "content-type": "text/html; charset=utf-8",
             "cache-control": "no-store",
+            ...corsHeaders,
         },
     });
 };
@@ -227,6 +232,9 @@ const WEB_COPY = {
         confirmBody:
             "This action permanently deletes your account and data. You will not be able to recover it.",
         confirmWarning: "This link can be used only once and expires soon.",
+        confirmInfoTitle: "How deletion works",
+        confirmInfoBody:
+            "This request contains a one-time token created by the app. Confirming below completes the deletion.",
         confirmButton: "Confirm delete account",
         invalidTitle: "Invalid link",
         missingToken: "Missing deletion token.",
@@ -237,6 +245,32 @@ const WEB_COPY = {
         expiredMessage: "This deletion link has expired. Please request a new one from the app.",
         successTitle: "Account deleted",
         successMessage: "Your account and data have been deleted successfully.",
+        infoTitle: "Delete account guide",
+        infoHeading: "How to delete your account",
+        infoIntro:
+            "To request deletion, you must use the app so we can generate a secure one-time link.",
+        infoSteps:
+            "Open the app and go to Profile.\nTap Delete Account.\nConfirm to open the secure deletion page.\nPress Confirm delete account to finish.",
+        infoNote:
+            "The deletion link expires quickly and can only be used once.",
+        infoScreensIntro: "Screenshots below show the exact flow in order.",
+        infoScreensHeading: "Step-by-step screenshots",
+        infoStep1Title: "Step 1: Open Profile",
+        infoStep1Body: "From the main screen, open your profile to access account actions.",
+        infoStep2Title: "Step 2: Tap Delete Account",
+        infoStep2Body: "Select Delete Account to open the secure deletion flow.",
+        infoStep3Title: "Step 3: Confirm deletion",
+        infoStep3Body: "Review the warning and press Confirm delete account to finish.",
+        infoActionTitle: "Request deletion",
+        infoActionBody:
+            "If you are signed in, you can request a secure deletion link now.",
+        infoActionButton: "Request delete link",
+        infoMissingToken:
+            "Sign in through the app to request a deletion link. This page alone cannot identify you.",
+        requestLinkTitle: "Deletion link ready",
+        requestLinkBody:
+            "Open the secure deletion page using the button below.",
+        requestLinkButton: "Open delete page",
     },
     ar: {
         confirmTitle: "\u062a\u0623\u0643\u064a\u062f \u062d\u0630\u0641 \u0627\u0644\u062d\u0633\u0627\u0628",
@@ -245,6 +279,9 @@ const WEB_COPY = {
             "\u0633\u064a\u062a\u0645 \u062d\u0630\u0641 \u0627\u0644\u062d\u0633\u0627\u0628 \u0648\u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0646\u0647\u0627\u0626\u064a\u0627\u064b. \u0644\u0646 \u062a\u062a\u0645\u0643\u0646 \u0645\u0646 \u0627\u0633\u062a\u0631\u062c\u0627\u0639\u0647\u0627.",
         confirmWarning:
             "\u0647\u0630\u0627 \u0627\u0644\u0631\u0627\u0628\u0637 \u064a\u0633\u062a\u062e\u062f\u0645 \u0645\u0631\u0629 \u0648\u0627\u062d\u062f\u0629 \u0641\u0642\u0637 \u0648\u064a\u0646\u062a\u0647\u064a \u0642\u0631\u064a\u0628\u0627\u064b.",
+        confirmInfoTitle: "\u0643\u064a\u0641 \u064a\u062a\u0645 \u0627\u0644\u062d\u0630\u0641",
+        confirmInfoBody:
+            "\u0647\u0630\u0627 \u0627\u0644\u0637\u0644\u0628 \u064a\u062d\u0645\u0644 \u0631\u0627\u0628\u0637\u0627\u064b \u0628\u062a\u0648\u0643\u0646 \u0645\u0631\u0629 \u0648\u0627\u062d\u062f\u0629 \u0645\u0646 \u0627\u0644\u062a\u0637\u0628\u064a\u0642. \u0627\u0644\u062a\u0623\u0643\u064a\u062f \u064a\u0643\u0645\u0651\u0644 \u0627\u0644\u062d\u0630\u0641.",
         confirmButton: "\u062a\u0623\u0643\u064a\u062f \u062d\u0630\u0641 \u0627\u0644\u062d\u0633\u0627\u0628",
         invalidTitle: "\u0631\u0627\u0628\u0637 \u063a\u064a\u0631 \u0635\u062d\u064a\u062d",
         missingToken: "\u0631\u0627\u0645\u0632 \u0627\u0644\u062d\u0630\u0641 \u0645\u0641\u0642\u0648\u062f.",
@@ -257,6 +294,31 @@ const WEB_COPY = {
             "\u0627\u0646\u062a\u0647\u062a \u0635\u0644\u0627\u062d\u064a\u0629 \u0631\u0627\u0628\u0637 \u0627\u0644\u062d\u0630\u0641. \u064a\u0631\u062c\u0649 \u0637\u0644\u0628 \u0631\u0627\u0628\u0637 \u062c\u062f\u064a\u062f \u0645\u0646 \u0627\u0644\u062a\u0637\u0628\u064a\u0642.",
         successTitle: "\u062a\u0645 \u062d\u0630\u0641 \u0627\u0644\u062d\u0633\u0627\u0628",
         successMessage: "\u062a\u0645 \u062d\u0630\u0641 \u062d\u0633\u0627\u0628\u0643 \u0648\u0628\u064a\u0627\u0646\u0627\u062a\u0643 \u0628\u0646\u062c\u0627\u062d.",
+        infoTitle: "\u062f\u0644\u064a\u0644 \u062d\u0630\u0641 \u0627\u0644\u062d\u0633\u0627\u0628",
+        infoHeading: "\u0637\u0631\u064a\u0642\u0629 \u062d\u0630\u0641 \u0627\u0644\u062d\u0633\u0627\u0628",
+        infoIntro:
+            "\u0644\u0637\u0644\u0628 \u0627\u0644\u062d\u0630\u0641\u060c \u064a\u062c\u0628 \u0627\u0633\u062a\u062e\u062f\u0627\u0645 \u0627\u0644\u062a\u0637\u0628\u064a\u0642 \u0644\u0625\u0646\u0634\u0627\u0621 \u0631\u0627\u0628\u0637 \u0622\u0645\u0646 \u0645\u0624\u0642\u062a.",
+        infoSteps:
+            "\u0627\u0641\u062a\u062d \u0627\u0644\u062a\u0637\u0628\u064a\u0642 \u0648\u0627\u0630\u0647\u0628 \u0625\u0644\u0649 \u0627\u0644\u0628\u0631\u0648\u0641\u0627\u064a\u0644.\n\u0627\u0636\u063a\u0637 \u062d\u0630\u0641 \u0627\u0644\u062d\u0633\u0627\u0628.\n\u0623\u0643\u062f \u0644\u0641\u062a\u062d \u0635\u0641\u062d\u0629 \u0627\u0644\u062d\u0630\u0641 \u0627\u0644\u0622\u0645\u0646\u0629.\n\u0627\u0636\u063a\u0637 \u062a\u0623\u0643\u064a\u062f \u062d\u0630\u0641 \u0627\u0644\u062d\u0633\u0627\u0628 \u0644\u0644\u0625\u0646\u0647\u0627\u0621.",
+        infoNote:
+            "\u0631\u0627\u0628\u0637 \u0627\u0644\u062d\u0630\u0641 \u0645\u0624\u0642\u062a \u0648\u064a\u062a\u0645 \u0627\u0633\u062a\u062e\u062f\u0627\u0645\u0647 \u0645\u0631\u0629 \u0648\u0627\u062d\u062f\u0629 \u0641\u0642\u0637.",
+        infoScreensIntro: "\u0627\u0644\u0635\u0648\u0631 \u0623\u062f\u0646\u0627\u0647 \u062a\u0648\u0636\u062d \u0627\u0644\u062e\u0637\u0648\u0627\u062a \u0628\u0627\u0644\u062a\u0631\u062a\u064a\u0628.",
+        infoScreensHeading: "\u0627\u0644\u0634\u0631\u062d \u0628\u0627\u0644\u0635\u0648\u0631 \u062e\u0637\u0648\u0629 \u0628\u062e\u0637\u0648\u0629",
+        infoStep1Title: "\u0627\u0644\u062e\u0637\u0648\u0629 1: \u0627\u0641\u062a\u062d \u0627\u0644\u0628\u0631\u0648\u0641\u0627\u064a\u0644",
+        infoStep1Body: "\u0645\u0646 \u0627\u0644\u0634\u0627\u0634\u0629 \u0627\u0644\u0631\u0626\u064a\u0633\u064a\u0629\u060c \u0627\u0641\u062a\u062d \u0628\u0631\u0648\u0641\u0627\u064a\u0644\u0643 \u0644\u0644\u0648\u0635\u0648\u0644 \u0625\u0644\u0649 \u062e\u064a\u0627\u0631\u0627\u062a \u0627\u0644\u062d\u0633\u0627\u0628.",
+        infoStep2Title: "\u0627\u0644\u062e\u0637\u0648\u0629 2: \u0627\u0636\u063a\u0637 \u062d\u0630\u0641 \u0627\u0644\u062d\u0633\u0627\u0628",
+        infoStep2Body: "\u0627\u062e\u062a\u0631 \u062d\u0630\u0641 \u0627\u0644\u062d\u0633\u0627\u0628 \u0644\u0641\u062a\u062d \u0645\u0633\u0627\u0631 \u0627\u0644\u062d\u0630\u0641 \u0627\u0644\u0622\u0645\u0646.",
+        infoStep3Title: "\u0627\u0644\u062e\u0637\u0648\u0629 3: \u062a\u0623\u0643\u064a\u062f \u0627\u0644\u062d\u0630\u0641",
+        infoStep3Body: "\u0631\u0627\u062c\u0639 \u0627\u0644\u062a\u062d\u0630\u064a\u0631 \u062b\u0645 \u0627\u0636\u063a\u0637 \u062a\u0623\u0643\u064a\u062f \u062d\u0630\u0641 \u0627\u0644\u062d\u0633\u0627\u0628 \u0644\u0644\u0625\u0646\u0647\u0627\u0621.",
+        infoActionTitle: "\u0637\u0644\u0628 \u0627\u0644\u062d\u0630\u0641",
+        infoActionBody:
+            "\u0625\u0630\u0627 \u0643\u0646\u062a \u0645\u0633\u062c\u0644\u0627\u064b\u060c \u064a\u0645\u0643\u0646\u0643 \u0637\u0644\u0628 \u0631\u0627\u0628\u0637 \u062d\u0630\u0641 \u0622\u0645\u0646 \u0627\u0644\u0622\u0646.",
+        infoActionButton: "\u0637\u0644\u0628 \u0631\u0627\u0628\u0637 \u0627\u0644\u062d\u0630\u0641",
+        infoMissingToken:
+            "\u064a\u0631\u062c\u0649 \u062a\u0633\u062c\u064a\u0644 \u0627\u0644\u062f\u062e\u0648\u0644 \u0645\u0646 \u0627\u0644\u062a\u0637\u0628\u064a\u0642 \u0644\u0637\u0644\u0628 \u0631\u0627\u0628\u0637 \u0627\u0644\u062d\u0630\u0641. \u0647\u0630\u0647 \u0627\u0644\u0635\u0641\u062d\u0629 \u0644\u0648\u062d\u062f\u0647\u0627 \u0644\u0627 \u062a\u0633\u062a\u0637\u064a\u0639 \u0645\u0639\u0631\u0641\u0629 \u0647\u0648\u064a\u062a\u0643.",
+        requestLinkTitle: "\u0627\u0644\u0631\u0627\u0628\u0637 \u062c\u0627\u0647\u0632",
+        requestLinkBody: "\u0627\u0641\u062a\u062d \u0635\u0641\u062d\u0629 \u0627\u0644\u062d\u0630\u0641 \u0627\u0644\u0622\u0645\u0646\u0629 \u0645\u0646 \u0627\u0644\u0632\u0631 \u0628\u0627\u0644\u0623\u0633\u0641\u0644.",
+        requestLinkButton: "\u0627\u0641\u062a\u062d \u0635\u0641\u062d\u0629 \u0627\u0644\u062d\u0630\u0641",
     },
 };
 
@@ -265,60 +327,117 @@ const t = (locale, key) => {
     return copy[key] || WEB_COPY.en[key] || "";
 };
 
-const renderDeletePage = (token, locale) => {
+const renderDeleteInfoPage = (locale, token, origin) => {
     const dir = locale === "ar" ? "rtl" : "ltr";
+    const steps = t(locale, "infoSteps").split("\n");
+    const stepsHtml = steps.map((step) => `<li>${step}</li>`).join("");
+    const baseUrl = new URL("/delete-guide/", origin).toString().replace(/\/$/, "");
+    const guideImages = [
+        {
+            src: `${baseUrl}/1.PNG`,
+            alt: locale === "ar" ? "\u0627\u0644\u062e\u0637\u0648\u0629 1" : "Step 1",
+            title: t(locale, "infoStep1Title"),
+            body: t(locale, "infoStep1Body"),
+        },
+        {
+            src: `${baseUrl}/2.PNG`,
+            alt: locale === "ar" ? "\u0627\u0644\u062e\u0637\u0648\u0629 2" : "Step 2",
+            title: t(locale, "infoStep2Title"),
+            body: t(locale, "infoStep2Body"),
+        },
+        {
+            src: `${baseUrl}/3.PNG`,
+            alt: locale === "ar" ? "\u0627\u0644\u062e\u0637\u0648\u0629 3" : "Step 3",
+            title: t(locale, "infoStep3Title"),
+            body: t(locale, "infoStep3Body"),
+        },
+    ];
+    const tokenSection = token
+        ? `<div class="action">
+            <h2>${t(locale, "infoActionTitle")}</h2>
+            <p>${t(locale, "infoActionBody")}</p>
+            <form method="post" action="/account/delete-request-web">
+                <input type="hidden" name="token" value="${token}" />
+                <button type="submit">${t(locale, "infoActionButton")}</button>
+            </form>
+        </div>`
+        : `<div class="note">${t(locale, "infoMissingToken")}</div>`;
     return `<!doctype html>
-<html lang="${locale}" dir="${dir}">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>${t(locale, "confirmTitle")}</title>
-    <style>
-        body { font-family: Arial, sans-serif; background: #f6f7fb; color: #1b1f24; margin: 0; padding: 32px; }
-        .card { max-width: 520px; margin: 0 auto; background: #ffffff; border-radius: 12px; padding: 24px; box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08); }
-        h1 { font-size: 22px; margin: 0 0 12px; }
-        p { line-height: 1.5; }
-        .warn { background: #fff1f2; color: #9f1239; padding: 12px 14px; border-radius: 8px; margin: 16px 0; }
-        button { width: 100%; padding: 12px 16px; border: 0; border-radius: 10px; background: #dc2626; color: #ffffff; font-size: 16px; cursor: pointer; }
-        button:hover { background: #b91c1c; }
-    </style>
-</head>
-<body>
-    <div class="card">
-        <h1>${t(locale, "confirmHeading")}</h1>
-        <p>${t(locale, "confirmBody")}</p>
-        <div class="warn">${t(locale, "confirmWarning")}</div>
-        <form method="post" action="/account/delete/confirm">
-            <input type="hidden" name="token" value="${token}" />
-            <button type="submit">${t(locale, "confirmButton")}</button>
-        </form>
-    </div>
-</body>
-</html>`;
+    <html lang="${locale}" dir="${dir}">
+        <head>
+            <meta charset="utf-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <title>${t(locale, "infoTitle")}</title>
+            <style>
+                body { font-family: Arial, sans-serif; background: #f6f7fb; color: #1b1f24; margin: 0; padding: 32px; }
+                .card { max-width: 640px; margin: 0 auto; background: #ffffff; border-radius: 12px; padding: 24px; box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08); }
+                h1 { font-size: 22px; margin: 0 0 12px; }
+                p { line-height: 1.6; }
+                ul { padding-inline-start: 20px; line-height: 1.7; }
+                .note { background: #f1f5f9; color: #0f172a; padding: 12px 14px; border-radius: 8px; margin-top: 16px; }
+                .action { margin-top: 18px; padding: 16px; border-radius: 10px; background: #ecfdf3; color: #14532d; }
+                .action h2 { font-size: 18px; margin: 0 0 8px; }
+                .action button { margin-top: 10px; width: 100%; padding: 12px 16px; border: 0; border-radius: 10px; background: #16a34a; color: #ffffff; font-size: 16px; cursor: pointer; }
+                .action button:hover { background: #15803d; }
+                .guide { margin-top: 22px; }
+                .guide h2 { font-size: 18px; margin: 0 0 10px; }
+                .guide-item { display: flex; gap: 16px; padding: 14px; border-radius: 12px; border: 1px solid #e2e8f0; margin-top: 14px; align-items: flex-start; }
+                .guide-item img { width: 100%; max-width: 220px; border-radius: 10px; border: 1px solid #e2e8f0; background: #f8fafc; }
+                .guide-text h3 { font-size: 16px; margin: 0 0 6px; }
+                .guide-text p { margin: 0; }
+                @media (max-width: 640px) { .guide-item { flex-direction: column; } .guide-item img { max-width: 100%; } }
+            </style>
+        </head>
+        <body>
+            <div class="card">
+                <h1>${t(locale, "infoHeading")}</h1>
+                <p>${t(locale, "infoIntro")}</p>
+                <ul>${stepsHtml}</ul>
+                <div class="note">${t(locale, "infoNote")}</div>
+                <div class="guide">
+                    <h2>${t(locale, "infoScreensHeading")}</h2>
+                    <p>${t(locale, "infoScreensIntro")}</p>
+                    ${guideImages
+            .map(
+                (item, index) => `
+                <div class="guide-item">
+                    <img src="${item.src}" alt="${item.alt}" />
+                    <div class="guide-text">
+                        <h3>${index + 1}. ${item.title}</h3>
+                        <p>${item.body}</p>
+                    </div>
+                </div>`,
+            )
+            .join("")}
+                </div>
+                ${tokenSection}
+            </div>
+        </body>
+    </html>`;
 };
 
 const renderStatusPage = (locale, title, message) => {
     const dir = locale === "ar" ? "rtl" : "ltr";
-    return `<!doctype html>
-<html lang="${locale}" dir="${dir}">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>${title}</title>
-    <style>
-        body { font-family: Arial, sans-serif; background: #f6f7fb; color: #1b1f24; margin: 0; padding: 32px; }
-        .card { max-width: 520px; margin: 0 auto; background: #ffffff; border-radius: 12px; padding: 24px; box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08); }
-        h1 { font-size: 22px; margin: 0 0 12px; }
-        p { line-height: 1.5; }
-    </style>
-</head>
-<body>
-    <div class="card">
-        <h1>${title}</h1>
-        <p>${message}</p>
-    </div>
-</body>
-</html>`;
+    return `< !doctype html >
+    <html lang="${locale}" dir="${dir}">
+        <head>
+            <meta charset="utf-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <title>${title}</title>
+            <style>
+                body {font - family: Arial, sans-serif; background: #f6f7fb; color: #1b1f24; margin: 0; padding: 32px; }
+                .card {max - width: 520px; margin: 0 auto; background: #ffffff; border-radius: 12px; padding: 24px; box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08); }
+                h1 {font - size: 22px; margin: 0 0 12px; }
+                p {line - height: 1.5; }
+            </style>
+        </head>
+        <body>
+            <div class="card">
+                <h1>${title}</h1>
+                <p>${message}</p>
+            </div>
+        </body>
+    </html>`;
 };
 
 const getConfigToken = (request) => {
@@ -338,6 +457,14 @@ const isConfigAuthorized = (request, env) => {
         return false;
     }
     return token === env.CONFIG_TOKEN;
+};
+
+const isR2Authorized = (request, env) => {
+    const token = getConfigToken(request);
+    if (!token || !env.R2_TOKEN) {
+        return false;
+    }
+    return token === env.R2_TOKEN;
 };
 
 const getConfigPayload = async (env) => {
@@ -375,12 +502,167 @@ export default {
             return jsonResponse({ ok: true, app: env.APP_NAME || "app" });
         }
 
+        if (path === "/r2/list" && request.method === "GET") {
+            if (!env.BOOKS_BUCKET) {
+                return jsonResponse({ error: "R2 not configured" }, 500);
+            }
+            if (!isR2Authorized(request, env)) {
+                return unauthorized("Unauthorized");
+            }
+            const prefix = url.searchParams.get("prefix") || "";
+            const cursor = url.searchParams.get("cursor") || undefined;
+            const limitParam = url.searchParams.get("limit");
+            const limit = limitParam ? Number(limitParam) : 1000;
+            const list = await env.BOOKS_BUCKET.list({ prefix, cursor, limit });
+            return jsonResponse({
+                objects: list.objects.map((item) => ({
+                    key: item.key,
+                    size: item.size,
+                    uploaded: item.uploaded,
+                })),
+                truncated: list.truncated,
+                cursor: list.cursor,
+            });
+        }
+
+        if (path === "/r2/get" && request.method === "GET") {
+            if (!env.BOOKS_BUCKET) {
+                return new Response("R2 not configured", { status: 500, headers: corsHeaders });
+            }
+            const key = url.searchParams.get("key");
+            if (!key) {
+                return new Response("Missing key", { status: 400, headers: corsHeaders });
+            }
+            const object = await env.BOOKS_BUCKET.get(key);
+            if (!object) {
+                return new Response("Not found", { status: 404, headers: corsHeaders });
+            }
+            return new Response(object.body, {
+                status: 200,
+                headers: {
+                    "content-type": object.httpMetadata?.contentType || "application/octet-stream",
+                    "etag": object.etag || "",
+                    ...corsHeaders,
+                },
+            });
+        }
+
+        if (path === "/r2/put" && request.method === "PUT") {
+            if (!env.BOOKS_BUCKET) {
+                return jsonResponse({ error: "R2 not configured" }, 500);
+            }
+            if (!isR2Authorized(request, env)) {
+                return unauthorized("Unauthorized");
+            }
+            const key = url.searchParams.get("key");
+            if (!key) {
+                return badRequest("Missing key");
+            }
+            if (!request.body) {
+                return badRequest("Missing body");
+            }
+            const contentType = request.headers.get("content-type") || "application/octet-stream";
+            await env.BOOKS_BUCKET.put(key, request.body, {
+                httpMetadata: { contentType },
+            });
+            return jsonResponse({ ok: true, key });
+        }
+
+        if (path.startsWith("/delete-guide/")) {
+            if (!env.ASSETS) {
+                return new Response("Not found", { status: 404 });
+            }
+            return env.ASSETS.fetch(request);
+        }
+
         if (path === "/config" && request.method === "GET") {
             if (!isConfigAuthorized(request, env)) {
                 return unauthorized("Unauthorized");
             }
             const payload = await getConfigPayload(env);
             return jsonResponse(payload);
+        }
+
+        if (path === "/account/delete-info" && request.method === "GET") {
+            const locale = getPreferredLocale(request);
+            const token = url.searchParams.get("token");
+            return htmlResponse(renderDeleteInfoPage(locale, token, url.origin));
+        }
+
+        if (path === "/account/delete-request-web" && request.method === "POST") {
+            const locale = getPreferredLocale(request);
+            const form = await parseFormBody(request);
+            const token = form.get("token");
+            if (!token) {
+                return htmlResponse(
+                    renderStatusPage(
+                        locale,
+                        t(locale, "invalidTitle"),
+                        t(locale, "missingToken"),
+                    ),
+                    400,
+                );
+            }
+
+            const user = await verifyJwt(token, env.JWT_SECRET);
+            if (!user) {
+                return htmlResponse(
+                    renderStatusPage(
+                        locale,
+                        t(locale, "invalidTitle"),
+                        t(locale, "invalidOrExpired"),
+                    ),
+                    401,
+                );
+            }
+
+            const now = Date.now();
+            const oneTimeToken = generateOneTimeToken();
+            const tokenHash = await sha256Hex(oneTimeToken);
+            const expiresAt = now + 30 * 60 * 1000;
+
+            await env.DB.prepare(
+                "DELETE FROM account_deletion_tokens WHERE user_id = ?",
+            )
+                .bind(user.sub)
+                .run();
+
+            await env.DB.prepare(
+                "INSERT INTO account_deletion_tokens (token_hash, user_id, created_at, expires_at, used_at) VALUES (?, ?, ?, ?, NULL)",
+            )
+                .bind(tokenHash, user.sub, now, expiresAt)
+                .run();
+
+            const origin = new URL(request.url).origin;
+            const deleteUrl = new URL("/account/delete", origin);
+            deleteUrl.searchParams.set("token", oneTimeToken);
+
+            const dir = locale === "ar" ? "rtl" : "ltr";
+            return htmlResponse(
+                `< !doctype html >
+    <html lang="${locale}" dir="${dir}">
+        <head>
+            <meta charset="utf-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <title>${t(locale, "requestLinkTitle")}</title>
+            <style>
+                body {font - family: Arial, sans-serif; background: #f6f7fb; color: #1b1f24; margin: 0; padding: 32px; }
+                .card {max - width: 520px; margin: 0 auto; background: #ffffff; border-radius: 12px; padding: 24px; box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08); }
+                h1 {font - size: 22px; margin: 0 0 12px; }
+                p {line - height: 1.5; }
+                a.button {display: block; text-align: center; text-decoration: none; padding: 12px 16px; border-radius: 10px; background: #dc2626; color: #ffffff; font-size: 16px; }
+                a.button:hover {background: #b91c1c; }
+            </style>
+        </head>
+        <body>
+            <div class="card">
+                <h1>${t(locale, "requestLinkTitle")}</h1>
+                <p>${t(locale, "requestLinkBody")}</p>
+                <a class="button" href="${deleteUrl.toString()}">${t(locale, "requestLinkButton")}</a>
+            </div>
+        </body>
+    </html>`,
+            );
         }
 
         if (path === "/developer/requests" && request.method === "POST") {
@@ -898,7 +1180,7 @@ export default {
             if (!table) {
                 return badRequest("Unknown type");
             }
-            await env.DB.prepare(`DELETE FROM ${table} WHERE id = ?`).bind(id).run();
+            await env.DB.prepare(`DELETE FROM ${table} WHERE id = ? `).bind(id).run();
             return jsonResponse({ ok: true });
         }
 
@@ -918,3 +1200,4 @@ export default {
         return jsonResponse({ error: "Not found" }, 404);
     },
 };
+

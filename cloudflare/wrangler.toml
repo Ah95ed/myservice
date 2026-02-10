@@ -12,6 +12,14 @@ binding = "CONFIG_KV"
 id = "d58bb4674d8a4bb184c38b28f22788d2"
 preview_id = "16d65f3150c04e849efab14643cbe34e"
 
+[[r2_buckets]]
+binding = "BOOKS_BUCKET"
+bucket_name = "books"
+
 [vars]
 APP_NAME = "AL-Zab Township Guide"
+
+[assets]
+directory = "./assets"
+binding = "ASSETS"
 

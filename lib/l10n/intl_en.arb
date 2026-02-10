@@ -6,6 +6,7 @@
     "doctors": "Doctors",
     "blood_type": "Blood Type",
     "cars": "Cars",
+    "profile" : "Profile",
     "doctor": "Doctor",
     "donors": "Donors",
     "select_service": "Select Service",

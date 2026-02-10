@@ -2,6 +2,7 @@ import 'package:Al_Zab_township_guide/Helper/Service/Language/keyabstract.dart';
 
 class Language implements KeyAbstract {
   static const String just4 = "just4";
+  static const String profile = "profile";
   static const String version = "version";
   static const String location = "locaton";
   static const String locationWork = "locationWork";
@@ -53,6 +54,7 @@ class Language implements KeyAbstract {
   static const String delete_account = "delete_account";
   static const String delete_account_browser_notice =
       "delete_account_browser_notice";
+  static const String delete_account_info = "delete_account_info";
   static const String could_not_open_browser = "could_not_open_browser";
   static const String edit_Data_and_delete = "edit_Data_and_delete";
   static const String settings = "settings";
@@ -149,6 +151,8 @@ class Language implements KeyAbstract {
       AddDoctor: "أضافة طبيب",
       typeProfession: "نوع المهنة",
       no: "لا",
+      profile :"الملف الشخصي",
+      
       yes: "نعم",
       email_not_exist: "البريد الالكتروني غير موجود",
       sure_to_delete_account: "هل انت متأكد من حذف الحساب؟",
@@ -193,6 +197,7 @@ class Language implements KeyAbstract {
       delete_account: "حذف الحساب",
       delete_account_browser_notice:
           "سيتم فتح صفحة ويب آمنة لتأكيد الحذف. الرابط صالح لفترة قصيرة ويُستخدم مرة واحدة فقط.",
+      delete_account_info: "شرح حذف الحساب",
       could_not_open_browser: "تعذر فتح المتصفح الخارجي.",
       edit_Data_and_delete: "تعديل البيانات و حذفها",
       settings: "الاعدادات",
@@ -256,6 +261,7 @@ class Language implements KeyAbstract {
       error_password: "كلمة المرور غير صحيحة",
     },
     "en": {
+      profile: "Profile",
       bookSchool: 'School Books',
       not_sent_email: 'Not sent email',
       just4: 'It should be four digits.',
@@ -319,6 +325,7 @@ class Language implements KeyAbstract {
       delete_account: "Delete Account",
       delete_account_browser_notice:
           "A secure web page will open to confirm deletion. The link expires soon and can be used once.",
+      delete_account_info: "How to delete your account",
       could_not_open_browser: "Could not open browser.",
       edit_Data_and_delete: "Edit Data and Delete",
       settings: "Settings",
