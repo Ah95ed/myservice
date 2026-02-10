@@ -31,7 +31,7 @@ class _MyCustomSplashScreenState extends State<MyCustomSplashScreen>
 
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 600),
+      duration: const Duration(milliseconds: 6000),
     );
 
     animation1 =
