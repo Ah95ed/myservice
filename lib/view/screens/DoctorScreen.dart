@@ -1,9 +1,11 @@
 import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
+import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/widget/Cards/cardView.dart';
+import 'package:Al_Zab_township_guide/view/widget/Dialogandsnakebar/ManageListingDialog.dart';
 import 'package:Al_Zab_township_guide/view/widget/Drawer/CustomDrawer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -29,23 +31,24 @@ class _DoctorScreenState extends State<DoctorScreen> {
       return;
     }
     final provider = context.read<Providers>();
-    provider.title = Text(
-      Translation[Language.doctors],
-      style: const TextStyle(color: AppTheme.notWhite),
-    );
-    provider.actionsicon = const Icon(
-      Icons.search,
-      color: AppTheme.notWhite,
-      size: 22.0,
-    );
+    _initialized = true;
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) {
+        return;
+      }
+      provider.configureAppBar(
+        Text(
+          Translation[Language.doctors],
+          style: const TextStyle(color: AppTheme.notWhite),
+        ),
+      );
       provider.getData('Doctor');
     });
-    _initialized = true;
   }
 
   @override
   Widget build(BuildContext context) {
+    final isRegister = shared?.getBool('isRegister') == true;
     return Consumer<Providers>(
       builder: (context, value, child) {
         return Scaffold(
@@ -85,6 +88,34 @@ class _DoctorScreenState extends State<DoctorScreen> {
                         specialization: value.data[index]['specialization'],
                         number: value.data[index]['number'],
                         title: value.data[index]['title'],
+                        onEdit:
+                            isRegister && value.data[index]['canManage'] == 1
+                            ? () async {
+                                await ManageListingDialog.showEditDialog(
+                                  context: context,
+                                  collection: 'Doctor',
+                                  item: Map<String, dynamic>.from(
+                                    value.data[index],
+                                  ),
+                                  onCompleted: () =>
+                                      value.getData('Doctor', refresh: true),
+                                );
+                              }
+                            : null,
+                        onDelete:
+                            isRegister && value.data[index]['canManage'] == 1
+                            ? () async {
+                                await ManageListingDialog.showDeleteDialog(
+                                  context: context,
+                                  collection: 'Doctor',
+                                  item: Map<String, dynamic>.from(
+                                    value.data[index],
+                                  ),
+                                  onCompleted: () =>
+                                      value.getData('Doctor', refresh: true),
+                                );
+                              }
+                            : null,
                       );
                     },
                   ),

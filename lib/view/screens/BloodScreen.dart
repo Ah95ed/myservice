@@ -19,19 +19,36 @@ class BloodScreen extends StatefulWidget {
 }
 
 class _BloodScreenState extends State<BloodScreen> {
+  bool _initialized = false;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (_initialized) {
+      return;
+    }
+    _initialized = true;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) {
+        return;
+      }
+      context.read<Providers>().configureAppBar(
+        Text(
+          Translation[Language.selectType],
+          style: TextStyle(
+            color: AppTheme.notWhite,
+            fontSize: setFontSize(16),
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        showSearch: false,
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final read = context.watch<Providers>();
-
-    read.title = Text(
-      Translation[Language.selectType],
-      style: TextStyle(
-        color: AppTheme.notWhite,
-        fontSize: setFontSize(16),
-        fontWeight: FontWeight.bold,
-      ),
-    );
-    read.actionsicon = const Icon(null);
     return Scaffold(
       backgroundColor: AppTheme.nearlyWhite,
 
@@ -62,7 +79,7 @@ class _BloodScreenState extends State<BloodScreen> {
                 ButtonSelect(
                   title: Constant.A_Plus,
                   onPressed: () async {
-                  await  read.managerScreen(
+                    await read.managerScreen(
                       ShowDonors.ROUTE,
                       context,
                       object: DataSend(Constant.A_Plus),

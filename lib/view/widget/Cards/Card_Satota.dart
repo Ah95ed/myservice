@@ -11,10 +11,14 @@ class CardSatota extends StatelessWidget {
     required this.name,
     required this.location,
     required this.onPressed,
+    this.onEdit,
+    this.onDelete,
   });
-  
+
   final String name, location;
   final VoidCallback onPressed;
+  final VoidCallback? onEdit;
+  final VoidCallback? onDelete;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -33,13 +37,36 @@ class CardSatota extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: IconButton(
-              icon: Icon(
-                Icons.call,
-                color: ColorUsed.primary,
-                size: getheight(4),
-              ),
-              onPressed: onPressed,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                  icon: Icon(
+                    Icons.call,
+                    color: ColorUsed.primary,
+                    size: getheight(3.5),
+                  ),
+                  onPressed: onPressed,
+                ),
+                if (onEdit != null)
+                  IconButton(
+                    icon: Icon(
+                      Icons.edit,
+                      color: ColorUsed.second,
+                      size: getheight(3),
+                    ),
+                    onPressed: onEdit,
+                  ),
+                if (onDelete != null)
+                  IconButton(
+                    icon: Icon(
+                      Icons.delete,
+                      color: Colors.red.shade700,
+                      size: getheight(3),
+                    ),
+                    onPressed: onDelete,
+                  ),
+              ],
             ),
           ),
         ],

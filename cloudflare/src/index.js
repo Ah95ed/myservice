@@ -220,6 +220,105 @@ const parseFormBody = async (request) => {
     return new URLSearchParams(bodyText);
 };
 
+const normalizeEmail = (value) => (value || "").trim().toLowerCase();
+
+const generateOtpCode = () => {
+    const random = crypto.getRandomValues(new Uint32Array(1))[0] % 1000000;
+    return String(random).padStart(6, "0");
+};
+
+const sendOtpEmail = async (env, toEmail, code) => {
+    if (!env.RESEND_API_KEY || !env.OTP_EMAIL_FROM) {
+        throw new Error("Email OTP is not configured on the server");
+    }
+
+    const response = await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: {
+            "content-type": "application/json",
+            authorization: `Bearer ${env.RESEND_API_KEY}`,
+        },
+        body: JSON.stringify({
+            from: env.OTP_EMAIL_FROM,
+            to: [toEmail],
+            subject: "رمز تأكيد حذف الحساب",
+            html: `<div dir="rtl" style="font-family: Arial, sans-serif; line-height: 1.7;">
+<h2>تأكيد حذف الحساب</h2>
+<p>رمز التحقق الخاص بك هو:</p>
+<div style="font-size: 30px; font-weight: bold; letter-spacing: 6px;">${code}</div>
+<p>ينتهي الرمز خلال 10 دقائق، ويسمح لك بحذف كل الإعلانات والحساب نهائياً.</p>
+<p>إذا لم تطلب هذه العملية، تجاهل هذه الرسالة.</p>
+</div>`,
+        }),
+    });
+
+    if (!response.ok) {
+        const text = await response.text();
+        throw new Error(`Failed to send OTP email (${response.status}): ${text}`);
+    }
+};
+
+const getEditableColumns = (type) => {
+    switch (type) {
+        case "doctor":
+            return ["name", "phone", "specialization", "presence", "title"];
+        case "profession":
+            return ["name", "phone", "name_profession"];
+        case "car":
+            return ["name", "phone", "vehicle_type", "time", "route_from"];
+        case "satota":
+            return ["name", "phone", "location"];
+        case "donor":
+            return ["name", "phone", "location", "blood_type"];
+        default:
+            return [];
+    }
+};
+
+const mapUpdatePayload = (type, body) => {
+    if (type === "doctor") {
+        return {
+            name: body.name,
+            phone: body.phone,
+            specialization: body.specialization,
+            presence: body.presence,
+            title: body.title,
+        };
+    }
+    if (type === "profession") {
+        return {
+            name: body.name,
+            phone: body.phone,
+            name_profession: body.nameProfession,
+        };
+    }
+    if (type === "car") {
+        return {
+            name: body.name,
+            phone: body.phone,
+            vehicle_type: body.vehicleType,
+            time: body.time,
+            route_from: body.routeFrom,
+        };
+    }
+    if (type === "satota") {
+        return {
+            name: body.name,
+            phone: body.phone,
+            location: body.location,
+        };
+    }
+    if (type === "donor") {
+        return {
+            name: body.name,
+            phone: body.phone,
+            location: body.location,
+            blood_type: body.bloodType,
+        };
+    }
+    return {};
+};
+
 const getPreferredLocale = (request) => {
     const header = request.headers.get("accept-language") || "";
     return header.toLowerCase().includes("ar") ? "ar" : "en";
@@ -745,7 +844,7 @@ export default {
             }
 
             const user = await env.DB.prepare(
-                "SELECT id, name, email, phone, password_hash, password_salt, is_active FROM users WHERE phone = ? LIMIT 1",
+                "SELECT id, name, email, phone, password_hash, password_salt, is_active, is_admin FROM users WHERE phone = ? LIMIT 1",
             )
                 .bind(phone)
                 .first();
@@ -771,6 +870,7 @@ export default {
                     sub: user.id,
                     phone: user.phone,
                     name: user.name,
+                    is_admin: user.is_admin === 1,
                     exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 30,
                 },
                 env.JWT_SECRET,
@@ -778,7 +878,7 @@ export default {
 
             return jsonResponse({
                 token,
-                user: { id: user.id, name: user.name, email: user.email, phone: user.phone },
+                user: { id: user.id, name: user.name, email: user.email, phone: user.phone, is_admin: user.is_admin === 1 },
             });
         }
 
@@ -832,28 +932,44 @@ export default {
                 return unauthorized("Unauthorized");
             }
 
-            const now = Date.now();
-            const token = generateOneTimeToken();
-            const tokenHash = await sha256Hex(token);
-            const expiresAt = now + 30 * 60 * 1000;
-
-            await env.DB.prepare(
-                "DELETE FROM account_deletion_tokens WHERE user_id = ?",
-            )
+            // Delete all user-related data
+            await env.DB.prepare("DELETE FROM donors WHERE created_by = ?")
+                .bind(user.sub)
+                .run();
+            await env.DB.prepare("DELETE FROM doctors WHERE created_by = ?")
+                .bind(user.sub)
+                .run();
+            await env.DB.prepare("DELETE FROM professions WHERE created_by = ?")
+                .bind(user.sub)
+                .run();
+            await env.DB.prepare("DELETE FROM cars WHERE created_by = ?")
+                .bind(user.sub)
+                .run();
+            await env.DB.prepare("DELETE FROM satota WHERE created_by = ?")
+                .bind(user.sub)
+                .run();
+            await env.DB.prepare("DELETE FROM edit_requests WHERE created_by = ?")
+                .bind(user.sub)
+                .run();
+            await env.DB.prepare("DELETE FROM account_deletion_tokens WHERE user_id = ?")
+                .bind(user.sub)
+                .run();
+            await env.DB.prepare("DELETE FROM account_delete_email_otp WHERE user_id = ?")
+                .bind(user.sub)
+                .run();
+            await env.DB.prepare("DELETE FROM users WHERE id = ?")
                 .bind(user.sub)
                 .run();
 
-            await env.DB.prepare(
-                "INSERT INTO account_deletion_tokens (token_hash, user_id, created_at, expires_at, used_at) VALUES (?, ?, ?, ?, NULL)",
-            )
-                .bind(tokenHash, user.sub, now, expiresAt)
-                .run();
+            return jsonResponse({ ok: true, deleted: true });
+        }
 
-            const origin = new URL(request.url).origin;
-            const deleteUrl = new URL("/account/delete", origin);
-            deleteUrl.searchParams.set("token", token);
+        if (path === "/account/delete-email-otp/request" && request.method === "POST") {
+            return jsonResponse({ error: "Account deletion by email OTP is disabled." }, 400);
+        }
 
-            return jsonResponse({ url: deleteUrl.toString(), expiresAt });
+        if (path === "/account/delete-email-otp/verify" && request.method === "POST") {
+            return jsonResponse({ error: "Account deletion by email OTP is disabled." }, 400);
         }
 
         if (path === "/account/delete" && request.method === "GET") {
@@ -1009,11 +1125,13 @@ export default {
         }
 
         if (path === "/donors" && request.method === "GET") {
+            const user = await getAuthUser(request, env);
             const bloodType = url.searchParams.get("bloodType");
             const number = url.searchParams.get("number");
             const { limit, offset } = parsePagination(url);
-            let query = "SELECT id, name, phone AS number, location, blood_type AS type FROM donors WHERE is_active = 1";
+            let query = "SELECT id, name, phone AS number, location, blood_type AS type, CASE WHEN created_by = ? THEN 1 ELSE 0 END AS canManage FROM donors WHERE is_active = 1";
             const params = [];
+            params.push(user?.sub || "");
             if (bloodType) {
                 query += " AND blood_type = ?";
                 params.push(bloodType);
@@ -1029,41 +1147,45 @@ export default {
         }
 
         if (path === "/doctors" && request.method === "GET") {
+            const user = await getAuthUser(request, env);
             const { limit, offset } = parsePagination(url);
             const result = await env.DB.prepare(
-                "SELECT id, name, phone AS number, specialization, presence, title FROM doctors WHERE is_active = 1 ORDER BY created_at DESC LIMIT ? OFFSET ?",
+                "SELECT id, name, phone AS number, specialization, presence, title, CASE WHEN created_by = ? THEN 1 ELSE 0 END AS canManage FROM doctors WHERE is_active = 1 ORDER BY created_at DESC LIMIT ? OFFSET ?",
             )
-                .bind(limit, offset)
+                .bind(user?.sub || "", limit, offset)
                 .all();
             return jsonResponse(result.results || []);
         }
 
         if (path === "/professions" && request.method === "GET") {
+            const user = await getAuthUser(request, env);
             const { limit, offset } = parsePagination(url);
             const result = await env.DB.prepare(
-                "SELECT id, name, phone AS number, name_profession AS nameProfession FROM professions WHERE is_active = 1 ORDER BY created_at DESC LIMIT ? OFFSET ?",
+                "SELECT id, name, phone AS number, name_profession AS nameProfession, CASE WHEN created_by = ? THEN 1 ELSE 0 END AS canManage FROM professions WHERE is_active = 1 ORDER BY created_at DESC LIMIT ? OFFSET ?",
             )
-                .bind(limit, offset)
+                .bind(user?.sub || "", limit, offset)
                 .all();
             return jsonResponse(result.results || []);
         }
 
         if (path === "/cars" && request.method === "GET") {
+            const user = await getAuthUser(request, env);
             const { limit, offset } = parsePagination(url);
             const result = await env.DB.prepare(
-                "SELECT id, name, phone AS number, vehicle_type AS type, time, route_from AS 'from' FROM cars WHERE is_active = 1 ORDER BY created_at DESC LIMIT ? OFFSET ?",
+                "SELECT id, name, phone AS number, vehicle_type AS type, time, route_from AS 'from', CASE WHEN created_by = ? THEN 1 ELSE 0 END AS canManage FROM cars WHERE is_active = 1 ORDER BY created_at DESC LIMIT ? OFFSET ?",
             )
-                .bind(limit, offset)
+                .bind(user?.sub || "", limit, offset)
                 .all();
             return jsonResponse(result.results || []);
         }
 
         if (path === "/satota" && request.method === "GET") {
+            const user = await getAuthUser(request, env);
             const { limit, offset } = parsePagination(url);
             const result = await env.DB.prepare(
-                "SELECT id, name, phone AS number, location FROM satota WHERE is_active = 1 ORDER BY created_at DESC LIMIT ? OFFSET ?",
+                "SELECT id, name, phone AS number, location, CASE WHEN created_by = ? THEN 1 ELSE 0 END AS canManage FROM satota WHERE is_active = 1 ORDER BY created_at DESC LIMIT ? OFFSET ?",
             )
-                .bind(limit, offset)
+                .bind(user?.sub || "", limit, offset)
                 .all();
             return jsonResponse(result.results || []);
         }
@@ -1180,7 +1302,72 @@ export default {
             if (!table) {
                 return badRequest("Unknown type");
             }
-            await env.DB.prepare(`DELETE FROM ${table} WHERE id = ? `).bind(id).run();
+
+            const owned = await env.DB.prepare(`SELECT id FROM ${table} WHERE id = ? AND created_by = ? LIMIT 1`)
+                .bind(id, user.sub)
+                .first();
+            if (!owned) {
+                return jsonResponse({ error: "Forbidden: owner only" }, 403);
+            }
+
+            await env.DB.prepare(`DELETE FROM ${table} WHERE id = ? AND created_by = ?`)
+                .bind(id, user.sub)
+                .run();
+            return jsonResponse({ ok: true });
+        }
+
+        if (path === "/items" && request.method === "PUT") {
+            const user = await getAuthUser(request, env);
+            if (!user) {
+                return unauthorized("Missing or invalid token");
+            }
+            const type = url.searchParams.get("type");
+            const id = url.searchParams.get("id");
+            if (!type || !id) {
+                return badRequest("Missing type or id");
+            }
+            const table = tableByType(type);
+            if (!table) {
+                return badRequest("Unknown type");
+            }
+
+            const body = await parseJsonBody(request);
+            if (!body) {
+                return badRequest("Invalid JSON");
+            }
+
+            const mappedPayload = mapUpdatePayload(type, body);
+            const editableColumns = getEditableColumns(type);
+            const assignments = [];
+            const values = [];
+            for (const column of editableColumns) {
+                const value = mappedPayload[column];
+                if (typeof value === "string") {
+                    const trimmed = value.trim();
+                    if (!trimmed) {
+                        return badRequest(`Missing or empty field: ${column}`);
+                    }
+                    assignments.push(`${column} = ?`);
+                    values.push(trimmed);
+                }
+            }
+
+            if (!assignments.length) {
+                return badRequest("No editable fields provided");
+            }
+
+            const owned = await env.DB.prepare(`SELECT id FROM ${table} WHERE id = ? AND created_by = ? LIMIT 1`)
+                .bind(id, user.sub)
+                .first();
+            if (!owned) {
+                return jsonResponse({ error: "Forbidden: owner only" }, 403);
+            }
+
+            const sql = `UPDATE ${table} SET ${assignments.join(", ")} WHERE id = ? AND created_by = ?`;
+            await env.DB.prepare(sql)
+                .bind(...values, id, user.sub)
+                .run();
+
             return jsonResponse({ ok: true });
         }
 
@@ -1193,7 +1380,12 @@ export default {
             if (!phone) {
                 return badRequest("Missing phone");
             }
-            await env.DB.prepare("DELETE FROM users WHERE phone = ?").bind(phone).run();
+            if (phone !== user.phone) {
+                return jsonResponse({ error: "Forbidden: owner only" }, 403);
+            }
+            await env.DB.prepare("DELETE FROM users WHERE id = ? AND phone = ?")
+                .bind(user.sub, phone)
+                .run();
             return jsonResponse({ ok: true });
         }
 

@@ -228,36 +228,37 @@ class Customdrawer extends StatelessWidget {
             ),
             Divider(thickness: getWidth(0.5), color: ColorUsed.DarkGreen),
 
-            ListTile(
-              leading: Icon(Icons.edit),
-              title: Text(
-                S.of(context).add_service,
-                style: TextStyle(
-                  fontSize: setFontSize(12),
-                  fontWeight: FontWeight.w500,
-                  color: ColorUsed.DarkGreen,
+            // إظهار زر التعديل فقط للأدمن
+            if (shared!.getString('emailUser') == 'amhmeed31@gmail.com' ||
+                shared!.getString('phoneUser') == '07824854526')
+              ListTile(
+                leading: Icon(Icons.edit),
+                title: Text(
+                  S.of(context).add_service,
+                  style: TextStyle(
+                    fontSize: setFontSize(12),
+                    fontWeight: FontWeight.w500,
+                    color: ColorUsed.DarkGreen,
+                  ),
                 ),
+                onTap: () {
+                  Scaffold.of(context).closeDrawer();
+                  if (shared!.getBool('isRegister') == true) {
+                    showDialog(
+                      context: context,
+                      builder: (_) {
+                        return CustomDialogAddService();
+                      },
+                    );
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(Translation[Language.register_first]),
+                      ),
+                    );
+                  }
+                },
               ),
-              onTap: () {
-                Scaffold.of(context).closeDrawer();
-
-                if (shared!.getBool('isRegister') == true) {
-                  showDialog(
-                    context: context,
-                    builder: (_) {
-                      return CustomDialogAddService();
-                    },
-                  );
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(Translation[Language.register_first]),
-                    ),
-                  );
-                  //  Navigator.of(context).pop();
-                }
-              },
-            ),
             Divider(thickness: getWidth(0.5), color: ColorUsed.DarkGreen),
             ListTile(
               leading: Icon(Icons.language),
@@ -346,20 +347,8 @@ class Customdrawer extends StatelessWidget {
                 ),
               ),
             ),
-
-            //  Divider(thickness: getWidth(0.1), color: ColorUsed.DarkGreen,),
-            // Center(
-            //   child: Text(
-            //     Translation[Language.version] +
-            //         ':- (${packageInfo!.version}) ' +
-            //         packageInfo!.buildNumber,
-            //     style: TextStyle(
-            //       fontSize: setFontSize(10),
-            //       fontWeight: FontWeight.w400,
-            //       color: ColorUsed.DarkGreen,
-            //     ),
-            //   ),
-            // ),
+            // ... باقي عناصر القائمة هنا ...
+            
           ],
         ),
       ),

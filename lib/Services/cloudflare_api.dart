@@ -20,6 +20,7 @@ class CloudflareApi {
     required String email,
     required String phone,
     required String password,
+    int isAdmin = 0,
   }) async {
     final response = await http.post(
       Uri.parse('$_baseUrl/auth/register'),
@@ -29,6 +30,7 @@ class CloudflareApi {
         'email': email,
         'phone': phone,
         'password': password,
+        'is_admin': isAdmin,
       }),
     );
 
@@ -91,7 +93,7 @@ class CloudflareApi {
     int limit = 50,
   }) async {
     final uri = _collectionUri(collection, page: page, limit: limit);
-    final response = await http.get(uri);
+    final response = await http.get(uri, headers: await _optionalAuthHeaders());
 
     if (response.statusCode >= 400) {
       throw Exception(_parseError(response));
@@ -164,12 +166,54 @@ class CloudflareApi {
     }
   }
 
+  Future<void> updateItem(
+    String type,
+    String id,
+    Map<String, dynamic> data,
+  ) async {
+    final headers = await _authHeaders();
+    final uri = Uri.parse(
+      '$_baseUrl/items',
+    ).replace(queryParameters: {'type': type, 'id': id});
+    final response = await http.put(
+      uri,
+      headers: headers,
+      body: jsonEncode(data),
+    );
+    if (response.statusCode >= 400) {
+      throw Exception(_parseError(response));
+    }
+  }
+
   Future<void> deleteUserByPhone(String phone) async {
     final headers = await _authHeaders();
     final uri = Uri.parse(
       '$_baseUrl/auth/by-phone',
     ).replace(queryParameters: {'phone': phone});
     final response = await http.delete(uri, headers: headers);
+    if (response.statusCode >= 400) {
+      throw Exception(_parseError(response));
+    }
+  }
+
+  Future<void> requestDeleteAllByEmailOtp() async {
+    final headers = await _authHeaders();
+    final response = await http.post(
+      Uri.parse('$_baseUrl/account/delete-email-otp/request'),
+      headers: headers,
+    );
+    if (response.statusCode >= 400) {
+      throw Exception(_parseError(response));
+    }
+  }
+
+  Future<void> confirmDeleteAllByEmailOtp(String code) async {
+    final headers = await _authHeaders();
+    final response = await http.post(
+      Uri.parse('$_baseUrl/account/delete-email-otp/verify'),
+      headers: headers,
+      body: jsonEncode({'code': code}),
+    );
     if (response.statusCode >= 400) {
       throw Exception(_parseError(response));
     }
@@ -220,6 +264,14 @@ class CloudflareApi {
       'content-type': 'application/json',
       'authorization': 'Bearer $token',
     };
+  }
+
+  Future<Map<String, String>> _optionalAuthHeaders() async {
+    final token = await SecureStorageService.getToken();
+    if (token == null || token.isEmpty) {
+      return {};
+    }
+    return {'authorization': 'Bearer $token'};
   }
 
   Uri _collectionUri(String collection, {int page = 1, int limit = 50}) {

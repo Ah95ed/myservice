@@ -10,6 +10,8 @@ import '../staticWidget/Multi_text.dart';
 // ignore: must_be_immutable
 class CardCars extends StatelessWidget {
   late String name, type, time, number, from;
+  final VoidCallback? onEdit;
+  final VoidCallback? onDelete;
 
   CardCars({
     required this.name,
@@ -17,6 +19,8 @@ class CardCars extends StatelessWidget {
     required this.time,
     required this.number,
     required this.from,
+    this.onEdit,
+    this.onDelete,
     super.key,
   });
 
@@ -24,37 +28,58 @@ class CardCars extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 5,
-      child: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: SizedBox(
-          child: Row(
-            children: [
-              Expanded(
-                flex: 6,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    MultiText(name, S.of(context).name),
-                    MultiText(type, S.of(context).type),
-                    MultiText(time, S.of(context).time),
-                    MultiText(from, S.of(context).from),
-                  ],
-                ),
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: getheight(0.5)),
+        child: Row(
+          children: [
+            Expanded(
+              flex: 6,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  MultiText(name, S.of(context).name),
+                  MultiText(type, S.of(context).type),
+                  MultiText(time, S.of(context).time),
+                  MultiText(from, S.of(context).from),
+                ],
               ),
-              Expanded(
-                child: IconButton(
-                  icon: Icon(
-                    Icons.call,
-                    size: getWidth(8),
-                    color: ColorUsed.second,
+            ),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                    icon: Icon(
+                      Icons.call,
+                      size: getheight(3.5),
+                      color: ColorUsed.second,
+                    ),
+                    onPressed: () async {
+                      context.read<Providers>().callNumber(number);
+                    },
                   ),
-                  onPressed: () async {
-                    context.read<Providers>().callNumber(number);
-                  },
-                ),
+                  if (onEdit != null)
+                    IconButton(
+                      icon: Icon(
+                        Icons.edit,
+                        size: getheight(3),
+                        color: ColorUsed.primary,
+                      ),
+                      onPressed: onEdit,
+                    ),
+                  if (onDelete != null)
+                    IconButton(
+                      icon: Icon(
+                        Icons.delete,
+                        size: getheight(3),
+                        color: Colors.red.shade700,
+                      ),
+                      onPressed: onDelete,
+                    ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

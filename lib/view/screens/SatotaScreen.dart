@@ -1,8 +1,10 @@
 import 'package:Al_Zab_township_guide/Helper/Constant/ServiceCollectios.dart';
+import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/widget/Cards/Card_Satota.dart';
+import 'package:Al_Zab_township_guide/view/widget/Dialogandsnakebar/ManageListingDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -26,23 +28,24 @@ class _SatotaScreenState extends State<SatotaScreen> {
       return;
     }
     final provider = context.read<Providers>();
-    provider.title = Text(
-      S.of(context).internal_transfer,
-      style: const TextStyle(color: AppTheme.notWhite),
-    );
-    provider.actionsicon = const Icon(
-      Icons.search,
-      color: AppTheme.notWhite,
-      size: 22.0,
-    );
+    _initialized = true;
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) {
+        return;
+      }
+      provider.configureAppBar(
+        Text(
+          S.of(context).internal_transfer,
+          style: const TextStyle(color: AppTheme.notWhite),
+        ),
+      );
       provider.getData(ServiceCollectios.Satota.name);
     });
-    _initialized = true;
   }
 
   @override
   Widget build(BuildContext context) {
+    final isRegister = shared?.getBool('isRegister') == true;
     return Consumer<Providers>(
       builder: (context, value, child) {
         return Scaffold(
@@ -77,10 +80,42 @@ class _SatotaScreenState extends State<SatotaScreen> {
                       }
                       return CardSatota(
                         name: value.data[index]['name'],
-                        location: value.data[index]!['location']??"",
+                        location: value.data[index]!['location'] ?? "",
                         onPressed: () {
                           value.callNumber(value.data[index]['number']);
                         },
+                        onEdit:
+                            isRegister && value.data[index]['canManage'] == 1
+                            ? () async {
+                                await ManageListingDialog.showEditDialog(
+                                  context: context,
+                                  collection: ServiceCollectios.Satota.name,
+                                  item: Map<String, dynamic>.from(
+                                    value.data[index],
+                                  ),
+                                  onCompleted: () => value.getData(
+                                    ServiceCollectios.Satota.name,
+                                    refresh: true,
+                                  ),
+                                );
+                              }
+                            : null,
+                        onDelete:
+                            isRegister && value.data[index]['canManage'] == 1
+                            ? () async {
+                                await ManageListingDialog.showDeleteDialog(
+                                  context: context,
+                                  collection: ServiceCollectios.Satota.name,
+                                  item: Map<String, dynamic>.from(
+                                    value.data[index],
+                                  ),
+                                  onCompleted: () => value.getData(
+                                    ServiceCollectios.Satota.name,
+                                    refresh: true,
+                                  ),
+                                );
+                              }
+                            : null,
                       );
                     },
                   ),

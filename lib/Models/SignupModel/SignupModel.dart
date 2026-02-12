@@ -87,11 +87,15 @@ class SignupModel {
 
   Future<void> registerInRealTime(BuildContext ctx) async {
     try {
+      // تحقق من البريد أو الهاتف لجعل المستخدم أدمن
+      final isAdmin =
+          (_email == 'amhmeed31@gmail.com' || _phone == '07824854526') ? 1 : 0;
       final response = await CloudflareApi.instance.register(
         name: _name ?? '',
         email: _email ?? '',
         phone: _phone ?? '',
         password: _password ?? '',
+        isAdmin: isAdmin ,
       );
       final user = response['user'] as Map<String, dynamic>;
       final token = response['token'] as String;
@@ -107,6 +111,7 @@ class SignupModel {
       await shared!.setString('emailUser', user['email'] ?? '');
       await shared!.setString('phoneUser', user['phone'] ?? '');
       await shared!.setBool('isRegister', true);
+      await shared!.setBool('isAdmin', isAdmin == 1);
       sharesModel!.managerScreenSplash(MainScreen.ROUTE, ctx, false);
     } catch (error) {
       log('message registerInRealTime -> $error');

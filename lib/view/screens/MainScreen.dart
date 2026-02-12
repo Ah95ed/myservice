@@ -140,18 +140,23 @@ class _MainScreenState extends State<MainScreen> {
         toolbarHeight: getheight(10),
         actions: [
           Consumer<Providers>(
-            builder: (context, value, child) => IconButton(
-              icon: readSerach.actionsicon,
-              onPressed: () {
-                readSerach.changewidget(
-                  TextStyle(
-                    fontSize: setFontSize(14),
-                    fontWeight: FontWeight.bold,
-                    color: AppTheme.notWhite,
-                  ),
-                );
-              },
-            ),
+            builder: (context, value, child) {
+              if (readSerach.actionsicon.icon == null) {
+                return const SizedBox.shrink();
+              }
+              return IconButton(
+                icon: readSerach.actionsicon,
+                onPressed: () {
+                  readSerach.changewidget(
+                    TextStyle(
+                      fontSize: setFontSize(14),
+                      fontWeight: FontWeight.bold,
+                      color: AppTheme.notWhite,
+                    ),
+                  );
+                },
+              );
+            },
           ),
         ],
       ),
@@ -180,7 +185,7 @@ class _MainScreenState extends State<MainScreen> {
             unselectedItemColor: ColorUsed.DarkGreen.withOpacity(0.7),
             currentIndex: readSerach.index,
             onTap: (index) {
-              readSerach.changeSelect(index);
+              readSerach.changeSelect(index, context);
             },
             items: [
               BottomNavigationBarItem(

@@ -98,73 +98,76 @@ class ProfileScreen extends StatelessWidget {
               icon: Icons.delete_forever,
               color: Colors.red.shade700,
               title: Translation[Language.delete_account],
-              onTap: () {
+              onTap: () async {
                 if (!isRegister) {
                   Logger.logger(Translation[Language.register_first]);
                   return;
                 }
 
-                showDialog(
+                // مربع حوار يشرح عملية الحذف
+                final confirm = await showDialog<bool>(
                   context: context,
                   builder: (dialogContext) {
                     return AlertDialog(
                       title: Text(Translation[Language.delete_account]),
                       content: Text(
                         '${Translation[Language.sure_to_delete_account]}\n\n'
-                        '${Translation[Language.delete_account_browser_notice]}',
+                        'سيتم حذف كل الإعلانات المرتبطة بك وحسابك نهائياً ولا يمكن استرجاعها بعد الحذف.\n\n'
+                        'بالضغط على "تأكيد الحذف النهائي" سيتم حذف حسابك مباشرة.',
                       ),
                       actions: [
                         TextButton(
-                          onPressed: () => Navigator.pop(dialogContext),
+                          onPressed: () => Navigator.pop(dialogContext, false),
                           child: Text(Translation[Language.no]),
                         ),
                         TextButton(
-                          onPressed: () async {
-                            Navigator.pop(dialogContext);
-                            showCirculerProgress(context);
-                            try {
-                              final deleteUrl = await CloudflareApi.instance
-                                  .requestAccountDeletionUrl();
-                              if (!context.mounted) {
-                                return;
-                              }
-                              Navigator.pop(context);
-                              final launched = await launchUrl(
-                                deleteUrl,
-                                mode: LaunchMode.externalApplication,
-                              );
-                              if (!launched && context.mounted) {
-                                Logger.logger(
-                                  Translation[Language.could_not_open_browser],
-                                );
-                                return;
-                              }
-
-                              await SecureStorageService.clearAll();
-                              shared?.remove('nameUser');
-                              shared?.remove('emailUser');
-                              shared?.remove('phoneUser');
-                              shared?.remove('isRegister');
-                              if (context.mounted) {
-                                read.managerScreenSplash(
-                                  LoginScreen.Route,
-                                  context,
-                                  false,
-                                );
-                              }
-                            } catch (error) {
-                              if (context.mounted) {
-                                Navigator.pop(context);
-                                Logger.logger(error.toString());
-                              }
-                            }
-                          },
-                          child: Text(Translation[Language.yes]),
+                          onPressed: () => Navigator.pop(dialogContext, true),
+                          child: Text(
+                            'تأكيد الحذف النهائي',
+                            style: TextStyle(color: Colors.red),
+                          ),
                         ),
                       ],
                     );
                   },
                 );
+
+                if (confirm != true || !context.mounted) {
+                  return;
+                }
+
+                showCirculerProgress(context);
+                try {
+                  final url = await CloudflareApi.instance
+                      .requestAccountDeletionUrl();
+                  if (!context.mounted) return;
+                  Navigator.pop(context);
+                  await SecureStorageService.clearAll();
+                  shared?.remove('nameUser');
+                  shared?.remove('emailUser');
+                  shared?.remove('phoneUser');
+                  shared?.remove('isRegister');
+                  if (context.mounted) {
+                    // إذا كان الرابط غير فارغ يتم فتحه، وإلا تظهر رسالة للمستخدم
+                    if (url.toString().isNotEmpty) {
+                      await launchUrl(
+                        url,
+                        mode: LaunchMode.externalApplication,
+                      );
+                    } else {
+                      Logger.logger(
+                        'تم حذف الحساب بنجاح، لا يوجد رابط خارجي للحذف النهائي.',
+                      );
+                    }
+                    read.managerScreenSplash(LoginScreen.Route, context, false);
+                  }
+                } catch (error) {
+                  if (context.mounted) {
+                    Navigator.pop(context);
+                    Logger.logger(error.toString());
+                    read.managerScreenSplash(LoginScreen.Route, context, false);
+                  }
+                }
               },
             ),
           ],
@@ -242,7 +245,8 @@ class _ProfileCard extends StatelessWidget {
       ),
     );
   }
-}
+  }
+
 
 class _ActionTile extends StatelessWidget {
   final IconData icon;

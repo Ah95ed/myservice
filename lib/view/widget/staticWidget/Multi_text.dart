@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class MultiText extends StatelessWidget {
   const MultiText(this.str, this.con, {super.key});
-  
+
   final String str, con;
 
   @override
@@ -19,7 +19,6 @@ class MultiText extends StatelessWidget {
           children: [
             Text(
               con,
-              maxLines: 3,
               style: TextStyle(
                 fontSize: setFontSize(14),
                 color: Colors.black,
@@ -29,14 +28,12 @@ class MultiText extends StatelessWidget {
             SizedBox(width: getWidth(2)),
             Text(
               str,
-              maxLines: 3,
               style: TextStyle(
                 fontSize: setFontSize(14),
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: getheight(1)),
           ],
         ),
       ),

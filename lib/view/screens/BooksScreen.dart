@@ -80,7 +80,10 @@ class _BooksScreenState extends State<BooksScreen>
                 backgroundColor: Colors.transparent,
                 elevation: 0,
                 leading: IconButton(
-                  icon: const Icon(Icons.arrow_back, color: AppTheme.notWhite),
+                  icon: const Icon(
+                    Icons.arrow_back,
+                    color: ColorUsed.DarkGreen,
+                  ),
                   onPressed: () => Navigator.pop(context),
                 ),
                 flexibleSpace: Container(

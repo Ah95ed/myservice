@@ -1,9 +1,11 @@
 import 'package:Al_Zab_township_guide/Helper/Constant/Constant.dart';
+import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/app_theme.dart';
 import 'package:Al_Zab_township_guide/view/widget/Cards/CardDonors.dart';
+import 'package:Al_Zab_township_guide/view/widget/Dialogandsnakebar/ManageListingDialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -46,6 +48,7 @@ class _ShowDonorsState extends State<ShowDonors> {
   @override
   Widget build(BuildContext context) {
     final dataSend = _dataSend;
+    final isRegister = shared?.getBool('isRegister') == true;
     if (dataSend == null) {
       return const SizedBox.shrink();
     }
@@ -129,6 +132,38 @@ class _ShowDonorsState extends State<ShowDonors> {
                           type: dataSend.collection,
                           title: value.data[index]['location'],
                           number: value.data[index]['number'],
+                          onEdit:
+                              isRegister && value.data[index]['canManage'] == 1
+                              ? () async {
+                                  await ManageListingDialog.showEditDialog(
+                                    context: context,
+                                    collection: dataSend.collection,
+                                    item: Map<String, dynamic>.from(
+                                      value.data[index],
+                                    ),
+                                    onCompleted: () => value.getData(
+                                      dataSend.collection,
+                                      refresh: true,
+                                    ),
+                                  );
+                                }
+                              : null,
+                          onDelete:
+                              isRegister && value.data[index]['canManage'] == 1
+                              ? () async {
+                                  await ManageListingDialog.showDeleteDialog(
+                                    context: context,
+                                    collection: dataSend.collection,
+                                    item: Map<String, dynamic>.from(
+                                      value.data[index],
+                                    ),
+                                    onCompleted: () => value.getData(
+                                      dataSend.collection,
+                                      refresh: true,
+                                    ),
+                                  );
+                                }
+                              : null,
                         );
                       },
                     ),

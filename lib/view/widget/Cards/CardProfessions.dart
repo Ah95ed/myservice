@@ -10,11 +10,15 @@ class CardProfessions extends StatelessWidget {
   // const Professions({super.key});
   String name, nameProfession;
   VoidCallback onPressed;
+  final VoidCallback? onEdit;
+  final VoidCallback? onDelete;
   CardProfessions({
     super.key,
     required this.name,
     required this.nameProfession,
     required this.onPressed,
+    this.onEdit,
+    this.onDelete,
   });
 
   @override
@@ -36,13 +40,36 @@ class CardProfessions extends StatelessWidget {
           ),
           Expanded(
             flex: 0,
-            child: IconButton(
-              icon: Icon(
-                Icons.call,
-                color: ColorUsed.primary,
-                size: getheight(4),
-              ),
-              onPressed: onPressed,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                  icon: Icon(
+                    Icons.call,
+                    color: ColorUsed.primary,
+                    size: getheight(3.5),
+                  ),
+                  onPressed: onPressed,
+                ),
+                if (onEdit != null)
+                  IconButton(
+                    icon: Icon(
+                      Icons.edit,
+                      color: ColorUsed.second,
+                      size: getheight(3),
+                    ),
+                    onPressed: onEdit,
+                  ),
+                if (onDelete != null)
+                  IconButton(
+                    icon: Icon(
+                      Icons.delete,
+                      color: Colors.red.shade700,
+                      size: getheight(3),
+                    ),
+                    onPressed: onDelete,
+                  ),
+              ],
             ),
           ),
         ],

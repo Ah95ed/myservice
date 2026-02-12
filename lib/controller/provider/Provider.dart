@@ -1,10 +1,12 @@
 import 'dart:convert';
 
 import 'package:Al_Zab_township_guide/Helper/Constant/Constant.dart';
+import 'package:Al_Zab_township_guide/Helper/Constant/ServiceCollectios.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
 import 'package:Al_Zab_township_guide/Services/cloudflare_api.dart';
+import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/app_theme.dart';
 import 'package:Al_Zab_township_guide/view/screens/BloodScreen.dart';
@@ -30,6 +32,10 @@ class Providers with ChangeNotifier {
   bool get isLoading => _isLoading;
   bool get hasMore => _hasMore;
 
+  Widget _baseTitle = Text(
+    Translation[Language.selectType],
+    style: TextStyle(color: AppTheme.notWhite),
+  );
   Widget title = Text(
     Translation[Language.selectType],
     style: TextStyle(color: AppTheme.notWhite),
@@ -37,17 +43,6 @@ class Providers with ChangeNotifier {
   Icon actionsicon = const Icon(null, color: AppTheme.notWhite, size: 22.0);
 
   final TextEditingController number = TextEditingController();
-  changewidgetSerach() {
-    if (index == 2) {
-      title = Text(
-        Translation[Language.selectType],
-        style: TextStyle(color: AppTheme.notWhite),
-      );
-      actionsicon = const Icon(null, color: AppTheme.notWhite, size: 22.0);
-      notifyListeners();
-    }
-  }
-
   @override
   void dispose() {
     super.dispose();
@@ -57,15 +52,73 @@ class Providers with ChangeNotifier {
   int index = 2;
   int expanded = 1;
 
-  void changeSelect(int vlaue) {
+  void changeSelect(int vlaue, BuildContext context) {
     index = vlaue;
-    changewidgetSerach();
+    resetSearchState();
+    updateAppBarForIndex(context);
     onSelected();
   }
 
   void onSelected() {
     this.expanded = 2;
     notifyListeners();
+  }
+
+  void updateAppBarForIndex(BuildContext context) {
+    switch (index) {
+      case 0:
+        configureAppBar(
+          Text(
+            S.of(context).doctors,
+            style: const TextStyle(color: AppTheme.notWhite),
+          ),
+        );
+        break;
+      case 1:
+        configureAppBar(
+          Text(
+            S.of(context).professions,
+            style: const TextStyle(color: AppTheme.notWhite),
+          ),
+        );
+        break;
+      case 2:
+        configureAppBar(
+          Text(
+            Translation[Language.selectType],
+            style: TextStyle(
+              color: AppTheme.notWhite,
+              fontSize: setFontSize(16),
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          showSearch: false,
+        );
+        break;
+      case 3:
+        configureAppBar(
+          Text(
+            S.of(context).cars,
+            style: const TextStyle(color: AppTheme.notWhite),
+          ),
+        );
+        break;
+      case 4:
+        configureAppBar(
+          Text(
+            S.of(context).internal_transfer,
+            style: const TextStyle(color: AppTheme.notWhite),
+          ),
+        );
+        break;
+      default:
+        configureAppBar(
+          Text(
+            Translation[Language.selectType],
+            style: TextStyle(color: AppTheme.notWhite),
+          ),
+        );
+    }
   }
 
   final bodys = [
@@ -78,6 +131,9 @@ class Providers with ChangeNotifier {
 
   List get data => search.isEmpty ? s : search;
   void changewidget(TextStyle style) {
+    if (actionsicon.icon == null) {
+      return;
+    }
     number.text = "";
     if (actionsicon.icon == Icons.search) {
       // save = List.from(s);
@@ -89,13 +145,8 @@ class Providers with ChangeNotifier {
       title = TextField(
         controller: number,
         keyboardType: TextInputType.text,
-        style: TextStyle(
-          fontSize: setFontSize(14),
-          fontWeight: FontWeight.bold,
-          color: AppTheme.notWhite,
-        ),
+        style: style,
         textAlign: TextAlign.start,
-
         onChanged: (value) {
           searchName(value);
         },
@@ -109,9 +160,26 @@ class Providers with ChangeNotifier {
         color: AppTheme.notWhite,
         size: 22.0,
       );
-      title = Text('', style: style);
+      title = _baseTitle;
     }
     notifyListeners();
+  }
+
+  void configureAppBar(Widget newTitle, {bool showSearch = true}) {
+    _baseTitle = newTitle;
+    title = newTitle;
+    actionsicon = showSearch
+        ? const Icon(Icons.search, color: AppTheme.notWhite, size: 22.0)
+        : const Icon(null, color: AppTheme.notWhite, size: 22.0);
+    if (!showSearch) {
+      resetSearchState();
+    }
+    notifyListeners();
+  }
+
+  void resetSearchState() {
+    number.clear();
+    search = [];
   }
 
   // void refresh() {
@@ -149,18 +217,53 @@ class Providers with ChangeNotifier {
   }
 
   Future<void> searchName(String? name) async {
-    if (name == null || name.length == 0 || name == "" || name.isEmpty) {
+    final query = name?.trim().toLowerCase() ?? '';
+    if (query.isEmpty) {
       search = [];
-
       notifyListeners();
       return;
     }
 
+    final fields = _searchFields();
     search = s.where((e) {
-      return e['name'].contains(name);
+      if (e is! Map) {
+        return false;
+      }
+      final item = Map<String, dynamic>.from(e);
+      for (final field in fields) {
+        final value = item[field];
+        if (_matchesQuery(value, query)) {
+          return true;
+        }
+      }
+      return false;
     }).toList();
 
     notifyListeners();
+  }
+
+  bool _matchesQuery(dynamic value, String query) {
+    if (value == null) {
+      return false;
+    }
+    return value.toString().toLowerCase().contains(query);
+  }
+
+  List<String> _searchFields() {
+    if (_currentCollection == ServiceCollectios.line.name) {
+      return ['name', 'type', 'from', 'number', 'time'];
+    }
+    if (_currentCollection == ServiceCollectios.professions.name) {
+      return ['name', 'nameProfession', 'number'];
+    }
+    if (_currentCollection == ServiceCollectios.Satota.name) {
+      return ['name', 'location', 'number'];
+    }
+    if (_currentCollection == ServiceCollectios.Doctor.name ||
+        _currentCollection == 'Doctor') {
+      return ['name', 'presence', 'specialization', 'title', 'number'];
+    }
+    return ['name'];
   }
 
   Future getData(String collection, {bool refresh = false}) async {
@@ -205,12 +308,26 @@ class Providers with ChangeNotifier {
         page: _page,
         limit: _pageSize,
       );
+      // إضافة canManage للمطور فقط
+      final adminEmail = 'amhmeed31@gmail.com';
+      final adminPhone = '07824854525';
+      final userEmail = shared?.getString('emailUser') ?? '';
+      final userPhone = shared?.getString('phoneUser') ?? '';
+      final processed = result.map((item) {
+        final map = Map<String, dynamic>.from(item);
+        if (userEmail == adminEmail || userPhone == adminPhone) {
+          map['canManage'] = 1;
+        } else {
+          map['canManage'] = 0;
+        }
+        return map;
+      }).toList();
       if (_page == 1) {
-        s = result;
+        s = processed;
       } else {
-        s.addAll(result);
+        s.addAll(processed);
       }
-      if (result.length < _pageSize) {
+      if (processed.length < _pageSize) {
         _hasMore = false;
       } else {
         _page += 1;
