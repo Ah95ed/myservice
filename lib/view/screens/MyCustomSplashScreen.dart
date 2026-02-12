@@ -31,7 +31,7 @@ class _MyCustomSplashScreenState extends State<MyCustomSplashScreen>
 
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 600),
+      duration: const Duration(milliseconds: 6000),
     );
 
     animation1 =
@@ -48,20 +48,20 @@ class _MyCustomSplashScreenState extends State<MyCustomSplashScreen>
 
     _controller.forward();
 
-    Timer(const Duration(milliseconds: 150), () {
+    Timer(const Duration(milliseconds: 2000), () {
       setState(() {
         _fontSize = 1.06;
       });
     });
 
-    Timer(const Duration(milliseconds: 200), () {
+    Timer(const Duration(milliseconds: 2000), () {
       setState(() {
         _containerSize = 2;
         _containerOpacity = 1;
       });
     });
 
-    Timer(const Duration(milliseconds: 450), () {
+    Timer(const Duration(milliseconds: 3000), () {
       shared!.setBool('spalsh', true);
       if (!mounted) return;
       Navigator.pushReplacement(context, PageTransition(MainScreen()));
@@ -87,12 +87,12 @@ class _MyCustomSplashScreenState extends State<MyCustomSplashScreen>
           Column(
             children: [
               AnimatedContainer(
-                duration: const Duration(milliseconds: 300),
+                duration: const Duration(milliseconds: 3000),
                 curve: Curves.fastLinearToSlowEaseIn,
                 height: _height / _fontSize,
               ),
               AnimatedOpacity(
-                duration: const Duration(milliseconds: 250),
+                duration: const Duration(milliseconds: 2500),
                 opacity: _textOpacity,
                 child: Text(
                   Translation[Language.title],
@@ -107,11 +107,11 @@ class _MyCustomSplashScreenState extends State<MyCustomSplashScreen>
           ),
           Center(
             child: AnimatedOpacity(
-              duration: const Duration(milliseconds: 300),
+              duration: const Duration(milliseconds: 3000),
               curve: Curves.fastLinearToSlowEaseIn,
               opacity: _containerOpacity,
               child: AnimatedContainer(
-                duration: const Duration(milliseconds: 300),
+                duration: const Duration(milliseconds: 3000),
                 curve: Curves.fastLinearToSlowEaseIn,
                 height: _width / _containerSize,
                 width: _width / _containerSize,
@@ -136,7 +136,7 @@ class PageTransition extends PageRouteBuilder {
   PageTransition(this.page)
     : super(
         pageBuilder: (context, animation, anotherAnimation) => page,
-        transitionDuration: const Duration(milliseconds: 600),
+        transitionDuration: const Duration(milliseconds: 6000),
         transitionsBuilder: (context, animation, anotherAnimation, child) {
           animation = CurvedAnimation(
             curve: Curves.fastLinearToSlowEaseIn,
