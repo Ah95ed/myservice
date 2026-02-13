@@ -59,7 +59,7 @@ class SignupProvider extends ChangeNotifier {
     EmailOTP.config(
       appName: Translation[Language.title],
       otpType: OTPType.numeric,
-      expiry: 40000,
+      expiry: 100000,
       emailTheme: EmailTheme.v6,
       appEmail: 'amhmeed31@gmail.com',
       otpLength: 6,

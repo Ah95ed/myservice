@@ -1303,15 +1303,21 @@ export default {
                 return badRequest("Unknown type");
             }
 
-            const owned = await env.DB.prepare(`SELECT id FROM ${table} WHERE id = ? AND created_by = ? LIMIT 1`)
-                .bind(id, user.sub)
-                .first();
-            if (!owned) {
+            // المطور يمكنه حذف أي عنصر
+            let canDelete = false;
+            if (user.is_admin === true || user.email === "amhmeed31@gmail.com" || user.phone === "07824854525") {
+                canDelete = true;
+            } else {
+                const owned = await env.DB.prepare(`SELECT id FROM ${table} WHERE id = ? AND created_by = ? LIMIT 1`)
+                    .bind(id, user.sub)
+                    .first();
+                if (owned) canDelete = true;
+            }
+            if (!canDelete) {
                 return jsonResponse({ error: "Forbidden: owner only" }, 403);
             }
-
-            await env.DB.prepare(`DELETE FROM ${table} WHERE id = ? AND created_by = ?`)
-                .bind(id, user.sub)
+            await env.DB.prepare(`DELETE FROM ${table} WHERE id = ?`)
+                .bind(id)
                 .run();
             return jsonResponse({ ok: true });
         }
@@ -1356,18 +1362,23 @@ export default {
                 return badRequest("No editable fields provided");
             }
 
-            const owned = await env.DB.prepare(`SELECT id FROM ${table} WHERE id = ? AND created_by = ? LIMIT 1`)
-                .bind(id, user.sub)
-                .first();
-            if (!owned) {
+            // المطور يمكنه التعديل على أي عنصر
+            let canEdit = false;
+            if (user.is_admin === true || user.email === "amhmeed31@gmail.com" || user.phone === "07824854525") {
+                canEdit = true;
+            } else {
+                const owned = await env.DB.prepare(`SELECT id FROM ${table} WHERE id = ? AND created_by = ? LIMIT 1`)
+                    .bind(id, user.sub)
+                    .first();
+                if (owned) canEdit = true;
+            }
+            if (!canEdit) {
                 return jsonResponse({ error: "Forbidden: owner only" }, 403);
             }
-
-            const sql = `UPDATE ${table} SET ${assignments.join(", ")} WHERE id = ? AND created_by = ?`;
+            const sql = `UPDATE ${table} SET ${assignments.join(", ")} WHERE id = ?`;
             await env.DB.prepare(sql)
-                .bind(...values, id, user.sub)
+                .bind(...values, id)
                 .run();
-
             return jsonResponse({ ok: true });
         }
 
