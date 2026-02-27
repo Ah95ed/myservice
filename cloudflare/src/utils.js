@@ -165,13 +165,13 @@ export const validateAuthInput = (data, type = "login") => {
   const errors = [];
   if (type === "register" && (!data.name || data.name.trim().length < 2))
     errors.push("الاسم قصير جداً");
-  if (!data.phone || !/^\\d{10,15}$/.test(data.phone.trim()))
+  if (!data.phone || !/^\d{10,15}$/.test(data.phone.trim()))
     errors.push("رقم الهاتف غير صحيح");
   if (!data.password || data.password.trim().length < 6)
     errors.push("كلمة المرور يجب أن تكون 6 أحرف على الأقل");
   if (
     type === "register" &&
-    (!data.email || !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(data.email.trim()))
+    (!data.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email.trim()))
   )
     errors.push("البريد الإلكتروني غير صحيح");
   return errors;
