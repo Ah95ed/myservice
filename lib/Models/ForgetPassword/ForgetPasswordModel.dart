@@ -22,19 +22,27 @@ class ForgetPasswordModel {
       Navigator.pop(context);
       return;
     }
-    if (await EmailOTP.sendOTP(email: _email)) {
-      Navigator.popAndPushNamed(
-        context,
-        OtpScreenEmail.Route,
-        arguments: {'isForget': true, 'email': _email},
-      );
-    } else {
+    try {
+      bool otpSent = await EmailOTP.sendOTP(email: _email);
+
+      if (otpSent) {
+        await CloudflareApi.instance.requestPasswordReset(_email);
+        Navigator.popAndPushNamed(
+          context,
+          OtpScreenEmail.Route,
+          arguments: {'isForget': true, 'email': _email},
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('فشل في إرسال رمز التحقق (OTP)')),
+        );
+        Navigator.pop(context);
+      }
+    } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(Translation[Language.not_sent_email])),
       );
       Navigator.pop(context);
-
-      return;
     }
   }
 }

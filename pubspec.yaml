@@ -3,39 +3,39 @@ description: A new Flutter project.
 publish_to: none
 version: 1.0.1+2
 environment:
-  sdk: '3.10.8'
-  flutter: '3.38.9'
+  sdk: "3.10.8"
+  flutter: "3.38.9"
 
 dependencies:
-  flutter: 
+  flutter:
     sdk: flutter
-  cupertino_icons: 
+  cupertino_icons:
   google_fonts:
   flutter_screenutil:
 
-  email_otp: 
-  recaptcha_enterprise_flutter: 
+  email_otp:
+  recaptcha_enterprise_flutter:
   provider:
   url_launcher:
   shared_preferences:
   flutter_secure_storage:
   flutter_localizations:
     sdk: flutter
-  intl: 
-  # tutorial_coach_mark: 
-  appwrite: 
-    git: https://github.com/appwrite/sdk-for-flutter.git
-  share_plus: 
-  package_info_plus: 
+  intl:
+  # tutorial_coach_mark:
+  # appwrite:
+  #   git: https://github.com/appwrite/sdk-for-flutter.git
+  share_plus:
+  package_info_plus:
   http:
-  flutter_pdfview: 
+  flutter_pdfview:
   open_filex:
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: 
+  flutter_lints:
 
 flutter:
   generate: true
@@ -48,4 +48,3 @@ flutter:
 
 flutter_intl:
   enabled: true
-

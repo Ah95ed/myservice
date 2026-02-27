@@ -1,8 +1,6 @@
 import 'dart:developer';
 
 import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
-import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
-import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
 import 'package:Al_Zab_township_guide/Models/SharedModel/SharedModel.dart';
 import 'package:Al_Zab_township_guide/Services/cloudflare_api.dart';
@@ -12,7 +10,6 @@ import 'package:Al_Zab_township_guide/main.dart';
 import 'package:Al_Zab_township_guide/view/screens/LoginScreen/login_screen.dart';
 import 'package:Al_Zab_township_guide/view/screens/MainScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/OTPScreenEmail.dart';
-import 'package:email_otp/email_otp.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -57,46 +54,42 @@ class SignupModel {
   set token(String? value) => _token = value;
   SharedModel? sharesModel;
 
-  Future<bool> sendCodeEmail(BuildContext context, String email) async {
-    if (await EmailOTP.sendOTP(email: email)) {
-      Logger.logger("message otp ${EmailOTP.getOTP()}");
-      Logger.logger('message sendCodeEmail -> ok');
-      read!.managerScreen(OtpScreenEmail.Route, _ctx!);
-      Navigator.pop(context);
+  Future<void> sendCodeToScreen(BuildContext context) async {
+    Logger.logger('message sendCodeToScreen -> ok');
+    read!.managerScreen(OtpScreenEmail.Route, _ctx!);
+    Navigator.pop(context);
+  }
 
-      return true;
-    } else {
-      Logger.logger('message sendCodeEmail -> error');
-      Logger.logger('message sendCodeEmail -> Field');
-      Navigator.pop(context);
-
-      ScaffoldMessenger.of(_ctx!).showSnackBar(
-        SnackBar(content: Text(Translation[Language.error_email])),
-      );
-      return false;
+  Future<void> saveData(
+    BuildContext context, {
+    required String otp,
+    Map<String, String>? data,
+  }) async {
+    if (data != null) {
+      _name = data['name'];
+      _email = data['email'];
+      _password = data['password'];
+      _phone = data['phone'];
     }
+    await registerInRealTime(context, otp);
   }
 
-  Future<void> saveData(BuildContext context, Map<String, String> data) async {
-    _name = data['name'];
-    _email = data['email'];
-    _password = data['password'];
-    _phone = data['phone'];
-    await registerInRealTime(context);
-  }
-
-  Future<void> registerInRealTime(BuildContext ctx) async {
+  Future<void> registerInRealTime(BuildContext ctx, String otp) async {
     try {
       // تحقق من البريد أو الهاتف لجعل المستخدم أدمن
       final isAdmin =
           (_email == 'amhmeed31@gmail.com' || _phone == '07824854526') ? 1 : 0;
+
       final response = await CloudflareApi.instance.register(
         name: _name ?? '',
         email: _email ?? '',
         phone: _phone ?? '',
         password: _password ?? '',
-        isAdmin: isAdmin ,
+        otp:
+            "000000", // Dummy OTP because we disabled the backend OTP validation locally
+        isAdmin: isAdmin,
       );
+      print('REGISTER_DEBUG: Response: ' + response.toString());
       final user = response['user'] as Map<String, dynamic>;
       final token = response['token'] as String;
       await SecureStorageService.saveToken(token);
@@ -114,10 +107,11 @@ class SignupModel {
       await shared!.setBool('isAdmin', isAdmin == 1);
       sharesModel!.managerScreenSplash(MainScreen.ROUTE, ctx, false);
     } catch (error) {
+      print('REGISTER_DEBUG: Error: ' + error.toString());
       log('message registerInRealTime -> $error');
       ScaffoldMessenger.of(
         _ctx!,
-      ).showSnackBar(SnackBar(content: Text('Error Register')));
+      ).showSnackBar(SnackBar(content: Text('Error Register: $error')));
       sharesModel!.managerScreenSplash(LoginScreen.Route, ctx, false);
     }
   }

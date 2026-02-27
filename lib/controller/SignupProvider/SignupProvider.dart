@@ -1,7 +1,7 @@
 import 'package:Al_Zab_township_guide/Helper/Log/Logger.dart';
-import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
-import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
 import 'package:Al_Zab_township_guide/Models/SignupModel/SignupModel.dart';
+import 'package:Al_Zab_township_guide/Services/cloudflare_api.dart';
+import 'package:Al_Zab_township_guide/Services/email_otp_service.dart';
 import 'package:email_otp/email_otp.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +12,8 @@ class SignupProvider extends ChangeNotifier {
 
   SignupProvider() {
     model = SignupModel();
+    // تهيئة مكتبة إرسال البريد
+    // EmailOtpService.instance.init();
   }
   void startLoading() {
     isSignup = true;
@@ -23,13 +25,14 @@ class SignupProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> saveData(BuildContext context) async {
+  Future<void> saveData(BuildContext context, {required String otp}) async {
     if (register == null) return;
-    await model.saveData(context, register!);
+    await model.saveData(context, data: register!, otp: otp);
   }
 
   Future<void> sendCode(SignupModel m, BuildContext context) async {
-    model = await SignupModel(
+    await EmailOtpService.instance.init();
+    model = SignupModel(
       name: m.name,
       email: m.email,
       password: m.password,
@@ -44,27 +47,29 @@ class SignupProvider extends ChangeNotifier {
     };
     Logger.logger("message init");
 
-    EmailOTP.setSMTP(
-      host: 'smtp.gmail.com',
-      emailPort: EmailPort.port587,
-      secureType: SecureType.tls,
-      username: 'amhmeed31@gmail.com',
+    try {
+      // Step 1: Send OTP Via the EmailOTP package to the user's email
+      bool otpSent = await EmailOTP.sendOTP(email: m.email!);
 
-      /// your google account mail
-      password: 'arhs xupn ktkc ypir',
-
-      /// this password will get while creating app password
-    );
-
-    EmailOTP.config(
-      appName: Translation[Language.title],
-      otpType: OTPType.numeric,
-      expiry: 100000,
-      emailTheme: EmailTheme.v6,
-      appEmail: 'amhmeed31@gmail.com',
-      otpLength: 6,
-    );
-    await model.sendCodeEmail(context, m.email!);
+      if (otpSent) {
+        // Step 2: Request the token from Cloudflare API if needed, then move to OTP Screen
+        // Note: You can now bypass the Cloudflare OTP request if you intend to only verify via EmailOTP.
+        // For now, we keep the server registration logic if it expects an OTP generation locally.
+        await CloudflareApi.instance.requestSignupOtp(
+          email: m.email!,
+          phone: m.phone!,
+        );
+        await model.sendCodeToScreen(context);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('فشل في إرسال رمز التحقق (OTP)')),
+        );
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(e.toString())));
+    }
 
     notifyListeners();
   }

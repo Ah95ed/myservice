@@ -6,20 +6,20 @@ import 'package:Al_Zab_township_guide/Services/cloudflare_api.dart';
 import 'package:Al_Zab_township_guide/Services/secure_storage_service.dart';
 import 'package:Al_Zab_township_guide/controller/provider/Provider.dart';
 import 'package:Al_Zab_township_guide/view/screens/OTPScreenNumber/OTPScreenNumber.dart';
-import 'package:appwrite/appwrite.dart';
+// import 'package:appwrite/appwrite.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class UpdateModel {
   String? name, number;
   String? typeService;
-  Client? client;
+  // Client? client;
   UpdateModel() {
-    client = Client();
-    client!
-        .setEndpoint('https://cloud.appwrite.io/v1')
-        .setProject('66b5930400399d8fd3ee')
-        .setSelfSigned(status: true);
+    // client = Client();
+    // client!
+    //     .setEndpoint('https://cloud.appwrite.io/v1')
+    //     .setProject('66b5930400399d8fd3ee')
+    // .setSelfSigned(status: true);
   }
   Future<void> searchService(
     String? selectedValue,
@@ -82,13 +82,13 @@ class UpdateModel {
 
   Future<void> sendSMS(BuildContext c, String number) async {
     String num = number.substring(1);
-    final account = Account(client!);
-    final token = await account.createPhoneToken(
-      userId: ID.unique(),
-      phone: '+964$num',
-    );
+    // final account = Account(client!);
+    // final token = await account.createPhoneToken(
+    //   userId: ID.unique(),
+    //   phone: '+964$num',
+    // );
     Navigator.pop(c);
-    await shared!.setString('userId', token.userId);
+    // await shared!.setString('userId', token.userId);
     await shared!.setString('numberDelete', number);
     Provider.of<Providers>(
       c,

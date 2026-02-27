@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:Al_Zab_township_guide/Helper/Constant/Constant.dart';
 import 'package:Al_Zab_township_guide/Helper/Constant/ServiceCollectios.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
@@ -11,11 +10,10 @@ import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/app_theme.dart';
 import 'package:Al_Zab_township_guide/view/screens/BloodScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/DoctorScreen.dart';
-import 'package:Al_Zab_township_guide/view/screens/OTPScreenEmail.dart';
 import 'package:Al_Zab_township_guide/view/screens/ProfessionsScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/SatotaScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/TheCars.dart';
-import 'package:email_otp/email_otp.dart';
+// import 'package:email_otp/email_otp.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -193,19 +191,19 @@ class Providers with ChangeNotifier {
     String phone,
     BuildContext context,
   ) async {
-    EmailOTP.config(
-      appEmail: Constant.appEmail,
-      appName: Constant.appName,
-      otpLength: 4,
-      otpType: OTPType.numeric,
-    );
-    if (await EmailOTP.sendOTP(email: email)) {
-      this.name = name;
-      this.email = email;
-      this.phone = phone;
-      this.password = password;
-      managerScreen(OtpScreenEmail.Route, context);
-    }
+    // EmailOTP.config(
+    //   appEmail: Constant.appEmail,
+    //   appName: Constant.appName,
+    //   otpLength: 4,
+    //   otpType: OTPType.numeric,
+    // );
+    // if (await EmailOTP.sendOTP(email: email)) {
+    //   this.name = name;
+    //   this.email = email;
+    //   this.phone = phone;
+    //   this.password = password;
+    //   managerScreen(OtpScreenEmail.Route, context);
+    // }
 
     notifyListeners();
   }

@@ -33,6 +33,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
     final args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     final email = args['email'] as String? ?? '';
+    final otp = args['otp'] as String? ?? '';
 
     return Scaffold(
       backgroundColor: ColorUsed.PrimaryBackground,
@@ -84,12 +85,15 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 }
                 showCirculerProgress(context);
                 try {
-                  await CloudflareApi.instance.resetPassword(
+                  await CloudflareApi.instance.confirmPasswordReset(
                     email: email,
+                    otp: otp,
                     newPassword: _password.text,
                   );
-                  Navigator.pop(context);
-                  Navigator.pop(context);
+                  Navigator.pop(context); // close progress
+                  Navigator.pop(context); // close reset screen
+                  Navigator.pop(context); // close otp screen
+                  Navigator.pop(context); // close forget screen
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text(Translation[Language.done])),
                   );

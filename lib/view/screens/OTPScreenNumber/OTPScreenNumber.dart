@@ -4,9 +4,8 @@ import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
 import 'package:Al_Zab_township_guide/controller/provider/UpdateProvider/UpdateProvider.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
-import 'package:Al_Zab_township_guide/view/ThemeApp/app_theme.dart';
 import 'package:Al_Zab_township_guide/view/widget/Dialogandsnakebar/DialogCirculerProgress.dart';
-import 'package:appwrite/appwrite.dart';
+// import 'package:appwrite/appwrite.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -151,98 +150,98 @@ class _OTPScreenNumberState extends State<OTPScreenNumber> {
                   //   );
                   //   return;
                   // }
-                  Client client = await Client();
-                  await client
-                      .setEndpoint('https://cloud.appwrite.io/v1')
-                      .setProject('66b5930400399d8fd3ee')
-                      .setSelfSigned(status: true);
-                  final account = await Account(client);
+                  // Client client = await Client();
+                  // await client
+                  //     .setEndpoint('https://cloud.appwrite.io/v1')
+                  //     .setProject('66b5930400399d8fd3ee')
+                  //     .setSelfSigned(status: true);
+                  // final account = await Account(client);
 
-                  await account
-                      .createSession(
-                        userId: userId!,
-                        secret: _textController.text,
-                      )
-                      .then((value) {
-                        if (value.current) {
-                          showDialog(
-                            context: context,
-                            builder: (c) {
-                              return AlertDialog(
-                                title: Text(
-                                  Translation[Language.sure_to_delete_account],
-                                ),
-                                actions: [
-                                  ElevatedButton(
-                                    autofocus: true,
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: ColorUsed.primary,
-                                      foregroundColor: ColorUsed.primary,
-                                      shadowColor: ColorUsed.primary,
-                                      elevation: 5,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      side: const BorderSide(
-                                        color: ColorUsed.primary,
-                                      ),
-                                    ),
-                                    onPressed: () async {
-                                      Navigator.pop(context);
-                                      showCirculerProgress(context);
-                                      shared!.remove('userId');
-                                      await read
-                                          .deleteDataFromRealtimeAndFireStore(
-                                            context,
-                                          );
-                                      // showDi
-                                    },
-                                    child: Text(
-                                      Translation[Language.yes],
-                                      style: TextStyle(
-                                        color: AppTheme.notWhite,
-                                        fontSize: setFontSize(14),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(width: getWidth(8)),
-                                  ElevatedButton(
-                                    autofocus: true,
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: ColorUsed.primary,
-                                      foregroundColor: ColorUsed.primary,
-                                      shadowColor: ColorUsed.primary,
-                                      elevation: 5,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      side: const BorderSide(
-                                        color: ColorUsed.primary,
-                                      ),
-                                    ),
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                      shared!.remove('userId');
-                                    },
-                                    child: Text(
-                                      Translation[Language.no],
-                                      style: TextStyle(
-                                        color: AppTheme.notWhite,
-                                        fontSize: setFontSize(14),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-                        }
-                      })
-                      .catchError((e) {
-                        ScaffoldMessenger.of(
-                          context,
-                        ).showSnackBar(SnackBar(content: Text(e.toString())));
-                      });
+                  // await account
+                  //     .createSession(
+                  //       userId: userId!,
+                  //       secret: _textController.text,
+                  //     )
+                  //     .then((value) {
+                  //       if (value.current) {
+                  //         showDialog(
+                  //           context: context,
+                  //           builder: (c) {
+                  //             return AlertDialog(
+                  //               title: Text(
+                  //                 Translation[Language.sure_to_delete_account],
+                  //               ),
+                  //               actions: [
+                  //                 ElevatedButton(
+                  //                   autofocus: true,
+                  //                   style: ElevatedButton.styleFrom(
+                  //                     backgroundColor: ColorUsed.primary,
+                  //                     foregroundColor: ColorUsed.primary,
+                  //                     shadowColor: ColorUsed.primary,
+                  //                     elevation: 5,
+                  //                     shape: RoundedRectangleBorder(
+                  //                       borderRadius: BorderRadius.circular(10),
+                  //                     ),
+                  //                     side: const BorderSide(
+                  //                       color: ColorUsed.primary,
+                  //                     ),
+                  //                   ),
+                  //                   onPressed: () async {
+                  //                     Navigator.pop(context);
+                  //                     showCirculerProgress(context);
+                  //                     shared!.remove('userId');
+                  //                     await read
+                  //                         .deleteDataFromRealtimeAndFireStore(
+                  //                           context,
+                  //                         );
+                  //                     // showDi
+                  //                   },
+                  //                   child: Text(
+                  //                     Translation[Language.yes],
+                  //                     style: TextStyle(
+                  //                       color: AppTheme.notWhite,
+                  //                       fontSize: setFontSize(14),
+                  //                     ),
+                  //                   ),
+                  //                 ),
+                  //                 SizedBox(width: getWidth(8)),
+                  //                 ElevatedButton(
+                  //                   autofocus: true,
+                  //                   style: ElevatedButton.styleFrom(
+                  //                     backgroundColor: ColorUsed.primary,
+                  //                     foregroundColor: ColorUsed.primary,
+                  //                     shadowColor: ColorUsed.primary,
+                  //                     elevation: 5,
+                  //                     shape: RoundedRectangleBorder(
+                  //                       borderRadius: BorderRadius.circular(10),
+                  //                     ),
+                  //                     side: const BorderSide(
+                  //                       color: ColorUsed.primary,
+                  //                     ),
+                  //                   ),
+                  //                   onPressed: () {
+                  //                     Navigator.of(context).pop();
+                  //                     shared!.remove('userId');
+                  //                   },
+                  //                   child: Text(
+                  //                     Translation[Language.no],
+                  //                     style: TextStyle(
+                  //                       color: AppTheme.notWhite,
+                  //                       fontSize: setFontSize(14),
+                  //                     ),
+                  //                   ),
+                  //                 ),
+                  //               ],
+                  //             );
+                  //           },
+                  //         );
+                  //       }
+                  //     })
+                  //     .catchError((e) {
+                  //   ScaffoldMessenger.of(
+                  //     context,
+                  //   ).showSnackBar(SnackBar(content: Text(e.toString())));
+                  // });
                 },
                 child: Text(
                   Translation[Language.confirm_otp],

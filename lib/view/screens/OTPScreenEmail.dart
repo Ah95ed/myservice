@@ -33,10 +33,9 @@ class _OtpScreenEmailState extends State<OtpScreenEmail> {
   Widget build(BuildContext context) {
     final signup = context.read<SignupProvider>();
     final Object? routeArgs = ModalRoute.of(context)?.settings.arguments;
-    final Map<dynamic, dynamic>? argsMap =
-      routeArgs is Map ? routeArgs : null;
+    final Map<dynamic, dynamic>? argsMap = routeArgs is Map ? routeArgs : null;
     final isForget =
-      (routeArgs is bool ? routeArgs : argsMap?['isForget']) == true;
+        (routeArgs is bool ? routeArgs : argsMap?['isForget']) == true;
     final email = argsMap?['email']?.toString();
     return Scaffold(
       body: SingleChildScrollView(
@@ -112,23 +111,37 @@ class _OtpScreenEmailState extends State<OtpScreenEmail> {
               ),
               onPressed: () async {
                 showCirculerProgress(context);
-                // if (isForget) {}
-                if (EmailOTP.verifyOTP(otp: otpNumber.text)) {
-                  if (isForget && email != null && email.isNotEmpty) {
-                    Navigator.pop(context);
-                    Navigator.pushNamed(
-                      context,
-                      '/ResetPassword',
-                      arguments: {'email': email},
-                    );
-                    return;
-                  }
-                  await signup.saveData(context);
-                } else {
+                // Try to verify OTP locally using EmailOTP package
+                bool isVerified = EmailOTP.verifyOTP(otp: otpNumber.text);
+
+                if (!isVerified) {
+                  Navigator.pop(context); // close progress
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(Translation[Language.otp_error])),
+                    const SnackBar(
+                      content: Text('رمز التحقق غير صحيح أو منتهي الصلاحية'),
+                    ),
                   );
-                  Navigator.pop(context);
+                  return;
+                }
+
+                if (isForget && email != null && email.isNotEmpty) {
+                  Navigator.pop(context); // close progress
+                  Navigator.pushNamed(
+                    context,
+                    '/ResetPassword',
+                    arguments: {'email': email, 'otp': otpNumber.text},
+                  );
+                  return;
+                }
+
+                // Smart: Rely on server-side validation during register call as well for consistency
+                try {
+                  await signup.saveData(context, otp: otpNumber.text);
+                } catch (e) {
+                  ScaffoldMessenger.of(
+                    context,
+                  ).showSnackBar(SnackBar(content: Text(e.toString())));
+                  Navigator.pop(context); // close progress
                 }
               },
               child: Text(

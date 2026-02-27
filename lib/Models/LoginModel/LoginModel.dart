@@ -30,10 +30,12 @@ class LoginModel {
 
   Future<void> checkData(String phone, String pass) async {
     try {
+      print('LOGIN_DEBUG: Sending phone: ' + phone + ', pass: ' + pass);
       final response = await CloudflareApi.instance.login(
         phone: phone,
         password: pass,
       );
+      print('LOGIN_DEBUG: Response: ' + response.toString());
       final user = response['user'] as Map<String, dynamic>;
       final token = response['token'] as String;
       await SecureStorageService.saveToken(token);
@@ -53,7 +55,8 @@ class LoginModel {
         MyApp.getContext()!,
         false,
       );
-    } catch (_) {
+    } catch (e) {
+      print('LOGIN_DEBUG: Error: ' + e.toString());
       Navigator.of(MyApp.getContext()!).pop();
       ScaffoldMessenger.of(
         MyApp.getContext()!,

@@ -54,15 +54,15 @@ class ProfileScreen extends StatelessWidget {
               icon: Icons.logout,
               color: ColorUsed.second,
               title: Translation[Language.logout],
-              onTap: () {
+              onTap: () async {
                 if (!isRegister) {
                   Logger.logger(Translation[Language.register_first]);
                   return;
                 }
-                shared?.remove('nameUser');
-                shared?.remove('emailUser');
-                shared?.remove('phoneUser');
-                shared?.remove('isRegister');
+                await shared?.remove('nameUser');
+                await shared?.remove('emailUser');
+                await shared?.remove('phoneUser');
+                await shared?.remove('isRegister');
                 read.managerScreenSplash(LoginScreen.Route, context, false);
               },
             ),
@@ -143,10 +143,10 @@ class ProfileScreen extends StatelessWidget {
                   if (!context.mounted) return;
                   Navigator.pop(context);
                   await SecureStorageService.clearAll();
-                  shared?.remove('nameUser');
-                  shared?.remove('emailUser');
-                  shared?.remove('phoneUser');
-                  shared?.remove('isRegister');
+                  await shared?.remove('nameUser');
+                  await shared?.remove('emailUser');
+                  await shared?.remove('phoneUser');
+                  await shared?.remove('isRegister');
                   if (context.mounted) {
                     // إذا كان الرابط غير فارغ يتم فتحه، وإلا تظهر رسالة للمستخدم
                     if (url.toString().isNotEmpty) {
@@ -245,8 +245,7 @@ class _ProfileCard extends StatelessWidget {
       ),
     );
   }
-  }
-
+}
 
 class _ActionTile extends StatelessWidget {
   final IconData icon;

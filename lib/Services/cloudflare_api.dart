@@ -15,11 +15,27 @@ class CloudflareApi {
 
   String get baseUrl => _baseUrl;
 
+  Future<void> requestSignupOtp({
+    required String email,
+    required String phone,
+  }) async {
+    final response = await http.post(
+      Uri.parse('$_baseUrl/auth/signup/request'),
+      headers: {'content-type': 'application/json'},
+      body: jsonEncode({'email': email, 'phone': phone}),
+    );
+
+    if (response.statusCode >= 400) {
+      throw Exception(_parseError(response));
+    }
+  }
+
   Future<Map<String, dynamic>> register({
     required String name,
     required String email,
     required String phone,
     required String password,
+    required String otp,
     int isAdmin = 0,
   }) async {
     final response = await http.post(
@@ -30,6 +46,7 @@ class CloudflareApi {
         'email': email,
         'phone': phone,
         'password': password,
+        'otp': otp,
         'is_admin': isAdmin,
       }),
     );
@@ -58,14 +75,31 @@ class CloudflareApi {
     return jsonDecode(response.body) as Map<String, dynamic>;
   }
 
-  Future<void> resetPassword({
+  Future<void> requestPasswordReset(String email) async {
+    final response = await http.post(
+      Uri.parse('$_baseUrl/auth/reset-password/request'),
+      headers: {'content-type': 'application/json'},
+      body: jsonEncode({'email': email}),
+    );
+
+    if (response.statusCode >= 400) {
+      throw Exception(_parseError(response));
+    }
+  }
+
+  Future<void> confirmPasswordReset({
     required String email,
+    required String otp,
     required String newPassword,
   }) async {
     final response = await http.post(
-      Uri.parse('$_baseUrl/auth/reset-password'),
+      Uri.parse('$_baseUrl/auth/reset-password/confirm'),
       headers: {'content-type': 'application/json'},
-      body: jsonEncode({'email': email, 'newPassword': newPassword}),
+      body: jsonEncode({
+        'email': email,
+        'otp': otp,
+        'newPassword': newPassword,
+      }),
     );
 
     if (response.statusCode >= 400) {

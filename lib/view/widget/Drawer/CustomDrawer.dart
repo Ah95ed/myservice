@@ -9,6 +9,7 @@ import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/app_theme.dart';
 import 'package:Al_Zab_township_guide/view/routing/routing.dart';
 import 'package:Al_Zab_township_guide/view/screens/GradesScreen.dart';
+import 'package:Al_Zab_township_guide/view/screens/LoginScreen/login_screen.dart';
 import 'package:Al_Zab_township_guide/view/screens/ProfileScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/SignupScreen/signup_screen.dart';
 import 'package:Al_Zab_township_guide/view/widget/Dialogandsnakebar/DialogCirculerProgress.dart';
@@ -77,7 +78,7 @@ class Customdrawer extends StatelessWidget {
                   : Icon(Icons.app_registration),
               title: shared!.getBool('isRegister') == true
                   ? Text(
-                      S.of(context).exit,
+                      Translation[Language.logout],
                       style: TextStyle(
                         fontSize: setFontSize(12),
                         fontWeight: FontWeight.w500,
@@ -85,21 +86,21 @@ class Customdrawer extends StatelessWidget {
                       ),
                     )
                   : Text(
-                      S.of(context).register_now,
+                      Translation[Language.login],
                       style: TextStyle(
                         fontSize: setFontSize(12),
                         fontWeight: FontWeight.w500,
                         color: ColorUsed.DarkGreen,
                       ),
                     ),
-              onTap: () {
+              onTap: () async {
                 if (shared!.getBool('isRegister') == true) {
-                  shared!.remove('nameUser');
-                  shared!.remove('emailUser');
-                  shared!.remove('phoneUser');
-                  shared!.remove('isRegister');
+                  await shared!.remove('nameUser');
+                  await shared!.remove('emailUser');
+                  await shared!.remove('phoneUser');
+                  await shared!.remove('isRegister');
                   Scaffold.of(context).closeDrawer();
-                  // read.refresh();
+                  read.managerScreenSplash(LoginScreen.Route, context, false);
                 } else {
                   read.managerScreen(SignupScreen.Route, context);
                 }
@@ -121,58 +122,6 @@ class Customdrawer extends StatelessWidget {
               },
             ),
             Divider(thickness: getWidth(0.5), color: ColorUsed.DarkGreen),
-            // ListTile(
-            //   leading: Icon(Icons.delete, color: Colors.red.shade700),
-            //   title: Text(
-            //     Translation[Language.delete_account],
-            //     style: TextStyle(
-            //       fontSize: setFontSize(12),
-            //       fontWeight: FontWeight.w500,
-            //       color: Colors.red.shade700,
-            //     ),
-            //   ),
-            //   onTap: () {
-            //     Scaffold.of(context).closeDrawer();
-            //     if (shared!.getBool('isRegister') != true) {
-            //       ScaffoldMessenger.of(context).showSnackBar(
-            //         SnackBar(
-            //           content: Text(Translation[Language.register_first]),
-            //         ),
-            //       );
-            //       return;
-            //     }
-            //     showDialog(
-            //       context: context,
-            //       builder: (dialogContext) {
-            //         return AlertDialog(
-            //           title: Text(Translation[Language.delete_account]),
-            //           content: Text(
-            //             Translation[Language.sure_to_delete_account],
-            //           ),
-            //           actions: [
-            //             TextButton(
-            //               onPressed: () => Navigator.pop(dialogContext),
-            //               child: Text(Translation[Language.no]),
-            //             ),
-            //             TextButton(
-            //               onPressed: () async {
-            //                 Navigator.pop(dialogContext);
-            //                 showCirculerProgress(context);
-            //                 final phone = shared!.getString('phoneUser') ?? '';
-            //                 await context
-            //                     .read<Updateprovider>()
-            //                     .deleteDataFromRealtime(context, phone);
-            //                 await SecureStorageService.clearAll();
-            //               },
-            //               child: Text(Translation[Language.yes]),
-            //             ),
-            //           ],
-            //         );
-            //       },
-            //     );
-            //   },
-            // ),
-            // Divider(thickness: getWidth(0.5), color: ColorUsed.DarkGreen),
             ListTile(
               leading: Icon(Icons.share),
               title: Text(Translation[Language.share_app]),
@@ -226,7 +175,7 @@ class Customdrawer extends StatelessWidget {
                 }
               },
             ),
-
+            Divider(thickness: getWidth(0.5), color: ColorUsed.DarkGreen),
             // إظهار زر التعديل فقط للأدمن
             if (shared!.getString('emailUser') == 'amhmeed31@gmail.com' ||
                 shared!.getString('phoneUser') == '07824854526')
