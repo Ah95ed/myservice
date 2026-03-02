@@ -61,7 +61,6 @@ class _AddProfessionsState extends State<AddProfessions> {
                   false,
                 ),
                 SizedBox(height: getheight(1.5)),
-                // TextFieldCustom(nameProfession, icons: Icons.work_history),
                 component1(
                   nameProfession,
                   Icons.work_history,
@@ -69,14 +68,7 @@ class _AddProfessionsState extends State<AddProfessions> {
                   false,
                   false,
                 ),
-                // TextFieldCustom(
 
-                //   nameProfession,
-                //   icons: Icons.work_history,
-                //   Translation[Language.typeProfession],
-                //   false,
-                //   false,
-                // ),
                 SizedBox(height: getheight(2)),
                 CustomMaterialButton(
                   title: Translation[Language.send],

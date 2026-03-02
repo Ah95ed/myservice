@@ -368,6 +368,16 @@ const Map<String, List<Map<String, String>>> r2BookLinks = {
   'c4_Scientific': [
     // اضف كتب الرابع العلمي هنا
     // {'name': 'اسم الكتاب', 'url': 'الرابط'},
+    {
+      'name': 'كتاب الاحياء الرابع العلمي ',
+      'url':
+          'https://pub-3fc8cfe1b1a84a7987f583891bf0e2c5.r2.dev/Books/c4_Scientific/%D9%83%D8%AA%D8%A7%D8%A8%20%D8%A7%D9%84%D8%A7%D8%AD%D9%8A%D8%A7%D8%A1%20%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9%20%D8%A7%D9%84%D8%B9%D9%84%D9%85%D9%8A.pdf',
+    },
+    {
+      'name': 'كتاب الكيمياء الرابع العلمي ',
+      'url':
+          'https://pub-3fc8cfe1b1a84a7987f583891bf0e2c5.r2.dev/Books/c4_Scientific/%D9%83%D8%AA%D8%A7%D8%A8%20%D8%A7%D9%84%D8%A7%D8%B3%D9%84%D8%A7%D9%85%D9%8A%D8%A9%20%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9%20%D8%A7%D9%84%D8%A7%D8%B9%D8%AF%D8%A7%D8%AF%D9%8A.pdf',
+    },
   ],
   'c4_Literary': [
     // اضف كتب الرابع الادبي هنا

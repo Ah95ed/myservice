@@ -48,12 +48,23 @@ class _GradesScreenState extends State<GradesScreen> {
           (grade) => ExpansionTile(
             title: Text(grade),
             children: [
-              ListTile(title: const Text('علمي'), onTap: () {}),
+              ListTile(
+                title: const Text('علمي'),
+                onTap: () {
+                  managerScreen(
+                    BooksScreen.route,
+                    context,
+                    object: 'c${grades.indexOf(grade) + 4}_Scientific',
+                  );
+                },
+              ),
               ListTile(
                 title: const Text('ادبي'),
                 onTap: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('تم اختيار: $grade - ادبي')),
+                  managerScreen(
+                    BooksScreen.route,
+                    context,
+                    object: 'c${grades.indexOf(grade) + 4}_Literary',
                   );
                 },
               ),
