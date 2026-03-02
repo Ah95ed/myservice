@@ -5,10 +5,10 @@ import 'package:Al_Zab_township_guide/Helper/Service/service.dart';
 import 'package:Al_Zab_township_guide/controller/provider/ServiceController/ServiceController.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
+import 'package:Al_Zab_township_guide/view/screens/LoginScreen/login_screen.dart';
 import 'package:Al_Zab_township_guide/view/widget/Dialogandsnakebar/DialogCirculerProgress.dart';
 import 'package:Al_Zab_township_guide/view/widget/LoginWidget/Loginimageshow.dart';
 import 'package:Al_Zab_township_guide/view/widget/staticWidget/CustomMaterialButton.dart';
-import 'package:Al_Zab_township_guide/view/widget/staticWidget/TextFieldCustom.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -53,19 +53,26 @@ class _AddProfessionsState extends State<AddProfessions> {
                   title: Translation[Language.professions],
                 ),
                 SizedBox(height: getheight(4)),
-                // component1(
-                //   name,
-                //   Icons.person,
-                //   Translation[Language.please_enter_name],
-                //   false,
-                //   false,
-                // ),
+                component1(
+                  name,
+                  Icons.person,
+                  Translation[Language.please_enter_name],
+                  false,
+                  false,
+                ),
                 SizedBox(height: getheight(1.5)),
-                TextFieldCustom(nameProfession, icons: Icons.work_history),
+                // TextFieldCustom(nameProfession, icons: Icons.work_history),
+                component1(
+                  nameProfession,
+                  Icons.work_history,
+                  Translation[Language.profession],
+                  false,
+                  false,
+                ),
                 // TextFieldCustom(
 
                 //   nameProfession,
-                //   Icons.work_history,
+                //   icons: Icons.work_history,
                 //   Translation[Language.typeProfession],
                 //   false,
                 //   false,
