@@ -142,10 +142,9 @@ class _SignupScreenState extends State<SignupScreen>
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () {
                                       HapticFeedback.lightImpact();
-                                    // context.read<Providers>().
-                                      context.read<Providers>().managerScreen(
-                                        LoginScreen.Route,
+                                      Navigator.pushReplacementNamed(
                                         context,
+                                        LoginScreen.Route,
                                       );
                                     },
                                 ),

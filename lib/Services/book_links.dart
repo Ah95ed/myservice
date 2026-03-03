@@ -374,14 +374,118 @@ const Map<String, List<Map<String, String>>> r2BookLinks = {
           'https://pub-3fc8cfe1b1a84a7987f583891bf0e2c5.r2.dev/Books/c4_Scientific/%D9%83%D8%AA%D8%A7%D8%A8%20%D8%A7%D9%84%D8%A7%D8%AD%D9%8A%D8%A7%D8%A1%20%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9%20%D8%A7%D9%84%D8%B9%D9%84%D9%85%D9%8A.pdf',
     },
     {
-      'name': 'كتاب الكيمياء الرابع العلمي ',
+      'name': 'كتاب الاسلامية الرابع الاعدادي',
       'url':
           'https://pub-3fc8cfe1b1a84a7987f583891bf0e2c5.r2.dev/Books/c4_Scientific/%D9%83%D8%AA%D8%A7%D8%A8%20%D8%A7%D9%84%D8%A7%D8%B3%D9%84%D8%A7%D9%85%D9%8A%D8%A9%20%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9%20%D8%A7%D9%84%D8%A7%D8%B9%D8%AF%D8%A7%D8%AF%D9%8A.pdf',
     },
+    {
+      'name': 'كتاب الحاسوب',
+      'url':
+          'https://pub-3fc8cfe1b1a84a7987f583891bf0e2c5.r2.dev/Books/c4_Scientific/%D9%83%D8%AA%D8%A7%D8%A8%20%D8%A7%D9%84%D8%AD%D8%A7%D8%B3%D9%88%D8%A8%20%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9%20%D8%A7%D9%84%D8%A7%D8%B9%D8%AF%D8%A7%D8%AF%D9%8A.pdf',
+    },
+    {
+      'name': 'كتاب الرياضيات الرابع العلمي',
+      'url':
+          'https://pub-3fc8cfe1b1a84a7987f583891bf0e2c5.r2.dev/Books/c4_Scientific/%D9%83%D8%AA%D8%A7%D8%A8%20%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D9%8A%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9%20%D8%A7%D9%84%D8%B9%D9%84%D9%85%D9%8A.pdf',
+    },
+    {
+      'name': 'كتاب الفيزياء ',
+      'url':
+          'https://pub-3fc8cfe1b1a84a7987f583891bf0e2c5.r2.dev/Books/c4_Scientific/%D9%83%D8%AA%D8%A7%D8%A8%20%D8%A7%D9%84%D9%81%D9%8A%D8%B2%D9%8A%D8%A7%D8%A1%20%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9%20%D8%A7%D9%84%D8%B9%D9%84%D9%85%D9%8A.pdf',
+    },
+    {
+      'name': 'كتاب الكردية',
+      'url':
+          'https://pub-3fc8cfe1b1a84a7987f583891bf0e2c5.r2.dev/Books/c4_Scientific/%D9%83%D8%AA%D8%A7%D8%A8%20%D8%A7%D9%84%D9%83%D8%B1%D8%AF%D9%8A%20%D8%A7%D9%84%D8%B5%D9%81%20%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9%20%D8%A7%D9%84%D8%A7%D8%B9%D8%AF%D8%A7%D8%AF%D9%8A.pdf',
+    },
+    {
+      'name': 'كتاب الكيمياء',
+      'url':
+          'https://pub-3fc8cfe1b1a84a7987f583891bf0e2c5.r2.dev/Books/c4_Scientific/%D9%83%D8%AA%D8%A7%D8%A8%20%D8%A7%D9%84%D9%83%D9%8A%D9%85%D9%8A%D8%A7%D8%A1%20%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9%20%D8%A7%D9%84%D8%B9%D9%84%D9%85%D9%8A.pdf',
+    },
+    {
+      'name': 'كتاب الانكليزي ',
+      'url':
+          'https://pub-3fc8cfe1b1a84a7987f583891bf0e2c5.r2.dev/Books/c4_Scientific/%D9%83%D8%AA%D8%A7%D8%A8_%D8%A7%D9%84%D8%A7%D9%86%D9%83%D9%84%D9%8A%D8%B2%D9%8A_%D8%A7%D9%84%D8%B7%D8%A7%D9%84%D8%A8_%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9_%D8%A7%D9%84%D8%A7%D8%B9%D8%AF%D8%A7%D8%AF%D9%8A_%D9%83%D8%A7%D9%85%D9%84.pdf',
+    },
+    {
+      'name': 'كتاب الانكليزي النشاط',
+      'url':
+          'https://pub-3fc8cfe1b1a84a7987f583891bf0e2c5.r2.dev/Books/c4_Scientific/%D9%83%D8%AA%D8%A7%D8%A8_%D8%A7%D9%84%D8%A7%D9%86%D9%83%D9%84%D9%8A%D8%B2%D9%8A_%D8%A7%D9%84%D9%86%D8%B4%D8%A7%D8%B7_%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9_%D8%A7%D9%84%D8%A7%D8%B9%D8%AF%D8%A7%D8%AF%D9%8A_%D9%83%D8%A7%D9%85%D9%84.pdf',
+    },
+    {
+      'name': 'كتاب العربي الرابع الاعدادي الجزء الاول',
+      'url':
+          'https://pub-3fc8cfe1b1a84a7987f583891bf0e2c5.r2.dev/Books/c4_Scientific/%D9%83%D8%AA%D8%A7%D8%A8_%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A_%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9_%D8%A7%D9%84%D8%A7%D8%B9%D8%AF%D8%A7%D8%AF%D9%8A_%D8%A7%D9%84%D8%AC%D8%B2%D8%A1_%D8%A7%D9%84%D8%A7%D9%88%D9%84.pdf',
+    },
+    {
+      'name': 'كتاب العربي الرابع الاعدادي الجزء الثاني',
+      'url':
+          'https://pub-3fc8cfe1b1a84a7987f583891bf0e2c5.r2.dev/Books/c4_Scientific/%D9%83%D8%AA%D8%A7%D8%A8_%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A_%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9_%D8%A7%D9%84%D8%A7%D8%B9%D8%AF%D8%A7%D8%AF%D9%8A_%D8%A7%D9%84%D8%AC%D8%B2%D8%A1_%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A.pdf',
+    },
+    {
+      'name': 'كتاب الفرنسي الرابع الاعدادي',
+      'url':
+          'https://pub-3fc8cfe1b1a84a7987f583891bf0e2c5.r2.dev/Books/c4_Scientific/%D9%83%D8%AA%D8%A7%D8%A8_%D8%A7%D9%84%D9%81%D8%B1%D9%86%D8%B3%D9%8A_%D8%A7%D9%84%D9%85%D9%86%D9%87%D8%AC_%D8%A7%D9%84%D8%AC%D8%AF%D9%8A%D8%AF_%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9_%D9%88%D8%A7%D9%84%D8%AE%D8%A7%D9%85%D8%B3_%D9%88%D8%A7%D9%84%D8%B3%D8%A7%D8%AF%D8%B3_%D8%A7%D9%84%D8%A7%D8%B9%D8%AF%D8%A7%D8%AF%D9%8A.pdf',
+    },
+    {
+      'name': 'كتاب جرائم حزب البعث الرابع الاعدادي',
+      'url':
+          'https://pub-3fc8cfe1b1a84a7987f583891bf0e2c5.r2.dev/Books/c4_Scientific/%D9%83%D8%AA%D8%A7%D8%A8_%D8%AC%D8%B1%D8%A7%D8%A6%D9%85_%D8%AD%D8%B2%D8%A8_%D8%A7%D9%84%D8%A8%D8%B9%D8%AB_%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9_%D8%A7%D9%84%D8%A7%D8%B9%D8%AF%D8%A7%D8%AF%D9%8A.pdf',
+    },
   ],
   'c4_Literary': [
-    // اضف كتب الرابع الادبي هنا
-    // {'name': 'اسم الكتاب', 'url': 'الرابط'},
+    {
+      'name': 'كتاب الاسلامية',
+      'url':
+          'https://pub-3fc8cfe1b1a84a7987f583891bf0e2c5.r2.dev/Books/c4_Literary/%D9%83%D8%AA%D8%A7%D8%A8%20%D8%A7%D9%84%D8%A7%D8%B3%D9%84%D8%A7%D9%85%D9%8A%D8%A9%20%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9%20%D8%A7%D9%84%D8%A7%D8%B9%D8%AF%D8%A7%D8%AF%D9%8A.pdf',
+    },
+    {
+      'name': 'كتاب التاريخ',
+      'url':
+          'https://pub-3fc8cfe1b1a84a7987f583891bf0e2c5.r2.dev/Books/c4_Literary/%D9%83%D8%AA%D8%A7%D8%A8%20%D8%A7%D9%84%D8%AA%D8%A7%D8%B1%D9%8A%D8%AE%20%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9%20%D8%A7%D9%84%D8%A7%D8%AF%D8%A8%D9%8A.pdf',
+    },
+    {
+      'name': 'كتاب الجغرافية',
+      'url':
+          'https://pub-3fc8cfe1b1a84a7987f583891bf0e2c5.r2.dev/Books/c4_Literary/%D9%83%D8%AA%D8%A7%D8%A8%20%D8%A7%D9%84%D8%AC%D8%BA%D8%B1%D8%A7%D9%81%D9%8A%D8%A9%20%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9%20%D8%A7%D9%84%D8%A7%D8%AF%D8%A8%D9%8A.pdf',
+    },
+    {
+      'name': 'كتاب الحاسوب',
+      'url':
+          'https://pub-3fc8cfe1b1a84a7987f583891bf0e2c5.r2.dev/Books/c4_Literary/%D9%83%D8%AA%D8%A7%D8%A8%20%D8%A7%D9%84%D8%AD%D8%A7%D8%B3%D9%88%D8%A8%20%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9%20%D8%A7%D9%84%D8%A7%D8%B9%D8%AF%D8%A7%D8%AF%D9%8A.pdf',
+    },
+    {
+      'name': 'كتاب علم الاجتماع',
+      'url':
+          'https://pub-3fc8cfe1b1a84a7987f583891bf0e2c5.r2.dev/Books/c4_Literary/%D9%83%D8%AA%D8%A7%D8%A8%20%D8%B9%D9%84%D9%85%20%D8%A7%D9%84%D8%A7%D8%AC%D8%AA%D9%85%D8%A7%D8%B9%20%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9%20%D8%A7%D9%84%D8%A7%D8%B9%D8%AF%D8%A7%D8%AF%D9%8A.pdf',
+    },
+    {
+      'name': 'كتاب الانكليزي',
+      'url':
+          'https://pub-3fc8cfe1b1a84a7987f583891bf0e2c5.r2.dev/Books/c4_Literary/%D9%83%D8%AA%D8%A7%D8%A8_%D8%A7%D9%84%D8%A7%D9%86%D9%83%D9%84%D9%8A%D8%B2%D9%8A_%D8%A7%D9%84%D8%B7%D8%A7%D9%84%D8%A8_%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9_%D8%A7%D9%84%D8%A7%D8%B9%D8%AF%D8%A7%D8%AF%D9%8A_%D9%83%D8%A7%D9%85%D9%84.pdf',
+    },
+    {
+      'name': 'كتاب الكردية',
+      'url':
+          'https://pub-3fc8cfe1b1a84a7987f583891bf0e2c5.r2.dev/Books/c4_Scientific/%D9%83%D8%AA%D8%A7%D8%A8%20%D8%A7%D9%84%D9%83%D8%B1%D8%AF%D9%8A%20%D8%A7%D9%84%D8%B5%D9%81%20%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9%20%D8%A7%D9%84%D8%A7%D8%B9%D8%AF%D8%A7%D8%AF%D9%8A.pdf',
+    },
+    {
+      'name': 'كتاب الانكليزي النشاط',
+      'url':
+          'https://pub-3fc8cfe1b1a84a7987f583891bf0e2c5.r2.dev/Books/c4_Literary/%D9%83%D8%AA%D8%A7%D8%A8_%D8%A7%D9%84%D8%A7%D9%86%D9%83%D9%84%D9%8A%D8%B2%D9%8A_%D8%A7%D9%84%D9%86%D8%B4%D8%A7%D8%B7_%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9_%D8%A7%D9%84%D8%A7%D8%B9%D8%AF%D8%A7%D8%AF%D9%8A_%D9%83%D8%A7%D9%85%D9%84.pdf',
+    },
+    {
+      'name': 'كتاب العربي الرابع الاعدادي الجزء الاول',
+      'url':
+          'https://pub-3fc8cfe1b1a84a7987f583891bf0e2c5.r2.dev/Books/c4_Literary/%D9%83%D8%AA%D8%A7%D8%A8_%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A_%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9_%D8%A7%D9%84%D8%A7%D8%B9%D8%AF%D8%A7%D8%AF%D9%8A_%D8%A7%D9%84%D8%AC%D8%B2%D8%A1_%D8%A7%D9%84%D8%A7%D9%88%D9%84.pdf',
+    },
+    {
+      'name': 'كتاب العربي الرابع الاعدادي الجزء الثاني',
+      'url':
+          'https://pub-3fc8cfe1b1a84a7987f583891bf0e2c5.r2.dev/Books/c4_Literary/%D9%83%D8%AA%D8%A7%D8%A8_%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A_%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9_%D8%A7%D9%84%D8%A7%D8%B9%D8%AF%D8%A7%D8%AF%D9%8A_%D8%A7%D9%84%D8%AC%D8%B2%D8%A1_%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A.pdf',
+    },
+    // {'name': '', 'url': ''},
   ],
 };
 
