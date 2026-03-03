@@ -393,3 +393,4 @@ class _AuthButton extends StatelessWidget {
     );
   }
 }
+

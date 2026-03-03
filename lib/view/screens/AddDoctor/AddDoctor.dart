@@ -57,7 +57,7 @@ class _AddDoctorState extends State<AddDoctor> {
                   title: Translation[Language.AddDoctor],
                 ),
                 SizedBox(height: getheight(4)),
-                component1(
+                SharedAuthTextField(
                   name,
                   Icons.person,
                   Translation[Language.please_enter_name],
@@ -65,7 +65,7 @@ class _AddDoctorState extends State<AddDoctor> {
                   false,
                 ),
                 SizedBox(height: getheight(1.5)),
-                component1(
+                SharedAuthTextField(
                   Specialization,
                   Icons.type_specimen,
                   Translation[Language.specialization],
@@ -73,7 +73,7 @@ class _AddDoctorState extends State<AddDoctor> {
                   false,
                 ),
                 SizedBox(height: getheight(1.5)),
-                component1(
+                SharedAuthTextField(
                   time,
                   Icons.access_time_sharp,
                   Translation[Language.time],
@@ -81,7 +81,7 @@ class _AddDoctorState extends State<AddDoctor> {
                   false,
                 ),
                 SizedBox(height: getheight(1.5)),
-                component1(
+                SharedAuthTextField(
                   title,
                   Icons.title,
                   Translation[Language.doctor_title],
@@ -129,3 +129,4 @@ class _AddDoctorState extends State<AddDoctor> {
     );
   }
 }
+

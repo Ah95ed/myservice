@@ -3,7 +3,7 @@ import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController
 import 'package:Al_Zab_township_guide/Services/cloudflare_api.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
-import 'package:Al_Zab_township_guide/view/screens/LoginScreen/login_screen.dart';
+import 'package:Al_Zab_township_guide/view/screens/MessageDeveloper.dart';
 import 'package:Al_Zab_township_guide/view/widget/Dialogandsnakebar/DialogCirculerProgress.dart';
 import 'package:Al_Zab_township_guide/view/widget/staticWidget/CustomMaterialButton.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +50,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
               ),
             ),
             SizedBox(height: getheight(4)),
-            component1(
+            SharedAuthTextField(
               _password,
               Icons.lock_outline,
               Translation[Language.enter_password],
@@ -58,7 +58,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
               false,
             ),
             SizedBox(height: getheight(2)),
-            component1(
+            SharedAuthTextField(
               _confirm,
               Icons.lock_outline,
               Translation[Language.confirm],

@@ -4,7 +4,7 @@ import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController
 import 'package:Al_Zab_township_guide/controller/provider/ServiceController/ServiceController.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
-import 'package:Al_Zab_township_guide/view/screens/LoginScreen/login_screen.dart';
+import 'package:Al_Zab_township_guide/view/screens/MessageDeveloper.dart';
 import 'package:Al_Zab_township_guide/view/widget/Dialogandsnakebar/DialogCirculerProgress.dart';
 import 'package:Al_Zab_township_guide/view/widget/LoginWidget/Loginimageshow.dart';
 import 'package:Al_Zab_township_guide/view/widget/staticWidget/CustomMaterialButton.dart';
@@ -58,7 +58,7 @@ class _LineScreenState extends State<LineScreen> {
                 title: Translation[Language.Addtransmissionline],
               ),
               SizedBox(height: getheight(4)),
-              component1(
+              SharedAuthTextField(
                 name,
                 Icons.person,
                 Translation[Language.please_enter_name],
@@ -66,7 +66,7 @@ class _LineScreenState extends State<LineScreen> {
                 false,
               ),
               SizedBox(height: getheight(1.5)),
-              component1(
+              SharedAuthTextField(
                 phone,
                 Icons.phone,
                 Translation[Language.number_phone],
@@ -74,7 +74,7 @@ class _LineScreenState extends State<LineScreen> {
                 false,
               ),
               SizedBox(height: getheight(1.5)),
-              component1(
+              SharedAuthTextField(
                 typevehicle,
                 Icons.taxi_alert_rounded,
                 Translation[Language.cars],
@@ -82,7 +82,7 @@ class _LineScreenState extends State<LineScreen> {
                 false,
               ),
               SizedBox(height: getheight(1.5)),
-              component1(
+              SharedAuthTextField(
                 time,
                 Icons.time_to_leave,
                 Translation[Language.time],
@@ -90,7 +90,7 @@ class _LineScreenState extends State<LineScreen> {
                 false,
               ),
               SizedBox(height: getheight(1.5)),
-              component1(
+              SharedAuthTextField(
                 direction,
                 Icons.where_to_vote_sharp,
                 Translation[Language.line],

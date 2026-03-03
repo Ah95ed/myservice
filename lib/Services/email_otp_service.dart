@@ -26,10 +26,10 @@ class EmailOtpService {
       host: 'smtp.gmail.com',
       emailPort: EmailPort.port587,
       secureType: SecureType.tls,
-      username: 'amhmeed31@gmail.com',
+      username: 'at.dev.iq@gmail.com',
 
       /// your google account mail
-      password: 'arhs xupn ktkc ypir',
+      password: 'vmcb kstf ljrq sues',
 
       /// this password will get while creating app password
     );
@@ -39,7 +39,7 @@ class EmailOtpService {
       otpType: OTPType.numeric,
       expiry: 100000,
       emailTheme: EmailTheme.v6,
-      appEmail: 'amhmeed31@gmail.com',
+      appEmail: 'at.dev.iq@gmail.com',
       otpLength: 6,
     );
 

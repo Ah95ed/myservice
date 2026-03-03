@@ -414,9 +414,9 @@ class _AuthButton extends StatelessWidget {
   }
 }
 
-// المكوّن القديم component1 — محتفظ به لتجنب أخطاء في ملفات أخرى
-class component1 extends StatelessWidget {
-  const component1(
+// المكوّن القديم SharedAuthTextField — محتفظ به لتجنب أخطاء في ملفات أخرى
+class SharedAuthTextField extends StatelessWidget {
+  const SharedAuthTextField(
     this.controller,
     this.icon,
     this.hintText,
@@ -444,3 +444,4 @@ class component1 extends StatelessWidget {
     );
   }
 }
+

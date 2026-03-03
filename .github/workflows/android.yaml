@@ -2,7 +2,7 @@ name: myService android CI/CD
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build_android:
@@ -20,24 +20,22 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
-          java-version: '21'
+          distribution: "temurin"
+          java-version: "21"
 
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          channel: 'stable'
-          flutter-version: '3.38.9'
-
-      
+          channel: "stable"
+          flutter-version: "3.38.9"
 
       - name: clean Project
         run: flutter clean
-        
-      - name: flutter update package 
+
+      - name: flutter update package
         run: flutter pub upgrade
 
-      - name: clean outdated 
+      - name: clean outdated
         run: flutter pub outdated
 
       - name: Install dependencies
@@ -51,4 +49,3 @@ jobs:
         with:
           name: apk-${{ matrix.abi }}
           path: build/app/outputs/flutter-apk/app-${{ matrix.abi }}-release.apk
-

@@ -6,9 +6,9 @@ import 'package:Al_Zab_township_guide/controller/provider/ServiceController/Serv
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
 import 'package:Al_Zab_township_guide/view/ThemeApp/app_theme.dart';
-import 'package:Al_Zab_township_guide/view/screens/LoginScreen/login_screen.dart';
 import 'package:Al_Zab_township_guide/view/widget/Dialogandsnakebar/DialogCirculerProgress.dart';
 import 'package:Al_Zab_township_guide/view/widget/LoginWidget/Loginimageshow.dart';
+import 'package:Al_Zab_township_guide/view/widget/staticWidget/AuthTextField.dart';
 import 'package:Al_Zab_township_guide/view/widget/staticWidget/CustomMaterialButton.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -63,7 +63,7 @@ class _AddDonorState extends State<AddDonor> {
                   title: Translation[Language.addDonor],
                 ),
                 SizedBox(height: getheight(4)),
-                component1(
+                SharedAuthTextField(
                   name,
                   Icons.person,
                   Translation[Language.please_enter_name],
@@ -110,7 +110,7 @@ class _AddDonorState extends State<AddDonor> {
                   ),
                 ),
                 SizedBox(height: getheight(2)),
-                component1(
+                SharedAuthTextField(
                   location,
                   Icons.title,
                   Translation[Language.location],
@@ -146,3 +146,5 @@ class _AddDonorState extends State<AddDonor> {
     );
   }
 }
+
+

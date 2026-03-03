@@ -1,0 +1,7 @@
+
+إذا أردت لاحقاً رفع تحديثات جديدة للتطبيق، يمكنك تنفيذ نفس أمر الرفع باستخدام wrangler:
+
+bash
+npx wrangler r2 object put books/Al_Zab_township_guide.apk --file D:\myservice\build\app\outputs\flutter-apk\app-release.apk --remote
+
+(بشرط أن تنفذه من داخل مجلد d:\myservice\cloudflare).

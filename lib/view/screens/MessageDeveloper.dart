@@ -85,7 +85,7 @@ class _MessageDeveloperState extends State<MessageDeveloper>
                 child: Column(
                   children: [
                     SizedBox(height: getheight(2)),
-                    component1(
+                    SharedAuthTextField(
                       name,
                       Icons.person,
                       S.current.please_enter_name,
@@ -93,7 +93,7 @@ class _MessageDeveloperState extends State<MessageDeveloper>
                       false,
                     ),
                     SizedBox(height: getheight(2)),
-                    component1(
+                    SharedAuthTextField(
                       number,
                       Icons.phone,
                       S.current.number_phone,
@@ -101,7 +101,7 @@ class _MessageDeveloperState extends State<MessageDeveloper>
                       false,
                     ),
                     SizedBox(height: getheight(2)),
-                    component1(
+                    SharedAuthTextField(
                       type,
                       Icons.type_specimen,
                       S.current.type,
@@ -109,7 +109,7 @@ class _MessageDeveloperState extends State<MessageDeveloper>
                       false,
                     ),
                     SizedBox(height: getheight(2)),
-                    component1(
+                    SharedAuthTextField(
                       description,
                       Icons.description,
                       S.current.description,
@@ -217,8 +217,8 @@ class _MessageDeveloperState extends State<MessageDeveloper>
   }
 }
 
-class component1 extends StatelessWidget {
-  const component1(
+class SharedAuthTextField extends StatelessWidget {
+  const SharedAuthTextField(
     this.controller,
     this.icon,
     this.hintText,
@@ -345,3 +345,4 @@ class ImagesSocial extends StatelessWidget {
     );
   }
 }
+

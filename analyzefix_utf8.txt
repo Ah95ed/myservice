@@ -1,0 +1,13 @@
+﻿Analyzing myservice...                                          
+
+warning - The value of the local variable 'num' isn't used - lib\Models\UpdateModel\UpdateModel.dart:84:12 - unused_local_variable
+warning - Unused import: 'package:Al_Zab_township_guide/view/screens/LoginScreen/login_screen.dart' - lib\view\screens\AddProfessions\AddProfessions.dart:8:8 - unused_import
+warning - Unused import: 'package:Al_Zab_township_guide/view/screens/LoginScreen/login_screen.dart' - lib\view\screens\AddSatota\AddSatota.dart:8:8 - unused_import
+warning - Unused import: 'package:Al_Zab_township_guide/view/screens/LoginScreen/login_screen.dart' - lib\view\screens\ForgetPassword\ResetPassword.dart:6:8 - unused_import
+warning - Unused import: 'package:Al_Zab_township_guide/view/screens/LoginScreen/login_screen.dart' - lib\view\screens\LineScreen\LineScreen.dart:7:8 - unused_import
+warning - The value of the local variable 'read' isn't used - lib\view\screens\OTPScreenNumber\OTPScreenNumber.dart:39:11 - unused_local_variable
+  error - 'SharedAuthTextField' isn't a function - lib\view\screens\addDonor\AddDonor.dart:67:17 - invocation_of_non_function
+  error - The name 'SharedAuthTextField' is defined in the libraries 'package:Al_Zab_township_guide/view/screens/MessageDeveloper.dart' and 'package:Al_Zab_township_guide/view/widget/staticWidget/AuthTextField.dart' - lib\view\screens\addDonor\AddDonor.dart:67:17 - ambiguous_import
+  error - 'SharedAuthTextField' isn't a function - lib\view\screens\addDonor\AddDonor.dart:114:17 - invocation_of_non_function
+  error - The name 'SharedAuthTextField' is defined in the libraries 'package:Al_Zab_township_guide/view/screens/MessageDeveloper.dart' and 'package:Al_Zab_township_guide/view/widget/staticWidget/AuthTextField.dart' - lib\view\screens\addDonor\AddDonor.dart:114:17 - ambiguous_import
+
