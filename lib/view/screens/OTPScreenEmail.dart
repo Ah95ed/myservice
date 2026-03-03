@@ -2,16 +2,16 @@ import 'package:Al_Zab_township_guide/Helper/Service/Language/Language.dart';
 import 'package:Al_Zab_township_guide/Helper/Service/Language/LanguageController.dart';
 import 'package:Al_Zab_township_guide/controller/SignupProvider/SignupProvider.dart';
 import 'package:Al_Zab_township_guide/view/Size/SizedApp.dart';
+import 'package:Al_Zab_township_guide/view/ThemeApp/ColorUsed.dart';
+import 'package:Al_Zab_township_guide/view/ThemeApp/app_theme.dart';
 import 'package:Al_Zab_township_guide/view/widget/Dialogandsnakebar/DialogCirculerProgress.dart';
 import 'package:email_otp/email_otp.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-
-import '../ThemeApp/ColorUsed.dart';
 
 class OtpScreenEmail extends StatefulWidget {
   static const Route = "/OtpScreen";
-
   OtpScreenEmail({Key? key}) : super(key: key);
 
   @override
@@ -21,12 +21,10 @@ class OtpScreenEmail extends StatefulWidget {
 class _OtpScreenEmailState extends State<OtpScreenEmail> {
   late TextEditingController otpNumber = TextEditingController();
 
-  // bool isForget = false;
   @override
-  void initState() {
-    // otpNumber  = TextEditingController();
-    // TODO: implement initState
-    super.initState();
+  void dispose() {
+    otpNumber.dispose();
+    super.dispose();
   }
 
   @override
@@ -37,128 +35,276 @@ class _OtpScreenEmailState extends State<OtpScreenEmail> {
     final isForget =
         (routeArgs is bool ? routeArgs : argsMap?['isForget']) == true;
     final email = argsMap?['email']?.toString();
+
     return Scaffold(
-      body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        scrollDirection: Axis.vertical,
-        child: Column(
-          children: [
-            Container(
-              height: getheight(30),
-              decoration: const BoxDecoration(
-                // color: Color(0xFF501063),
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(90),
-                ),
-                color: ColorUsed.primary, // Color(0xFF501063),
-                gradient: LinearGradient(
-                  colors: [
-                    ColorUsed.primary, ColorUsed.second,
-                    // (Color(0xFF501063)),
-                    // (Color(0xFF591D6B)),
-                  ],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                ),
+      backgroundColor: ColorUsed.PrimaryBackground,
+      body: Stack(
+        children: [
+          // خلفية موحّدة
+          Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  ColorUsed.PrimaryBackground,
+                  ColorUsed.PrimaryBackground.withOpacity(0.6),
+                ],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
               ),
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      margin: EdgeInsets.symmetric(vertical: getheight(4)),
-                      height: getheight(14),
-                      child: Image.asset('assets/logo/asd.png'),
+            ),
+            child: Stack(
+              children: [
+                Positioned(
+                  top: -80,
+                  left: -40,
+                  child: _GlowOrb(
+                    size: 220,
+                    color: ColorUsed.second.withOpacity(0.2),
+                  ),
+                ),
+                Positioned(
+                  bottom: -100,
+                  right: -60,
+                  child: _GlowOrb(
+                    size: 260,
+                    color: ColorUsed.primary.withOpacity(0.15),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SafeArea(
+            child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Column(
+                children: [
+                  // Header gradient موحّد
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.fromLTRB(24, 40, 24, 32),
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [ColorUsed.primary, ColorUsed.DarkGreen],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                      borderRadius: const BorderRadius.only(
+                        bottomLeft: Radius.circular(32),
+                        bottomRight: Radius.circular(32),
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: ColorUsed.DarkGreen.withOpacity(0.3),
+                          blurRadius: 20,
+                          offset: const Offset(0, 10),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-              ),
-            ),
-            SizedBox(height: getheight(3)),
-            Text(
-              Translation[Language.enter_otp_email],
-              style: TextStyle(
-                fontSize: setFontSize(16),
-                fontWeight: FontWeight.bold,
-                color: ColorUsed.second,
-              ),
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(height: getheight(3)),
-            SizedBox(
-              height: getheight(8),
-              width: getWidth(80),
-              child: AspectRatio(
-                aspectRatio: 0.5,
-                child: TextFieldCustomEmailOTP(
-                  otpNumber,
-                  Icons.key,
-                  Translation[Language.enter_otp_email],
-                  false,
-                  false,
-                ),
-              ),
-            ),
-            SizedBox(height: getheight(3)),
-            OutlinedButton(
-              style: OutlinedButton.styleFrom(
-                backgroundColor: ColorUsed.primary,
-                side: const BorderSide(color: ColorUsed.DarkGreen),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-              onPressed: () async {
-                showCirculerProgress(context);
-                // Try to verify OTP locally using EmailOTP package
-                bool isVerified = EmailOTP.verifyOTP(otp: otpNumber.text);
-
-                if (!isVerified) {
-                  Navigator.pop(context); // close progress
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('رمز التحقق غير صحيح أو منتهي الصلاحية'),
+                    child: Column(
+                      children: [
+                        // أيقونة الحماية
+                        Container(
+                          width: 80,
+                          height: 80,
+                          decoration: BoxDecoration(
+                            color: Colors.white.withOpacity(0.15),
+                            shape: BoxShape.circle,
+                          ),
+                          child: const Icon(
+                            Icons.verified_user_outlined,
+                            color: Colors.white,
+                            size: 42,
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                        Text(
+                          Translation[Language.confirm_otp] ?? 'تأكيد الرمز',
+                          style: TextStyle(
+                            color: AppTheme.notWhite,
+                            fontSize: setFontSize(22),
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        const SizedBox(height: 6),
+                        Text(
+                          Translation[Language.enter_otp_email] ??
+                              'أدخل رمز التحقق المرسل إلى بريدك',
+                          style: TextStyle(
+                            color: AppTheme.notWhite.withOpacity(0.8),
+                            fontSize: setFontSize(13),
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
                     ),
-                  );
-                  return;
-                }
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: getWidth(6),
+                      vertical: getheight(3),
+                    ),
+                    child: Column(
+                      children: [
+                        // حقل الرمز
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(14),
+                            boxShadow: [
+                              BoxShadow(
+                                color: ColorUsed.primary.withOpacity(0.08),
+                                blurRadius: 12,
+                                offset: const Offset(0, 4),
+                              ),
+                            ],
+                          ),
+                          child: TextField(
+                            controller: otpNumber,
+                            textAlign: TextAlign.center,
+                            keyboardType: TextInputType.number,
+                            style: TextStyle(
+                              color: ColorUsed.DarkGreen,
+                              fontSize: setFontSize(22),
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 6,
+                            ),
+                            decoration: InputDecoration(
+                              prefixIcon: Icon(
+                                Icons.key_outlined,
+                                color: ColorUsed.primary.withOpacity(0.7),
+                              ),
+                              hintText: '• • • • • •',
+                              hintStyle: TextStyle(
+                                color: ColorUsed.primary.withOpacity(0.3),
+                                fontSize: setFontSize(20),
+                                letterSpacing: 6,
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(14),
+                                borderSide: BorderSide.none,
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(14),
+                                borderSide: BorderSide(
+                                  color: ColorUsed.primary.withOpacity(0.1),
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(14),
+                                borderSide: BorderSide(
+                                  color: ColorUsed.second,
+                                  width: 1.5,
+                                ),
+                              ),
+                              filled: true,
+                              fillColor: Colors.white,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: getheight(4)),
+                        // زر التأكيد
+                        SizedBox(
+                          width: double.infinity,
+                          height: getheight(7),
+                          child: ElevatedButton.icon(
+                            onPressed: () async {
+                              HapticFeedback.lightImpact();
+                              showCirculerProgress(context);
+                              bool isVerified = EmailOTP.verifyOTP(
+                                otp: otpNumber.text,
+                              );
 
-                if (isForget && email != null && email.isNotEmpty) {
-                  Navigator.pop(context); // close progress
-                  Navigator.pushNamed(
-                    context,
-                    '/ResetPassword',
-                    arguments: {'email': email, 'otp': otpNumber.text},
-                  );
-                  return;
-                }
+                              if (!isVerified) {
+                                Navigator.pop(context);
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text(
+                                      'رمز التحقق غير صحيح أو منتهي الصلاحية',
+                                    ),
+                                  ),
+                                );
+                                return;
+                              }
 
-                // Smart: Rely on server-side validation during register call as well for consistency
-                try {
-                  await signup.saveData(context, otp: otpNumber.text);
-                } catch (e) {
-                  ScaffoldMessenger.of(
-                    context,
-                  ).showSnackBar(SnackBar(content: Text(e.toString())));
-                  Navigator.pop(context); // close progress
-                }
-              },
-              child: Text(
-                Translation[Language.confirm_otp],
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: setFontSize(18),
-                ),
+                              if (isForget &&
+                                  email != null &&
+                                  email.isNotEmpty) {
+                                Navigator.pop(context);
+                                Navigator.pushNamed(
+                                  context,
+                                  '/ResetPassword',
+                                  arguments: {
+                                    'email': email,
+                                    'otp': otpNumber.text,
+                                  },
+                                );
+                                return;
+                              }
+
+                              try {
+                                await signup.saveData(
+                                  context,
+                                  otp: otpNumber.text,
+                                );
+                              } catch (e) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text(e.toString())),
+                                );
+                                Navigator.pop(context);
+                              }
+                            },
+                            icon: const Icon(Icons.check_circle_outline),
+                            label: Text(
+                              Translation[Language.confirm_otp] ?? 'تأكيد',
+                              style: TextStyle(
+                                fontSize: setFontSize(16),
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: ColorUsed.second,
+                              foregroundColor: Colors.white,
+                              elevation: 4,
+                              shadowColor: ColorUsed.second.withOpacity(0.4),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: getheight(3)),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
 }
 
+class _GlowOrb extends StatelessWidget {
+  final double size;
+  final Color color;
+  const _GlowOrb({required this.size, required this.color});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        gradient: RadialGradient(colors: [color, color.withOpacity(0.0)]),
+      ),
+    );
+  }
+}
+
+// المكوّن القديم — محتفظ به للتوافق
 class TextFieldCustomEmailOTP extends StatelessWidget {
   const TextFieldCustomEmailOTP(
     this.controller,
@@ -178,34 +324,42 @@ class TextFieldCustomEmailOTP extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: getheight(10),
-      width: getWidth(90),
-      padding: EdgeInsets.symmetric(horizontal: getWidth(2)),
       decoration: BoxDecoration(
-        color: ColorUsed.second.withOpacity(0.8),
-        borderRadius: BorderRadius.circular(12),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(14),
+        boxShadow: [
+          BoxShadow(
+            color: ColorUsed.primary.withOpacity(0.08),
+            blurRadius: 12,
+            offset: const Offset(0, 4),
+          ),
+        ],
       ),
       child: TextField(
-        textAlign: TextAlign.center,
-        textAlignVertical: TextAlignVertical.center,
         controller: controller!,
-        style: TextStyle(color: Colors.white, fontSize: setFontSize(15)),
-        obscureText: isPassword!,
-        keyboardType: isEmail! ? TextInputType.phone : TextInputType.text,
+        textAlign: TextAlign.center,
+        obscureText: isPassword ?? false,
+        keyboardType: (isEmail ?? false)
+            ? TextInputType.phone
+            : TextInputType.text,
+        style: TextStyle(color: ColorUsed.DarkGreen, fontSize: setFontSize(15)),
         decoration: InputDecoration(
-          // icon: Icon(
-          //   icon,
-          //   color: Colors.white.withOpacity(.7),
-          // ),
-          border: const OutlineInputBorder(),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: ColorUsed.primary),
-          ),
-          prefixIcon: Icon(icon, color: Colors.white.withOpacity(.7)),
-
-          hintMaxLines: 1,
+          prefixIcon: Icon(icon, color: ColorUsed.primary.withOpacity(0.7)),
           hintText: hintText,
-          hintStyle: TextStyle(fontSize: setFontSize(13), color: Colors.white),
+          hintStyle: TextStyle(
+            color: ColorUsed.primary.withOpacity(0.4),
+            fontSize: setFontSize(14),
+          ),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(14),
+            borderSide: BorderSide.none,
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(14),
+            borderSide: BorderSide(color: ColorUsed.second, width: 1.5),
+          ),
+          filled: true,
+          fillColor: Colors.white,
         ),
       ),
     );

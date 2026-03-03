@@ -158,5 +158,23 @@ class MessageLookup extends MessageLookupByLibrary {
     "whocandonate": MessageLookupByLibrary.simpleMessage(
       "من يمكنه التبرع بالدم ؟",
     ),
+    "grades_title": MessageLookupByLibrary.simpleMessage("المراحل الدراسية"),
+    "primary_stage": MessageLookupByLibrary.simpleMessage("المرحلة الابتدائية"),
+    "middle_stage": MessageLookupByLibrary.simpleMessage("المرحلة المتوسطة"),
+    "secondary_stage": MessageLookupByLibrary.simpleMessage("الثانوية"),
+    "grade_1_primary": MessageLookupByLibrary.simpleMessage("أول ابتدائي"),
+    "grade_2_primary": MessageLookupByLibrary.simpleMessage("ثاني ابتدائي"),
+    "grade_3_primary": MessageLookupByLibrary.simpleMessage("ثالث ابتدائي"),
+    "grade_4_primary": MessageLookupByLibrary.simpleMessage("رابع ابتدائي"),
+    "grade_5_primary": MessageLookupByLibrary.simpleMessage("خامس ابتدائي"),
+    "grade_6_primary": MessageLookupByLibrary.simpleMessage("سادس ابتدائي"),
+    "grade_1_middle": MessageLookupByLibrary.simpleMessage("اول متوسط"),
+    "grade_2_middle": MessageLookupByLibrary.simpleMessage("ثاني متوسط"),
+    "grade_3_middle": MessageLookupByLibrary.simpleMessage("ثالث متوسط"),
+    "grade_4_secondary": MessageLookupByLibrary.simpleMessage("رابع ثانوي"),
+    "grade_5_secondary": MessageLookupByLibrary.simpleMessage("خامس ثانوي"),
+    "grade_6_secondary": MessageLookupByLibrary.simpleMessage("سادس ثانوي"),
+    "scientific": MessageLookupByLibrary.simpleMessage("علمي"),
+    "literary": MessageLookupByLibrary.simpleMessage("ادبي"),
   };
 }

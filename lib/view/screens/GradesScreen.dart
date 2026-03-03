@@ -1,3 +1,4 @@
+import 'package:Al_Zab_township_guide/generated/l10n.dart';
 import 'package:Al_Zab_township_guide/view/routing/routing.dart';
 import 'package:Al_Zab_township_guide/view/screens/BooksScreen.dart';
 import 'package:flutter/material.dart';
@@ -13,12 +14,12 @@ class GradesScreen extends StatefulWidget {
 class _GradesScreenState extends State<GradesScreen> {
   List<Widget> _buildPrimaryGrades(BuildContext context) {
     final grades = [
-      'أول ابتدائي',
-      'ثاني ابتدائي',
-      'ثالث ابتدائي',
-      'رابع ابتدائي',
-      'خامس ابتدائي',
-      'سادس ابتدائي',
+      S.current.grade_1_primary,
+      S.current.grade_2_primary,
+      S.current.grade_3_primary,
+      S.current.grade_4_primary,
+      S.current.grade_5_primary,
+      S.current.grade_6_primary,
     ];
     return grades
         .map(
@@ -30,10 +31,6 @@ class _GradesScreenState extends State<GradesScreen> {
                 BooksScreen.route,
                 context,
                 object: 'c${grades.indexOf(g) + 1}_Primary',
-                // object: BooksArgs(
-                //   name: 'grade${grades.indexOf(g) + 1}',
-                //   data: books['primary']!['grade${grades.indexOf(g) + 1}']!,
-                // ),
               );
             },
           ),
@@ -42,14 +39,18 @@ class _GradesScreenState extends State<GradesScreen> {
   }
 
   List<Widget> _buildSecondaryGrades(BuildContext context) {
-    final grades = ['رابع ثانوي', 'خامس ثانوي', 'سادس ثانوي'];
+    final grades = [
+      S.current.grade_4_secondary,
+      S.current.grade_5_secondary,
+      S.current.grade_6_secondary,
+    ];
     return grades
         .map(
           (grade) => ExpansionTile(
             title: Text(grade),
             children: [
               ListTile(
-                title: const Text('علمي'),
+                title: Text(S.current.scientific),
                 onTap: () {
                   managerScreen(
                     BooksScreen.route,
@@ -59,7 +60,7 @@ class _GradesScreenState extends State<GradesScreen> {
                 },
               ),
               ListTile(
-                title: const Text('ادبي'),
+                title: Text(S.current.literary),
                 onTap: () {
                   managerScreen(
                     BooksScreen.route,
@@ -75,7 +76,11 @@ class _GradesScreenState extends State<GradesScreen> {
   }
 
   List<Widget> _buildMiddleGrades(BuildContext context) {
-    final grades = ['اول متوسط', 'ثاني متوسط', 'ثالث متوسط'];
+    final grades = [
+      S.current.grade_1_middle,
+      S.current.grade_2_middle,
+      S.current.grade_3_middle,
+    ];
     return grades
         .map(
           (g) => ListTile(
@@ -96,7 +101,7 @@ class _GradesScreenState extends State<GradesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('التصنيفات'), centerTitle: true),
+      appBar: AppBar(title: Text(S.current.grades_title), centerTitle: true),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
         child: ListView(
@@ -107,11 +112,11 @@ class _GradesScreenState extends State<GradesScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 8.0),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: Text(
-                        'المرحلة الابتدائية',
-                        style: TextStyle(
+                        S.current.primary_stage,
+                        style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
@@ -129,11 +134,11 @@ class _GradesScreenState extends State<GradesScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 8.0),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: Text(
-                        'المرحلة المتوسطة',
-                        style: TextStyle(
+                        S.current.middle_stage,
+                        style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
@@ -151,11 +156,11 @@ class _GradesScreenState extends State<GradesScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 8.0),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: Text(
-                        'الثانوية',
-                        style: TextStyle(
+                        S.current.secondary_stage,
+                        style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),

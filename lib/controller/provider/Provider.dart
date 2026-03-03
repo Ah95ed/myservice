@@ -15,6 +15,7 @@ import 'package:Al_Zab_township_guide/view/screens/SatotaScreen.dart';
 import 'package:Al_Zab_township_guide/view/screens/TheCars.dart';
 // import 'package:email_otp/email_otp.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Providers with ChangeNotifier {
@@ -36,9 +37,9 @@ class Providers with ChangeNotifier {
   );
   Widget title = Text(
     Translation[Language.selectType],
-    style: TextStyle(color: AppTheme.notWhite),
+    style: TextStyle(color: AppTheme.notWhite, fontSize: setFontSize(14)),
   );
-  Icon actionsicon = const Icon(null, color: AppTheme.notWhite, size: 22.0);
+  Icon actionsicon =  Icon(null, color: AppTheme.notWhite, size:18.sp );
 
   final TextEditingController number = TextEditingController();
   @override

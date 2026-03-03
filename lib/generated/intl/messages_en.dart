@@ -170,5 +170,23 @@ class MessageLookup extends MessageLookupByLibrary {
     "whocandonate": MessageLookupByLibrary.simpleMessage(
       "Who Can Donate Blood ?",
     ),
+    "grades_title": MessageLookupByLibrary.simpleMessage("Academic Grades"),
+    "primary_stage": MessageLookupByLibrary.simpleMessage("Primary Stage"),
+    "middle_stage": MessageLookupByLibrary.simpleMessage("Middle Stage"),
+    "secondary_stage": MessageLookupByLibrary.simpleMessage("Secondary Stage"),
+    "grade_1_primary": MessageLookupByLibrary.simpleMessage("1st Primary"),
+    "grade_2_primary": MessageLookupByLibrary.simpleMessage("2nd Primary"),
+    "grade_3_primary": MessageLookupByLibrary.simpleMessage("3rd Primary"),
+    "grade_4_primary": MessageLookupByLibrary.simpleMessage("4th Primary"),
+    "grade_5_primary": MessageLookupByLibrary.simpleMessage("5th Primary"),
+    "grade_6_primary": MessageLookupByLibrary.simpleMessage("6th Primary"),
+    "grade_1_middle": MessageLookupByLibrary.simpleMessage("1st Middle"),
+    "grade_2_middle": MessageLookupByLibrary.simpleMessage("2nd Middle"),
+    "grade_3_middle": MessageLookupByLibrary.simpleMessage("3rd Middle"),
+    "grade_4_secondary": MessageLookupByLibrary.simpleMessage("4th Secondary"),
+    "grade_5_secondary": MessageLookupByLibrary.simpleMessage("5th Secondary"),
+    "grade_6_secondary": MessageLookupByLibrary.simpleMessage("6th Secondary"),
+    "scientific": MessageLookupByLibrary.simpleMessage("Scientific"),
+    "literary": MessageLookupByLibrary.simpleMessage("Literary"),
   };
 }

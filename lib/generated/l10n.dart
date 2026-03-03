@@ -1,6 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
 import 'intl/messages_all.dart';
 
 // **************************************************************************
@@ -847,6 +848,176 @@ class S {
       desc: '',
       args: [],
     );
+  }
+
+  /// `Academic Grades`
+  String get grades_title {
+    return Intl.message(
+      'Academic Grades',
+      name: 'grades_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Primary Stage`
+  String get primary_stage {
+    return Intl.message(
+      'Primary Stage',
+      name: 'primary_stage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Middle Stage`
+  String get middle_stage {
+    return Intl.message(
+      'Middle Stage',
+      name: 'middle_stage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Secondary Stage`
+  String get secondary_stage {
+    return Intl.message(
+      'Secondary Stage',
+      name: 'secondary_stage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `1st Primary`
+  String get grade_1_primary {
+    return Intl.message(
+      '1st Primary',
+      name: 'grade_1_primary',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `2nd Primary`
+  String get grade_2_primary {
+    return Intl.message(
+      '2nd Primary',
+      name: 'grade_2_primary',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `3rd Primary`
+  String get grade_3_primary {
+    return Intl.message(
+      '3rd Primary',
+      name: 'grade_3_primary',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `4th Primary`
+  String get grade_4_primary {
+    return Intl.message(
+      '4th Primary',
+      name: 'grade_4_primary',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `5th Primary`
+  String get grade_5_primary {
+    return Intl.message(
+      '5th Primary',
+      name: 'grade_5_primary',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `6th Primary`
+  String get grade_6_primary {
+    return Intl.message(
+      '6th Primary',
+      name: 'grade_6_primary',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `1st Middle`
+  String get grade_1_middle {
+    return Intl.message(
+      '1st Middle',
+      name: 'grade_1_middle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `2nd Middle`
+  String get grade_2_middle {
+    return Intl.message(
+      '2nd Middle',
+      name: 'grade_2_middle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `3rd Middle`
+  String get grade_3_middle {
+    return Intl.message(
+      '3rd Middle',
+      name: 'grade_3_middle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `4th Secondary`
+  String get grade_4_secondary {
+    return Intl.message(
+      '4th Secondary',
+      name: 'grade_4_secondary',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `5th Secondary`
+  String get grade_5_secondary {
+    return Intl.message(
+      '5th Secondary',
+      name: 'grade_5_secondary',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `6th Secondary`
+  String get grade_6_secondary {
+    return Intl.message(
+      '6th Secondary',
+      name: 'grade_6_secondary',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Scientific`
+  String get scientific {
+    return Intl.message('Scientific', name: 'scientific', desc: '', args: []);
+  }
+
+  /// `Literary`
+  String get literary {
+    return Intl.message('Literary', name: 'literary', desc: '', args: []);
   }
 }
 
